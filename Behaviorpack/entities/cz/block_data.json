@@ -1,0 +1,89 @@
+{
+  "format_version": "1.16.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:block_data",
+      "is_summonable": true
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {}
+      }
+    },
+    "components": {
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:health": {
+        "max": 4,
+        "value": 4
+      },
+      "minecraft:collision_box": {
+        "width": 0.1,
+        "height": 0.1
+      },
+      "minecraft:movement": {
+        "value": 0
+      },
+      "minecraft:persistent": {},
+      "minecraft:breathable": {
+        "breathes_air": true,
+        "breathes_lava": true,
+        "breathes_solids": true,
+        "breathes_water": true,
+        "generates_bubbles": true,
+        "inhale_time": 0.0,
+        "suffocate_time": -20,
+        "total_supply": 15
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:block_sensor": {
+        "sensor_radius": 0.5,
+        "on_break": [
+          {
+            "block_list": [
+              "cz:plasma_core"
+            ],
+            "on_block_broken": "minecraft:despawn"
+          }
+        ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:type_family": {
+        "family": [
+          "data"
+        ]
+      }
+    },
+    "events": {
+      "minecraft:despawn": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "despawn"
+              ]
+            }
+          },
+          {
+            "run_command": {
+              "command": []
+            }
+          }
+        ]
+      },
+      "minecraft:entity_spawned": {}
+    }
+  }
+}

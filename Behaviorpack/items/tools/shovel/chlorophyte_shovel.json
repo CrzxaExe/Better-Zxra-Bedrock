@@ -1,0 +1,74 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:chlorophyte_shovel",
+      "menu_category": {
+        "category": "equipment",
+        "group": "itemGroup.name.shovel",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:display_name": {
+        "value": "item.chlorophyte_shovel.name"
+      },
+      "minecraft:icon": {
+        "texture": "chlorophyte_shovel"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:hand_equipped": true,
+      "minecraft:durability": {
+        "max_durability": 6650
+      },
+      "minecraft:repairable": {
+        "repair_items": [
+          {
+            "items": [
+              "cz:chlorophyte_ingot",
+              "cz:chlorophyte_shovel"
+            ],
+            "repair_amount": "q.max_durability"
+          }
+        ]
+      },
+      "minecraft:mining_speed": 1,
+      "minecraft:damage": 7,
+      "minecraft:enchantable": {
+        "value": 16,
+        "slot": "shovel"
+      },
+      "minecraft:weapon": {
+        "on_hurt_entity": {
+          "event": "digger"
+        }
+      },
+      "minecraft:digger": {
+        "use_efficiency": true,
+        "destroy_speeds": [
+          {
+            "block": {
+              "tags": "query.any_tag(\u0027dirt\u0027, \u0027sand\u0027, \u0027gravel\u0027, \u0027grass\u0027, \u0027snow\u0027)"
+            },
+            "speed": 12,
+            "on_dig": {
+              "event": "digger"
+            }
+          }
+        ],
+        "on_dig": {
+          "event": "digger"
+        }
+      }
+    },
+    "events": {
+      "digger": {
+        "damage": {
+          "amount": 1,
+          "type": "durability",
+          "target": "self"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:vial_stamina_0"
+    },
+    "pattern": [
+      "CHG",
+      "GSC",
+      " I"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:vial"
+      },
+      "H": {
+        "item": "cz:clean_water"
+      },
+      "G": {
+        "item": "minecraft:red_mushroom"
+      },
+      "S": {
+        "item": "minecraft:nether_wart"
+      },
+      "C": {
+        "item": "minecraft:red_flower",
+        "data": 9
+      }
+    },
+    "tags": [
+      "alchemy"
+    ],
+    "result": [
+      {
+        "item": "cz:vial_stamina_0"
+      },
+      {
+        "item": "minecraft:glass_bottle"
+      }
+    ]
+  }
+}

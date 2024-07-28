@@ -1,0 +1,613 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:yuri",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "components": {
+      "minecraft:nameable": {
+        "always_show": true,
+        "allow_name_tag_renaming": true
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0,
+        "breathes_water": true
+      },
+      "minecraft:health": {
+        "value": 500,
+        "max": 500
+      },
+      "minecraft:collision_box": {
+        "width": 0.72,
+        "height": 2.01
+      },
+      "minecraft:movement": {
+        "value": 0.21
+      },
+      "minecraft:jump.static": {},
+      "minecraft:behavior.random_stroll": {
+        "priority": 6,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 9,
+        "look_distance": 4
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 6
+      },
+      "minecraft:physics": {},
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:persistent": {},
+      "minecraft:conditional_bandwidth_optimization": {}
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "randomize": [
+          {
+            "weight": 100,
+            "add": {
+              "component_groups": [
+                "cz:yuri_wild",
+                "cz:yuri_size_n",
+                "normal_eye"
+              ]
+            }
+          }
+        ]
+      },
+      "minecraft:on_tame": {
+        "add": {
+          "component_groups": [
+            "cz:yuri_tamed"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "cz:yuri_wild"
+          ]
+        }
+      },
+      "cz:stay": {
+        "sequence": [
+          {
+            "remove": {
+              "component_groups": [
+                "cz:follow_owner",
+                "cz:walk_idle"
+              ]
+            },
+            "add": {
+              "component_groups": [
+                "cz:stay"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:follow": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "cz:follow_owner"
+              ]
+            },
+            "remove": {
+              "component_groups": [
+                "cz:stay",
+                "cz:walk_idle"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:free_walk": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "cz:walk_idle"
+              ]
+            },
+            "remove": {
+              "component_groups": [
+                "cz:stay",
+                "cz:follow_owner"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:size_n": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "cz:yuri_size_n"
+              ]
+            },
+            "remove": {
+              "component_groups": [
+                "cz:yuri_size_p",
+                "cz:yuri_size_loli"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:size_loli": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "cz:yuri_size_loli"
+              ]
+            },
+            "remove": {
+              "component_groups": [
+                "cz:yuri_size_p",
+                "cz:yuri_size_n"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:size_p": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "cz:yuri_size_p"
+              ]
+            },
+            "remove": {
+              "component_groups": [
+                "cz:yuri_size_loli",
+                "cz:yuri_size_n"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:target_stop": {
+        "sequence": [
+          {
+            "remove": {
+              "component_groups": [
+                "cz:target_zombie",
+                "cz:target_creeper",
+                "cz:target_skeleton",
+                "cz:target_spider",
+                "cz:target_ravager"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:target_creeper": {
+        "sequence": [
+          {
+            "remove": {
+              "component_groups": [
+                "cz:target_zombie",
+                "cz:target_skeleton",
+                "cz:target_spider",
+                "cz:target_ravager"
+              ]
+            },
+            "add": {
+              "component_groups": [
+                "cz:target_creeper"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:target_zombie": {
+        "sequence": [
+          {
+            "remove": {
+              "component_groups": [
+                "cz:target_creeper",
+                "cz:target_skeleton",
+                "cz:target_spider",
+                "cz:target_ravager"
+              ]
+            },
+            "add": {
+              "component_groups": [
+                "cz:target_zombie"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:target_skeleton": {
+        "sequence": [
+          {
+            "remove": {
+              "component_groups": [
+                "cz:target_creeper",
+                "cz:target_zombie",
+                "cz:target_spider",
+                "cz:target_ravager"
+              ]
+            },
+            "add": {
+              "component_groups": [
+                "cz:target_skeleton"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:target_spider": {
+        "sequence": [
+          {
+            "remove": {
+              "component_groups": [
+                "cz:target_creeper",
+                "cz:target_zombie",
+                "cz:target_skeleton",
+                "cz:target_ravager"
+              ]
+            },
+            "add": {
+              "component_groups": [
+                "cz:target_spider"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:target_ravager": {
+        "sequence": [
+          {
+            "remove": {
+              "component_groups": [
+                "cz:target_creeper",
+                "cz:target_zombie",
+                "cz:target_spider",
+                "cz:target_skeleton"
+              ]
+            },
+            "add": {
+              "component_groups": [
+                "cz:target_ravager"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:yuri_blink": {
+        "add": {
+          "component_groups": [
+            "blink_eye"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "normal_eye"
+          ]
+        }
+      },
+      "cz:yuri_not_blink": {
+        "remove": {
+          "component_groups": [
+            "blink_eye"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "normal_eye"
+          ]
+        }
+      },
+      "cz:open_menu": {
+        "run_command": {
+          "command": [
+            "scriptevent cz:yuri_menu"
+          ],
+          "target": "other"
+        }
+      }
+    },
+    "component_groups": {
+      "cz:yuri_tamed": {
+        "minecraft:is_tamed": {},
+        "minecraft:type_family": {
+          "family": [
+            "yuri",
+            "cat",
+            "zxra",
+            "npc"
+          ]
+        },
+        "minecraft:behavior.pet_sleep_with_owner": {
+          "goal_radius": 1.0,
+          "speed_multiplier": 1.2,
+          "search_range": 12,
+          "search_height": 20,
+          "priority": 6
+        },
+        "minecraft:interact": {
+          "interactions": [
+            {
+              "on_interact": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "player"
+                    }
+                  ]
+                },
+                "event": "cz:open_menu"
+              },
+              "interact_text": "yuri.talk"
+            }
+          ]
+        }
+      },
+      "cz:follow_owner": {
+        "minecraft:behavior.follow_owner": {
+          "priority": 3,
+          "speed_multiplier": 1.4,
+          "start_distance": 5,
+          "stop_distance": 3
+        },
+        "minecraft:is_tamed": {},
+        "minecraft:movement": {
+          "value": 0.23
+        },
+        "minecraft:navigation.walk": {
+          "can_jump": true,
+          "avoid_damage_blocks": true,
+          "can_path_over_water": true,
+          "can_pass_doors": true,
+          "avoid_water": true
+        }
+      },
+      "cz:yuri_wild": {
+        "minecraft:type_family": {
+          "family": [
+            "cat",
+            "yuri",
+            "zxra"
+          ]
+        },
+        "minecraft:tameable": {
+          "probability": 0.8,
+          "tame_items": [
+            "minecraft:cod"
+          ],
+          "tame_event": {
+            "event": "minecraft:on_tame",
+            "target": "self"
+          }
+        }
+      },
+      "cz:stay": {
+        "minecraft:movement": {
+          "value": 0.0
+        }
+      },
+      "cz:walk_idle": {
+        "minecraft:movement": {
+          "value": 0.19
+        },
+        "minecraft:navigation.walk": {
+          "can_jump": true,
+          "avoid_damage_blocks": true,
+          "can_path_over_water": true,
+          "can_pass_doors": true,
+          "avoid_water": true
+        }
+      },
+      "cz:yuri_size_n": {
+        "minecraft:scale": {
+          "value": 0.86
+        }
+      },
+      "cz:yuri_size_p": {
+        "minecraft:scale": {
+          "value": 0.95
+        }
+      },
+      "cz:yuri_size_loli": {
+        "minecraft:scale": {
+          "value": 0.6
+        }
+      },
+      "cz:target_creeper": {
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 2,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "creeper"
+              },
+              "max_dist": 35
+            }
+          ]
+        },
+        "minecraft:attack": {
+          "damage": 20
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 2,
+          "speed_multiplier": 1.6,
+          "track_target": true
+        }
+      },
+      "cz:target_zombie": {
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 2,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "zombie"
+              },
+              "max_dist": 35
+            },
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "zombie_villager"
+              },
+              "max_dist": 35
+            },
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "husk"
+              },
+              "max_dist": 35
+            }
+          ]
+        },
+        "minecraft:attack": {
+          "damage": 14
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 2,
+          "speed_multiplier": 1.25,
+          "track_target": true
+        }
+      },
+      "cz:target_skeleton": {
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 2,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "skeleton"
+              },
+              "max_dist": 35
+            },
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "stray"
+              },
+              "max_dist": 35
+            }
+          ]
+        },
+        "minecraft:attack": {
+          "damage": 25
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 2,
+          "speed_multiplier": 1.53,
+          "track_target": true
+        }
+      },
+      "cz:target_spider": {
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 2,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "spider"
+              },
+              "max_dist": 35
+            },
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "cave_spider"
+              },
+              "max_dist": 35
+            }
+          ]
+        },
+        "minecraft:attack": {
+          "damage": 12
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 2,
+          "speed_multiplier": 1.53,
+          "track_target": true
+        }
+      },
+      "cz:target_ravager": {
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 2,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "ravager"
+              },
+              "max_dist": 35
+            }
+          ]
+        },
+        "minecraft:attack": {
+          "damage": 20
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 2,
+          "speed_multiplier": 1.53,
+          "track_target": true
+        }
+      },
+      "normal_eye": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": [
+            2,
+            4
+          ],
+          "time_down_event": {
+            "event": "cz:yuri_blink"
+          }
+        },
+        "minecraft:variant": {
+          "value": 0
+        }
+      },
+      "blink_eye": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 0.2,
+          "time_down_event": {
+            "event": "cz:yuri_not_blink"
+          }
+        },
+        "minecraft:variant": {
+          "value": 1
+        }
+      }
+    }
+  }
+}

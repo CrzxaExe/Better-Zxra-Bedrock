@@ -1,0 +1,39 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:vial_heal_1"
+    },
+    "pattern": [
+      "L",
+      "SHG",
+      " I"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:vial_heal_0"
+      },
+      "G": {
+        "item": "minecraft:golden_apple"
+      },
+      "S": {
+        "item": "minecraft:sugar"
+      },
+      "H": {
+        "item": "cz:vial_water"
+      }
+    },
+    "tags": [
+      "alchemy"
+    ],
+    "result": [
+      {
+        "item": "cz:vial_heal_1"
+      },
+      {
+        "item": "cz:vial",
+        "count": 1
+      }
+    ]
+  }
+}

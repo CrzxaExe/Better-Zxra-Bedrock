@@ -1,0 +1,23 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:paper_birch"
+    },
+    "pattern": [
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:birch_log"
+      }
+    },
+    "result": {
+      "item": "minecraft:paper",
+      "count": 9
+    },
+    "tags": [
+      "crafting_table"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "biomes": {
+    "birchy": {
+      "water_surface_color": "#e8e10e",
+      "water_fog_color": "#e8e10e",
+      "fog_identifier": "cz:birchy_fog",
+      "water_surface_transparency": 0.45
+    }
+  }
+}

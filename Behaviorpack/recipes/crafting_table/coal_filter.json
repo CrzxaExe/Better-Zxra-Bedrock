@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:coal_filter_res"
+    },
+    "pattern": [
+      "I",
+      "P",
+      "I"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:paper"
+      },
+      "P": {
+        "item": "minecraft:coal"
+      }
+    },
+    "result": {
+      "item": "cz:coal_filter"
+    },
+    "tags": [
+      "crafting_table"
+    ]
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "format_version": "1.19.0",
+  "animation_controllers": {
+    "controller.animation.yuri.behavior": {
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "look_player": "q.has_target"
+            },
+            {
+              "searching": "q.is_searching"
+            },
+            {
+              "sit": "q.is_sitting"
+            }
+          ],
+          "blend_transition": 0.35
+        },
+        "look_player": {
+          "animations": [
+            "player"
+          ],
+          "transitions": [
+            {
+              "default": "!q.has_target"
+            },
+            {
+              "searching": "q.is_searching"
+            }
+          ],
+          "blend_transition": 0.35
+        },
+        "searching": {
+          "animations": [
+            "searching"
+          ],
+          "transitions": [
+            {
+              "default": "!q.is_searching"
+            },
+            {
+              "look_player": "q.has_target"
+            }
+          ],
+          "blend_transition": 0.35
+        },
+        "sit": {
+          "animations": [
+            "sit"
+          ],
+          "transitions": [
+            {
+              "default": "!q.is_sitting"
+            }
+          ],
+          "blend_transition": 0.35
+        }
+      }
+    },
+    "controller.animation.yuri.tail": {
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "walk": "q.is_moving"
+            }
+          ],
+          "blend_transition": 0.35,
+          "animations": [
+            {
+              "tail_idle": "q.is_alive"
+            }
+          ]
+        },
+        "walk": {
+          "animations": [
+            "tail_walk"
+          ],
+          "transitions": [
+            {
+              "default": "!q.is_moving"
+            }
+          ],
+          "blend_transition": 0.35
+        }
+      }
+    },
+    "controller.animation.yuri.ears": {
+      "states": {
+        "default": {
+          "transitions": [],
+          "blend_transition": 0.35,
+          "animations": [
+            {
+              "ears_idle": "q.is_alive"
+            },
+            {
+              "ears_interest": "query.has_target"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

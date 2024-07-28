@@ -1,0 +1,144 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:block": {
+    "description": {
+      "identifier": "cz:jungle_chair",
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ],
+          "y_rotation": 180
+        }
+      },
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.chairs"
+      }
+    },
+    "components": {
+      "minecraft:friction": 0.4,
+      "minecraft:map_color": "#b0753a",
+      "minecraft:loot": "loot_tables/block/chair/jungle_chair.json",
+      "minecraft:geometry": "geometry.chair",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "wood_jungle",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -7.0,
+          0.0,
+          -7.0
+        ],
+        "size": [
+          14.0,
+          12.0,
+          14.0
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -7.0,
+          0.0,
+          -7.0
+        ],
+        "size": [
+          14.0,
+          16.0,
+          14.0
+        ]
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 3.0
+      },
+      "tag:wood": {},
+      "minecraft:flammable": {
+        "catch_chance_modifier": 5,
+        "destroy_chance_modifier": 20
+      },
+      "minecraft:on_interact": {
+        "event": "sitable",
+        "condition": "!q.is_sneaking"
+      }
+    },
+    "events": {
+      "drop": {
+        "spawn_loot": {
+          "table": "loot_tables/block/chair/jungle_chair"
+        }
+      },
+      "sitable": {
+        "sequence": [
+          {
+            "run_command": {
+              "command": [
+                "summon cz:seat ~~0.2~"
+              ]
+            }
+          },
+          {
+            "run_command": {
+              "command": [
+                "ride @s start_riding @e[r=6,type=cz:seat,c=1]"
+              ],
+              "target": "other"
+            }
+          }
+        ]
+      }
+    },
+    "permutations": [
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'south'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'east'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              90,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'north'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              180,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'west'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -90,
+              0
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

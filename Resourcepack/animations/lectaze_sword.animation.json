@@ -1,0 +1,90 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.lectaze_sword.move": {
+			"loop": true,
+			"bones": {
+				"projectile": {
+					"rotation": ["variable.shake_power - q.target_x_rotation", "-q.body_y_rotation", 0],
+					"position": [0, -3, 0]
+				}
+			}
+		},
+		"animation.lectaze_creation.move": {
+			"loop": true,
+			"bones": {
+				"projectile": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				}
+			}
+		},
+		"animation.lectaze.idle": {
+			"loop": true,
+			"animation_length": 2.1,
+			"bones": {
+				"projectile": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.6": [-7.5, 0, 0],
+						"1.5": [2.5, 0, 0],
+						"2.1": [0, 0, 0]
+					},
+					"position": {
+						"0.0": {
+							"post": [0, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.6": {
+							"post": [0, 2, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"1.5": {
+							"post": [0, -3, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"2.1": {
+							"post": [0, 0, 0],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.lectaze.attack": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1.2083,
+			"bones": {
+				"projectile": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.375": [27.5, 0, 0],
+						"0.6667": [15, 0, 0],
+						"0.7083": [7.5, 0, 0],
+						"0.8333": [0, 0, 0],
+						"1.0": [0, 0, 0],
+						"1.2083": [0, 0, 0]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.375": [0, 14, 21],
+						"0.6667": [0, 21, 32],
+						"0.7083": [0, 3, -2],
+						"0.8333": [0, 3, -7],
+						"1.0": [0, 3, -8],
+						"1.2083": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.lectaze.key": {
+			"loop": true,
+			"bones": {
+				"projectile": {
+					"rotation": [0, "q.target_y_rotation", 0],
+					"position": [0, 0, 0]
+				}
+			}
+		}
+	}
+}

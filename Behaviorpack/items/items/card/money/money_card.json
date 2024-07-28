@@ -1,0 +1,22 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:money_card",
+      "menu_category": {
+        "category": "items",
+        "group": "none",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:max_stack_size": 16,
+      "minecraft:icon": {
+        "texture": "card"
+      },
+      "minecraft:display_name": {
+        "value": "item.money_card.name"
+      }
+    }
+  }
+}

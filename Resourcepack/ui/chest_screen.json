@@ -1,0 +1,131 @@
+{
+  "namespace": "chest",
+  
+  "small_chest_panel_top_half": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+          {
+            "heart_rend@hud.heart_renderer": {
+              "layer": 8,
+              "bindings": [
+                {
+			      "binding_name": "#show_survival_ui",
+			      "binding_name_override": "#visible"
+			    }
+			  ],
+              "anchor_from": "bottom_left",
+              "anchor_to": "bottom_left",
+              "offset": [ "0%", "88%" ]
+            }
+          },
+          {
+           "player_bg": {
+	         "type": "image",
+	         "texture": "textures/ui/position_label_cz",
+	         "size": [ 104, 74 ],
+	         "layer": 2,
+	         "anchor_from": "bottom_left",
+	         "anchor_to": "bottom_left",
+	         "offset": [ -70, "79% + 38" ],
+	         "controls": [
+	           {
+	             "player_renderer_panel": {
+	               "type": "panel",
+	               "size": [ 34, 34 ],
+	               "offset": [ 0, -16 ],
+
+	               "controls": [
+	                 {
+	                   "player_renderer": {
+	                     "type": "custom",
+	                     "renderer": "live_player_renderer",
+	                     "property_bag": {
+	                       "#look_at_cursor": true
+	                     },
+	                     "animation_reset_name": "screen_animation_reset",
+	                     "anims": [
+	                       "@common.screen_exit_size_animation_push",
+	                       "@common.screen_exit_size_animation_pop",
+	                       "@common.screen_entrance_size_animation_push",
+	                       "@common.screen_entrance_size_animation_pop"
+	                     ],
+	                     "layer": 8,
+	                     "anchor_from": "center",
+	                     "anchor_to": "center"
+	                   }
+	                 }
+	               ]
+	             }
+	           }
+	         ]
+	       }
+	      }
+        ]
+      }
+    ]
+  },
+
+  "large_chest_panel_top_half": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+          {
+            "heart_rend@hud.heart_renderer": {
+              "layer": 8,
+              "anchor_from": "bottom_left",
+              "anchor_to": "bottom_left",
+              "offset": [ "0%", "61%" ]
+            }
+          },
+          {
+            "player_bg": {
+	          "type": "image",
+	          "texture": "textures/ui/position_label_cz",
+	          "size": [ 104, 74 ],
+	          "layer": 2,
+	          "anchor_from": "bottom_left",
+	          "anchor_to": "bottom_left",
+	          "offset": [ -70, "55%" ],
+	          "controls": [
+	            {
+	              "player_renderer_panel": {
+	                "type": "panel",
+	                "size": [ 34, 34 ],
+	                "offset": [ 0, -16 ],
+
+	                "controls": [
+	                  {
+	                    "player_renderer": {
+	                      "type": "custom",
+	                      "renderer": "live_player_renderer",
+	                      "property_bag": {
+	                        "#look_at_cursor": true
+	                      },
+	                      "animation_reset_name": "screen_animation_reset",
+	                      "anims": [
+	                        "@common.screen_exit_size_animation_push",
+	                        "@common.screen_exit_size_animation_pop",
+	                        "@common.screen_entrance_size_animation_push",
+	                        "@common.screen_entrance_size_animation_pop"
+	                      ],
+	                      "layer": 8,
+	                      "anchor_from": "center",
+	                      "anchor_to": "center"
+	                    }
+	                  }
+	                ]
+	              }
+	            }
+	          ]
+	        }
+	      }
+        ]
+      }
+    ]
+  }
+}

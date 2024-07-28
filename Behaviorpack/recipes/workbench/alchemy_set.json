@@ -1,0 +1,44 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:alchemy_set"
+    },
+    "pattern": [
+      "G",
+      "G S",
+      "GPC"
+    ],
+    "key": {
+      "P": {
+        "item": "cz:plate"
+      },
+      "G": {
+        "item": "minecraft:glass"
+      },
+      "S": {
+        "item": "cz:silver_ingot"
+      },
+      "C": {
+        "item": "cz:vial"
+      }
+    },
+    "result": {
+      "item": "cz:alchemy_set"
+    },
+    "tags": [
+      "workbench"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:glass"
+      },
+      {
+        "item": "cz:plate"
+      },
+      {
+        "item": "cz:vial"
+      }
+    ]
+  }
+}

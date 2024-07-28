@@ -1,0 +1,14 @@
+{
+  "namespace": "profile",
+  
+  "profile_screen": {
+    "$screen_bg_content": "cz_common.background_lobby",
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": []
+      }
+    ]
+  }
+}

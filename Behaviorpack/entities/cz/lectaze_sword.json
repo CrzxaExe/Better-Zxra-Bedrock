@@ -1,0 +1,115 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:lectaze_sword",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "runtime_identifier": "minecraft:snowball"
+    },
+    "components": {
+      "minecraft:collision_box": {
+        "width": 0.1,
+        "height": 0.1
+      },
+      "minecraft:physics": {}
+    },
+    "events": {
+      "minecraft:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      },
+      "cz:lectaze_projectile": {
+        "add": {
+          "component_groups": [
+            "projectile"
+          ]
+        }
+      },
+      "cz:lectaze_rain": {
+        "add": {
+          "component_groups": [
+            "rain"
+          ]
+        }
+      }
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {}
+      },
+      "projectile": {
+        "minecraft:projectile": {
+          "on_hit": {
+            "impact_damage": {
+              "damage": 30,
+              "destroy_on_hit": false,
+              "knockback": true
+            },
+            "stick_in_ground": {
+              "shake": 0.35
+            }
+          },
+          "hit_sound": "item.trident.hit",
+          "hit_ground_sound": "item.trident.hit_ground",
+          "power": 6,
+          "gravity": 0.089,
+          "uncertainty_base": 1,
+          "uncertainty_multiplier": 0,
+          "should_bounce": true,
+          "anchor": 1,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        "minecraft:transformation": {
+          "into": "cz:lectaze_creation<cz:change_1>",
+          "transformation_sound": "convert_to_drowned",
+          "delay": {
+            "value": 2
+          }
+        }
+      },
+      "rain": {
+        "minecraft:projectile": {
+          "on_hit": {
+            "impact_damage": {
+              "damage": 64,
+              "destroy_on_hit": false,
+              "knockback": true
+            },
+            "stick_in_ground": {
+              "shake": 0.35
+            }
+          },
+          "hit_sound": "item.trident.hit",
+          "hit_ground_sound": "item.trident.hit_ground",
+          "power": 6,
+          "gravity": 0.689,
+          "uncertainty_base": 1,
+          "uncertainty_multiplier": 0,
+          "should_bounce": true,
+          "anchor": 1,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        "minecraft:timer": {
+          "time": 10,
+          "looping": false,
+          "time_down_event": {
+            "event": "minecraft:despawn"
+          }
+        }
+      }
+    }
+  }
+}

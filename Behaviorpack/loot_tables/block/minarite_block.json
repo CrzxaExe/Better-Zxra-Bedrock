@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entities": [
+        {
+          "type": "item",
+          "name": "cz:minarite_block",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

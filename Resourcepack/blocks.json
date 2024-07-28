@@ -1,0 +1,152 @@
+{
+  "format_version": [
+    1,
+    1,
+    0
+  ],
+  "cz:crate": {
+    "sound": "plank",
+    "textures": "crate"
+  },
+  "cz:plasma_core": {
+    "sound": "stone",
+    "textures": "plasma_core"
+  },
+  "cz:forge": {
+    "sound": "stone",
+    "textures": "forge"
+  },
+  "cz:plate": {
+    "sound": "plank"
+  },
+  "cz:workbench": {
+    "sound": "plank"
+  },
+  "cz:alchemy_set": {
+    "sound": "plank"
+  },
+  "cz:altar": {
+    "sound": "stone"
+  },
+  "cz:oak_chair": {
+    "sound": "plank"
+  },
+  "cz:warped_chair": {
+    "sound": "plank"
+  },
+  "cz:bamboo_chair": {
+    "sound": "plank"
+  },
+  "cz:cherry_chair": {
+    "sound": "plank"
+  },
+  "cz:crimson_chair": {
+    "sound": "plank"
+  },
+  "cz:jungle_chair": {
+    "sound": "plank"
+  },
+  "cz:mangrove_chair": {
+    "sound": "plank"
+  },
+  "cz:dark_oak_chair": {
+    "sound": "plank"
+  },
+  "cz:birch_chair": {
+    "sound": "plank"
+  },
+  "cz:spruce_chair": {
+    "sound": "plank"
+  },
+  "cz:acacia_chair": {
+    "sound": "plank"
+  },
+  "cz:dexterite_ore": {
+    "sound": "stone",
+    "textures": "dexterite_ore"
+  },
+  "cz:chlorophyte_ore": {
+    "sound": "stone",
+    "textures": "chlorophyte_ore"
+  },
+  "cz:ender_ore": {
+    "sound": "stone",
+    "textures": "ender_ore"
+  },
+  "cz:dexterite_block": {
+    "sound": "stone",
+    "textures": "dexterite_block"
+  },
+  "cz:mina_block": {
+    "sound": "stone",
+    "textures": "mina_block"
+  },
+  "cz:minarite_block": {
+    "sound": "stone",
+    "textures": "minarite_block"
+  },
+  "cz:black_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_black"
+  },
+  "cz:blue_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_blue"
+  },
+  "cz:brown_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_brown"
+  },
+  "cz:cyan_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_cyan"
+  },
+  "cz:gray_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_gray"
+  },
+  "cz:green_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_green"
+  },
+  "cz:light_blue_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_light_blue"
+  },
+  "cz:lime_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_lime"
+  },
+  "cz:magenta_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_magenta"
+  },
+  "cz:orange_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_orange"
+  },
+  "cz:pink_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_pink"
+  },
+  "cz:purple_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_purple"
+  },
+  "cz:red_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_red"
+  },
+  "cz:silver_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_silver"
+  },
+  "cz:white_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_white"
+  },
+  "cz:yellow_brick_concrete": {
+    "sound": "stone",
+    "textures": "concrete_brick_yellow"
+  }
+}

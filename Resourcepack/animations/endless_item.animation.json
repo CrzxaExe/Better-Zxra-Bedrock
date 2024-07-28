@@ -1,0 +1,20 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.endless_item.fpp": {
+			"loop": true,
+			"bones": {
+				"rightEndless": {
+					"rotation": [56.21668, -62.70334, -89.23699],
+					"position": [29, 22, 0],
+					"scale": [1.4, 1.2, 1.4]
+				},
+				"leftEndless": {
+					"rotation": [61.59686, -61.0442, -77.44093],
+					"position": [25, 21, -14],
+					"scale": [1.4, 1.2, 1.4]
+				}
+			}
+		}
+	}
+}

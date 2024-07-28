@@ -1,0 +1,24 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:netherite_plate"
+    },
+    "pattern": [
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:netherite_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:netherite_plate",
+      "count": 3
+    },
+    "tags": [
+      "crafting_table",
+      "forger"
+    ]
+  }
+}

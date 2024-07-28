@@ -1,0 +1,20 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:flour",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:max_stack_size": 64,
+      "minecraft:icon": {
+        "texture": "flour"
+      },
+      "minecraft:display_name": {
+        "value": "item.flour.name"
+      }
+    }
+  }
+}

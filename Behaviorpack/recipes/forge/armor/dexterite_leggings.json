@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:dexterite_leggings"
+    },
+    "pattern": [
+      "III",
+      "IPI",
+      "I I"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:dexterite_ingot"
+      },
+      "P": {
+        "item": "cz:netherite_plate"
+      }
+    },
+    "result": {
+      "item": "cz:dexterite_leggings"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

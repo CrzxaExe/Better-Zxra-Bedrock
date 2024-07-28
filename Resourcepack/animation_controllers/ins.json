@@ -1,0 +1,424 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.kyle": {
+      "states": {
+        "default": {
+          "blend_transition": 0.3,
+          "transitions": [
+            {
+              "hold": "q.is_sneaking"
+            }
+          ],
+          "animations": [
+            {
+              "kyle_firstperson": "v.is_first_person"
+            }
+          ]
+        },
+        "hold": {
+          "animations": [
+            "sneak"
+          ],
+          "blend_transition": 0.1,
+          "transitions": [
+            {
+              "default": "q.is_sneaking < 1 && q.any_animation_finished"
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.kyle_entity": {
+      "states": {
+        "default": {
+          "blend_transition": 0.3,
+          "transitions": [
+            {
+              "attack": "q.is_delayed_attacking == 1.0 || v.attack_time > 0"
+            },
+            {
+              "moving": "q.is_moving"
+            },
+            {
+              "stealth": "q.variant == 3"
+            },
+            {
+              "emerge": "q.is_emerging"
+            }
+          ],
+          "animations": [
+            {
+              "holding": "q.get_equipped_item_name=='kyles'"
+            },
+            "prime",
+            "look"
+          ]
+        },
+        "attack": {
+          "blend_transition": 0.1,
+          "transitions": [
+            {
+              "default": "!q.is_delayed_attacking"
+            },
+            {
+              "moving": "q.is_moving && q.any_animation_finished && !q.is_delayed_attacking"
+            },
+            {
+              "stealth": "q.variant == 3"
+            }
+          ],
+          "animations": [
+            {
+              "skill_1": "q.variant == 1"
+            },
+            {
+              "skill_2": "q.variant == 2"
+            },
+            {
+              "skill_4": "q.variant == 4"
+            },
+            {
+              "skill_5": "q.variant == 5"
+            },
+            {
+              "skill_6": "q.variant == 6"
+            },
+            {
+              "skill_7": "q.variant == 7"
+            }
+          ]
+        },
+        "moving": {
+          "blend_transition": 0.2,
+          "transitions": [
+            {
+              "default": "!q.is_moving"
+            },
+            {
+              "attack": "q.is_delayed_attacking == 1.0 || v.attack_time > 0"
+            },
+            {
+              "stealth": "q.variant == 3"
+            }
+          ],
+          "animations": [
+            "move",
+            "look",
+            {
+              "body_target": "q.has_target"
+            }
+          ]
+        },
+        "emerge": {
+          "blend_transition": 0.4,
+          "transitions": [
+            {
+              "default": "q.any_animation_finished || !q.is_emerging"
+            },
+            {
+              "stealth": "q.variant == 3"
+            },
+            {
+              "attack": "q.is_delayed_attacking == 1.0 || v.attack_time > 0"
+            }
+          ],
+          "animations": [
+            "emerge"
+          ]
+        },
+        "stealth": {
+          "blend_transition": 0.3,
+          "transitions": [
+            {
+              "default": "q.variant != 3"
+            }
+          ],
+          "animations": [
+            "skill_3",
+            "look"
+          ]
+        }
+      }
+    },
+    "controller.animation.lectaze": {
+      "states": {
+        "default": {
+          "blend_transition": 0.1,
+          "transitions": [
+            {
+              "attack": "q.is_delayed_attacking == 1.0"
+            }
+          ],
+          "animations": [
+            "idle"
+          ]
+        },
+        "attack": {
+          "blend_transition": 0.1,
+          "transitions": [
+            {
+              "default": "q.any_animation_finished"
+            }
+          ],
+          "animations": [
+            "attack"
+          ]
+        }
+      }
+    },
+    "controller.animation.kyle.control": {
+      "states": {
+        "default": {
+          "blend_transition": 0.3,
+          "transitions": [
+            {
+              "run": "q.is_sprinting"
+            },
+            {
+              "draw_sword": "query.is_using_item > 0"
+            }
+          ]
+        },
+        "run": {
+          "blend_transition": 0.1,
+          "transitions": [
+            {
+              "default": "q.is_sprinting < 1 && q.any_animation_finished"
+            },
+            {
+              "draw_sword": "query.is_using_item > 0 && q.any_animation_finished"
+            }
+          ]
+        },
+        "draw_sword": {
+          "blend_transition": 0.1,
+          "transitions": [
+            {
+              "default": "query.is_using_item < 0.1 && q.any_animation_finished"
+            },
+            {
+              "run": "query.is_using_item < 0.1 && q.is_sprinting > 0 && q.any_animation_finished"
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.draw.control": {
+      "states": {
+        "default": {
+          "blend_transition": 0.3,
+          "transitions": [
+            {
+              "draw_sword": "query.is_using_item > 0"
+            },
+            {
+              "running": "query.is_sprinting"
+            }
+          ],
+          "animations": [
+            {
+              "double_gun": "v.endless"
+            }
+          ]
+        },
+        "draw_sword": {
+          "animations": [
+            {
+              "kyle_draw": "v.draw_sword"
+            },
+            {
+              "kyle_charge": "v.kyles"
+            },
+            {
+              "draw_long": "v.draw_long"
+            },
+            {
+              "staff_use": "v.staff"
+            },
+            {
+              "gun_use": "v.gun"
+            },
+            {
+              "heavy_charge": "v.heavy"
+            },
+            {
+              "draw_reaper": "v.reaper"
+            }
+          ],
+          "blend_transition": 0.25,
+          "transitions": [
+            {
+              "default": "query.is_using_item < 0.1 && q.any_animation_finished"
+            },
+            {
+              "running": "query.is_sprinting"
+            }
+          ]
+        },
+        "running": {
+          "animations": [
+            {
+              "kyle_player_run": "v.draw_sword"
+            },
+            {
+              "kyle_new_run": "v.kyles"
+            },
+            {
+              "heavy_weapon": "v.heavy"
+            },
+            {
+              "run_reaper": "v.reaper"
+            }
+          ],
+          "blend_transition": 0.3,
+          "transitions": [
+            {
+              "default": "q.is_sprinting < 0.1"
+            },
+            {
+              "draw_sword": "query.is_using_item"
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.angel": {
+      "states": {
+        "default": {
+          "blend_transition": 0,
+          "transitions": [
+            {
+              "attack": "q.is_delayed_attacking == 1"
+            },
+            {
+              "emerge": "q.is_emerging"
+            },
+            {
+              "moving": "q.is_moving"
+            }
+          ],
+          "animations": [
+            "bob"
+          ]
+        },
+        "attack": {
+          "animations": [
+            {
+              "attack_normal": "q.variant == 0"
+            },
+            {
+              "attack_forward": "q.variant == 1"
+            }
+          ],
+          "blend_transition": 0.9,
+          "transitions": [
+            {
+              "default": "q.any_animation_finished && !q.is_delayed_attacking"
+            },
+            {
+              "moving": "q.is_moving && !q.is_delayed_attacking"
+            }
+          ]
+        },
+        "emerge": {
+          "animations": [
+            "spawned"
+          ],
+          "transitions": [
+            {
+              "default": "q.any_animation_finished"
+            },
+            {
+              "moving": "q.is_moving"
+            }
+          ],
+          "blend_transition": 0
+        },
+        "moving": {
+          "animations": [
+            "move"
+          ],
+          "transitions": [
+            {
+              "default": "!q.is_moving"
+            }
+          ],
+          "blend_transition": 0.1
+        }
+      }
+    },
+    "controller.animation.yuri.root": {
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "moving": "q.ground_speed >= 0.17 && query.modified_move_speed < 0.75"
+            },
+            {
+              "running": "q.ground_speed >= 0.17 && query.modified_move_speed >= 0.75"
+            }
+          ],
+          "animations": [
+            "bob"
+          ],
+          "blend_transition": 0.1
+        },
+        "moving": {
+          "animations": [
+            "move"
+          ],
+          "transitions": [
+            {
+              "default": "q.ground_speed < 0.17"
+            },
+            {
+              "running": "query.modified_move_speed >= 0.75"
+            }
+          ],
+          "blend_transition": 0.1
+        },
+        "running": {
+          "animations": [
+            "run"
+          ],
+          "transitions": [
+            {
+              "default": "q.ground_speed < 0.17"
+            },
+            {
+              "moving": "query.modified_move_speed < 0.75"
+            }
+          ],
+          "blend_transition": 0.1
+        }
+      }
+    },
+    "controller.animation.particle": {
+      "states": {
+        "default": {
+          "blend_transition": 0.3,
+          "animations": [
+            {
+              "impact_anim": "q.variant == 0"
+            },
+            {
+              "liberator_swing_anim": "q.variant == 1 && q.skin_id == 0"
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.new_player": {
+      "states": {
+        "default": {
+          "blend_transition": 0.3,
+          "animations": [
+            "cape",
+            "hudplayer"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:limited_ascend",
+      "menu_category": {
+        "category": "items",
+        "group": "none",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:max_stack_size": 64,
+      "minecraft:icon": {
+        "texture": "limited_ascend"
+      },
+      "minecraft:display_name": {
+        "value": "item.limited_ascend.name"
+      },
+      "minecraft:glint": true
+    },
+    "events": {}
+  }
+}

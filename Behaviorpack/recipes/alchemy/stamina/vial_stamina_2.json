@@ -1,0 +1,43 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:vial_stamina_2"
+    },
+    "pattern": [
+      "CSC",
+      "GHG",
+      " I"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:vial_stamina_1"
+      },
+      "H": {
+        "item": "cz:vial_water"
+      },
+      "G": {
+        "item": "cz:vial_stamina_0"
+      },
+      "S": {
+        "item": "minecraft:sugar"
+      },
+      "C": {
+        "item": "minecraft:red_flower",
+        "data": 9
+      }
+    },
+    "tags": [
+      "alchemy"
+    ],
+    "result": [
+      {
+        "item": "cz:vial_stamina_2"
+      },
+      {
+        "item": "cz:vial",
+        "count": 2
+      }
+    ]
+  }
+}

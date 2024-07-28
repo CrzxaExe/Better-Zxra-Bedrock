@@ -1,0 +1,375 @@
+{
+  "namespace": "cz_world",
+  
+  // Header Button
+  "header_bar": {
+    "type": "stack_panel",
+    "controls": [
+    ]
+  },
+  
+  // Content Layout
+  "cz_common_content@play.common_content": {},
+  
+  "cz_world_scroll@cz_common_content": {
+    "controls": [
+      {
+        "worlds_stack_panel": {
+          "type": "stack_panel",
+          "size": [ "100%", "100%" ],
+          "controls": [
+            {
+              "scrolling_panel_sizer": {
+                "type": "panel",
+                "size": [ "100%", "fill" ],
+                "controls": [
+                  {
+                    "scrolling_panel@play.scrolling_offsets": {
+                      "layer": 1,
+                      "$scrolling_content": "play.worlds_scroll_panel"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "scrolling_panel_legacy_storage_sizer": {
+                "type": "panel",
+                "ignored": "(not $legacy_worlds_share_storage)",
+                "size": [ "100%", "20%" ],
+                "controls": [
+                  {
+                    "scrolling_panel@play.scrolling_offsets": {
+                      "layer": 1,
+                      "$scrolling_content": "play.legacy_world_content_status_area_panel"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  
+  "cz_friends_scroll_content@cz_common_content": {
+    "controls": [
+      {
+        "scrolling_panel@play.scrolling_offsets": {
+          "layer": 1,
+          "$scrolling_content": "play.friends_scroll_panel"
+        }
+      }
+    ]
+  },
+  
+  "cz_server_scroll_content@cz_common_content": {
+    "size": [ "100% - 4px", "100% - 4px" ],
+    "controls": [
+      {
+        "severs_panel": {
+          "type": "stack_panel",
+          "orientation": "vertical",
+          "size": [ "100%", "100%" ],
+          "controls": [
+            {
+              "offset_panel": {
+                "type": "panel",
+                "size": [ "100% - 4px", "100%cm" ],
+                "controls": [
+                  {
+                    "servers_sunsetting_warning@play.realm_warning_tip": {
+                      "size": [ "100% - 2px", "100%cm - 2px" ],
+                      "offset": [ 2, 2 ]
+                    }
+                  }
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#device_sunsetting",
+                    "binding_name_override": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "show_servers_panel@play.show_servers_panel": {}
+            }
+          ]
+        }
+      },
+      {
+        "feature_server_message_panel": {
+          "type": "stack_panel",
+          "orientation": "vertical",
+          "size": [ "100% - 10px", "100%c" ],
+          "offset": [ 0, 2 ],
+          "anchor_to": "top_middle",
+          "anchor_from": "top_middle",
+          "bindings": [
+            {
+              "binding_name": "#feature_server_message_visible",
+              "binding_name_override": "#visible"
+            }
+          ],
+          "controls": [
+            {
+              "featured_servers_label@common.minecraftTenLabel": {
+                "size": [ "default", "default" ],
+                "text": "thirdPartyWorld.Featured",
+                "color": "$dark_button_default_text_color"
+              }
+            },
+            {
+              "pad": {
+                "type": "panel",
+                "size": [ "100%", 2 ]
+              }
+            },
+            {
+              "feature_server_message_panel@play.dark_label_background": {
+                "size": [ "100%", "100%c" ],
+                "controls": [
+                  {
+                    "label_panel_layout": {
+                      "type": "panel",
+                      "size": [ "99%", "100%c + 8px" ],
+                      "controls": [
+                        {
+                          "label": {
+                            "type": "label",
+                            "$information_label_font|default": "default",
+                            "font_type": "smooth",
+                            "color": "$dark_button_default_text_color",
+                            "size": [ "100%", "default" ],
+                            "layer": 1,
+                            "shadow": false,
+                            "text": "#feature_server_message_text",
+                            "bindings": [
+                              {
+                                "binding_name": "#feature_server_message_text"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "open_account_setting_button_gamecore@play.open_account_setting_button_gamecore": {}
+            }
+          ]
+        }
+      }
+    ]
+  },
+  
+  // Tab Panel
+  "common_tab_content_panel": {
+    "type": "panel",
+    "controls": [
+      {
+        "content@$scroll_tab_content": {
+          "layer": 2,
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "size": [ "100%-12px", "100%-12px" ],
+          "offset": [ 6, 6 ],
+          "ttsSectionContainer": true
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "binding_type": "view",
+        "source_control_name": "$visible_bind_toggle_source_control",
+        "source_property_name": "#toggle_state",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  
+  "worlds_tab_content_panel@cz_world.common_tab_content_panel": {
+    "$visible_bind_toggle_source_control": "world_navigation_tab_toggle",
+    "$scroll_tab_content": "cz_world.cz_world_scroll"
+  },
+
+  "friends_tab_content_panel@cz_world.common_tab_content_panel": {
+    "$visible_bind_toggle_source_control": "friends_navigation_tab_toggle",
+    "$scroll_tab_content": "cz_world.cz_friends_scroll_content"
+  },
+
+  "server_tab_content_panel@cz_world.common_tab_content_panel": {
+    "$visible_bind_toggle_source_control": "server_navigation_tab_toggle",
+    "$scroll_tab_content": "cz_world.cz_server_scroll_content"
+  },
+  
+  "top_tab@cz_common.cz_dark_button": {
+    "$toggle_tts_enabled_binding_type": "global",
+    "$radio_toggle_group": true,
+    "$toggle_name": "navigation_tab",
+    "$toggle_group_default_selected": "$default_tab",
+    "anchor_to": "top_left",
+    "anchor_from": "top_left",
+    "$toggle_tts_type_priority": 1001,
+    "$toggle_tts_toggle_on_text": "",
+    "$toggle_tts_toggle_off_text": "",
+    "$toggle_tts_index_priority": 1002
+  },
+  
+  "world_navigation_tab@play.top_tab": {
+    "$is_left_most_tab": true,
+    "$tab_view_binding_name": "world_navigation_tab_toggle",
+    "$tab_icon": "worlds_icon",
+    "$count_text_name": "#world_item_count",
+    "$tab_text_name": "selectWorld.tab.worlds",
+    "$toggle_group_forced_index": 0,
+    "$tab_content": "play.common_navigation_tab_content",
+    "variables": [
+      {
+        "requires": "$is_editor_mode_enabled",
+        "$tab_text_name": "playscreen.editor.worlds"
+      }
+    ]
+  },
+
+  "friends_navigation_tab@play.top_tab": {
+    "$tab_view_binding_name": "friends_navigation_tab_toggle",
+    "$tab_icon": "friends_icon_2",
+    "$tab_icon_2": "friends_icon_1",
+    "$tab_icon_nobounce": "friends_icon_2",
+    "$tab_icon_nobounce_2": "friends_icon_1",
+    "$visibility_binding_override_name": "#friends_tab_show_bouncing",
+    "$visibility_binding_override_name_nobounce": "#friends_tab_show_not_bouncing",
+    "$visibility_binding_override_name_notification": "#friends_tab_show_invites",
+    "$count_text_name": "#friend_world_item_count",
+    "$tab_text_name": "selectWorld.tab.friends",
+    "$toggle_group_forced_index": 1,
+    "$tab_content": "play.friends_navigation_tab_content"
+  },
+
+  "server_navigation_tab@play.top_tab": {
+    "$tab_view_binding_name": "server_navigation_tab_toggle",
+    "$tab_icon": "server_tab_icon",
+    "$count_text_name": "#server_world_item_count",
+    "$tab_text_name": "selectWorld.tab.thirdParty",
+    "$toggle_group_forced_index": 2,
+    "$tab_content": "play.common_navigation_tab_content"
+  },
+
+  "close_navigation_tab": {
+    "type": "panel",
+    "controls": [
+      {
+        "background@play.X_tab_back": {}
+      },
+      {
+        "x_image@common.light_close_button": {
+          "layer": 1,
+          "offset": [ 0, -1 ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "focus_identifier": "close_button",
+          "focus_change_left": "FOCUS_OVERRIDE_STOP",
+          "focus_change_up": "FOCUS_OVERRIDE_STOP",
+          "focus_change_right": "FOCUS_OVERRIDE_STOP",
+          "bindings": [
+            {
+              "binding_name": "(not #exit_button_visible)",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  
+  "default_tab_navigation_panel_layout@play.common_tab_navigation_panel_layout": {
+    "controls": [
+      {
+        "world_navigation_tab@cz_world.world_navigation_tab": {
+          "size": [ "32%", "12%" ],
+          "offset": [ "20%", 0 ]
+        }
+      },
+      {
+        "friends_navigation_tab@cz_world.friends_navigation_tab": {
+          "size": [ "32%", "12%" ]
+        }
+      },
+      {
+        "server_navigation_tab@cz_world.server_navigation_tab": {
+          "size": [ "32%", "12%" ]
+        }
+      },
+      {
+        "close_navigation_tab@cz_world.close_navigation_tab": {
+          "size": [ "4%", "12%" ]
+        }
+      }
+    ]
+  },
+  
+  // Panels
+  "panel_layout@play.common_tab_content_panel_type": {
+    "size": [ "95%", "87.8%" ],
+    "controls": [
+      { "cz_worlds_tab_content_panel@cz_world.worlds_tab_content_panel": {} },
+      { "cz_friends_tab_content_panel@cz_world.friends_tab_content_panel": {} },
+      { "cz_server_tab_content_panel@cz_world.server_tab_content_panel": {} }
+    ]
+  },
+  
+  // Content
+  "cz_world_content_screen": {
+    "type": "stack_panel",
+    "size": [ "97.2%", "100%" ],
+    "controls": [
+      {
+        "cz_name_world_screen": {
+	      "type": "label",
+		  "text": "Play Screen",
+		  "shadow": true,
+		  "size": [ "100%", "3.7%" ],
+		  "text_alignment": "center",
+		  "anchor_from": "center_middle",
+          "anchor_to": "center_middle"
+		}
+      },
+      { "panel_layout@cz_world.panel_layout": {
+          "anchor_from": "bottom_center",
+          "anchor_to": "bottom_center"
+        }
+      },
+      {
+        "default_tab_navigation_panel_layout@cz_world.default_tab_navigation_panel_layout": {
+          "offset": [ 0, "-3.4%" ],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle"
+        }
+      }
+    ]
+  },
+  
+  // Screen
+  "cz_play_screen": {
+    "type": "panel",
+    "controls": [
+      {
+        "black": {
+          "type": "image",
+          "texture": "textures/ui/Black.png",
+          "alpha": 0.5,
+          "fill": true,
+          "controls": [
+            { "cz_world_content_screen@cz_world.cz_world_content_screen" : {} }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "format_version": "1.14.0",
+  "sound_definitions": {
+    "sword.swing": {
+      "pitch": 1.8,
+      "volume": 0.6,
+      "sounds": [
+        "sounds/combat/sword",
+        "sounds/combat/slash1"
+      ]
+    },
+    "sword.collide": {
+      "volume": 0.65,
+      "sounds": [
+        "sounds/combat/sword_collide"
+      ]
+    },
+    "sword.grab": {
+      "volume": 0.2,
+      "sounds": [
+        "sounds/combat/sword_grab"
+      ]
+    },
+    "shotgun.pump": {
+      "volume": 0.8,
+      "sounds": [
+        "sounds/combat/shotgun_pump"
+      ]
+    },
+    "gun.uzi": {
+      "volume": 0.8,
+      "sounds": [
+        "sounds/combat/uzi"
+      ]
+    },
+    "weapon.chainsaw": {
+      "volume": 0.8,
+      "sounds": [
+        "sounds/combat/chainsaw"
+      ]
+    }
+  }
+}

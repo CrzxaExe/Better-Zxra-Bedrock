@@ -1,0 +1,156 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:bullet",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "runtime_identifier": "minecraft:snowball"
+    },
+    "components": {
+      "minecraft:collision_box": {
+        "width": 0.25,
+        "height": 0.25
+      },
+      "minecraft:projectile": {
+        "on_hit": {
+          "impact_damage": {
+            "damage": [
+              15,
+              18
+            ],
+            "destroy_on_hit": true
+          }
+        },
+        "power": 9.0,
+        "gravity": 0.01,
+        "offset": [
+          0,
+          -0.1,
+          -3
+        ],
+        "hit_sound": "gun.uzi",
+        "anchor": 1,
+        "should_bounce": true,
+        "uncertainty_base": 1,
+        "uncertainty_multiplier": 0
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:scale": {
+        "value": 0.3
+      },
+      "minecraft:timer": {
+        "looping": false,
+        "time": 7,
+        "time_down_event": {
+          "event": "minecraft:despawn"
+        }
+      }
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {}
+      },
+      "minecraft:player_arrow": {
+        "minecraft:projectile": {
+          "on_hit": {
+            "impact_damage": {
+              "damage": [
+                20,
+                50
+              ],
+              "destroy_on_hit": true
+            }
+          },
+          "power": 9.0,
+          "gravity": 0.0,
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "hit_sound": "gun.uzi",
+          "anchor": 1,
+          "uncertainty_base": 1,
+          "uncertainty_multiplier": 0,
+          "should_bounce": true
+        }
+      },
+      "explode": {
+        "minecraft:explode": {
+          "fuse_length": 0,
+          "fuse_lit": true,
+          "power": 9,
+          "causes_fire": false,
+          "max_resistance": 4.0,
+          "destroy_affected_by_griefing": false
+        }
+      },
+      "endless_ult": {
+        "minecraft:projectile": {
+          "on_hit": {
+            "impact_damage": {
+              "damage": [
+                60,
+                65
+              ]
+            },
+            "definition_event": {
+              "affect_projectile": true,
+              "event_trigger": {
+                "event": "cz:endless_explode",
+                "target": "self"
+              }
+            }
+          },
+          "power": 9.0,
+          "gravity": 0.01,
+          "offset": [
+            0,
+            -0.1,
+            -3
+          ],
+          "hit_sound": "gun.uzi",
+          "anchor": 1,
+          "should_bounce": true,
+          "uncertainty_base": 1,
+          "uncertainty_multiplier": 0
+        }
+      }
+    },
+    "events": {
+      "minecraft:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      },
+      "cz:endless_1": {
+        "add": {
+          "component_groups": [
+            "minecraft:player_arrow"
+          ]
+        }
+      },
+      "cz:endless_ult": {
+        "add": {
+          "component_groups": [
+            "endless_ult"
+          ]
+        }
+      },
+      "cz:endless_explode": {
+        "add": {
+          "component_groups": [
+            "explode"
+          ]
+        }
+      }
+    }
+  }
+}

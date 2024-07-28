@@ -1,0 +1,48 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "cz:angel",
+      "materials": {
+        "default": "skeleton"
+      },
+      "textures": {
+        "default": "textures/entity/angel"
+      },
+      "geometry": {
+        "default": "geometry.iyura.angel"
+      },
+      "scripts": {
+        "pre_animation": [
+          "variable.tcos0 = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / variable.gliding_speed_value) * 57.3;"
+        ],
+        "animate": [
+          "look_at_target_default",
+          "root"
+        ]
+      },
+      "animations": {
+        "look_at_target_default": "animation.humanoid.look_at_target.default",
+        "look_at_target_gliding": "animation.humanoid.look_at_target.gliding",
+        "look_at_target_swimming": "animation.humanoid.look_at_target.swimming",
+        "move": "animation.angel.walking",
+        "riding.arms": "animation.humanoid.riding.arms",
+        "riding.legs": "animation.humanoid.riding.legs",
+        "bob": "animation.angel.pose",
+        "use_item_progress": "animation.humanoid.use_item_progress",
+        "spawned": "animation.angel.spawn",
+        "attack_normal": "animation.angel.attack.normal",
+        "attack_forward": "animation.angel.attack.forward",
+        "root": "controller.animation.angel"
+      },
+      "spawn_egg": {
+        "texture": "cz:angel",
+        "texture_index": 0
+      },
+      "render_controllers": [
+        "controller.render.skeleton"
+      ],
+      "enable_attachables": true
+    }
+  }
+}

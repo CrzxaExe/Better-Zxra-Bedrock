@@ -1,0 +1,49 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.lectaze_sword",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 1,
+        "visible_bounds_height": 1,
+        "visible_bounds_offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "projectile",
+          "pivot": [
+            0,
+            1,
+            11
+          ],
+          "texture_meshes": [
+            {
+              "texture": "default",
+              "position": [
+                -0.5,
+                3.1,
+                4.3
+              ],
+              "rotation": [
+                0,
+                45,
+                -90
+              ],
+              "local_pivot": [
+                6,
+                0,
+                6
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

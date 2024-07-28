@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:minarite_shortsword_r"
+    },
+    "pattern": [
+      " I",
+      "P"
+    ],
+    "key": {
+      "P": {
+        "item": "minecraft:stick"
+      },
+      "I": {
+        "item": "cz:minarite_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:minarite_shortsword"
+    },
+    "tags": [
+      "crafting_table",
+      "forger"
+    ]
+  }
+}

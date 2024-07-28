@@ -1,0 +1,38 @@
+{
+  "format_version": "1.10.0",
+  "render_controllers": {
+    "controller.render.indicator_silence": {
+      "textures": [
+        "Texture.silence"
+      ],
+      "is_hurt_color": {},
+      "on_fire_color": {},
+      "geometry": "Geometry.indicator",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "color": {},
+      "part_visibility": [
+        {
+          "indicator": "q.is_stunned \u003d\u003d 1.0"
+        }
+      ]
+    },
+    "controller.render.indicator_kyle": {
+      "textures": [
+        "Texture.kyle_indicator"
+      ],
+      "is_hurt_color": {},
+      "on_fire_color": {},
+      "geometry": "Geometry.indicator",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "color": {}
+    }
+  }
+}

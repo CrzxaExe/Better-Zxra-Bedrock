@@ -1,0 +1,53 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:ascended_minarite_helmet",
+      "menu_category": {
+        "category": "equipment",
+        "group": "itemGroup.name.helmet",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:icon": {
+        "texture": "minarite_helmet_asc"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:enchantable": {
+        "value": 10,
+        "slot": "armor_head"
+      },
+      "minecraft:durability": {
+        "max_durability": 5780,
+        "damage_chance": {
+          "min": 60,
+          "max": 100
+        }
+      },
+      "minecraft:repairable": {
+        "repair_items": [
+          {
+            "items": [
+              "cz:minarite_helmet"
+            ],
+            "repair_amount": "q.max_durability"
+          }
+        ]
+      },
+      "minecraft:mining_speed": 1,
+      "minecraft:damage": 3,
+      "minecraft:wearable": {
+        "slot": "slot.armor.head",
+        "protection": 9,
+        "dispensable": true
+      },
+      "minecraft:display_name": {
+        "value": "item.ascended_minarite_helmet.name"
+      },
+      "minecraft:knockback_resistance": {
+        "protection": 0.3
+      }
+    }
+  }
+}

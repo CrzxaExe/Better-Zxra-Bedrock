@@ -1,0 +1,26 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:mina_boots_r"
+    },
+    "pattern": [
+      "I I",
+      "IPI"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:mina_ingot"
+      },
+      "P": {
+        "item": "cz:netherite_plate"
+      }
+    },
+    "result": {
+      "item": "cz:mina_boots"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

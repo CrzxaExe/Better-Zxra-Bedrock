@@ -1,0 +1,33 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:forge_res"
+    },
+    "pattern": [
+      "RRR",
+      " S",
+      "OBO"
+    ],
+    "key": {
+      "R": {
+        "item": "minecraft:iron_ingot"
+      },
+      "O": {
+        "item": "minecraft:obsidian"
+      },
+      "B": {
+        "item": "minecraft:diamond"
+      },
+      "S": {
+        "item": "cz:silver_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:forge"
+    },
+    "tags": [
+      "crafting_table"
+    ]
+  }
+}

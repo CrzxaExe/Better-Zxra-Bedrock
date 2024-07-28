@@ -1,0 +1,32 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:scatter_feature": {
+    "description": {
+      "identifier": "cz:scatter_grass_feature"
+    },
+    "iterations": 96,
+    "x": {
+      "distribution": "gaussian",
+      "extent": [
+        -8,
+        8
+      ]
+    },
+    "y": {
+      "distribution": "gaussian",
+      "extent": [
+        -4,
+        4
+      ]
+    },
+    "z": {
+      "distribution": "gaussian",
+      "extent": [
+        -8,
+        8
+      ]
+    },
+    "coordinate_eval_order": "zyx",
+    "places_feature": "cz:grass_feature"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "cz:yuri",
+      "materials": {
+        "default": "skeleton"
+      },
+      "textures": {
+        "normal": "textures/entity/yuri_new",
+        "blink": "textures/entity/yuri_blink"
+      },
+      "geometry": {
+        "default": "geometry.yuri"
+      },
+      "scripts": {
+        "pre_animation": [
+          "variable.tcos0 = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / variable.gliding_speed_value) * 57.3;",
+          "variable.running = q.ground_speed > 0.3;"
+        ],
+        "animate": [
+          "tail_controller",
+          "ears_controller",
+          "root",
+          "look_at_target_default"
+        ]
+      },
+      "animations": {
+        "look_at_target_default": "animation.yuri.looking",
+        "look_at_target_gliding": "animation.humanoid.look_at_target.gliding",
+        "look_at_target_swimming": "animation.humanoid.look_at_target.swimming",
+        "move": "animation.yuri.walk",
+        "run": "animation.yuri.run",
+        "riding.arms": "animation.humanoid.riding.arms",
+        "riding.legs": "animation.humanoid.riding.legs",
+        "holding": "animation.humanoid.holding",
+        "brandish_spear": "animation.humanoid.brandish_spear",
+        "charging": "animation.humanoid.charging",
+        "attack.rotations": "animation.humanoid.attack.rotations",
+        "sneaking": "animation.humanoid.sneaking",
+        "bob": "animation.humanoid.bob",
+        "damage_nearby_mobs": "animation.humanoid.damage_nearby_mobs",
+        "bow_and_arrow": "animation.humanoid.bow_and_arrow",
+        "swimming": "animation.humanoid.swimming",
+        "use_item_progress": "animation.humanoid.use_item_progress",
+        "tail_idle": "animation.yuri.tail.idle",
+        "tail_walk": "animation.yuri.tail.walk",
+        "tail_interest": "animation.yuri.tail.interest",
+        "tail_controller": "controller.animation.yuri.tail",
+        "root": "controller.animation.yuri.root",
+        "ears_controller": "controller.animation.yuri.ears",
+        "ears_idle": "animation.yuri.ears.idle",
+        "ears_interest": "animation.yuri.ears.interest"
+      },
+      "spawn_egg": {
+        "texture": "spawn_egg",
+        "texture_index": 0
+      },
+      "render_controllers": [
+        "controller.render.yuri"
+      ],
+      "enable_attachables": true
+    }
+  }
+}

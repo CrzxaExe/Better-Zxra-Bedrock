@@ -1,0 +1,87 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.kyle.draw": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "rotation": [
+            "0 -this",
+            "-47.5 -this",
+            "0 -this"
+          ],
+          "position": [
+            0,
+            "(-1.25 * v.sneak)",
+            "2 + (-9 * v.sneak)"
+          ]
+        },
+        "waist": {
+          "rotation": [
+            "15 + (8 * v.sneak)",
+            -7.5,
+            0
+          ]
+        },
+        "leftArm": {
+          "rotation": [
+            -46.02509,
+            37.15276,
+            -32.04446
+          ],
+          "position": [
+            0,
+            1,
+            1
+          ]
+        },
+        "rightArm": {
+          "rotation": [
+            "-133.69467 -this",
+            -23.76433,
+            108.05631
+          ],
+          "position": [
+            0,
+            -1,
+            -1
+          ]
+        },
+        "rightItem": {
+          "rotation": [
+            35.5,
+            0,
+            0
+          ]
+        },
+        "leftLeg": {
+          "rotation": [
+            "-2.44092 + (28.0 * v.sneak)",
+            -23.69764,
+            -9.93685
+          ]
+        },
+        "rightLeg": {
+          "rotation": [
+            "-0.37285 + (28.0 * v.sneak)",
+            36.126,
+            12.2231
+          ],
+          "position": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "body": {
+          "position": [
+            0,
+            "(2.0 * v.sneak)",
+            0
+          ]
+        }
+      },
+      "sound_effects": {}
+    }
+  }
+}

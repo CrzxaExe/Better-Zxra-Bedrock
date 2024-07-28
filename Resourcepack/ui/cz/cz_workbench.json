@@ -1,0 +1,52 @@
+{
+  // Ngapain Bang?
+  "namespace": "workbench",
+
+  "wb_img": {
+    "type": "image",
+    "texture": "textures/ui/workbench",
+    "size": [ 32, 32 ],
+    "layer": 4
+  },
+
+  "top_workbench": {
+    "type": "panel",
+    "anchor_to": "top_left",
+    "anchor_from": "top_left",
+    "offset": [ 30, 0 ],
+	"controls": [
+      {
+        "inventory_label@crafting.inventory_label": {
+          "offset": [
+            -21,
+            72
+          ]
+        }
+      },
+      {
+        "large@wb_img": {
+          "offset": [
+            -15,
+            -41.5
+          ]
+        }
+      },
+      {
+        "crafting_grid_3x3_with_label_0@crafting.crafting_grid_3x3_with_label": {
+          "offset": [
+            0,
+            5
+          ]
+        }
+      },
+      {
+        "work_bench_output_grid@crafting.output_grid_3x3": {
+          "offset": [
+            94,
+            30
+          ]
+        }
+      }
+    ]
+  }
+}

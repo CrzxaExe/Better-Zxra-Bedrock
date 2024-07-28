@@ -1,0 +1,36 @@
+{
+  "format_version": "1.19.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "cz:quezn",
+      "materials": {
+        "default": "entity_alphatest",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/items/weapon/quezn",
+        "enchanted": "textures/misc/enchanted_item_glint"
+      },
+      "geometry": {
+        "default": "geometry.cz.medium_item"
+      },
+      "animations": {
+        "normal": "animation.destreza.key",
+        "fp": "animation.item.normal.fp"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "normal": "!c.is_first_person"
+          },
+          {
+            "fp": "c.is_first_person"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.default"
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:ascend_template_duplicate"
+    },
+    "pattern": [
+      "ISI",
+      "IPI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:diamond_ingot"
+      },
+      "P": {
+        "item": "cz:ascend_template"
+      },
+      "S": {
+        "item": "cz:diamond_ascend"
+      }
+    },
+    "result": {
+      "item": "cz:crate",
+      "count": 2
+    },
+    "tags": [
+      "crafting_table",
+      "forger"
+    ]
+  }
+}

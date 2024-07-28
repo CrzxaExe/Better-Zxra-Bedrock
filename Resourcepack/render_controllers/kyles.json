@@ -1,0 +1,103 @@
+{
+  "format_version": "1.10.0",
+  "render_controllers": {
+    "controller.render.kyle": {
+      "textures": [
+        "Texture.kyle_state"
+      ],
+      "is_hurt_color": {},
+      "on_fire_color": {},
+      "geometry": "Geometry.kyle_state",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "part_visibility": [
+        {
+          "zavarm": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "horn": "!v.is_first_person"
+        },
+        {
+          "zavarm2": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "wing": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "wing1": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "wing2": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "wing3": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "tail": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "tail1": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "tail2": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "tail3": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "tail4": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "tail5": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "tail6": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        }
+      ]
+    },
+    "controller.render.kyle_entity": {
+      "textures": [
+        "Texture.default"
+      ],
+      "is_hurt_color": {},
+      "on_fire_color": {},
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ]
+    },
+    "controller.render.particles": {
+      "textures": [
+        "Array.texture[q.variant]"
+      ],
+      "is_hurt_color": {},
+      "on_fire_color": {},
+      "geometry": "Array.geometry[q.variant]",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "color": {},
+      "arrays": {
+        "textures": {
+          "Array.texture": [
+            "Texture.impact",
+            "Texture.liberator_swing"
+          ]
+        },
+        "geometries": {
+          "Array.geometry": [
+            "Geometry.impact_model",
+            "Geometry.liberator_swing_model"
+          ]
+        }
+      }
+    }
+  }
+}

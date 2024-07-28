@@ -1,0 +1,35 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "cz:mina_block"
+    },
+    "components": {
+      "minecraft:creative_category": {
+        "category": "construction",
+        "group": "itemGroup.name.heavy_ingot_block"
+      },
+      "minecraft:destroy_time": 20.0,
+      "minecraft:friction": 0.6,
+      "minecraft:map_color": "#4AE4E4",
+      "minecraft:flammable": {
+        "flame_odds": 50,
+        "burn_odds": 0
+      },
+      "tag:heavy_ingot_block": {},
+      "tag:heavy_ingot_block1": {},
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:on_player_destroyed": {
+        "event": "drop",
+        "target": "self"
+      }
+    },
+    "events": {
+      "drop": {
+        "spawn_loot": {
+          "table": "loot_tables/block/mina_block"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.kyle.skill_1": {
+      "loop": false,
+      "animation_length": 0.9385,
+      "timeline": {
+        "0.01": [
+          "/scriptevent cz:bind 1.6283"
+        ],
+        "0.378": [
+          "/scriptevent cz:dash 17 0"
+        ],
+        "0.456": [
+          "/damage @e[r=3,type=!cz:kyle] 240 entity_attack entity @s",
+          "/effect @s resistance 5 4",
+          "/particle cz:withering ~~0.1~"
+        ]
+      }
+    },
+    "animation.kyle.skill_2": {
+      "loop": false,
+      "animation_length": 1.7083,
+      "timeline": {
+        "0.01": [
+          "/effect @s resistance 3 8",
+          "/scriptevent cz:bind 1.886"
+        ],
+        "0.933": [
+          "/effect @e[r=10,type=!cz:kyle] slowness 3 2 true",
+          "/particle cz:withering_area ~~0.1~",
+          "/particle cz:withering_circle ~~0.3~"
+        ],
+        "1.065": [
+          "/effect @e[r=10,type=!cz:kyle] slowness 3 2 true",
+          "/damage @e[r=6,type=!cz:kyle] 180 entity_attack entity @s"
+        ]
+      }
+    },
+    "animation.kyle.skill_4": {
+      "loop": false,
+      "animation_length": 0.885,
+      "timeline": {
+        "0.01": [
+          "/scriptevent cz:bind 0.975"
+        ],
+        "0.123": [
+          "/scriptevent cz:dash 14 1"
+        ],
+        "0.5417": [
+          "/damage @e[r=5,type=!cz:kyle] 384 entity_attack entity @s",
+          "/effect @e[r=5,type=!cz:kyle] slowness 4 1",
+          "/effect @e[r=5,type=!cz:kyle] poison 4 1",
+          "/execute as @e[r=5,type=!cz:kyle] at @s run scriptevent cz:dash 0 0.6",
+          "/camerashake add @a[r=5] 1.9 0.8 positional",
+          "/particle cz:impact_up ~~~"
+        ]
+      }
+    },
+    "animation.kyle.skill_5": {
+      "loop": false,
+      "animation_length": 1.1667,
+      "timeline": {
+        "0.01": [
+          "/scriptevent cz:bind 1.49"
+        ],
+        "0.456": [
+          "/execute positioned ^^^1 run damage @e[r=5,type=!cz:kyle] 285 entity_attack entity @s"
+        ]
+      }
+    },
+    "animation.kyle.skill_6": {
+      "loop": false,
+      "animation_length": 1.3333,
+      "timeline": {
+        "0.468": [
+          "/effect @e[r=9,type=!cz:kyle,m=!c] poison 4 1",
+          "/effect @e[r=9,type=!cz:kyle,m=!c] blindness 4 1"
+        ]
+      }
+    },
+    "animation.kyle.skill_7": {
+      "loop": false,
+      "animation_length": 1.2917,
+      "timeline": {
+        "0.01": [
+          "/scriptevent cz:bind 1.8917"
+        ],
+        "0.4304": [
+          "/scriptevent cz:dash 17 0"
+        ]
+      }
+    }
+  }
+}

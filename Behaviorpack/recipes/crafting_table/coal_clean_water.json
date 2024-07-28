@@ -1,0 +1,24 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "cz:coal_clean_water"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "cz:coal_filter"
+      },
+      {
+        "item": "minecraft:potion",
+        "data": 0
+      }
+    ],
+    "result": {
+      "item": "cz:clean_water"
+    },
+    "group": "clean_water"
+  }
+}

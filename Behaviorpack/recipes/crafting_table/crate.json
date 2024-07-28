@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:crate_res"
+    },
+    "pattern": [
+      "III",
+      "IPI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:planks"
+      },
+      "P": {
+        "item": "minecraft:chest"
+      }
+    },
+    "result": {
+      "item": "cz:crate"
+    },
+    "tags": [
+      "crafting_table"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "cz:ascended_mina_boots_r"
+    },
+    "tags": [
+      "forger"
+    ],
+    "ingredients": [
+      {
+        "item": "cz:mina_boots"
+      },
+      {
+        "item": "cz:ascend_template"
+      }
+    ],
+    "result": {
+      "item": "cz:ascended_mina_boots"
+    }
+  }
+}

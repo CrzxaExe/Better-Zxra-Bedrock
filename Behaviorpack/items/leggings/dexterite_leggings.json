@@ -1,0 +1,50 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:dexterite_leggings",
+      "menu_category": {
+        "category": "equipment",
+        "group": "itemGroup.name.leggings",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:icon": {
+        "texture": "dexterite_leggings"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:enchantable": {
+        "value": 10,
+        "slot": "armor_legs"
+      },
+      "minecraft:durability": {
+        "max_durability": 3680,
+        "damage_chance": {
+          "min": 60,
+          "max": 100
+        }
+      },
+      "minecraft:repairable": {
+        "repair_items": [
+          {
+            "items": [
+              "cz:dexterite_leggings"
+            ],
+            "repair_amount": "q.max_durability"
+          }
+        ]
+      },
+      "minecraft:mining_speed": 1,
+      "minecraft:damage": 3,
+      "minecraft:wearable": {
+        "slot": "slot.armor.legs",
+        "protection": 7,
+        "dispensable": true
+      },
+      "minecraft:display_name": {
+        "value": "item.dexterite_leggings.name"
+      }
+    }
+  }
+}

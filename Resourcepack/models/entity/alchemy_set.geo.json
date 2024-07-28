@@ -1,0 +1,1138 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alchemy_set",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 2,
+        "visible_bounds_height": 2.5,
+        "visible_bounds_offset": [
+          0,
+          0.75,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "set",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "plate",
+          "parent": "set",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -7,
+                0,
+                -7
+              ],
+              "size": [
+                14,
+                1,
+                14
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    14,
+                    1
+                  ],
+                  "material_instance": "plate"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    14,
+                    1
+                  ],
+                  "material_instance": "plate"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    14,
+                    1
+                  ],
+                  "material_instance": "plate"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    14,
+                    1
+                  ],
+                  "material_instance": "plate"
+                },
+                "up": {
+                  "uv": [
+                    14,
+                    14
+                  ],
+                  "uv_size": [
+                    -14,
+                    -14
+                  ],
+                  "material_instance": "plate"
+                },
+                "down": {
+                  "uv": [
+                    14,
+                    14
+                  ],
+                  "uv_size": [
+                    -14,
+                    -14
+                  ],
+                  "material_instance": "plate"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "vials",
+          "parent": "set",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "place",
+          "parent": "vials",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -6,
+                1,
+                3
+              ],
+              "size": [
+                9,
+                1,
+                3
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    9,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    3,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    9,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    3,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "up": {
+                  "uv": [
+                    9,
+                    3
+                  ],
+                  "uv_size": [
+                    -9,
+                    -3
+                  ],
+                  "material_instance": "wood"
+                },
+                "down": {
+                  "uv": [
+                    9,
+                    3
+                  ],
+                  "uv_size": [
+                    -9,
+                    -3
+                  ],
+                  "material_instance": "wood"
+                }
+              }
+            },
+            {
+              "origin": [
+                2,
+                2,
+                3
+              ],
+              "size": [
+                1,
+                5,
+                3
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "wood"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    3,
+                    5
+                  ],
+                  "material_instance": "wood"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "wood"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    3,
+                    5
+                  ],
+                  "material_instance": "wood"
+                },
+                "up": {
+                  "uv": [
+                    1,
+                    3
+                  ],
+                  "uv_size": [
+                    -1,
+                    -3
+                  ],
+                  "material_instance": "wood"
+                },
+                "down": {
+                  "uv": [
+                    1,
+                    3
+                  ],
+                  "uv_size": [
+                    -1,
+                    -3
+                  ],
+                  "material_instance": "wood"
+                }
+              }
+            },
+            {
+              "origin": [
+                -6,
+                2,
+                3
+              ],
+              "size": [
+                1,
+                5,
+                3
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "wood"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    3,
+                    5
+                  ],
+                  "material_instance": "wood"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "wood"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    3,
+                    5
+                  ],
+                  "material_instance": "wood"
+                },
+                "up": {
+                  "uv": [
+                    1,
+                    3
+                  ],
+                  "uv_size": [
+                    -1,
+                    -3
+                  ],
+                  "material_instance": "wood"
+                },
+                "down": {
+                  "uv": [
+                    1,
+                    3
+                  ],
+                  "uv_size": [
+                    -1,
+                    -3
+                  ],
+                  "material_instance": "wood"
+                }
+              }
+            },
+            {
+              "origin": [
+                -5,
+                5,
+                3
+              ],
+              "size": [
+                7,
+                1,
+                1
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    1
+                  ],
+                  "uv_size": [
+                    -7,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    1
+                  ],
+                  "uv_size": [
+                    -7,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                }
+              }
+            },
+            {
+              "origin": [
+                1,
+                5,
+                4
+              ],
+              "size": [
+                1,
+                1,
+                1
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "up": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                },
+                "down": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                }
+              }
+            },
+            {
+              "origin": [
+                -1,
+                5,
+                4
+              ],
+              "size": [
+                1,
+                1,
+                1
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "up": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                },
+                "down": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                }
+              }
+            },
+            {
+              "origin": [
+                -3,
+                5,
+                4
+              ],
+              "size": [
+                1,
+                1,
+                1
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "up": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                },
+                "down": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                }
+              }
+            },
+            {
+              "origin": [
+                -5,
+                5,
+                4
+              ],
+              "size": [
+                1,
+                1,
+                1
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "up": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                },
+                "down": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                }
+              }
+            },
+            {
+              "origin": [
+                -5,
+                5,
+                5
+              ],
+              "size": [
+                7,
+                1,
+                1
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    1
+                  ],
+                  "material_instance": "wood"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    1
+                  ],
+                  "uv_size": [
+                    -7,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    1
+                  ],
+                  "uv_size": [
+                    -7,
+                    -1
+                  ],
+                  "material_instance": "wood"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "vial2",
+          "parent": "place",
+          "pivot": [
+            -2,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                2,
+                4
+              ],
+              "size": [
+                1,
+                5,
+                1
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "up": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "glass"
+                },
+                "down": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "glass"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "vial",
+          "parent": "place",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0,
+                2,
+                4
+              ],
+              "size": [
+                1,
+                5,
+                1
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "up": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "glass"
+                },
+                "down": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "glass"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "vial3",
+          "parent": "vials",
+          "pivot": [
+            2,
+            2,
+            -4
+          ],
+          "rotation": [
+            -45,
+            0,
+            87.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                2,
+                2,
+                -5
+              ],
+              "size": [
+                1,
+                5,
+                1
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    1,
+                    5
+                  ],
+                  "material_instance": "glass"
+                },
+                "up": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "glass"
+                },
+                "down": {
+                  "uv": [
+                    1,
+                    1
+                  ],
+                  "uv_size": [
+                    -1,
+                    -1
+                  ],
+                  "material_instance": "glass"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_furnace": {
+    "description": {
+      "identifier": "cz:furnace_toast"
+    },
+    "tags": [
+      "furnace",
+      "smoker"
+    ],
+    "input": "cz:slice_bread",
+    "output": "cz:toast"
+  }
+}

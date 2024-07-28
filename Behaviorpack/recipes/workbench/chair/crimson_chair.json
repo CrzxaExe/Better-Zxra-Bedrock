@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:crimson_chair"
+    },
+    "pattern": [
+      "IPI",
+      "PPP",
+      "I I"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:stick"
+      },
+      "P": {
+        "item": "minecraft:crimson_planks"
+      }
+    },
+    "result": {
+      "item": "cz:crimson_chair"
+    },
+    "tags": [
+      "workbench"
+    ]
+  }
+}

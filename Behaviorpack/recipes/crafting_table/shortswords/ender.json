@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:ender_shortsword_r"
+    },
+    "pattern": [
+      " I",
+      "P"
+    ],
+    "key": {
+      "P": {
+        "item": "minecraft:stick"
+      },
+      "I": {
+        "item": "cz:ender_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:ender_shortsword"
+    },
+    "tags": [
+      "crafting_table",
+      "forger"
+    ]
+  }
+}

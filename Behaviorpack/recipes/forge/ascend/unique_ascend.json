@@ -1,0 +1,32 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:unique_ascends"
+    },
+    "pattern": [
+      "III",
+      "IBI",
+      "III"
+    ],
+    "key": {
+      "B": {
+        "item": "cz:epic_ascend"
+      },
+      "I": {
+        "item": "cz:legend_ascend"
+      }
+    },
+    "result": {
+      "item": "cz:unique_ascend"
+    },
+    "tags": [
+      "forger"
+    ],
+    "unlock": [
+      {
+        "item": "cz:diamond_ascend"
+      }
+    ]
+  }
+}

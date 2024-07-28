@@ -1,0 +1,194 @@
+{
+  "format_version": "1.16.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.cz.slash_projectile",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 1,
+        "visible_bounds_height": 1,
+        "visible_bounds_offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "projectile",
+          "pivot": [
+            0,
+            0,
+            -7
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "texture_meshes": [
+            {
+              "texture": "default",
+              "position": [
+                -0.5,
+                2.1,
+                4.3
+              ],
+              "rotation": [
+                0,
+                45,
+                -90
+              ],
+              "local_pivot": [
+                6,
+                0,
+                6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": {
+        "identifier": "geometry.cz.item_projectile",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 1,
+        "visible_bounds_height": 1,
+        "visible_bounds_offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "projectile",
+          "pivot": [
+            0,
+            0,
+            -7
+          ],
+          "texture_meshes": [
+            {
+              "texture": "default",
+              "position": [
+                -0.5,
+                2.1,
+                4.3
+              ],
+              "rotation": [
+                0,
+                45,
+                -90
+              ],
+              "local_pivot": [
+                6,
+                0,
+                6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": {
+        "identifier": "geometry.cz.normal_item",
+        "texture_width": 16.0,
+        "texture_height": 16.0
+      },
+      "bones": [
+        {
+          "name": "rightitem",
+          "texture_meshes": [
+            {
+              "local_pivot": [
+                6.0,
+                0.0,
+                6.0
+              ],
+              "position": [
+                -0.5,
+                6.1,
+                -5.7
+              ],
+              "rotation": [
+                0.0,
+                55.0,
+                270.0
+              ],
+              "texture": "default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": {
+        "identifier": "geometry.cz.large_item",
+        "texture_width": 32.0,
+        "texture_height": 32.0
+      },
+      "bones": [
+        {
+          "name": "rightitem",
+          "texture_meshes": [
+            {
+              "local_pivot": [
+                6.0,
+                0.0,
+                6.0
+              ],
+              "position": [
+                -0.5,
+                6.1,
+                -5.7
+              ],
+              "rotation": [
+                0.0,
+                55.0,
+                270.0
+              ],
+              "texture": "default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": {
+        "identifier": "geometry.cz.medium_item",
+        "texture_width": 24.0,
+        "texture_height": 24.0
+      },
+      "bones": [
+        {
+          "name": "rightitem",
+          "texture_meshes": [
+            {
+              "local_pivot": [
+                6.0,
+                0.0,
+                6.0
+              ],
+              "position": [
+                -0.5,
+                6.1,
+                -5.7
+              ],
+              "rotation": [
+                0.0,
+                55.0,
+                270.0
+              ],
+              "texture": "default"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

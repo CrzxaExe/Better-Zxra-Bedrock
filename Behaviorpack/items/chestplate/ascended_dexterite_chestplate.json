@@ -1,0 +1,53 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:ascended_dexterite_chestplate",
+      "menu_category": {
+        "category": "equipment",
+        "group": "itemGroup.name.chestplate",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:icon": {
+        "texture": "dexterite_chestplate_asc"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:enchantable": {
+        "value": 10,
+        "slot": "armor_torso"
+      },
+      "minecraft:durability": {
+        "max_durability": 3780,
+        "damage_chance": {
+          "min": 60,
+          "max": 100
+        }
+      },
+      "minecraft:repairable": {
+        "repair_items": [
+          {
+            "items": [
+              "cz:dexterite_chestplate"
+            ],
+            "repair_amount": "q.max_durability"
+          }
+        ]
+      },
+      "minecraft:mining_speed": 1,
+      "minecraft:damage": 3,
+      "minecraft:wearable": {
+        "slot": "slot.armor.chest",
+        "protection": 10,
+        "dispensable": true
+      },
+      "minecraft:display_name": {
+        "value": "item.ascended_dexterite_chestplate.name"
+      },
+      "minecraft:knockback_resistance": {
+        "protection": 0.7
+      }
+    }
+  }
+}

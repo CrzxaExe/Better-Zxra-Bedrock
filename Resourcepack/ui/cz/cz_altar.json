@@ -1,0 +1,270 @@
+{
+  // Ngapain Bang?
+  "namespace": "altar",
+
+  "runes_img": {
+    "type": "image",
+    "texture": "textures/ui/rune_cz",
+    "size": [ 32, 32 ],
+    "layer": 4
+  },
+  
+  "rune_slot@altar.inventory_container_item": {
+    "$item_collection_name": "crafting_input_items",
+    "$background_images": "crafting.crafting_container_cell_images",
+    "$item_renderer_binding_condition": "always",
+    "$button_ref": "crafting.inventory_container_slot_button"
+  },
+
+  "inventory_container_item@common.container_item": {
+  "$button_ref|default": "crafting.inventory_container_slot_button",
+  "$background_images|default": "crafting.container_cell_images",
+  "$overlay_images|default": "crafting.container_overlay_images",
+  "$overlay_image_control_name|default": "overlay",
+  "controls": [
+    {
+      "item_cell": {
+        "type": "panel",
+        "size": "$cell_image_size",
+        "layer": 0,
+        "controls": [
+          {
+            "$background_image_control_name@$background_images": {
+              "layer": 1
+            }
+          },
+          {
+            "item": {
+              "type": "panel",
+              "size": "$item_renderer_panel_size",
+              "layer": 0,
+              "controls": [
+                {
+                  "stack_count_label@common.stack_count_label": {
+                    "layer": 10
+                  }
+                },
+                {
+                  "$item_renderer@$item_renderer": {
+                    "size": "$item_renderer_size",
+                    "offset": "$item_renderer_offset",
+                    "anchor_to": "center",
+                    "anchor_from": "center",
+                    "layer": 7
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "durability_bar@common.durability_bar": {
+              "layer": 8
+            }
+          },
+          {
+            "storage_bar@common.storage_bar": {
+              "layer": 8
+            }
+          },
+          {
+            "$overlay_image_control_name@$overlay_images": {
+              "layer": 9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "img": {
+        "type": "image",
+        "texture": "textures/ui/rune_slot",
+        "layer": 3,
+        "size": [ 17, 17 ]
+      }
+    },
+    {
+      "item_cell_overlay_ref@$cell_overlay_ref": {
+        "layer": 3
+      }
+    },
+    {
+      "item_selected_image@common.slot_selected": {
+        "layer": 4
+      }
+    },
+    {
+      "item_button_ref@$button_ref": {
+        "tts_ignore_count": true,
+        "tts_skip_message": true,
+        "tts_inherit_siblings": true,
+        "layer": 5
+      }
+    },
+    {
+      "container_item_lock_overlay@common.container_item_lock_overlay": {
+        "size": "$item_renderer_size",
+        "offset": [
+          1,
+          1
+        ],
+        "anchor_to": "top_left",
+        "anchor_from": "top_left",
+        "layer": 6
+      }
+    },
+    {
+      "item_lock_cell_image@common.item_lock_cell_image": {
+        "layer": 2
+      }
+    },
+    {
+      "item_container_transfer_mode_overlay@common.item_container_transfer_mode_overlay": {
+        "size": "$item_renderer_size",
+        "offset": [
+          1,
+          1
+        ],
+        "anchor_to": "top_left",
+        "anchor_from": "top_left",
+        "layer": 10
+      }
+    }
+  ]
+},
+  
+  "crafting": {
+  "type": "grid",
+  "size": [
+    54,
+    54
+  ],
+  "anchor_from": "top_left",
+  "anchor_to": "top_left",
+  "grid_dimensions": [
+    3,
+    3
+  ],
+  "collection_name": "crafting_input_items",
+  "controls": [
+    {
+      "crafting_input_item_top_left@crafting.crafting_input_grid_item": {
+        "grid_position": [
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "crafting_input_item_mid_left@crafting.crafting_input_grid_item": {
+        "grid_position": [
+          0,
+          1
+        ],
+        "$focus_id_binding_type": "none",
+        "$focus_id": "crafting_input_mid_left",
+        "$focus_override_left_binding_type": "none",
+        "$focus_override_left": "armor_item_legs"
+      }
+    },
+    {
+      "crafting_input_item_middle@altar.rune_slot": {
+        "grid_position": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "crafting_input_item_mid_right@crafting.crafting_input_grid_item": {
+        "grid_position": [
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "crafting_input_item_bot_center@crafting.crafting_input_grid_item": {
+        "grid_position": [
+          1,
+          2
+        ]
+      }
+    }
+  ]
+},
+  
+  "crafting_pane": {
+	"type": "panel",
+	"size": [
+	  "default",
+	  105
+	],
+	"anchor_from": "top_middle",
+	"anchor_to": "top_middle",
+	"$grid_label_alignment|default": "center",
+	"controls": [
+	  {
+	    "crafting_label@crafting.crafting_label": {
+	      "size": [
+	        84,
+	        10
+	      ],
+	      "offset": [
+	        -15,
+	        0
+	      ],
+	      "text_alignment": "$grid_label_alignment"
+	    }
+	  },
+	  {
+	    "crafting_grid_3x3@altar.crafting": {
+	      "offset": [
+	        0,
+	        11
+	      ]
+	    }
+	  }
+	]
+  },
+
+  "top_rune": {
+    "type": "panel",
+    "anchor_to": "top_left",
+    "anchor_from": "top_left",
+    "offset": [ 30, 0 ],
+	"controls": [
+      {
+        "inventory_label@crafting.inventory_label": {
+          "offset": [
+            -21,
+            72
+          ]
+        }
+      },
+      {
+        "rn_large@altar.runes_img": {
+          "offset": [
+            -15,
+            -41.5
+          ]
+        }
+      },
+      {
+        "crafting_grid_3x3_with_label_0@altar.crafting_pane": {
+          "offset": [
+            0,
+            5
+          ]
+        }
+      },
+      {
+        "work_bench_output_grid@crafting.output_grid_3x3": {
+          "offset": [
+            94,
+            30
+          ]
+        }
+      }
+    ]
+  }
+}

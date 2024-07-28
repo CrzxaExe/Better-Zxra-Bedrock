@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:ender_sword_r"
+    },
+    "pattern": [
+      "I",
+      "IP",
+      "H"
+    ],
+    "key": {
+      "P": {
+        "item": "cz:netherite_plate"
+      },
+      "H": {
+        "item": "cz:handle"
+      },
+      "I": {
+        "item": "cz:ender_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:ender_sword"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

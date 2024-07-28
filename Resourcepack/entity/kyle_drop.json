@@ -1,0 +1,31 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "cz:kyle_drop",
+      "materials": {
+        "default": "arrow"
+      },
+      "textures": {
+        "default": "textures/entity/kyle"
+      },
+      "geometry": {
+        "default": "geometry.kyle_sword"
+      },
+      "scripts": {
+        "animate": [
+          "idle",
+          "rots"
+        ]
+      },
+      "animations": {
+        "idle": "animation.kyless.idle",
+        "rots": "animation.kyle.rots"
+      },
+      "render_controllers": [
+        "controller.render.skeleton"
+      ],
+      "enable_attachables": true
+    }
+  }
+}

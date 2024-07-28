@@ -1,0 +1,20 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "cz:minarite_ingot_from_block"
+    },
+    "tags": [
+      "forger"
+    ],
+    "ingredients": [
+      {
+        "item": "cz:minarite_block"
+      }
+    ],
+    "result": {
+      "item": "cz:minarite_ingot",
+      "count": 9
+    }
+  }
+}

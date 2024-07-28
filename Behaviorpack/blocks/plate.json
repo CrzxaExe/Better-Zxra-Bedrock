@@ -1,0 +1,66 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "cz:plate"
+    },
+    "components": {
+      "minecraft:creative_category": {
+        "category": "items",
+        "group": "none"
+      },
+      "minecraft:destroy_time": 3.0,
+      "minecraft:friction": 0.6,
+      "minecraft:map_color": "#8c760b",
+      "minecraft:flammable": {
+        "flame_odds": 30,
+        "burn_odds": 0
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:on_player_destroyed": {
+        "event": "drop",
+        "target": "self"
+      },
+      "minecraft:display_name": "plate",
+      "tag:wood": {},
+      "minecraft:geometry": "geometry.plate",
+      "minecraft:collision_box": {
+        "origin": [
+          -7.0,
+          0.0,
+          -7.0
+        ],
+        "size": [
+          14.0,
+          1.0,
+          14.0
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -7.0,
+          0.0,
+          -7.0
+        ],
+        "size": [
+          14.0,
+          3.0,
+          14.0
+        ]
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "wood_oak",
+          "render_method": "opaque"
+        }
+      }
+    },
+    "events": {
+      "drop": {
+        "spawn_loot": {
+          "table": "loot_tables/block/plate"
+        }
+      }
+    }
+  }
+}

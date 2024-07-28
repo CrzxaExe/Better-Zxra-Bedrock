@@ -1,0 +1,41 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "cz:particles",
+      "materials": {
+        "default": "skeleton"
+      },
+      "textures": {
+        "impact": "textures/blocks/stone",
+        "liberator_swing": "textures/indicator/liberator_swing"
+      },
+      "geometry": {
+        "impact_model": "geometry.impact",
+        "liberator_swing_model": "geometry.liberator_swing"
+      },
+      "scripts": {
+        "animate": [
+          "particle_control"
+        ]
+      },
+      "animations": {
+        "impact_anim": "animation.particle.impact",
+        "liberator_swing_anim": "animation.particle.liberator.swing",
+        "particle_control": "controller.animation.particle"
+      },
+      "spawn_egg": {
+        "texture": "cz:angel",
+        "texture_index": 3
+      },
+      "render_controllers": [
+        "controller.render.particles"
+      ],
+      "enable_attachables": true,
+      "sound_effects": {
+        "swing": "sword.swing",
+        "sword_collide": "sword.collide"
+      }
+    }
+  }
+}

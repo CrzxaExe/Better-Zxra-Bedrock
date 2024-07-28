@@ -1,0 +1,107 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:kyle_sword",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "runtime_identifier": "minecraft:snowball"
+    },
+    "components": {
+      "minecraft:collision_box": {
+        "width": 0.1,
+        "height": 0.1
+      },
+      "minecraft:physics": {},
+      "minecraft:projectile": {
+        "on_hit": {
+          "impact_damage": {
+            "damage": 500,
+            "destroy_on_hit": false,
+            "knockback": true
+          },
+          "stick_in_ground": {
+            "shake": 0.35
+          }
+        },
+        "hit_sound": "item.trident.hit",
+        "hit_ground_sound": "item.trident.hit_ground",
+        "power": 6,
+        "gravity": 0.089,
+        "uncertainty_base": 1,
+        "uncertainty_multiplier": 0,
+        "should_bounce": true,
+        "anchor": 1,
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "events": {
+      "minecraft:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      },
+      "cz:to_item": {
+        "run_command": {
+          "command": [
+            "give @p[r=3] cz:kyles 1"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      },
+      "cz:has_sensor": {
+        "add": {
+          "component_groups": [
+            "has_sensor"
+          ]
+        }
+      },
+      "cz:to_sword": {
+        "remove": {
+          "component_groups": [
+            "has_sensor"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "to_drop"
+          ]
+        }
+      }
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {}
+      },
+      "has_sensor": {
+        "minecraft:entity_sensor": {
+          "sensor_range": 1.2,
+          "relative_range": true,
+          "event_filters": {
+            "test": "is_family",
+            "subject": "other",
+            "value": "player"
+          },
+          "event": "cz:to_item"
+        }
+      },
+      "to_drop": {
+        "minecraft:transformation": {
+          "into": "cz:kyle_drop<cz:has_owner>",
+          "keep_owner": true
+        }
+      }
+    }
+  }
+}

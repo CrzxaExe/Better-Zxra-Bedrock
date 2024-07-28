@@ -1,0 +1,648 @@
+{
+  "namespace": "server_form",
+
+  "long_form": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "controls": [
+      {
+        "cz_form0@cz_common.main_panel_no_buttons": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [410, 330],
+	      "$text_name": "cz.shop",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.shop_panel",
+	      "layer": 2,
+		  "alpha": 1,
+	      "bindings": [
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "(#title_text = 'cz:shop')",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      },
+      {
+        "cz_form1@common_dialogs.main_panel_no_buttons": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [330, 280],
+	      "$text_name": "cz.quest",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.long_form_panel",
+	      "layer": 2,
+		  "alpha": 0.8,
+	      "bindings": [
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "(#title_text = 'cz:quest')",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      },
+      {
+        "cz_form2@cz_common.full_panel_no_buttons": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [520, 260],
+	      "$text_name": "cz.user",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.user_panel",
+	      "layer": 2,
+		  "alpha": 0.2,
+	      "bindings": [
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "(#title_text = 'cz:user')",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      },
+      {
+        "cz_form3@cz_common.yuri_panel_ui": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [400, 120],
+	      "$text_name": "Yuri Zxra",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.yuri_panel",
+	      "layer": 2,
+		  "alpha": 0.8,
+	      "bindings": [
+			{
+			  "binding_name": "#gamertag",
+			  "binding_type": "collection",
+			  "binding_collection_name": "players_collection"
+			},
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "(#title_text = 'cz:yuri_menu0')",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      },
+      {
+        "cz_form4@cz_common.yuri_panel_ui": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [400, 120],
+	      "$text_name": "Yuri Zxra",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.yuri_panel",
+	      "$display": "textures/cz/art/yuri/face/1",
+	      "layer": 2,
+		  "alpha": 0.8,
+	      "bindings": [
+			{
+			  "binding_name": "#gamertag",
+			  "binding_type": "collection",
+			  "binding_collection_name": "players_collection"
+			},
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "(#title_text = 'cz:yuri_menu1')",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      },
+      {
+        "cz_form5@cz_common.yuri_panel_ui": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [400, 120],
+	      "$text_name": "Yuri Zxra",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.yuri_panel",
+	      "$display": "textures/cz/art/yuri/face/2",
+	      "layer": 2,
+		  "alpha": 0.8,
+	      "bindings": [
+			{
+			  "binding_name": "#gamertag",
+			  "binding_type": "collection",
+			  "binding_collection_name": "players_collection"
+			},
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "(#title_text = 'cz:yuri_menu2')",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      },
+      {
+        "cz_form6@cz_common.yuri_panel_ui": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [400, 120],
+	      "$text_name": "Yuri Zxra",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.yuri_panel",
+	      "$display": "textures/cz/art/yuri/face/3",
+	      "layer": 2,
+		  "alpha": 0.8,
+	      "bindings": [
+			{
+			  "binding_name": "#gamertag",
+			  "binding_type": "collection",
+			  "binding_collection_name": "players_collection"
+			},
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "(#title_text = 'cz:yuri_menu3')",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      },
+      {
+        "cz_form7@cz_common.main_panel_no_buttons": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [410, 330],
+	      "$text_name": "guild.shop",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.shop_panel",
+	      "layer": 2,
+		  "alpha": 1,
+	      "bindings": [
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "(#title_text = 'cz:guild_shop')",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      },
+      {
+        "cz_form@common_dialogs.main_panel_no_buttons": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [245, 220],
+	      "$text_name": "#title_text",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.long_form_panel",
+	      "layer": 2,
+	      "bindings": [
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "((#title_text - 'cz:shop') and (#title_text - 'cz:quest') and (#title_text - 'cz:guild_shop') and (#title_text - 'cz:yuri_menu0') and (#title_text - 'cz:yuri_menu3') and (#title_text - 'cz:yuri_menu2') and (#title_text - 'cz:yuri_menu1') and (#title_text - 'cz:user') = #title_text)",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      }
+    ]
+  },
+
+  "shop_panel" : {
+    "type": "stack_panel",
+    "size": ["100%", "100%"],
+    "orientation": "vertical",
+    "layer": 1,
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "controls": [
+      {
+        "scrolling_panel@common.scrolling_panel": {
+          "anchor_to": "top_left",
+          "anchor_from": "top_left",
+          "$show_background": false,
+          "size": [ "100%", "100%" ],
+          "$scrolling_content": "server_form.shop_scrolling_content",
+          "$scroll_size": [ 5, "100% - 4px" ],
+          "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
+          "$scrolling_pane_offset": [ 2, 10 ],
+          "$scroll_bar_right_padding_size": [ 0, 0 ]
+        }
+      }
+    ]
+  },
+
+  "shop_scrolling_content": {
+    "type": "stack_panel",
+    "size": [ "100% - 4px", "100%c" ],
+    "orientation": "vertical",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "controls": [
+      {
+        "label_offset_panel": {
+          "type": "panel",
+          "size": ["100%", "100%c"],
+          "controls": [
+            {
+              "main_label": {
+                "type": "label",
+                "offset": [2,2],
+                "color": "$main_header_text_color",
+                "size": ["100%", "default"],
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "text": "#form_text"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "padding": {
+          "type": "panel",
+          "size": [ "100%", 4 ]
+        }
+      },
+      {
+        "wrapping_panel": {
+          "type": "panel",
+          "size": [ "100%", "100%c" ],
+          "controls": [
+            {
+              "shop_dynamic_buttons_panel@server_form.shop_dynamic_buttons_panel": {}
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "user_panel" : {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "offset": [ 0, "-5%" ],
+    "layer": 1,
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "controls": [
+      {
+        "label_offset_panel": {
+          "type": "panel",
+          "offset": ["3%", "-2%"],
+          "anchor_from": "center",
+          "size": ["65%", "100%c"],
+          "controls": [
+            {
+              "main_label": {
+                "type": "label",
+                "offset": [2,2],
+                "size": ["100%", "default"],
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "text": "#form_text"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "scrolling_panel@common.scrolling_panel": {
+          "anchor_to": "top_left",
+          "anchor_from": "top_left",
+          "$show_background": false,
+          "size": [ "20%", "100%" ],
+          "$scrolling_content": "server_form.user_scrolling_content",
+          "$scroll_size": [ 2, "100% - 4px" ],
+          "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
+          "$scrolling_pane_offset": [ 2, 0 ],
+          "$scroll_bar_right_padding_size": [ 0, 0 ]
+        }
+      },
+      {
+        "player_bg": {
+          "type": "image",
+          "texture": "textures/ui/position_label_cz",
+          "size": [ 94, 70 ],
+          "layer": 2,
+          "anchor_from": "bottom_left",
+          "anchor_to": "bottom_left",
+          "offset": [ "-19% -5", "-27%" ],
+          "controls": [
+            {
+              "player_renderer_panel": {
+                "type": "panel",
+                "size": [ 68, 68 ],
+                "offset": [ 0, -12 ],
+
+                "controls": [
+                  {
+                    "player_renderer": {
+                      "type": "custom",
+                      "renderer": "live_player_renderer",
+                      "property_bag": {
+                        "#look_at_cursor": true
+                      },
+                      "animation_reset_name": "screen_animation_reset",
+                      "anims": [
+                        "@common.screen_exit_size_animation_push",
+                        "@common.screen_exit_size_animation_pop",
+                        "@common.screen_entrance_size_animation_push",
+                        "@common.screen_entrance_size_animation_pop"
+                      ],
+                      "layer": 8,
+                      "anchor_from": "center",
+                      "anchor_to": "center"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "user_scrolling_content": {
+    "type": "panel",
+    "size": [ "100% - 4px", "100%" ],
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "controls": [
+      {
+        "wrapping_panel": {
+          "type": "panel",
+          "anchor_from": "center",
+          "size": [ "97%", "100%c" ],
+          "offset": [ "0%", "0%"],
+          "controls": [
+            {
+              "shop_dynamic_buttons_panel@server_form.user_dynamic_buttons_panel": {}
+            }
+          ]
+        }
+      }
+    ]
+  },
+  
+  "yuri_panel" : {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "layer": 1,
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [0, "21%"],
+    "controls": [
+      {
+        "scrolling_panel@common.scrolling_panel": {
+          "anchor_to": "top_left",
+          "anchor_from": "top_left",
+          "$show_background": false,
+          "size": [ "100%", "100%" ],
+          "$scrolling_content": "server_form.long_form_scrolling_content",
+          "$scroll_size": [ 5, "100% - 4px" ],
+          "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
+          "$scrolling_pane_offset": [ 2, 0 ],
+          "$scroll_bar_right_padding_size": [ 0, 0 ]
+        }
+      }
+    ]
+  },
+
+  "shop_dynamic_buttons_panel": {
+    "type": "grid",
+    "size": ["100%", "100%c"],
+    "grid_dimensions": [2,3],
+    "grid_item_template": "server_form.shop_button",
+    "grid_fill_direction": "horizontal",
+    "grid_rescaling_type": "horizontal",
+    "offset": [2,10],
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+
+    "factory":{
+      "name": "buttons",
+      "control_name": "server_form.shop_button"
+    },
+
+    "collection_name": "form_buttons",
+    "bindings": [
+      {
+        "binding_name": "#form_button_length",
+        "binding_name_override": "#maximum_grid_items"
+      }
+    ]
+  },
+
+  "shop_button": {
+    "type": "panel",
+    "size": [96, 50],
+    "alpha": 0.7,
+    "controls":[
+      {
+        "panel_name": {
+          "type": "panel",
+          "size": ["100%", "100%"],
+          "bindings": [
+            {
+              "binding_type": "view",
+              "source_control_name": "image",
+              "resolve_sibling_scope": true,
+              "source_property_name": "(not (#texture = ''))",
+              "target_property_name": "#visible"
+            }
+          ],
+
+          "controls": [
+            {
+              "image": {
+                "type": "image",
+                "layer": 4,
+                "anchor_from": "center",
+                "size": [38, 38],
+                "offset": [-18, 0],
+                "bindings":[
+                  {
+                    "binding_name": "#form_button_texture",
+                    "binding_name_override": "#texture",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_name": "#form_button_texture_file_system",
+                    "binding_name_override": "#texture_file_system",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((#texture = '') or (#texture = 'loading')))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "form_button@cz_common.cz_dark_button": {
+          "$pressed_button_name": "button.form_button_click",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "size": [ 96, 50 ],
+          "$button_text": "#form_button_text",
+          "$button_text_binding_type": "collection",
+          "$button_text_grid_collection_name": "form_buttons",
+          "$button_text_max_size": [ "110%", 45 ],
+          "$default_text_color": [0.25,0.55,0.18],
+          "$button_font_scale_factor": 0.79,
+          "$text_layer": 6,
+          "bindings": [
+            {
+              "binding_type": "collection_details",
+              "binding_collection_name": "form_buttons"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "user_dynamic_buttons_panel": {
+    "type": "stack_panel",
+    "size": ["100%", "100%c"],
+    "offset": [2,0],
+    "orientation": "vertical",
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+
+    "factory":{
+      "name": "buttons",
+      "control_name": "server_form.user_button"
+    },
+
+    "collection_name": "form_buttons",
+    "bindings": [
+      {
+        "binding_name": "#form_button_length",
+        "binding_name_override": "#collection_length"
+      }
+    ]
+  },
+
+  "user_button": {
+    "type": "panel",
+    "size": ["100%", 36],
+    "controls":[
+      {
+        "panel_name": {
+          "type": "panel",
+          "size": [34, "100%c"],
+          "bindings": [
+            {
+              "binding_type": "view",
+              "source_control_name": "image",
+              "resolve_sibling_scope": true,
+              "source_property_name": "(not (#texture = ''))",
+              "target_property_name": "#visible"
+            }
+          ],
+
+          "controls": [
+            {
+              "image": {
+                "type": "image",
+                "layer": 7,
+                "anchor_from": "middle_left",
+                "size": [30, 30],
+                "alpha": 0.4,
+                "offset": ["-50%", 0],
+                "bindings":[
+                  {
+                    "binding_name": "#form_button_texture",
+                    "binding_name_override": "#texture",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_name": "#form_button_texture_file_system",
+                    "binding_name_override": "#texture_file_system",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((#texture = '') or (#texture = 'loading')))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "progress@progress.progress_loading_bars": {
+                "size": [
+                  30,
+                  4
+                ],
+                "offset": [
+                  -2,
+                  16
+                ],
+                "bindings": [
+                  {
+                    "binding_type": "view",
+                    "source_control_name": "image",
+                    "resolve_sibling_scope": true,
+                    "source_property_name": "(#texture = 'loading')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "form_button@cz_common.cz_dark_button": {
+          "$pressed_button_name": "button.form_button_click",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "size": [ "100%", 36 ],
+          "$button_text": "#form_button_text",
+          "$button_text_binding_type": "collection",
+          "$button_text_grid_collection_name": "form_buttons",
+          "$button_text_max_size": [ "100%", 20 ],
+          "$default_text_color": [1,1,1],
+          "bindings": [
+            {
+              "binding_type": "collection_details",
+              "binding_collection_name": "form_buttons"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

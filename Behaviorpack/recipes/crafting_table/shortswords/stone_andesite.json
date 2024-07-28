@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:stone_shortsword_andesite"
+    },
+    "pattern": [
+      " I",
+      "P"
+    ],
+    "key": {
+      "P": {
+        "item": "minecraft:stick"
+      },
+      "I": {
+        "item": "minecraft:andesite"
+      }
+    },
+    "result": {
+      "item": "cz:stone_shortsword"
+    },
+    "tags": [
+      "crafting_table",
+      "forger"
+    ]
+  }
+}

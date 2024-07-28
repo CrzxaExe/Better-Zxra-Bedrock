@@ -1,0 +1,105 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.angel": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "attack": "query.is_delayed_attacking == 1.0"
+            }
+          ]
+        },
+        "attack": {
+          "animations": [
+            {
+              "attack_1": "query.variant == 0"
+            },
+            {
+              "attack_2": "query.variant == 1"
+            }
+          ],
+          "transitions": [
+            {
+              "default": "query.any_animation_finished"
+            }
+          ],
+          "on_exit": [
+            "@s cz:ops_attack"
+          ]
+        }
+      }
+    },
+    "controller.animation.kyle_ent": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "attack": "query.is_delayed_attacking == 1.0"
+            }
+          ]
+        },
+        "attack": {
+          "transitions": [
+            {
+              "default": "q.any_animation_finished && q.is_delayed_attacking == 0"
+            }
+          ],
+          "on_exit": [
+            "@s cz:kyle_change_atk"
+          ],
+          "animations": [
+            {
+              "skill_1": "q.variant == 1"
+            },
+            {
+              "skill_2": "q.variant == 2"
+            },
+            {
+              "skill_4": "q.variant == 4"
+            },
+            {
+              "skill_5": "q.variant == 5"
+            },
+            {
+              "skill_6": "q.variant == 6"
+            },
+            {
+              "skill_7": "q.variant == 7"
+            }
+          ],
+          "on_entry": [
+            "/effect @s clear"
+          ]
+        }
+      }
+    },
+    "controller.animation.player.cz": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "skill": "q.is_using_item"
+            }
+          ]
+        },
+        "skill": {
+          "transitions": [
+            {
+              "default": "q.is_using_item > 0"
+            }
+          ],
+          "on_exit": [
+            "/tag @s remove skill"
+          ],
+          "on_entry": [
+            "/tag @s add skill"
+          ]
+        }
+      }
+    }
+  }
+}

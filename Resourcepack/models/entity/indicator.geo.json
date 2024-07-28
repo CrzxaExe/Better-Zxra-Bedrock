@@ -1,0 +1,98 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.indicator",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 1,
+        "visible_bounds_height": 1,
+        "visible_bounds_offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "indicator",
+          "pivot": [
+            0,
+            21,
+            0
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "texture_meshes": [
+            {
+              "position": [
+                -4,
+                0,
+                -4
+              ],
+              "scale": [
+                0.5,
+                0.5,
+                0.5
+              ],
+              "texture": "indicator"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": {
+        "identifier": "geometry.indicator_kyle",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 1,
+        "visible_bounds_height": 1,
+        "visible_bounds_offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "indicator",
+          "pivot": [
+            0,
+            42,
+            0
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "texture_meshes": [
+            {
+              "position": [
+                -6,
+                42,
+                0
+              ],
+              "scale": [
+                0.7,
+                0.5,
+                0.7
+              ],
+              "texture": "kyle_indicator",
+              "rotation": [
+                180,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

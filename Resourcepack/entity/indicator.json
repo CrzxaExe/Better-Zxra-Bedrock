@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "cz:indicator",
+      "materials": {
+        "default": "iron_golem"
+      },
+      "textures": {
+        "default": "textures/blocks/outline_window/empty"
+      },
+      "geometry": {
+        "default": "geometry.bullet"
+      },
+      "render_controllers": [
+        "controller.render.iron_golem"
+      ],
+      "animations": {
+        "move": "animation.bullet.move"
+      },
+      "scripts": {
+        "animate": [
+          "move"
+        ]
+      }
+    }
+  }
+}

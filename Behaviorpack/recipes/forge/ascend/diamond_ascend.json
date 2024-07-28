@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:diamond_ascends"
+    },
+    "pattern": [
+      "III",
+      "IBI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:diamond_block"
+      },
+      "B": {
+        "item": "cz:diamond_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:diamond_ascend"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

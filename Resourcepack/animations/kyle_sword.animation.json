@@ -1,0 +1,22 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.kyle.rots": {
+      "loop": true,
+      "bones": {
+        "kyles": {
+          "rotation": [
+            132.5,
+            "-40 + q.target_y_rotation",
+            -180
+          ],
+          "position": [
+            -2,
+            0,
+            -5
+          ]
+        }
+      }
+    }
+  }
+}

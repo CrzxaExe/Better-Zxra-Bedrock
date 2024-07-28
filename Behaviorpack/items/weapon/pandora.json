@@ -1,0 +1,38 @@
+{
+  "format_version": "1.20.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:pandora",
+      "menu_category": {
+        "group": "none",
+        "category": "equipment",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:damage": 8,
+      "minecraft:icon": {
+        "texture": "pandora_alt"
+      },
+      "minecraft:can_destroy_in_creative": false,
+      "minecraft:max_stack_size": 1,
+      "minecraft:use_modifiers": {
+        "use_duration": 30,
+        "movement_modifier": 0.1
+      },
+      "minecraft:shooter": {
+        "charge_on_draw": true,
+        "max_draw_duration": 3.5
+      },
+      "minecraft:display_name": {
+        "value": "Pandora"
+      },
+      "minecraft:hand_equipped": true,
+      "minecraft:tags": {
+        "tags": [
+          "briefcase"
+        ]
+      }
+    }
+  }
+}

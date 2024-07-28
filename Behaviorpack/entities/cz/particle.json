@@ -1,0 +1,90 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:particles",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "components": {
+      "minecraft:collision_box": {
+        "width": 0.01,
+        "height": 0.01
+      },
+      "minecraft:movement": {
+        "value": 0
+      },
+      "minecraft:fire_immune": true,
+      "minecraft:physics": {},
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:type_family": {
+        "family": [
+          "data"
+        ]
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {},
+      "cz:impact_particle": {
+        "add": {
+          "component_groups": [
+            "impact"
+          ]
+        }
+      },
+      "cz:liberator_swing_particle": {
+        "add": {
+          "component_groups": [
+            "liberator_swing"
+          ]
+        }
+      },
+      "minecraft:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      }
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {}
+      },
+      "impact": {
+        "minecraft:variant": {
+          "value": 0
+        },
+        "minecraft:timer": {
+          "time": 1.15,
+          "looping": false,
+          "time_down_event": {
+            "event": "minecraft:despawn"
+          }
+        }
+      },
+      "liberator_swing": {
+        "minecraft:variant": {
+          "value": 1
+        },
+        "minecraft:timer": {
+          "time": 0.25,
+          "looping": false,
+          "time_down_event": {
+            "event": "minecraft:despawn"
+          }
+        },
+        "minecraft:skin_id": {
+          "value": 0
+        }
+      }
+    }
+  }
+}

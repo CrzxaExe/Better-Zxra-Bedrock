@@ -1,0 +1,66 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "cz:plasma_core"
+    },
+    "components": {
+      "minecraft:creative_category": {
+        "category": "items",
+        "group": "none"
+      },
+      "minecraft:destroy_time": 6.0,
+      "minecraft:friction": 0.6,
+      "minecraft:map_color": "#454545",
+      "minecraft:flammable": {
+        "flame_odds": 50,
+        "burn_odds": 0
+      },
+      "minecraft:loot": "loot_tables/plasma_core.json",
+      "minecraft:on_player_destroyed": {
+        "event": "drop",
+        "target": "self"
+      },
+      "minecraft:display_name": "plasma_core",
+      "minecraft:on_placed": {
+        "event": "cz:core_place",
+        "target": "self"
+      },
+      "tag:plasma_electric": {},
+      "minecraft:on_interact": {
+        "event": "cz:test"
+      }
+    },
+    "events": {
+      "drop": {
+        "sequence": [
+          {
+            "run_command": {
+              "command": [
+                "event entity @e[r=1.3,type=cz:block_data] minecraft:despawn",
+                "say test"
+              ]
+            }
+          },
+          {
+            "spawn_loot": {
+              "table": "loot_tables/block/plasma_core"
+            }
+          }
+        ]
+      },
+      "cz:core_place": {
+        "run_command": {
+          "command": [
+            "summon cz:block_data ~~~"
+          ]
+        }
+      },
+      "cz:test": {
+        "run_command": {
+          "command": []
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,559 @@
+{
+  "format_version": "1.18.20",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "minecraft:player",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "new_root"
+        ]
+      },
+      "animations": {
+        "new_root": "controller.animation.player.cz"
+      }
+    },
+    "component_groups": {
+      "minecraft:add_raid_omen": {
+        "minecraft:spell_effects": {
+          "add_effects": [
+            {
+              "effect": "raid_omen",
+              "duration": 30,
+              "visible": false,
+              "display_on_screen_animation": true
+            }
+          ],
+          "remove_effects": "bad_omen"
+        },
+        "minecraft:timer": {
+          "time": [
+            0.0,
+            0.0
+          ],
+          "looping": false,
+          "time_down_event": {
+            "event": "minecraft:clear_add_raid_omen",
+            "target": "self"
+          }
+        }
+      },
+      "minecraft:clear_raid_omen_spell_effect": {
+        "minecraft:spell_effects": {}
+      },
+      "minecraft:raid_trigger": {
+        "minecraft:raid_trigger": {
+          "triggered_event": {
+            "event": "minecraft:remove_raid_trigger",
+            "target": "self"
+          }
+        }
+      },
+      "liberator": {
+        "minecraft:damage_sensor": {
+          "triggers": {
+            "deals_damage": false,
+            "cause": "all"
+          }
+        },
+        "minecraft:timer": {
+          "time": 5,
+          "time_down_event": {
+            "event": "cz:clear"
+          }
+        },
+        "minecraft:movement": {
+          "value": 0.1
+        }
+      },
+      "silent_20": {
+        "minecraft:damage_sensor": {
+          "triggers": {
+            "cause": "all",
+            "damage_multiplier": 0.5
+          }
+        }
+      },
+      "endless_skill1": {
+        "minecraft:spawn_entity": {
+          "entities": [
+            {
+              "num_to_spawn": 1,
+              "single_use": true,
+              "should_leash": false,
+              "spawn_entity": "cz:bullet",
+              "spawn_event": "cz:endless_1",
+              "max_wait_time": 0,
+              "min_wait_time": 0
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": 0.01,
+          "time_down_event": {
+            "event": "cz:clear"
+          }
+        }
+      },
+      "endless_ult": {
+        "minecraft:spawn_entity": {
+          "entities": [
+            {
+              "num_to_spawn": 1,
+              "single_use": true,
+              "should_leash": false,
+              "spawn_entity": "cz:bullet",
+              "spawn_event": "cz:endless_ult",
+              "max_wait_time": 0,
+              "min_wait_time": 0
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": 0.01,
+          "time_down_event": {
+            "event": "cz:clear"
+          }
+        }
+      },
+      "lectaze_skill1": {
+        "minecraft:spawn_entity": {
+          "entities": [
+            {
+              "num_to_spawn": 1,
+              "single_use": true,
+              "should_leash": false,
+              "spawn_entity": "cz:lectaze_sword",
+              "spawn_event": "cz:lectaze_projectile",
+              "max_wait_time": 0,
+              "min_wait_time": 0
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": 0.01,
+          "time_down_event": {
+            "event": "cz:clear"
+          }
+        }
+      },
+      "lectaze_slash": {
+        "minecraft:spawn_entity": {
+          "entities": [
+            {
+              "num_to_spawn": 1,
+              "single_use": true,
+              "should_leash": false,
+              "spawn_entity": "cz:slash",
+              "max_wait_time": 0,
+              "min_wait_time": 0
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": 0.01,
+          "time_down_event": {
+            "event": "cz:clear"
+          }
+        }
+      },
+      "summon_kyles": {
+        "minecraft:spawn_entity": {
+          "entities": [
+            {
+              "num_to_spawn": 1,
+              "single_use": true,
+              "should_leash": false,
+              "spawn_entity": "cz:kyle_sword",
+              "spawn_event": "cz:to_sword",
+              "max_wait_time": 0,
+              "min_wait_time": 0
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": 0.01,
+          "time_down_event": {
+            "event": "cz:clear"
+          }
+        }
+      },
+      "shield_1": {
+        "minecraft:timer": {
+          "time": 8,
+          "looping": false,
+          "time_down_event": {
+            "event": "cz:shield_break"
+          }
+        },
+        "minecraft:damage_sensor": {
+          "triggers": {
+            "deals_damage": false,
+            "on_damage": {
+              "filters": {
+                "test": "has_damage",
+                "value": "none",
+                "operator": "!="
+              },
+              "event": "cz:shield_break"
+            }
+          }
+        }
+      },
+      "no_fall_5s": {
+        "minecraft:timer": {
+          "time": 5,
+          "looping": false,
+          "time_down_event": {
+            "event": "cz:clear_fall"
+          }
+        },
+        "minecraft:damage_sensor": {
+          "triggers": {
+            "deals_damage": false,
+            "on_damage": {
+              "filters": {
+                "test": "has_damage",
+                "value": "fall"
+              },
+              "event": "cz:clear_fall"
+            }
+          }
+        }
+      },
+      "float": {}
+    },
+    "components": {
+      "minecraft:experience_reward": {
+        "on_death": "Math.Min(query.player_level * 7, 100)"
+      },
+      "minecraft:type_family": {
+        "family": [
+          "player",
+          "slayer"
+        ]
+      },
+      "minecraft:is_hidden_when_invisible": {},
+      "minecraft:loot": {
+        "table": "loot_tables/empty.json"
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.8
+      },
+      "minecraft:can_climb": {},
+      "minecraft:movement": {
+        "value": 0.1
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": {
+              "test": "in_lava",
+              "subject": "self",
+              "operator": "==",
+              "value": true
+            },
+            "cause": "lava",
+            "damage_per_tick": 5
+          }
+        ]
+      },
+      "minecraft:attack": {
+        "damage": 1
+      },
+      "minecraft:exhaustion_values": {
+        "heal": 6,
+        "jump": 0.05,
+        "sprint_jump": 0.2,
+        "mine": 0.005,
+        "attack": 0.1,
+        "damage": 0.1,
+        "walk": 0.0,
+        "sprint": 0.1,
+        "swim": 0.01
+      },
+      "minecraft:player.saturation": {
+        "value": 5,
+        "max": 20
+      },
+      "minecraft:player.exhaustion": {
+        "value": 0,
+        "max": 20
+      },
+      "minecraft:player.level": {
+        "value": 0,
+        "max": 24791
+      },
+      "minecraft:player.experience": {
+        "value": 0,
+        "max": 1
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": -1,
+        "inhale_time": 3.75,
+        "generates_bubbles": false
+      },
+      "minecraft:nameable": {
+        "always_show": true,
+        "allow_name_tag_renaming": false
+      },
+      "minecraft:physics": {
+        "push_towards_closest_space": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:insomnia": {
+        "days_until_insomnia": 3
+      },
+      "minecraft:rideable": {
+        "seat_count": 2,
+        "family_types": [
+          "parrot_tame"
+        ],
+        "pull_in_entities": true,
+        "seats": [
+          {
+            "position": [
+              0.4,
+              -0.2,
+              -0.1
+            ],
+            "min_rider_count": 0,
+            "max_rider_count": 0,
+            "lock_rider_rotation": 0
+          },
+          {
+            "position": [
+              -0.4,
+              -0.2,
+              -0.1
+            ],
+            "min_rider_count": 1,
+            "max_rider_count": 2,
+            "lock_rider_rotation": 0
+          }
+        ]
+      },
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:block_climber": {},
+      "minecraft:environment_sensor": {
+        "triggers": [
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "has_mob_effect",
+                  "subject": "self",
+                  "value": "bad_omen"
+                },
+                {
+                  "test": "is_in_village",
+                  "subject": "self",
+                  "value": true
+                }
+              ]
+            },
+            "event": "minecraft:gain_raid_omen"
+          },
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "has_tag",
+                  "subject": "self",
+                  "value": "stunned"
+                },
+                {
+                  "test": "has_equipment",
+                  "domain": "hand",
+                  "operator": "!=",
+                  "value": "cz:silent"
+                }
+              ]
+            },
+            "event": "cz:stun"
+          },
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "has_tag",
+                  "subject": "self",
+                  "value": "stunned"
+                },
+                {
+                  "test": "has_equipment",
+                  "domain": "hand",
+                  "value": "cz:silent"
+                }
+              ]
+            },
+            "event": "cz:stun_reduce"
+          }
+        ]
+      }
+    },
+    "events": {
+      "minecraft:gain_raid_omen": {
+        "add": {
+          "component_groups": [
+            "minecraft:add_raid_omen"
+          ]
+        }
+      },
+      "minecraft:clear_add_raid_omen": {
+        "remove": {
+          "component_groups": [
+            "minecraft:add_raid_omen"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "minecraft:clear_raid_omen_spell_effect"
+          ]
+        }
+      },
+      "minecraft:trigger_raid": {
+        "add": {
+          "component_groups": [
+            "minecraft:raid_trigger"
+          ]
+        }
+      },
+      "minecraft:remove_raid_trigger": {
+        "remove": {
+          "component_groups": [
+            "minecraft:raid_trigger"
+          ]
+        }
+      },
+      "cz:add_liberator": {
+        "add": {
+          "component_groups": [
+            "liberator"
+          ]
+        }
+      },
+      "cz:endless_1": {
+        "add": {
+          "component_groups": [
+            "endless_skill1"
+          ]
+        }
+      },
+      "cz:lectaze_slash": {
+        "add": {
+          "component_groups": [
+            "lectaze_slash"
+          ]
+        }
+      },
+      "cz:summon_kyles": {
+        "add": {
+          "component_groups": [
+            "summon_kyles"
+          ]
+        }
+      },
+      "cz:lectaze_1": {
+        "add": {
+          "component_groups": [
+            "lectaze_skill1"
+          ]
+        }
+      },
+      "cz:lectaze_ultimate": {
+        "add": {
+          "component_groups": [
+            "lectaze_ult"
+          ]
+        }
+      },
+      "cz:clear": {
+        "remove": {
+          "component_groups": [
+            "liberator",
+            "silent_20",
+            "endless_skill1",
+            "lectaze_skill1",
+            "lectaze_ult",
+            "lectaze_slash",
+            "summon_kyles"
+          ]
+        }
+      },
+      "cz:stun": {
+        "run_command": {
+          "command": [
+            "title @s actionbar You Are Stunned",
+            "effect @s slowness 2 255 true",
+            "effect @s mining_fatigue 2 255 true",
+            "effect @s weakness 2 255 true",
+            "tag @s remove stunned"
+          ]
+        }
+      },
+      "cz:stun_reduce": {
+        "run_command": {
+          "command": [
+            "title @s actionbar Dodge",
+            "tag @s remove stunned"
+          ]
+        }
+      },
+      "cz:on_rain": {
+        "run_command": {
+          "command": [
+            "title @s actionbar Rain"
+          ]
+        }
+      },
+      "cz:test": {
+        "run_command": {
+          "command": [
+            "say test"
+          ]
+        }
+      },
+      "cz:shield_break": {
+        "remove": {
+          "component_groups": [
+            "shield_1"
+          ]
+        }
+      },
+      "cz:shield_1": {
+        "add": {
+          "component_groups": [
+            "shield_1"
+          ]
+        }
+      },
+      "cz:no_fall_5s": {
+        "add": {
+          "component_groups": [
+            "no_fall_5s"
+          ]
+        }
+      },
+      "cz:clear_fall": {
+        "remove": {
+          "component_groups": [
+            "no_fall_5s"
+          ]
+        }
+      }
+    }
+  }
+}

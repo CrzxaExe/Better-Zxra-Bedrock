@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:minarite_ingot_r"
+    },
+    "pattern": [
+      "III",
+      "IPI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:mina_powder"
+      },
+      "P": {
+        "item": "cz:mina_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:minarite_ingot"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

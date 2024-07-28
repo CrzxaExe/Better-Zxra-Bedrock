@@ -1,0 +1,41 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:vial_heal_0"
+    },
+    "pattern": [
+      "CLC",
+      "SHG",
+      " I"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:vial_water"
+      },
+      "H": {
+        "item": "minecraft:golden_carrot"
+      },
+      "G": {
+        "item": "minecraft:golden_apple"
+      },
+      "S": {
+        "item": "minecraft:sugar"
+      },
+      "C": {
+        "item": "minecraft:apple"
+      },
+      "L": {
+        "item": "minecraft:nether_wart"
+      }
+    },
+    "tags": [
+      "alchemy"
+    ],
+    "result": [
+      {
+        "item": "cz:vial_heal_0"
+      }
+    ]
+  }
+}

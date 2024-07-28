@@ -1,0 +1,24 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.yuri": {
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Array.blink[query.variant]"
+      ],
+      "arrays": {
+        "textures": {
+          "Array.blink": [
+            "Texture.normal",
+            "Texture.blink"
+          ]
+        }
+      }
+    }
+  }
+}

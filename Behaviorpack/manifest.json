@@ -1,0 +1,60 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "[Forgery Update]\n\nAddonPack for your World\nLet's enchant your journey",
+    "name": "§l§b[Project]§r Better Zxra Bedrock",
+    "uuid": "0239a99e-5fec-45b8-a690-e5310d399508",
+    "version": [
+      1,
+      1,
+      2
+    ],
+    "min_engine_version": [
+      1,
+      20,
+      40
+    ]
+  },
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "1.12.0-beta"
+    },
+    {
+      "module_name": "@minecraft/server-gametest",
+      "version": "1.0.0-beta"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "1.2.0-beta"
+    }
+  ],
+  "metadata": {
+    "authors": [
+      "CrzxaExe"
+    ]
+  },
+  "modules": [
+    {
+      "description": "BZB",
+      "type": "data",
+      "uuid": "4e98f145-3fb5-4c78-b836-e48492a1600f",
+      "version": [
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "d19290c3-b25b-441b-98e9-3c437266e487",
+      "entry": "scripts/main.js",
+      "version": [
+        1,
+        1,
+        2
+      ]
+    }
+  ]
+}

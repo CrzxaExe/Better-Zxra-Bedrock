@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:birch_chair",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

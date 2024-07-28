@@ -1,0 +1,139 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:block": {
+    "description": {
+      "identifier": "cz:altar",
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ],
+          "y_rotation": 180
+        }
+      },
+      "menu_category": {
+        "category": "Items",
+        "group": "none"
+      }
+    },
+    "components": {
+      "minecraft:friction": 0.4,
+      "minecraft:map_color": "#ffffff",
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:on_player_destroyed": {
+        "event": "drop",
+        "target": "self"
+      },
+      "minecraft:geometry": "geometry.altar",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "quartz_bricks",
+          "render_method": "opaque"
+        },
+        "quartz": {
+          "texture": "quartz_bricks",
+          "render_method": "opaque"
+        },
+        "lodes": {
+          "texture": "netherite_block",
+          "render_method": "opaque"
+        },
+        "andesite": {
+          "texture": "andesite",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:crafting_table": {
+        "crafting_tags": [
+          "altar"
+        ]
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -6.0,
+          0.0,
+          -6.0
+        ],
+        "size": [
+          12.0,
+          11.0,
+          12.0
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -8.0,
+          0.0,
+          -8.0
+        ],
+        "size": [
+          16.0,
+          12.0,
+          16.0
+        ]
+      },
+      "minecraft:flammable": false,
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 6.0
+      },
+      "tag:metal": {}
+    },
+    "events": {
+      "drop": {
+        "spawn_loot": {
+          "table": "loot_tables/block/altar"
+        }
+      }
+    },
+    "permutations": [
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'south'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'east'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              90,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'north'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              180,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'west'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -90,
+              0
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

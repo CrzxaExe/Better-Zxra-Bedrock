@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:rare_ascends"
+    },
+    "pattern": [
+      "III",
+      "IBI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:diamond_ingot"
+      },
+      "B": {
+        "item": "cz:diamond_ascend"
+      }
+    },
+    "result": {
+      "item": "cz:rare_ascend"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

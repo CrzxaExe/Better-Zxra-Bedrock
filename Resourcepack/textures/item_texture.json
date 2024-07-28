@@ -1,0 +1,495 @@
+{
+  "resource_pack_name": "bzb",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "kyles": {
+      "textures": "textures/items/weapon/kyle"
+    },
+    "liberator": {
+      "textures": "textures/items/weapon/liberator"
+    },
+    "silent": {
+      "textures": "textures/items/weapon/silent"
+    },
+    "katana": {
+      "textures": "textures/items/weapon/katana"
+    },
+    "spear": {
+      "textures": "textures/items/weapon/spear"
+    },
+    "greatsword": {
+      "textures": "textures/items/weapon/greatsword"
+    },
+    "reaper": {
+      "textures": "textures/items/weapon/reaper"
+    },
+    "hammer": {
+      "textures": "textures/items/weapon/hammer"
+    },
+    "bringer": {
+      "textures": "textures/items/weapon/bringer"
+    },
+    "berserk": {
+      "textures": "textures/items/weapon/berserk"
+    },
+    "crusher": {
+      "textures": "textures/items/weapon/crusher"
+    },
+    "destiny": {
+      "textures": "textures/items/weapon/destiny"
+    },
+    "pandora_alt": {
+      "textures": "textures/items/weapon/pandora_alt"
+    },
+    "catlye": {
+      "textures": "textures/items/weapon/catlye"
+    },
+    "skyler": {
+      "textures": "textures/items/weapon/skyler"
+    },
+    "lectaze": {
+      "textures": "textures/items/weapon/lectaze"
+    },
+    "endless": {
+      "textures": "textures/items/weapon/endless"
+    },
+    "boltizer": {
+      "textures": "textures/items/weapon/boltizer"
+    },
+    "quezn": {
+      "textures": "textures/items/weapon/quezn"
+    },
+    "destreza": {
+      "textures": "textures/items/weapon/destreza"
+    },
+    "cenryter": {
+      "textures": "textures/items/weapon/cenryter"
+    },
+    "cervant": {
+      "textures": "textures/items/weapon/cervant"
+    },
+    "exalt": {
+      "textures": "textures/items/weapon/exalt"
+    },
+    "harmist_flute": {
+      "textures": "textures/items/weapon/harmist_flute"
+    },
+    "hyrant": {
+      "textures": "textures/items/weapon/hyrant"
+    },
+    "lighter": {
+      "textures": "textures/items/weapon/ligther"
+    },
+    "musha": {
+      "textures": "textures/items/weapon/musha"
+    },
+    "harmony": {
+      "textures": "textures/items/weapon/harmony"
+    },
+    "undying": {
+      "textures": "textures/items/weapon/undying"
+    },
+    "yume_staff": {
+      "textures": "textures/items/weapon/yume_staff"
+    },
+    "vitage": {
+      "textures": "textures/items/weapon/vitage"
+    },
+    "x-3r": {
+      "textures": "textures/items/weapon/x-3r"
+    },
+    "dough": {
+      "textures": "textures/items/dough"
+    },
+    "handle": {
+      "textures": "textures/items/handle"
+    },
+    "quest_scroll": {
+      "textures": "textures/items/quest_scroll"
+    },
+    "transmiter": {
+      "textures": "textures/items/transmiter"
+    },
+    "netherite_plate": {
+      "textures": "textures/items/netherite_plate"
+    },
+    "card": {
+      "textures": "textures/items/cards/normal"
+    },
+    "card_teleport": {
+      "textures": "textures/items/cards/teleport"
+    },
+    "chip": {
+      "textures": "textures/items/chip"
+    },
+    "chip_base": {
+      "textures": "textures/items/chip_base"
+    },
+    "glasses": {
+      "textures": "textures/items/glasses"
+    },
+    "silver_ingot": {
+      "textures": "textures/items/silver_ingot"
+    },
+    "diamond_ingot": {
+      "textures": "textures/items/diamond_ingot"
+    },
+    "charcoal_filter": {
+      "textures": "textures/items/charcoal_filter"
+    },
+    "clean_water": {
+      "textures": "textures/items/clean_water"
+    },
+    "coal_filter": {
+      "textures": "textures/items/coal_filter"
+    },
+    "diamond_ascend": {
+      "textures": "textures/items/diamond_ascend"
+    },
+    "rare_ascend": {
+      "textures": "textures/items/rare_ascend"
+    },
+    "legend_ascend": {
+      "textures": "textures/items/legend_ascend"
+    },
+    "epic_ascend": {
+      "textures": "textures/items/epic_ascend"
+    },
+    "unique_ascend": {
+      "textures": "textures/items/unique_ascend"
+    },
+    "limited_ascend": {
+      "textures": "textures/items/limited_ascend"
+    },
+    "stats": {
+      "textures": "textures/items/stats"
+    },
+    "zxra_book": {
+      "textures": "textures/items/zxra_book"
+    },
+    "toast": {
+      "textures": "textures/items/food/toast"
+    },
+    "flour": {
+      "textures": "textures/items/flour"
+    },
+    "ascend_template": {
+      "textures": "textures/items/ascend_template"
+    },
+    "mini_chest": {
+      "textures": "textures/items/mini_chest"
+    },
+    "badge": {
+      "textures": "textures/items/badge"
+    },
+    "ender_shard": {
+      "textures": "textures/items/ender_shard"
+    },
+    "white_bread": {
+      "textures": "textures/items/food/white_bread"
+    },
+    "slice_bread": {
+      "textures": "textures/items/food/slice_bread"
+    },
+    "plasma_ingot": {
+      "textures": "textures/items/plasma/ingot"
+    },
+    "prime_core": {
+      "textures": "textures/items/plasma/prime_core"
+    },
+    "steel_ingot": {
+      "textures": "textures/items/steel_ingot"
+    },
+    "vial": {
+      "textures": "textures/items/alchemy/vial"
+    },
+    "vial_water": {
+      "textures": "textures/items/alchemy/vial_water"
+    },
+    "vial_stamina_0": {
+      "textures": "textures/items/alchemy/stamina/0"
+    },
+    "vial_stamina_1": {
+      "textures": "textures/items/alchemy/stamina/1"
+    },
+    "vial_stamina_2": {
+      "textures": "textures/items/alchemy/stamina/2"
+    },
+    "vial_heal_0": {
+      "textures": "textures/items/alchemy/heal/0"
+    },
+    "vial_heal_1": {
+      "textures": "textures/items/alchemy/heal/1"
+    },
+    "vial_atk_0": {
+      "textures": "textures/items/alchemy/atk/0"
+    },
+    "vial_atk_1": {
+      "textures": "textures/items/alchemy/atk/1"
+    },
+    "vial_skill_0": {
+      "textures": "textures/items/alchemy/skill/0"
+    },
+    "vial_skill_1": {
+      "textures": "textures/items/alchemy/skill/1"
+    },
+    "vial_shelter_0": {
+      "textures": "textures/items/alchemy/shelter/0"
+    },
+    "vial_speed_jump_0": {
+      "textures": "textures/items/alchemy/speed_jump/0"
+    },
+    "vial_speed_jump_1": {
+      "textures": "textures/items/alchemy/speed_jump/1"
+    },
+    "vial_speed_jump_2": {
+      "textures": "textures/items/alchemy/speed_jump/2"
+    },
+    "vial_fireres_def_0": {
+      "textures": "textures/items/alchemy/fireres_def/0"
+    },
+    "vial_fireres_def_1": {
+      "textures": "textures/items/alchemy/fireres_def/1"
+    },
+    "vial_fireres_def_2": {
+      "textures": "textures/items/alchemy/fireres_def/2"
+    },
+    "netherite_steel_ingot": {
+      "textures": "textures/items/netherite_steel_ingot"
+    },
+    "minarite_powder": {
+      "textures": "textures/items/minarite/powder"
+    },
+    "minarite_axe": {
+      "textures": "textures/items/minarite/axe"
+    },
+    "minarite_boots": {
+      "textures": "textures/items/minarite/boots"
+    },
+    "minarite_boots_asc": {
+      "textures": "textures/items/minarite/boots_asc"
+    },
+    "minarite_helmet": {
+      "textures": "textures/items/minarite/helmet"
+    },
+    "minarite_helmet_asc": {
+      "textures": "textures/items/minarite/helmet_asc"
+    },
+    "minarite_chestplate": {
+      "textures": "textures/items/minarite/chestplate"
+    },
+    "minarite_chestplate_asc": {
+      "textures": "textures/items/minarite/chestplate_asc"
+    },
+    "minarite_leggings": {
+      "textures": "textures/items/minarite/leggings"
+    },
+    "minarite_leggings_asc": {
+      "textures": "textures/items/minarite/leggings_asc"
+    },
+    "minarite_ingot": {
+      "textures": "textures/items/minarite/ingot"
+    },
+    "minarite_sword": {
+      "textures": "textures/items/minarite/sword"
+    },
+    "minarite_pickaxe": {
+      "textures": "textures/items/minarite/pickaxe"
+    },
+    "minarite_shovel": {
+      "textures": "textures/items/minarite/shovel"
+    },
+    "plasma_shovel": {
+      "textures": "textures/items/plasma/shovel"
+    },
+    "plasma_pickaxe": {
+      "textures": "textures/items/plasma/pickaxe"
+    },
+    "plasma_sword": {
+      "textures": "textures/items/plasma/sword"
+    },
+    "plasma_axe": {
+      "textures": "textures/items/plasma/axe"
+    },
+    "plasma_powder": {
+      "textures": "textures/items/plasma/powder"
+    },
+    "plasma_dust": {
+      "textures": "textures/items/plasma/dust"
+    },
+    "mina_axe": {
+      "textures": "textures/items/mina/axe"
+    },
+    "mina_rod": {
+      "textures": "textures/items/mina/rod"
+    },
+    "mina_shovel": {
+      "textures": "textures/items/mina/shovel"
+    },
+    "mina_pickaxe": {
+      "textures": "textures/items/mina/pickaxe"
+    },
+    "mina_powder": {
+      "textures": "textures/items/mina/powder"
+    },
+    "mina_sword": {
+      "textures": "textures/items/mina/sword"
+    },
+    "mina_ingot": {
+      "textures": "textures/items/mina/ingot"
+    },
+    "mina_chestplate": {
+      "textures": "textures/items/mina/chestplate"
+    },
+    "mina_chestplate_asc": {
+      "textures": "textures/items/mina/chestplate_asc"
+    },
+    "mina_leggings": {
+      "textures": "textures/items/mina/leggings"
+    },
+    "mina_leggings_asc": {
+      "textures": "textures/items/mina/leggings_asc"
+    },
+    "mina_helmet": {
+      "textures": "textures/items/mina/helmet"
+    },
+    "mina_helmet_asc": {
+      "textures": "textures/items/mina/helmet_asc"
+    },
+    "mina_boots": {
+      "textures": "textures/items/mina/boots"
+    },
+    "mina_boots_asc": {
+      "textures": "textures/items/mina/boots_asc"
+    },
+    "dexterite_boots": {
+      "textures": "textures/items/dexterite/boots"
+    },
+    "dexterite_boots_asc": {
+      "textures": "textures/items/dexterite/boots_asc"
+    },
+    "dexterite_leggings": {
+      "textures": "textures/items/dexterite/leggings"
+    },
+    "dexterite_leggings_asc": {
+      "textures": "textures/items/dexterite/leggings_asc"
+    },
+    "dexterite_chestplate": {
+      "textures": "textures/items/dexterite/chestplate"
+    },
+    "dexterite_chestplate_asc": {
+      "textures": "textures/items/dexterite/chestplate_asc"
+    },
+    "dexterite_helmet_asc": {
+      "textures": "textures/items/dexterite/helmet_asc"
+    },
+    "dexterite_helmet": {
+      "textures": "textures/items/dexterite/helmet"
+    },
+    "dexterite_ingot": {
+      "textures": "textures/items/dexterite/ingot"
+    },
+    "dexterite_sword": {
+      "textures": "textures/items/dexterite/sword"
+    },
+    "dexterite_shovel": {
+      "textures": "textures/items/dexterite/shovel"
+    },
+    "dexterite_pickaxe": {
+      "textures": "textures/items/dexterite/pickaxe"
+    },
+    "dexterite_axe": {
+      "textures": "textures/items/dexterite/axe"
+    },
+    "dexterite_raw": {
+      "textures": "textures/items/dexterite/raw"
+    },
+    "dexterite_powder": {
+      "textures": "textures/items/dexterite/powder"
+    },
+    "chlorophyte_powder": {
+      "textures": "textures/items/chlorophyte/powder"
+    },
+    "chlorophyte_sword": {
+      "textures": "textures/items/chlorophyte/sword"
+    },
+    "chlorophyte_shovel": {
+      "textures": "textures/items/chlorophyte/shovel"
+    },
+    "chlorophyte_ingot": {
+      "textures": "textures/items/chlorophyte/ingot"
+    },
+    "chlorophyte_raw": {
+      "textures": "textures/items/chlorophyte/raw"
+    },
+    "chlorophyte_pickaxe": {
+      "textures": "textures/items/chlorophyte/pickaxe"
+    },
+    "chlorophyte_axe": {
+      "textures": "textures/items/chlorophyte/axe"
+    },
+    "firerite_ingot": {
+      "textures": "textures/items/firerite/ingot"
+    },
+    "firerite_pickaxe": {
+      "textures": "textures/items/firerite/pickaxe"
+    },
+    "diarite_pickaxe": {
+      "textures": "textures/items/diarite/pickaxe"
+    },
+    "diarite_ingot": {
+      "textures": "textures/items/diarite/ingot"
+    },
+    "ender_ingot": {
+      "textures": "textures/items/ender/ingot"
+    },
+    "ender_sword": {
+      "textures": "textures/items/ender/sword"
+    },
+    "ender_raw": {
+      "textures": "textures/items/ender/raw"
+    },
+    "fish_silver": {
+      "textures": "textures/items/food/fish_silver"
+    },
+    "cooked_fish_silver": {
+      "textures": "textures/items/food/cooked_fish_silver"
+    },
+    "wooden_shortsword": {
+      "textures": "textures/items/swords/wood_shortsword"
+    },
+    "stone_shortsword": {
+      "textures": "textures/items/swords/stone_shortsword"
+    },
+    "iron_shortsword": {
+      "textures": "textures/items/swords/iron_shortsword"
+    },
+    "golden_shortsword": {
+      "textures": "textures/items/swords/gold_shortsword"
+    },
+    "diamond_shortsword": {
+      "textures": "textures/items/swords/diamond_shortsword"
+    },
+    "netherite_shortsword": {
+      "textures": "textures/items/swords/netherite_shortsword"
+    },
+    "dexterite_shortsword": {
+      "textures": "textures/items/dexterite/shortsword"
+    },
+    "mina_shortsword": {
+      "textures": "textures/items/mina/shortsword"
+    },
+    "plasma_shortsword": {
+      "textures": "textures/items/plasma/shortsword"
+    },
+    "minarite_shortsword": {
+      "textures": "textures/items/minarite/shortsword"
+    },
+    "chlorophyte_shortsword": {
+      "textures": "textures/items/chlorophyte/shortsword"
+    },
+    "ender_shortsword": {
+      "textures": "textures/items/ender/shortsword"
+    }
+  }
+}

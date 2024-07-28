@@ -1,0 +1,30 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:plasma_dust",
+      "menu_category": {
+        "category": "items",
+        "group": "none",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:max_stack_size": 64,
+      "minecraft:hand_equipped": false,
+      "minecraft:icon": {
+        "texture": "plasma_dust"
+      },
+      "minecraft:display_name": {
+        "value": "item.plasma_dust.name"
+      },
+      "minecraft:on_use_on": {
+        "event": "cz:plasma_dust",
+        "target": "self"
+      }
+    },
+    "events": {
+      "cz:plasma_dust": {}
+    }
+  }
+}

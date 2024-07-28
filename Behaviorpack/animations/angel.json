@@ -1,0 +1,15 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.angel.attack.normal": {
+      "loop": false,
+      "timeline": {},
+      "animation_length": 2
+    },
+    "animation.angel.attack.forward": {
+      "loop": false,
+      "timeline": {},
+      "animation_length": 2
+    }
+  }
+}

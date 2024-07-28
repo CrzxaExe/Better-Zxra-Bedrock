@@ -1,0 +1,43 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.endless_item",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 1,
+				"visible_bounds_height": 1,
+				"visible_bounds_offset": [0, 0, 0]
+			},
+			"bones": [
+				{
+					"name": "rightEndless",
+					"pivot": [0, 0, 0],
+					"rotation": [0, 55, 90],
+					"binding": "'rightitem'",
+					"texture_meshes": [
+						{
+							"texture": "default",
+							"position": [0, 0, 0],
+							"local_pivot": [8, 0, 11]
+						}
+					]
+				},
+				{
+					"name": "leftEndless",
+					"pivot": [0, 0, 0],
+					"rotation": [0, 55, 90],
+					"binding": "'leftitem'",
+					"texture_meshes": [
+						{
+							"texture": "default",
+							"position": [0, 0, 0],
+							"local_pivot": [8, 0, 11]
+						}
+					]
+				}
+			]
+		}
+	]
+}

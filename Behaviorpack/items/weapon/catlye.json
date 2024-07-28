@@ -1,0 +1,38 @@
+{
+  "format_version": "1.20.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:catlye",
+      "menu_category": {
+        "group": "none",
+        "category": "equipment",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:damage": 2,
+      "minecraft:icon": {
+        "texture": "catlye"
+      },
+      "minecraft:can_destroy_in_creative": false,
+      "minecraft:max_stack_size": 1,
+      "minecraft:use_modifiers": {
+        "use_duration": 30,
+        "movement_modifier": 0.5
+      },
+      "minecraft:shooter": {
+        "charge_on_draw": true,
+        "max_draw_duration": 3.5
+      },
+      "minecraft:display_name": {
+        "value": "Catlye"
+      },
+      "minecraft:tags": {
+        "tags": [
+          "staff"
+        ]
+      },
+      "minecraft:hand_equipped": true
+    }
+  }
+}

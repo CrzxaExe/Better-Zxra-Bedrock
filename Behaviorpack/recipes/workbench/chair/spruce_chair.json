@@ -1,0 +1,28 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:spruce_chair"
+    },
+    "pattern": [
+      "IPI",
+      "PPP",
+      "I I"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:stick"
+      },
+      "P": {
+        "item": "minecraft:planks",
+        "data": 1
+      }
+    },
+    "result": {
+      "item": "cz:spruce_chair"
+    },
+    "tags": [
+      "workbench"
+    ]
+  }
+}

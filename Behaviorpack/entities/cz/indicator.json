@@ -1,0 +1,58 @@
+{
+  "format_version": "1.16.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:indicator",
+      "is_summonable": true,
+      "is_spawnable": true
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {}
+      }
+    },
+    "components": {
+      "minecraft:collision_box": {
+        "width": 0,
+        "height": 0
+      },
+      "minecraft:nameable": {
+        "always_show": true
+      },
+      "minecraft:timer": {
+        "looping": false,
+        "time_down_event": {
+          "event": "minecraft:despawn",
+          "target": "self"
+        },
+        "time": [
+          0.6,
+          0.8
+        ]
+      },
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": false
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      }
+    },
+    "events": {
+      "minecraft:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:mina_helmet_r"
+    },
+    "pattern": [
+      "III",
+      "IPI"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:mina_ingot"
+      },
+      "P": {
+        "item": "cz:netherite_plate"
+      }
+    },
+    "result": {
+      "item": "cz:mina_helmet"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

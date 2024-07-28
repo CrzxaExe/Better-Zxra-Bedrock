@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:ender_pearl"
+    },
+    "pattern": [
+      "III",
+      "IPI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:ender_shard"
+      },
+      "P": {
+        "item": "cz:diamond_ascend"
+      }
+    },
+    "result": {
+      "item": "minecraft:ender_pearl"
+    },
+    "tags": [
+      "crafting_table"
+    ]
+  }
+}

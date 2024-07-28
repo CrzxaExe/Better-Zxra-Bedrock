@@ -1,0 +1,33 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:bamboo_chair"
+    },
+    "pattern": [
+      "IPI",
+      "PPP",
+      "I I"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:stick"
+      },
+      "P": {
+        "item": "minecraft:bamboo_planks"
+      }
+    },
+    "result": {
+      "item": "cz:bamboo_chair"
+    },
+    "tags": [
+      "workbench"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:bamboo_planks"
+      }
+    ],
+    "group": "chairs"
+  }
+}

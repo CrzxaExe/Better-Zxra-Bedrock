@@ -1,0 +1,170 @@
+{
+  "format_version": "1.16.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:seat",
+      "is_summonable": true
+    },
+    "component_groups": {
+      "set_despawn": {
+        "minecraft:instant_despawn": {}
+      },
+      "has_ride": {
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "event": "cz:clear",
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "rider_count",
+                    "value": false,
+                    "subject": "self"
+                  },
+                  {
+                    "all_of": [
+                      {
+                        "test": "on_ground",
+                        "subject": "self",
+                        "value": false
+                      },
+                      {
+                        "test": "in_water",
+                        "subject": "self",
+                        "value": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "get_riders": {
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "event": "cz:get_riders",
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "rider_count",
+                    "operation": ">=",
+                    "value": 1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "time": 1,
+          "looping": false,
+          "time_down_event": {
+            "event": "cz:clear"
+          }
+        }
+      }
+    },
+    "components": {
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:input_ground_controlled": {},
+      "minecraft:rideable": {
+        "seat_count": 1,
+        "seats": {
+          "position": [
+            0,
+            -0.1,
+            0
+          ]
+        }
+      },
+      "minecraft:health": {
+        "max": 4,
+        "value": 4
+      },
+      "minecraft:collision_box": {
+        "width": 0.1,
+        "height": 0.1
+      },
+      "minecraft:movement": {
+        "value": 0
+      },
+      "minecraft:type_family": {
+        "family": [
+          "data"
+        ]
+      }
+    },
+    "events": {
+      "cz:clear": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "set_despawn"
+              ]
+            }
+          },
+          {
+            "run_command": {
+              "command": []
+            }
+          }
+        ]
+      },
+      "cz:get_riders": {
+        "sequence": [
+          {
+            "remove": {
+              "component_groups": [
+                "get_riders"
+              ]
+            }
+          },
+          {
+            "add": {
+              "component_groups": [
+                "has_ride"
+              ]
+            }
+          },
+          {
+            "run_command": {
+              "command": []
+            }
+          }
+        ]
+      },
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "get_riders"
+          ]
+        }
+      },
+      "cz:get_rider": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "has_riders"
+              ]
+            }
+          },
+          {
+            "remove": {
+              "component_groups": [
+                "get_riders"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

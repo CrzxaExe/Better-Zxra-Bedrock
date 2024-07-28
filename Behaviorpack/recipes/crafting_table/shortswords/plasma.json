@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:plasma_shortsword_r"
+    },
+    "pattern": [
+      " I",
+      "P"
+    ],
+    "key": {
+      "P": {
+        "item": "minecraft:stick"
+      },
+      "I": {
+        "item": "cz:plasma_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:plasma_shortsword"
+    },
+    "tags": [
+      "crafting_table",
+      "forger"
+    ]
+  }
+}

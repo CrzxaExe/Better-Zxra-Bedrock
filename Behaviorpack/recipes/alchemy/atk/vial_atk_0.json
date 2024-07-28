@@ -1,0 +1,41 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:vial_atk_0"
+    },
+    "pattern": [
+      "CG",
+      "SHC",
+      " I"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:vial_water"
+      },
+      "H": {
+        "item": "minecraft:red_flower"
+      },
+      "G": {
+        "item": "minecraft:golden_apple"
+      },
+      "S": {
+        "item": "minecraft:sugar"
+      },
+      "C": {
+        "item": "minecraft:apple"
+      },
+      "L": {
+        "item": "minecraft:nether_wart"
+      }
+    },
+    "tags": [
+      "alchemy"
+    ],
+    "result": [
+      {
+        "item": "cz:vial_atk_0"
+      }
+    ]
+  }
+}

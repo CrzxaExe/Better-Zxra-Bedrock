@@ -1,0 +1,137 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:kyle_drop",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "components": {
+      "minecraft:collision_box": {
+        "width": 0.3,
+        "height": 0.3
+      },
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": true
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:movement": {
+        "value": 0.18
+      },
+      "minecraft:flying_speed": {
+        "value": 0.22
+      },
+      "minecraft:behavior.float": {},
+      "minecraft:navigation.hover": {
+        "can_path_over_water": true,
+        "can_sink": false,
+        "can_pass_doors": false,
+        "can_path_from_air": true,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "avoid_sun": false
+      },
+      "minecraft:can_fly": {},
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:movement.hover": {},
+      "minecraft:persistent": {}
+    },
+    "events": {
+      "minecraft:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      },
+      "cz:has_owner": {
+        "add": {
+          "component_groups": [
+            "has_owner"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "no_owner"
+          ]
+        }
+      },
+      "cz:back_to_sword": {
+        "add": {
+          "component_groups": [
+            "to_sword"
+          ]
+        }
+      },
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "no_owner"
+          ]
+        }
+      }
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {}
+      },
+      "no_owner": {
+        "minecraft:tameable": {
+          "probability": 1,
+          "tame_items": "cz:kyles",
+          "tame_event": {
+            "event": "cz:has_owner"
+          }
+        }
+      },
+      "has_owner": {
+        "minecraft:is_tamed": {},
+        "minecraft:behavior.follow_owner": {
+          "priority": 2,
+          "speed_multiplier": 5,
+          "start_distance": 5,
+          "stop_distance": 2.5
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "on_damage": {
+                "filters": {
+                  "test": "is_owner",
+                  "subject": "other",
+                  "value": true
+                },
+                "event": "cz:back_to_sword"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "test": "is_owner",
+                  "subject": "other",
+                  "operation": "!=",
+                  "value": true
+                }
+              },
+              "deals_damage": false
+            }
+          ]
+        }
+      },
+      "to_sword": {
+        "minecraft:transformation": {
+          "into": "cz:kyle_sword<cz:has_sensor>"
+        }
+      }
+    }
+  }
+}

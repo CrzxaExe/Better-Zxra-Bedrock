@@ -1,0 +1,20 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "cz:dexterite_ingot_from_block"
+    },
+    "tags": [
+      "forger"
+    ],
+    "ingredients": [
+      {
+        "item": "cz:dexterite_block"
+      }
+    ],
+    "result": {
+      "item": "cz:dexterite_ingot",
+      "count": 9
+    }
+  }
+}

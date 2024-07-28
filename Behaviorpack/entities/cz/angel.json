@@ -1,0 +1,272 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "cz:angel",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "root"
+        ]
+      },
+      "animations": {
+        "root": "controller.animation.angel",
+        "attack_1": "animation.angel.attack.normal",
+        "attack_2": "animation.angel.attack.forward"
+      }
+    },
+    "components": {
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 5 + (query.equipment_count * Math.Random(1,3)) : 0"
+      },
+      "minecraft:nameable": {},
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0,
+        "breathes_water": true
+      },
+      "minecraft:health": {
+        "value": 190,
+        "max": 190
+      },
+      "minecraft:collision_box": {
+        "width": 0.72,
+        "height": 2.01
+      },
+      "minecraft:movement": {
+        "value": 0.17
+      },
+      "minecraft:navigation.walk": {
+        "is_amphibious": true,
+        "avoid_sun": false,
+        "avoid_water": true
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:jump.static": {},
+      "minecraft:can_climb": {},
+      "minecraft:fire_immune": true,
+      "minecraft:physics": {},
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 2,
+        "reselect_targets": true,
+        "entity_types": [
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "has_tag",
+                  "value": "liberator_target",
+                  "subject": "other"
+                }
+              ]
+            },
+            "max_dist": 50
+          }
+        ],
+        "must_see": false
+      },
+      "minecraft:behavior.melee_attack": {
+        "priority": 4,
+        "target_dist": 1.9,
+        "speed_multiplier": 1.9,
+        "track_target": true
+      },
+      "minecraft:equipment": {
+        "table": "loot_tables/angel.json"
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.86
+      },
+      "minecraft:type_family": {
+        "family": [
+          "angel"
+        ]
+      },
+      "minecraft:scale": {
+        "value": 1.16
+      },
+      "minecraft:conditional_bandwidth_optimization": {}
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "angel_attack_normal",
+                "spawn_emerge",
+                "summon_20"
+              ]
+            }
+          },
+          {
+            "run_command": {
+              "command": [
+                "playanimation @s animation.angel.spawn ii 1"
+              ]
+            }
+          }
+        ]
+      },
+      "cz:ops_attack": {
+        "sequence": [
+          {
+            "randomize": [
+              {
+                "weight": 75,
+                "add": {
+                  "component_groups": [
+                    "angel_attack_normal"
+                  ]
+                },
+                "remove": {
+                  "component_groups": [
+                    "angel_attack_forward"
+                  ]
+                }
+              },
+              {
+                "weight": 25,
+                "remove": {
+                  "component_groups": [
+                    "angel_attack_normal"
+                  ]
+                },
+                "add": {
+                  "component_groups": [
+                    "angel_attack_forward"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "cz:emerge_done": {
+        "remove": {
+          "component_groups": [
+            "spawn_emerge"
+          ]
+        }
+      },
+      "cz:liberator_upgrade": {
+        "add": {
+          "component_groups": [
+            "upgrade"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "summon_20"
+          ]
+        },
+        "run_command": {
+          "command": [
+            "effect @s instant_health 1 2 true"
+          ]
+        }
+      },
+      "minecraft:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      }
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {}
+      },
+      "angel_attack_normal": {
+        "minecraft:behavior.delayed_attack": {
+          "priority": 1,
+          "track_target": true,
+          "attack_once": false,
+          "require_complete_path": true,
+          "reach_multiplier": 2.3,
+          "speed_multiplier": 1.22,
+          "attack_duration": 1.5,
+          "hit_delay_pct": 0.5
+        },
+        "minecraft:variant": {
+          "value": 0
+        },
+        "minecraft:attack": {
+          "damage": [
+            65,
+            76
+          ]
+        }
+      },
+      "angel_attack_forward": {
+        "minecraft:behavior.delayed_attack": {
+          "priority": 1,
+          "track_target": true,
+          "attack_once": false,
+          "require_complete_path": true,
+          "reach_multiplier": 2.6,
+          "speed_multiplier": 1.2,
+          "attack_duration": 1.5,
+          "hit_delay_pct": 0.7
+        },
+        "minecraft:variant": {
+          "value": 1
+        },
+        "minecraft:attack": {
+          "damage": [
+            190,
+            206
+          ]
+        }
+      },
+      "spawn_emerge": {
+        "minecraft:behavior.emerge": {
+          "duration": 1.8,
+          "on_done": {
+            "event": "cz:emerge_done",
+            "target": "self"
+          }
+        }
+      },
+      "summon_20": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 20,
+          "time_down_event": {
+            "event": "minecraft:despawn"
+          }
+        }
+      },
+      "upgrade": {
+        "minecraft:movement": {
+          "value": 0.2
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": 20,
+          "time_down_event": {
+            "event": "minecraft:despawn"
+          }
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "cause": "all",
+              "damage_multiplier": 0.25
+            }
+          ]
+        },
+        "minecraft:scale": {
+          "value": 1.3
+        }
+      }
+    }
+  }
+}

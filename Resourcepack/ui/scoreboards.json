@@ -1,0 +1,15 @@
+{
+  "namespace": "scoreboard",
+  
+  "scoreboard_sidebar": {
+    "anchor_from": "bottom_right",
+    "anchor_to": "bottom_right",
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": []
+      }
+    ]
+  }
+}

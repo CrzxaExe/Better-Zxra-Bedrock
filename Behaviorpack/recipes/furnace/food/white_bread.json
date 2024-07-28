@@ -1,0 +1,14 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_furnace": {
+    "description": {
+      "identifier": "cz:furnace_white_bread"
+    },
+    "tags": [
+      "furnace",
+      "smoker"
+    ],
+    "input": "cz:dough",
+    "output": "cz:white_bread"
+  }
+}

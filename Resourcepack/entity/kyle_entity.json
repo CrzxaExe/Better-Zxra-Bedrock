@@ -1,0 +1,77 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "cz:kyle",
+      "materials": {
+        "default": "skeleton"
+      },
+      "textures": {
+        "default": "textures/entity/kyle_entity"
+      },
+      "geometry": {
+        "default": "geometry.kyle_entity"
+      },
+      "scripts": {
+        "pre_animation": [
+          "variable.tcos0 = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / variable.gliding_speed_value) * 57.3;",
+          "variable.run = q.is_sprinting;",
+          "variable.idle = !q.is_sprinting;",
+          "variable.sneak = q.is_sneaking;",
+          "variable.getKyle = q.get_equipped_item_name=='kyles';"
+        ],
+        "scale": "0.9375",
+        "animate": [
+          "root",
+          "idle",
+          {
+            "invis": "q.is_invisible"
+          },
+          {
+            "body_target": "q.is_delayed_attacking"
+          }
+        ]
+      },
+      "animations": {
+        "look": "animation.humanoid.look_at_target.default",
+        "move": "animation.crzx.move",
+        "body_target": "animation.crzx.body_to_target",
+        "riding.arms": "animation.humanoid.riding.arms",
+        "riding.legs": "animation.humanoid.riding.legs",
+        "holding": "animation.player.holding",
+        "bob": "animation.angel.holding",
+        "use_item_progress": "animation.humanoid.use_item_progress",
+        "idle": "animation.kyle.new.idle",
+        "prime": "animation.crzx.prime",
+        "emerge": "animation.crzx.emerge",
+        "invis": "animation.mob.invisible",
+        "root": "controller.animation.kyle_entity",
+        "running": "animation.kyle.new.run",
+        "skill_1": "animation.crzx.skill1",
+        "skill_2": "animation.crzx.skill2",
+        "skill_3": "animation.weapon.draw.kyle",
+        "skill_4": "animation.weapon.crushing.heavy",
+        "skill_5": "animation.crzx.skill5",
+        "skill_6": "animation.crzx.skill6",
+        "skill_7": "animation.crzx.skill7"
+      },
+      "render_controllers": [
+        "controller.render.kyle_entity"
+      ],
+      "enable_attachables": true,
+      "sound_effects": {
+        "swing": "sword.swing",
+        "sword_collide": "sword.collide",
+        "step": "armor.equip_chain",
+        "greek": "mob.wither.shoot",
+        "dash": "random.fuse",
+        "xp": "random.orb"
+      },
+      "particle_effects": {
+        "dash": "cz:impact_particle",
+        "stardust": "cz:red_orb",
+        "shine": "minecraft:totem_manual"
+      }
+    }
+  }
+}

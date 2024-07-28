@@ -1,0 +1,400 @@
+{
+  "num_mip_levels": 4,
+  "padding": 8,
+  "resource_pack_name": "vanilla",
+  "texture_data": {
+    "crate": {
+      "textures": [
+        {
+          "variations": [
+            {
+              "path": "textures/blocks/crate/0",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/crate/1",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/crate/2",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/crate/3",
+              "weight": 2
+            }
+          ]
+        }
+      ]
+    },
+    "iron_ore": {
+      "textures": [
+        {
+          "variations": [
+            {
+              "path": "textures/blocks/iron_ore/0",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/iron_ore/1",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/iron_ore/2",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/iron_ore/3",
+              "weight": 2
+            }
+          ]
+        }
+      ]
+    },
+    "deepslate_iron_ore": {
+      "textures": [
+        {
+          "variations": [
+            {
+              "path": "textures/blocks/deepslate/deepslate_iron_ore/0",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/deepslate/deepslate_iron_ore/1",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/deepslate/deepslate_iron_ore/2",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/deepslate/deepslate_iron_ore/3",
+              "weight": 2
+            }
+          ]
+        }
+      ]
+    },
+    "ender_ore": {
+      "textures": [
+        "textures/blocks/ender_ore"
+      ]
+    },
+    "dexterite_ore": {
+      "textures": [
+        "textures/blocks/dexterite_ore"
+      ]
+    },
+    "chlorophyte_ore": {
+      "textures": [
+        "textures/blocks/chlorophyte_ore"
+      ]
+    },
+    "dexterite_block": {
+      "textures": [
+        "textures/blocks/dexterite_block"
+      ]
+    },
+    "mina_block": {
+      "textures": [
+        "textures/blocks/mina_block"
+      ]
+    },
+    "minarite_block": {
+      "textures": [
+        "textures/blocks/minarite_block"
+      ]
+    },
+    "forge": {
+      "textures": [
+        "textures/blocks/forge"
+      ]
+    },
+    "plate": {
+      "textures": [
+        "textures/blocks/plate"
+      ]
+    },
+    "plasma_core": {
+      "textures": [
+        "textures/blocks/plasma_core"
+      ]
+    },
+    "bookshelf": {
+      "textures": [
+        {
+          "variations": [
+            {
+              "path": "textures/blocks/bookshelf/0",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/bookshelf/1",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/bookshelf/2",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/bookshelf/3",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/bookshelf/4",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/bookshelf/5",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/bookshelf/6",
+              "weight": 2
+            }
+          ]
+        }
+      ]
+    },
+    "coal_ore": {
+      "textures": [
+        {
+          "variations": [
+            {
+              "path": "textures/blocks/coal/0",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/coal/1",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/coal/2",
+              "weight": 2
+            },
+            {
+              "path": "textures/blocks/coal/3",
+              "weight": 2
+            }
+          ]
+        }
+      ]
+    },
+    "stonebrick": {
+      "textures": {
+        "variations": [
+          {
+            "path": "textures/blocks/stonebrick/0",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/stonebrick/1",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/stonebrick/2",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/stonebrick/3",
+            "weight": 2
+          }
+        ]
+      }
+    },
+    "end_stone": {
+      "textures": {
+        "variations": [
+          {
+            "path": "textures/blocks/end_stone/0",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/end_stone/1",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/end_stone/2",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/end_stone/3",
+            "weight": 2
+          }
+        ]
+      }
+    },
+    "end_bricks": {
+      "textures": {
+        "variations": [
+          {
+            "path": "textures/blocks/end_bricks/0",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/end_bricks/1",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/end_bricks/2",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/end_bricks/3",
+            "weight": 2
+          }
+        ]
+      }
+    },
+    "cobblestone": {
+      "textures": {
+        "variations": [
+          {
+            "path": "textures/blocks/cobblestone/0",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/cobblestone/1",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/cobblestone/2",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/cobblestone/3",
+            "weight": 2
+          }
+        ]
+      }
+    },
+    "brick": {
+      "textures": {
+        "variations": [
+          {
+            "path": "textures/blocks/brick/0",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/brick/1",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/brick/2",
+            "weight": 2
+          },
+          {
+            "path": "textures/blocks/brick/3",
+            "weight": 2
+          }
+        ]
+      }
+    },
+    "glass_line_base": {
+      "textures": [
+        "textures/blocks/outline_window/line_window/line_base"
+      ]
+    },
+    "glass_line_down": {
+      "textures": [
+        "textures/blocks/outline_window/line_window/line_down"
+      ]
+    },
+    "glass_line_up": {
+      "textures": [
+        "textures/blocks/outline_window/line_window/line_up"
+      ]
+    },
+    "glass_line_center_ver": {
+      "textures": [
+        "textures/blocks/outline_window/line_window/line_center_ver"
+      ]
+    },
+    "empty_glass": {
+      "textures": [
+        "textures/blocks/outline_window/empty"
+      ]
+    },
+    "concrete_brick_black": {
+      "textures": [
+        "textures/blocks/concrete/brick/black"
+      ]
+    },
+    "concrete_brick_blue": {
+      "textures": [
+        "textures/blocks/concrete/brick/blue"
+      ]
+    },
+    "concrete_brick_brown": {
+      "textures": [
+        "textures/blocks/concrete/brick/brown"
+      ]
+    },
+    "concrete_brick_cyan": {
+      "textures": [
+        "textures/blocks/concrete/brick/cyan"
+      ]
+    },
+    "concrete_brick_gray": {
+      "textures": [
+        "textures/blocks/concrete/brick/gray"
+      ]
+    },
+    "concrete_brick_green": {
+      "textures": [
+        "textures/blocks/concrete/brick/green"
+      ]
+    },
+    "concrete_brick_light_blue": {
+      "textures": [
+        "textures/blocks/concrete/brick/light_blue"
+      ]
+    },
+    "concrete_brick_lime": {
+      "textures": [
+        "textures/blocks/concrete/brick/lime"
+      ]
+    },
+    "concrete_brick_magenta": {
+      "textures": [
+        "textures/blocks/concrete/brick/magenta"
+      ]
+    },
+    "concrete_brick_orange": {
+      "textures": [
+        "textures/blocks/concrete/brick/orange"
+      ]
+    },
+    "concrete_brick_pink": {
+      "textures": [
+        "textures/blocks/concrete/brick/pink"
+      ]
+    },
+    "concrete_brick_purple": {
+      "textures": [
+        "textures/blocks/concrete/brick/purple"
+      ]
+    },
+    "concrete_brick_red": {
+      "textures": [
+        "textures/blocks/concrete/brick/red"
+      ]
+    },
+    "concrete_brick_silver": {
+      "textures": [
+        "textures/blocks/concrete/brick/silver"
+      ]
+    },
+    "concrete_brick_white": {
+      "textures": [
+        "textures/blocks/concrete/brick/white"
+      ]
+    },
+    "concrete_brick_yellow": {
+      "textures": [
+        "textures/blocks/concrete/brick/yellow"
+      ]
+    }
+  },
+  "texture_name": "atlas.terrain"
+}

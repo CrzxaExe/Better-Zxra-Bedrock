@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:mina_ingot_plasma"
+    },
+    "pattern": [
+      "III",
+      "IPI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:plasma_powder"
+      },
+      "P": {
+        "item": "cz:plasma_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:mina_ingot"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

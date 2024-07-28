@@ -1,0 +1,33 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:mina_powder_r"
+    },
+    "pattern": [
+      "DIC",
+      "IPI",
+      "CID"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:mina_ingot"
+      },
+      "P": {
+        "item": "cz:plasma_powder"
+      },
+      "D": {
+        "item": "cz:dexterite_powder"
+      },
+      "C": {
+        "item": "cz:chlorophyte_powder"
+      }
+    },
+    "result": {
+      "item": "cz:mina_powder"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:dexterite_shovel_r"
+    },
+    "pattern": [
+      "IP",
+      "H",
+      "H"
+    ],
+    "key": {
+      "P": {
+        "item": "cz:netherite_plate"
+      },
+      "H": {
+        "item": "cz:handle"
+      },
+      "I": {
+        "item": "cz:dexterite_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:dexterite_shovel"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

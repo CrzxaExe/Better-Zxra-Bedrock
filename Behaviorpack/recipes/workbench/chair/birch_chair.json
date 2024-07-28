@@ -1,0 +1,28 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:birch_chair"
+    },
+    "pattern": [
+      "IPI",
+      "PPP",
+      "I I"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:stick"
+      },
+      "P": {
+        "item": "minecraft:planks",
+        "data": 2
+      }
+    },
+    "result": {
+      "item": "cz:birch_chair"
+    },
+    "tags": [
+      "workbench"
+    ]
+  }
+}

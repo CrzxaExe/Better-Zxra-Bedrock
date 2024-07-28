@@ -1,0 +1,30 @@
+{
+  "namespace": "play",
+  
+  "worlds_stack_panel": {
+    "modifications": [
+      {
+        "array_name": "size",
+        "operation": "replace",
+        "where": "100%",
+        "value": [ "96%" ]
+      }
+    ]
+  },
+  
+   "play_screen_panel": {
+     "size": [ "72%", "92%" ]
+   },
+   
+   "play_screen": {
+    "$screen_bg_content": "cz_start.background",
+    "$screen_content": "cz_world.cz_play_screen",
+    "$screen_conten": "play.play_screen_content",
+	"$screen_animations": [
+	  "@common.screen_exit_animation_push_fade",
+      "@common.screen_exit_animation_pop_fade",
+      "@common.screen_entrance_animation_push_fade",
+      "@common.screen_entrance_animation_pop_fade"
+    ]
+  }
+}

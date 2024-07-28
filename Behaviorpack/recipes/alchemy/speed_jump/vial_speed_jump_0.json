@@ -1,0 +1,38 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:vial_speed_jump_0"
+    },
+    "pattern": [
+      " S",
+      "LDE",
+      " I"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:vial_water"
+      },
+      "S": {
+        "item": "minecraft:sugar"
+      },
+      "E": {
+        "item": "minecraft:nether_wart"
+      },
+      "L": {
+        "item": "minecraft:rabbit_foot"
+      },
+      "D": {
+        "item": "minecraft:red_flower"
+      }
+    },
+    "tags": [
+      "alchemy"
+    ],
+    "result": [
+      {
+        "item": "cz:vial_speed_jump_0"
+      }
+    ]
+  }
+}

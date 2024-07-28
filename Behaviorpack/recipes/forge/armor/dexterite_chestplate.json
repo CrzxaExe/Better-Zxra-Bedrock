@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:dexterite_chestplate_r"
+    },
+    "pattern": [
+      "IPI",
+      "III",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:dexterite_ingot"
+      },
+      "P": {
+        "item": "cz:netherite_plate"
+      }
+    },
+    "result": {
+      "item": "cz:dexterite_chestplate"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

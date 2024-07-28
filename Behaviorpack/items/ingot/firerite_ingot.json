@@ -1,0 +1,23 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:firerite_ingot",
+      "menu_category": {
+        "category": "items",
+        "group": "none",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:max_stack_size": 64,
+      "minecraft:hand_equipped": false,
+      "minecraft:icon": {
+        "texture": "firerite_ingot"
+      },
+      "minecraft:display_name": {
+        "value": "item.firerite_ingot.name"
+      }
+    }
+  }
+}

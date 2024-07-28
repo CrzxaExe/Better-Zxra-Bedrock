@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:plate"
+    },
+    "pattern": [
+      "PPP"
+    ],
+    "key": {
+      "P": {
+        "item": "minecraft:planks",
+        "data": 0
+      }
+    },
+    "result": {
+      "item": "cz:plate"
+    },
+    "tags": [
+      "workbench"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:oak_planks"
+      }
+    ]
+  }
+}

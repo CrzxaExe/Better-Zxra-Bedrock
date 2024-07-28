@@ -1,0 +1,143 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:block": {
+    "description": {
+      "identifier": "cz:workbench",
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ],
+          "y_rotation": 180
+        }
+      },
+      "menu_category": {
+        "category": "Items",
+        "group": "none"
+      }
+    },
+    "components": {
+      "minecraft:friction": 0.4,
+      "minecraft:map_color": "#cc9f58",
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:on_player_destroyed": {
+        "event": "drop",
+        "target": "self"
+      },
+      "minecraft:geometry": "geometry.workbench",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "wood_oak",
+          "render_method": "opaque"
+        },
+        "wood": {
+          "texture": "wood_oak",
+          "render_method": "opaque"
+        },
+        "loom": {
+          "texture": "loom_side",
+          "render_method": "opaque"
+        },
+        "stick": {
+          "texture": "log_side",
+          "render_method": "opaque"
+        },
+        "iron": {
+          "texture": "iron_block",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:crafting_table": {
+        "crafting_tags": [
+          "workbench"
+        ]
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -8.0,
+          0.0,
+          -8.0
+        ],
+        "size": [
+          16.0,
+          15.0,
+          16.0
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -8.0,
+          0.0,
+          -8.0
+        ],
+        "size": [
+          16.0,
+          15.0,
+          16.0
+        ]
+      },
+      "minecraft:flammable": true,
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 9.0
+      },
+      "tag:wood": {}
+    },
+    "events": {
+      "drop": {
+        "spawn_loot": {
+          "table": "loot_tables/block/workbench"
+        }
+      }
+    },
+    "permutations": [
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'south'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'east'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              90,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'north'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              180,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_property('minecraft:cardinal_direction') == 'west'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -90,
+              0
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

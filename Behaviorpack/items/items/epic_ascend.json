@@ -1,0 +1,23 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:epic_ascend",
+      "menu_category": {
+        "category": "items",
+        "group": "none",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:max_stack_size": 64,
+      "minecraft:icon": {
+        "texture": "epic_ascend"
+      },
+      "minecraft:display_name": {
+        "value": "item.epic_ascend.name"
+      }
+    },
+    "events": {}
+  }
+}

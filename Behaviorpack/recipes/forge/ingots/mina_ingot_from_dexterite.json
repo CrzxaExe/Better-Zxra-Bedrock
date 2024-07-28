@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:mina_ingot_dexterite"
+    },
+    "pattern": [
+      "III",
+      "IPI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:dexterite_powder"
+      },
+      "P": {
+        "item": "cz:dexterite_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:mina_ingot"
+    },
+    "tags": [
+      "forger"
+    ]
+  }
+}

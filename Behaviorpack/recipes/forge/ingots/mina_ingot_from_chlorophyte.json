@@ -1,0 +1,32 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:mina_ingot_chlorophyte"
+    },
+    "pattern": [
+      "III",
+      "IPI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:chlorophyte_powder"
+      },
+      "P": {
+        "item": "cz:chlorophyte_ingot"
+      }
+    },
+    "result": {
+      "item": "cz:mina_ingot"
+    },
+    "tags": [
+      "forger"
+    ],
+    "unlock": [
+      {
+        "item": "cz:mina_ingot"
+      }
+    ]
+  }
+}

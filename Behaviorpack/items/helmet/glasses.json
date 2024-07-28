@@ -1,0 +1,30 @@
+{
+  "format_version": "1.20.20",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:glasses",
+      "menu_category": {
+        "category": "equipment",
+        "group": "none",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:icon": {
+        "texture": "glasses"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:wearable": {
+        "slot": "slot.armor.head",
+        "protection": 1,
+        "dispensable": true
+      },
+      "minecraft:display_name": {
+        "value": "item.glasses.name"
+      },
+      "minecraft:knockback_resistance": {
+        "protection": 0.03
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:vial_fireres_def_1"
+    },
+    "pattern": [
+      "HEL",
+      "SDG",
+      " I"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:vial_water"
+      },
+      "G": {
+        "item": "minecraft:blaze_powder"
+      },
+      "S": {
+        "item": "minecraft:sugar"
+      },
+      "H": {
+        "item": "minecraft:magma_cream"
+      },
+      "E": {
+        "item": "minecraft:nether_wart"
+      },
+      "L": {
+        "item": "minecraft:apple"
+      },
+      "D": {
+        "item": "minecraft:golden_carrot"
+      }
+    },
+    "tags": [
+      "alchemy"
+    ],
+    "result": [
+      {
+        "item": "cz:vial_fireres_def_1"
+      }
+    ]
+  }
+}
