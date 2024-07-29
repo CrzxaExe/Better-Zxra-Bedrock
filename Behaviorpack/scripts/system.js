@@ -690,8 +690,7 @@ export class Specialist extends Entity {
 		})
 		
         let disText = `${dis[3]}${dis[2]}:${mm[1]}${mm[0]}`
-		this.player.onScreenDisplay.setTitle(`cz:ui 
-          ${this.player.name}
+		this.player.onScreenDisplay.setTitle(`cz:ui ${this.player.name}
           (${perXp}%) ${data.specialist.xp.toFixed(1)} XP | Lvl ${data.specialist.lvl} <SP
           $${data.money.toFixed(1)}
           §b§l${data.voxn} Voxn§r

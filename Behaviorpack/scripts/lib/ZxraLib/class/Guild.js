@@ -1,4 +1,4 @@
-import { uniqueId, mergeObject } from "../module.js";
+import { uniqueId, mergeObject, leveling } from "../module.js";
 import { Specialist } from "../../../system.js";
 import * as jsonData from "../../data.js";
 
@@ -164,6 +164,48 @@ class Guild {
   };
   resetToken(id) {
     this.setToken(id, 0)
+  };
+
+  // Xp Method
+  addXp(id, amount) {
+    let data = this.gd(), find = data.findIndex(e => e.id === id);
+
+    if(find === -1) return;
+    if(data[find].act.xp + Number(amount) > (50 * data[find].act.lvl) + 50) {
+      let counter = leveling(data[find].act.xp, data[find].act.lvl, level => (50 * level) + 50);
+
+      data[find].act = { xp: counter.xp, lvl: counter.lvl }
+    } else
+      data[find].act.xp += Number(amount);
+
+    this.setGd(data)
+  };
+  minXp(id, amount) {
+    this.addXp(id, -Number(amount))
+  };
+  setXp(id, value) {
+    let data = this.gd(), find = data.findIndex(e => e.id === id);
+
+    if(find === -1) return;
+    data[find].act.xp = value;
+    this.setGd(data)
+  };
+
+  // Level Method
+  addLvl(id, amount) {
+    let data = this.gd(), find = data.findIndex(e => e.id === id);
+
+    if(find === -1) return;
+    data[find].act.lvl += amount;
+    
+    this.setGd(data)
+  };
+  setLvl(id, value) {
+    let data = this.gd(), find = data.findIndex(e => e.id === id);
+
+    if(find === -1) return;
+    data[find].act.lvl = value;
+    this.setGd(data)
   };
 };
 

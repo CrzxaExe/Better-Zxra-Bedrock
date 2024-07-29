@@ -22,6 +22,7 @@ Function Section -------------------------------------------------------------
 export { adminPanel, settingPanel } from "./function/adminPanel.js";
 export { enParticle } from "./function/enParticle.js";
 export { guildUi, guildList } from "./function/guildUi.js";
+export { leveling } from "./function/leveling.js";
 export { mergeObject } from "./function/mergeObject.js";
 export { questPanel } from "./function/questPanel.js";
 export { shuffleObjects } from "./function/shuffleObjects.js";

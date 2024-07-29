@@ -122,9 +122,10 @@ export class Quest {
 			let ins = i.type.split("/")
 			switch(ins[0]) {
 				case "cash":
-				  let bonus = 0;
-				  if(new Game().guild().gd().find(e => e.member.some(r => r.id === this.player.id))) bonus += Number(i.amount/5).toFixed(1);
-                  this.data.addMoney(i.amount);
+				  let gets = i.amount;
+				  if(new Game().guild().gd().find(e => e.member.some(r => r.id === this.player.id))) gets += i.amount/5;
+				  // console.warn(gets)
+                  this.data.addMoney(gets);
                   break;
 				case "item":
 				  let newItem = new ItemStack(ins[1])

@@ -550,9 +550,9 @@ export let questIndex = [
 	des: "quest.no17.des",
 	rep: 100,
 	task: [
-	  { act: "destroy", target: "gold_ore", amount: 100 },
-	  { act: "destroy", target: "iron_ore", amount: 100 },
-  	{ act: "destroy", target: "diamond_ore", amount: 100 }
+	  { act: "destroy", target: "gold_ore", amount: 140 },
+	  { act: "destroy", target: "iron_ore", amount: 140 },
+  	{ act: "destroy", target: "diamond_ore", amount: 140 }
 	],
 	reward: [
 	  { type: "cash", amount: 242.8 },
