@@ -70,9 +70,13 @@ system.runInterval(async () => {
         ...inGame
       });
       sp.controllerCooldown();
-      sp.controllerStamina();
+      sp.controllerStamina({
+        options
+      });
       sp.controllerThirst();
-      sp.controllerUi();
+      sp.controllerUi({
+        options
+      });
     }
     dimension.forEach(e => {
       world
@@ -106,6 +110,14 @@ world.beforeEvents.chatSend.subscribe(async e => {
           .replace(/%splvl/gi, data.specialist.lvl)
           .replace(/%rep/gi, data.reputation)
           .replace(/%guild/gi, guild?.name ? "["+guild.name+"§r] " : "")
+          /*
+          *. %name   = Player Name
+          *. %msg    = Message from player
+          *. %lvl    = Player Level
+          *. %splvl  = Specialist Level
+          *. %rep    = Player Reputation
+          *. %guild  = Player Guild - Visible when player has/join guild
+          */
       );
       new Game().leaderboard().addLb(e.sender, { amount: 1, type: "chatting" })
     }
@@ -203,7 +215,6 @@ world.afterEvents.entityDie.subscribe(async e => {
   // Initializing Kill Pasif
   if (murder instanceof Player) {
     let murderData = new Specialist(murder),
-      quest = new Quest(murder),
       tarHp = corp.getComponent("health");
     murderData.addSpecialist(
       "xp",
@@ -211,7 +222,7 @@ world.afterEvents.entityDie.subscribe(async e => {
         tarHp.defaultValue / 22 + (Math.random() * tarHp.defaultValue) / 6
       ) * options.xpMultiplier
     );
-    quest.controller({ act: "kill", target: corp });
+    new Quest(murder).controller({ act: "kill", target: corp });
     new Game().leaderboard().addLb(murder, { amount: 1, type: "kills" })
 
     const item = murder
@@ -230,8 +241,7 @@ world.afterEvents.entityDie.subscribe(async e => {
 // Break Block Event
 world.afterEvents.playerBreakBlock.subscribe(
   ({ brokenBlockPermutation, player }) => {
-    let quest = new Quest(player);
-    quest.controller({ act: "destroy", target: brokenBlockPermutation }); // Quest Controller - Destroy
+    new Quest(player).controller({ act: "destroy", target: brokenBlockPermutation }); // Quest Controller - Destroy
   }
 );
 

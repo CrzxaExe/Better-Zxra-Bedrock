@@ -31,13 +31,14 @@ const settingPanel = (player, lib) => {
   let {
     useBzbRules,
     debug,
-    staminaCooldown, staminaExhaust,
+    staminaCooldown, staminaExhaust, staminaRun, staminaRecovery,
     customChat, customChatPrefix,
     shopMultiplier,
     xpMultiplier,
     deathLocation,
     damageIndicator,
-    starterItem, starterItems
+    starterItem, starterItems,
+    uiLevelRequirement
   } = lib.options,
   ui = new ModalFormData()
     .title({ translate: "system.settings" })
@@ -46,6 +47,8 @@ const settingPanel = (player, lib) => {
     .toggle({ translate: "option.debug" }, debug)
     .toggle({ translate: "option.staminaCooldown" }, staminaCooldown)
     .textField({ translate: "option.staminaExhaust" }, { translate: "type.float" }, `${staminaExhaust}`)
+    .textField({ translate: "option.staminaRecovery" }, { translate: "type.float" }, `${staminaRecovery}`)
+    .textField({ translate: "option.staminaRun" }, { translate: "type.float" }, `${staminaRun}`)
     .toggle({ translate: "option.customChat" }, customChat)
     .textField({ translate: "option.customChatPrefix" }, { translate: "type.string" }, `${customChatPrefix}`)
     .textField({ translate: "option.shopMultiplier" }, { translate: "type.float" }, `${shopMultiplier}`)
@@ -54,26 +57,30 @@ const settingPanel = (player, lib) => {
     .toggle({ translate: "option.damageIndicator" }, damageIndicator)
     .toggle({ translate: "option.starterItem" }, starterItem)
     .textField({ translate: "option.starterItems" }, { translate: "type.string" }, `${starterItems}`)
+    .toggle({ translate: "option.uiLevelRequirement" }, uiLevelRequirement)
 
     .submitButton({ translate: "option.submit" })
     .show(player)
     .then(e => {
       if(e.canceled) return;
 
-      let [uBR,dbg,sC,sE,cC,cCP,sM,xM,dL,dI,sI,sIs] = e.formValues;
+      let [uBR,dbg,sC,sE,sRv,sR,cC,cCP,sM,xM,dL,dI,sI,sIs,uLR] = e.formValues;
       const newOptions = {
         useBzbRules: uBR,
         debug: dbg,
         staminaCooldown: sC,
-        staminaExhaust: sE,
+        staminaExhaust: Number(sE),
+        staminaRecovery: Number(sRv),
+        staminaRun: Number(sR),
         customChat: cC,
         customChatPrefix: cCP,
-        shopMultiplier: sM,
-        xpMultiplier: xM,
+        shopMultiplier: Number(sM),
+        xpMultiplier: Number(xM),
         deathLocation: dL,
         damageIndicator: dI,
         starterItem: sI,
-        starterItems:sIs
+        starterItems:sIs,
+        uiLevelRequirement: uLR
       };
 
       setOptions(mergeObject(lib.options, newOptions))

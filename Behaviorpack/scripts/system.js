@@ -1,6 +1,6 @@
 import { EffectTypes, ItemStack, system, world, Player } from "@minecraft/server";
 import { Ultimate, Cooldown, status, Temp } from "./lib/classes.js";
-import { Dirty, Ench, Game } from "./lib/ZxraLib/module.js";
+import { Dirty, Ench, Game, leveling } from "./lib/ZxraLib/module.js";
 import { Npc } from "./lib/npc-class.js";
 import * as data from "./lib/data.js";
 
@@ -238,13 +238,14 @@ export class Entity {
         })
 	}
     hasEffect(array) {
-    	return array.map(e => this.getEffect(e)).filter(r => r !== undefined)
+        return array.reduce((all, cur) => this.player.hasEffect(cur) ? all.push(cur) : 0, []) || []
     }
     removeEffect(array) {
 		array.forEach(i => this.entity.removeEffect(i))
 	}
 	hasDebuffEffect() {
-		return this.hasEffect(["weakness","blindness","slowness","mining_fatigue","darkness","poison","wither","instant_damage"])
+	    // this.player.getEffects().forEach(f => console.warn(JSON.stringify(f.typeId)))
+		return this.player.getEffects().some(e => ["weakness","blindness","slowness","mining_fatigue","darkness","poison","wither","instant_damage"].includes(e.typeId))
 	}
     // Essentials Method
 	runCommand(cmdArray) {
@@ -385,14 +386,15 @@ export class Specialist extends Entity {
 
 	// Specialist Method
 	addSpecialist(key, amount) {
-		let data = this.getData(), lvlUp = Math.floor((data.specialist.lvl * 12) + 34 + (data.specialist.lvl * 5))
+		let data = this.getData(), lvlUp = Math.floor((data.specialist.lvl * 14) + 40 + (data.specialist.lvl * 8))
 		data.specialist[key] = data.specialist[key] + Number(amount)
 
 		if(key == "xp" && data.specialist[key] > lvlUp) {
-			data.specialist.lvl++
-			data.stamina.add = 2 * data.specialist.lvl
-			this.player.sendMessage(`Your Specialist Level Up to ${data.specialist.lvl}`)
-			data.specialist[key] -= lvlUp
+			let vv = leveling(data.specialist.xp, data.specialist.lvl, (level) => Math.floor((level * 14) + 40 + (level * 8)));
+			data.specialist.lvl = vv.lvl
+			data.stamina.add = 2 * vv.lvl
+			this.player.sendMessage(`Your Specialist Level Up to ${vv.lvl}`)
+			data.specialist[key] = vv.xp
 	    }
 		this.setData(data)
 	}
@@ -479,6 +481,9 @@ export class Specialist extends Entity {
 		return this.getData().stamina;
 	};
 	addStamina(key, amount) {
+		if(["creative","spectator"].includes(this.player.getGameMode()))
+		  return;
+
 		let data = this.getData(), total = data.stamina[key] + Number(amount);
 		if(key == "value" && total <= 0) total = 0;
 
@@ -497,16 +502,16 @@ export class Specialist extends Entity {
 	setValueDefaultStamina() {
 		this.setStamina("value", this.getStamina().max + this.getStamina().add);
 	};
-	controllerStamina() {
+	controllerStamina({ options }) {
 		if(["creative","spectator"].includes(this.player.getGameMode()))
 		  return;
 
-		let data = this.getStamina(), stm = 1.5, cd = this.cooldown(), sts = this.status();
+		let data = this.getStamina(), stm = options.staminaRecovery || 1.5, runOut = options.staminaRun || 1, cd = this.cooldown(), sts = this.status();
 		let down = sts.getStatusBy({ type: "stamina_down" }), exhaust = sts.getStatusBy({ type: "stamina_exhaust" }), up = sts.getStatusBy({ type: "stamina_up" }), additional = data.add || 0;
 
 		if(this.player.isSprinting == true || this.player.isSwimming == true) {
-			data.value - 4 <= 0 ? this.setStamina("value", 0) : stm = -1;
-			cd.setCd("stamina_regen", 3);
+			data.value - runOut <= 0 ? this.setStamina("value", 0) : stm = -runOut;
+			if(options.staminaCooldown) cd.setCd("stamina_regen", options.staminaExhaust || 3);
 		} else {
             if(data.value + stm > data.max + additional) {
               this.setStamina("value", data.max + additional);
@@ -663,7 +668,7 @@ export class Specialist extends Entity {
         if(er <= 0) return
         this.setData(data)
 	}
-	controllerUi() {
+	controllerUi({ options }) {
 		let data = this.getData(), maps = new Game(world), stamina = this.getStamina(), thirst = this.getThirst(), day = world.getDay(), time = Math.floor(Number((world.getTimeOfDay()/10).toFixed(0)) + 600), status = this.status().getAll(), sts = "", spMax = Math.floor((data.specialist.lvl * 5) + 34 + (data.specialist.lvl *12)), perXp = Number(data.specialist.xp / spMax * 100).toFixed(2);
 		time >= 2400 ? time = Math.floor(time - 2400) : 0
 		let dis = String(time).split("").reverse();
@@ -696,7 +701,7 @@ export class Specialist extends Entity {
           §b§l${data.voxn} Voxn§r
           §eS ${Math.round(stamina.value/(stamina.max + stamina.add) * 100)}% §b T ${Math.round(thirst.value/thirst.max * 100)}%§r
           §f${this.temp().getTemp()}° D ${this.dirtyness().getVal()}% Rep ${this.getRep()} AP ${maps.getOnlineCount()}
-          ${data.specialist.lvl >= 8 ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id : "minecraft:air" : ""}${data.specialist.lvl >= 10 ? "\nDay "+day+" | "+disText : ""}
+          ${data.specialist.lvl >= 8 || !options.uiLevelRequirement ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id : "minecraft:air" : ""}${data.specialist.lvl >= 10 || !options.uiLevelRequirement ? "\nDay "+day+" | "+disText : ""}
           ${sts}
         `, 
          {fadeInDuration: 0, fadeOutDuration: 0, stayDuration: 0}

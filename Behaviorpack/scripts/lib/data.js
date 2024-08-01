@@ -6,7 +6,9 @@ export let setting = {
     spawnradius: 1
   },
   staminaCooldown: true,
-  staminaExhaust: 1.5,
+  staminaExhaust: 3,
+  staminaRecovery: 1.5,
+  staminaRun: 1.0,
   customChat: true,
   customChatPrefix: "%guild%name > %msg",
   shopMultiplier: 1.0,
@@ -17,6 +19,7 @@ export let setting = {
   damageIndicator: true,
   starterItem: true,
   starterItems: "cz:stats*1",
+  uiLevelRequirement: true
 }
 
 export const weaponType = [

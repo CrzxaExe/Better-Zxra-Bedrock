@@ -516,8 +516,8 @@
           "$button_text_binding_type": "collection",
           "$button_text_grid_collection_name": "form_buttons",
           "$button_text_max_size": [ "110%", 45 ],
-          "$default_text_color": [0.25,0.55,0.18],
-          "$button_font_scale_factor": 0.79,
+          "$default_text_color": [0.45,0.45,0.18],
+          "$button_font_scale_factor": 1,
           "$text_layer": 6,
           "bindings": [
             {

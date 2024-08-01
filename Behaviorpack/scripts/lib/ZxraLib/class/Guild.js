@@ -145,6 +145,7 @@ class Guild {
   getToken(id) {
     return this.getGuildById(id)?.token;
   };
+
   addToken(id, amount) {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
@@ -152,9 +153,11 @@ class Guild {
     data[find].token += Number(amount);
     this.setGd(data)
   };
+
   minToken(id, amount) {
     this.addToken(id, -Number(amount))
   };
+
   setToken(id, value) {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
@@ -162,11 +165,16 @@ class Guild {
     data[find].token = Number(value);
     this.setGd(data)
   };
+
   resetToken(id) {
     this.setToken(id, 0)
   };
 
   // Xp Method
+  getXp(id) {
+    return this.gd().find(e => e.id === id)?.act?.xp;
+  };
+
   addXp(id, amount) {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
@@ -180,9 +188,11 @@ class Guild {
 
     this.setGd(data)
   };
+
   minXp(id, amount) {
     this.addXp(id, -Number(amount))
   };
+
   setXp(id, value) {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
@@ -191,7 +201,14 @@ class Guild {
     this.setGd(data)
   };
 
+  resetXp(id) {
+    this.setXp(id, 0)
+  };
+
   // Level Method
+  getLvl(id) {
+    return this.gd().find(e => e.id === id);
+  };
   addLvl(id, amount) {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
@@ -200,12 +217,18 @@ class Guild {
     
     this.setGd(data)
   };
+  minLvl(id, amount) {
+    this.addLvl(id, -Number(amount));
+  };
   setLvl(id, value) {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
     if(find === -1) return;
     data[find].act.lvl = value;
     this.setGd(data)
+  };
+  resetLvl(id) {
+    this.setLvl(id, 0);
   };
 };
 

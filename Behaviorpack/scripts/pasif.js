@@ -5,8 +5,8 @@ import { Modifier } from "./lib/ZxraLib/module.js";
 // Pasif Slayer
 pasif.addHitPasif("slayer", (user, target, lib) => {
 	if(!user || !target) return
-    lib.ent.addEffect([{ name: "wither", duration: 60, lvl: 2 }])
-	let userHealth = user.getComponent("health"), percenDamage = Math.round(userHealth.currentValue) / userHealth.defaultValue, damage = Math.floor((2 + Math.round(10 * percenDamage) + (target.getComponent("health").defaultValue / 5)));
+    lib.ent.addEffect([{ name: "wither", duration: 60, lvl: 5 }])
+	let userHealth = user.getComponent("health"), percenDamage = Math.round(userHealth.currentValue) / userHealth.defaultValue, damage = Math.floor(Math.round(10 * percenDamage) + (target.getComponent("health").defaultValue / 4));
 
 	if(damage > 250) damage = 250
 	lib.ent.addDamage(damage * lib.multiplier, { cause: "entityAttack", damagingEntity: user }, { vel: lib.velocity, hor: percenDamage*2 , ver: 0 })
@@ -25,7 +25,7 @@ pasif.addKillPasif("slayer", (user, target, lib) => {
 	if(!item || item.typeId !== "cz:kyles") return
 
 	lib.sp.addEffect([{ name: "resistance", duration: 40, lvl: 1 },{ name: "speed", duration: 40, lvl: 0 }])
-	lib.sp.heal(Math.floor(user.getComponent("health").defaultValue/5))
+	lib.sp.heal(Math.floor(user.getComponent("health").defaultValue/4))
 })
 
 // Pasif Reaper
@@ -74,7 +74,7 @@ pasif.addHitPasif("artsword", (user, target, option) => {
 
 		  if(skly !== undefined && skly > 0) {
 			option.ent.addEffect([{ name: "slowness", duration: 40, lvl: 2 },{ name: "weakness", duration: 40, lvl: 0 }])
-			option.ent.addDamage(18*option.multiplier, { cause: "entityAttack", damagingEntity: user })
+			option.ent.addDamage(18*option.multiplier, { cause: "fire", damagingEntity: user })
 		    option.sp.addEffect([{ name: "fire_resistance", duration: 80, lvl: 0 }])
 		    option.sp.knockback(user.getVelocity(), 3.2, 0)
 		    skly - 1 >= 0 ? option.skyler[user.id] -= 1 : option.skyler[user.id] = undefined
@@ -90,7 +90,7 @@ pasif.addHitPasif("artsword", (user, target, option) => {
 			world.getDimension(target.dimension.id).spawnEntity("minecraft:lightning_bolt",target.location)
 		  } else target.addTag("boltizer_atk")
 		
-		  target.runCommand(`damage @e[r=6,c=1,name=${option.notSelf},tag=!boltizer_atk] ${3*option.multiplier} entity_attack entity ${user.name}`)// Pasif ArChain
+		  target.runCommand(`damage @e[r=6,c=1,name=${option.notSelf},tag=!boltizer_atk] ${3*option.multiplier} lightning entity ${user.name}`)// Pasif ArChain
 		  break;
 	}
 })
@@ -101,7 +101,7 @@ pasif.addKillPasif("artsword", (user, target, lib) => {
 	switch(item.typeId.split(":")[1]) {
 		case "skyler":// Pasif Burns Out
 		  spawnParticles("cz:fireing_explode", target.dimension.id, target.location)
-		  world.getDimension(target.dimension.id).createExplosion(target.location, 5, { breaksBlocks: false, source: user })
+		  world.getDimension(target.dimension.id).createExplosion(target.location, 3, { breaksBlocks: false, source: user })
 		  break;
 		case "destreza":// Pasif Juned
 		  target.runCommand(`effect @e[r=4,name=${lib.notSelf}] poison 3 1`)
@@ -115,7 +115,7 @@ pasif.addHitedPasif("artsword", (user, target, lib) => {
 	switch(item.typeId.split(":")[1]) {
 		case "destreza":// Pasif Thornifi
 		  if(!user.hasTag("skill")) return
-		  user.runCommand(`damage @e[r=3,name=${lib.notSelf}] ${9*lib.multiplier} entity_attack entity @s`)
+		  user.runCommand(`damage @e[r=3,name=${lib.notSelf}] ${9*lib.multiplier} poison entity @s`)
 		  break;
 	}
 })

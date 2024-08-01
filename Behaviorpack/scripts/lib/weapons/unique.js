@@ -19,10 +19,10 @@ weapon.registerWeapon("kyles", (player, lib, event) => {
 
 	  let kyle2 = Math.round((power * 80) + 26 + player.getComponent("health").defaultValue/4), rot = player.getViewDirection()
 
-	  lib.sp.dash(lib.velocity, power/6*2.3+6.5, 1.2*(rot.y)+0.1)
+	  lib.sp.dash(lib.velocity, power/6*2.7+6.5, 1.24*(rot.y)+0.2)
 	  system.runTimeout(() => {
-		lib.sp.runCommand([`camerashake add @s 1 0.09`, `damage @e[r=4.5,name=${lib.notSelf}] ${kyle2*lib.multiplier} entity_attack entity @s`])
-      }, (power/6*2.2 + 3)*1.818)
+		lib.sp.runCommand([`camerashake add @s 1 0.09`, `damage @e[r=4.3,name=${lib.notSelf}] ${kyle2*lib.multiplier} entity_attack entity @s`])
+      }, (power/6*2.6 + 3)*1.818)
 	} else if(!player.isOnGround) {// Ultimate
 	  if(lib.sp.cooldown().isCd("kylesUlt", 12) == true) return
 
@@ -30,7 +30,7 @@ weapon.registerWeapon("kyles", (player, lib, event) => {
 	  player.playAnimation("animation.weapon.kyle.ultimate", { blendOutTime: 0.35 })// Animation
 	  let target = player.getEntitiesFromViewDirection()[0] || undefined
 
-      let kyle3 = Math.round((power * 199) + (Math.random() * 50) + 16), dashPower = 11.5
+      let kyle3 = Math.round((power * 209) + (Math.random() * 60) + 26), dashPower = 10.5
       lib.sp.bind(1.9)
       player.addTag("ultimate")
       
@@ -41,8 +41,8 @@ weapon.registerWeapon("kyles", (player, lib, event) => {
       
       function kyleUlt() {
       	world.getDimension(player.dimension.id).getEntities({ maxDistance: 7, location: player.location, minDistance: 0, excludeNames: [`${player.name}`] }).forEach(e => {
-      	  let ent = new Entity(e), dmga = ((12*power)+e.getComponent("health").defaultValue/4)*(lib.multiplier*2.5)
-            if(dmga >= 2500) dmga = 2500
+      	  let ent = new Entity(e), dmga = ((17*power)+e.getComponent("health").defaultValue/4)*(lib.multiplier*2.8)
+            if(dmga >= 2700) dmga = 2700
 		    lib.sp.bind(0.3)
             ent.addDamage(dmga, { cause: "entityAttack", damagingEntity: player }, { vel: lib.velocity, hor: 0.5, ver: 0 })
             lib.sp.heal(Math.round(1*lib.multiplier))
@@ -65,12 +65,12 @@ weapon.registerWeapon("kyles", (player, lib, event) => {
       player.playAnimation("animation.weapon.crushing.heavy", { blendOutTime: 0.35 })// Animation
 
       system.runTimeout(() => {
-      	lib.sp.knockback(lib.velocity, 4.41, 0.45)
+      	lib.sp.knockback(lib.velocity, 4.21, 0.45)
       	system.runTimeout(() => {
               lib.sp.removeEffect(["strength","hunger","poison","wither","weakness","mining_fatigue"])
               lib.sp.bind(0.6)
-              lib.sp.runCommand([`damage @e[r=5,name=${lib.notSelf}] ${Math.floor(((80*power)+16+player.getComponent("health").defaultValue/4)*lib.multiplier)} entity_attack entity @s`, `execute as @e[r=6,name=${lib.notSelf},type=!cz:particles] run particle cz:kyle_right ~~1~`])
-              system.runTimeout(() => lib.sp.runCommand([`damage @e[r=5,name=${lib.notSelf}] ${Math.floor(((110*power)+16+player.getComponent("health").defaultValue/4)*lib.multiplier)} entity_attack entity @s`, `execute as @e[r=6,name=${lib.notSelf},type=!cz:particles] run particle cz:kyle_right ~~1~`]), 5)
+              lib.sp.runCommand([`damage @e[r=5,name=${lib.notSelf}] ${Math.floor(((88*power)+24+player.getComponent("health").defaultValue/4)*lib.multiplier)} entity_attack entity @s`, `execute as @e[r=6,name=${lib.notSelf},type=!cz:particles] run particle cz:kyle_right ~~1~`])
+              system.runTimeout(() => lib.sp.runCommand([`damage @e[r=5,name=${lib.notSelf}] ${Math.floor(((160*power)+18+player.getComponent("health").defaultValue/4)*lib.multiplier)} entity_attack entity @s`, `execute as @e[r=6,name=${lib.notSelf},type=!cz:particles] run particle cz:kyle_right ~~1~`]), 9)
           }, 13)
       }, 5)
 	} else { // Skill 1
@@ -79,10 +79,10 @@ weapon.registerWeapon("kyles", (player, lib, event) => {
 	  player.playAnimation("animation.kyle.slash", { blendOutTime: 0.35 })// Animation
 
       system.runTimeout(() => {
-	    let kyle1 = Math.round((power * 30) + 28 + player.getComponent("health").defaultValue/4)
+	    let kyle1 = Math.round((power * 32) + 28 + player.getComponent("health").defaultValue/4)
 	    lib.sp.addEffect([{ name: "strength", duration: 60, lvl: 1 }])
 		lib.sp.bind(0.6)
-	    lib.sp.knockback(lib.velocity, 3.3, 0.1)
+	    lib.sp.knockback(lib.velocity, 3.1, 0.1)
 	    player.getEntitiesFromViewDirection().forEach(e => {
           let ent = new Entity(e.entity);
 
@@ -308,10 +308,10 @@ weapon.registerWeapon("skyler", (player, lib, event) => {
 		  world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`] }).forEach(e => {
 			let ent = new Entity(e)
 			e.setOnFire(5)
-			ent.addDamage(36*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, hor: 0, ver: power+1.4 })
+			ent.addDamage(36*lib.multiplier, { cause: "fire", damagingEntity: player }, { vel: lib.vel, hor: 0, ver: power+1.3 })
 			ent.particles(["cz:fireing_hit","cz:impact_down"])
 		  })
-		}, 8)
+		}, 7)
 	} else if(!player.isSneaking && !player.isOnGround && !player.getEffect("fire_resistance")) {// Skill 3
 		player.playAnimation("animation.weapon.slice.up", { blendOutTime: 0.35 })// Animation
 
@@ -326,7 +326,7 @@ weapon.registerWeapon("skyler", (player, lib, event) => {
 		system.runTimeout(() => {
           lib.sp.knockback(lib.vel, distance*1.2, 0)
           target.setOnFire(5)
-		  ent.addDamage(45*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, hor: 0.3, ver: 0 })
+		  ent.addDamage(45*lib.multiplier, { cause: "fire", damagingEntity: player }, { vel: lib.vel, hor: 0.3, ver: 0 })
 		}, 3)
 	} else if(!player.isSneaking && !player.isOnGround && player.getEffect("fire_resistance")) {// Skill 3 - Special
 	    if(lib.sp.cooldown().isCd("skylerUlt", 20) == true) return
@@ -346,7 +346,7 @@ weapon.registerWeapon("skyler", (player, lib, event) => {
 				world.getDimension(player.dimension.id).getEntities({ maxDistance: 5, location: player.location, minDistance: 0, excludeNames: [`${player.name}`] }).forEach(e => {
 					let ent = new Entity(e)
 					e.setOnFire(5)
-					ent.addDamage(9*lib.multiplier, { cause: "entityAttack", damagingEntity: player })
+					ent.addDamage(9*lib.multiplier, { cause: "fire", damagingEntity: player })
 					ent.addEffect([{ name: "slowness", duration: 5, lvl: 0 },{ name: "weakness", duration: 5, lvl: 0 }])
 				})
 			}, 5)
@@ -367,7 +367,7 @@ weapon.registerWeapon("skyler", (player, lib, event) => {
 			player.getEntitiesFromViewDirection({ maxDistance: 7 }).forEach(i => {
 				let ent = new Entity(i.entity)
 				i.entity.setOnFire(5)
-				ent.addDamage(27*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.velocity, hor: 3, ver: 0 })
+				ent.addDamage(27*lib.multiplier, { cause: "fire", damagingEntity: player }, { vel: lib.velocity, hor: 2.7, ver: 0 })
 			})
 		}, 4)
 	}
@@ -693,6 +693,7 @@ weapon.registerWeapon("quezn", (player, lib, event) => {
 
 // Destreza
 weapon.registerWeapon("destreza", (player, lib, event) => {
+    //console.warn(lib.sp.hasDebuffEffect())
 	if(player.isSneaking == true) {// Skill 2
 		if(lib.sp.cooldown().isCd("destreza2", 8) == true) return
 
@@ -701,10 +702,10 @@ weapon.registerWeapon("destreza", (player, lib, event) => {
 
 		world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`] }).forEach(e => {
 			let ent = new Entity(e)
-			ent.addDamage(18*lib.multiplier, { cause: "entityAttack", damagingEntity: player })
+			ent.addDamage(18*lib.multiplier, { cause: "magic", damagingEntity: player })
 			ent.addEffect([{ name: "slowness", duration: 60, lvl: 1 },{ name: "poison", duration: 20, lvl: 4 }])
 		})
-	} else if(lib.sp.hasDebuffEffect().length > 0 && player.isOnGround == true) {// Skill Spesial
+	} else if(lib.sp.hasDebuffEffect() && player.isOnGround == true && !player.isSneaking) {// Skill Spesial
 		if(lib.sp.cooldown().isCd("destrezaS", 8) == true) return
 		lib.sp.minStamina("value", 10)
 
@@ -720,7 +721,7 @@ weapon.registerWeapon("destreza", (player, lib, event) => {
 		let ent = new Entity(target.entity)
 		lib.sp.knockback(lib.velocity, target.distance, -2)
 		system.runTimeout(() => {
-			ent.addDamage(27*lib.multiplier, { cause: "entityAttack", damagingEntity: player })
+			ent.addDamage(27*lib.multiplier, { cause: "magic", damagingEntity: player })
 
 			world.getDimension(target.entity.dimension.id).getEntities({ maxDistance: 6, location: target.entity.location, minDistance: 0, excludeNames: [`${player.name}`] }).forEach(e => {
 				let pnt = new Entity(e)
@@ -737,7 +738,7 @@ weapon.registerWeapon("destreza", (player, lib, event) => {
 	  	player.getEntitiesFromViewDirection({ maxDistance: 5 }).forEach(e => {
 			let ent = new Entity(e.entity)
 			ent.addEffect([{ name: "poison", duration: 60, lvl: 1 }])
-			ent.addDamage(18*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, hor: 1, ver: 0 })
+			ent.addDamage(18*lib.multiplier, { cause: "magic", damagingEntity: player }, { vel: lib.vel, hor: 1, ver: 0 })
 	  	})
 		}, 5)
 	}
@@ -795,7 +796,7 @@ weapon.registerWeapon("boltizer", (player, lib, event) => {
 		lib.sp.minStamina("value", 7)
 
 		system.runTimeout(() => {
-          ent.addDamage(18*upper, { cause: "entityAttack", damagingEntity: player })
+          ent.addDamage(18*upper, { cause: "lightning", damagingEntity: player })
 	  	bolt(target.entity)
 		}, 3)
 	}
