@@ -232,9 +232,8 @@ export class Entity {
 	// Effect Method
 	addEffect(effectArray) {
 		if(effectArray.length <= 0) return
-		effectArray.forEach(({ name, duration, lvl, hide }) => {
-		  let particle = hide || true
-          this.entity.addEffect(EffectTypes.get(name), duration, { amplifier: lvl, showParticles: particle })
+		effectArray.forEach(({ name, duration, lvl, hide = true }) => {
+          this.entity.addEffect(EffectTypes.get(name), duration, { amplifier: lvl, showParticles: hide })
         })
 	}
     hasEffect(array) {
@@ -245,7 +244,7 @@ export class Entity {
 	}
 	hasDebuffEffect() {
 	    // this.player.getEffects().forEach(f => console.warn(JSON.stringify(f.typeId)))
-		return this.player.getEffects().some(e => ["weakness","blindness","slowness","mining_fatigue","darkness","poison","wither","instant_damage"].includes(e.typeId))
+		return this.entity.getEffects()?.some(e => ["weakness","blindness","slowness","mining_fatigue","darkness","poison","wither","instant_damage"].includes(e.typeId))
 	}
     // Essentials Method
 	runCommand(cmdArray) {
@@ -318,12 +317,11 @@ export class Entity {
 		return new status(this.entity)
 	}
 	controllerStatus() {
-		let sts = this.status()
-		this.getDataEnt().status.filter(r => r.decay == "time").forEach(e => sts.minStatus(e.name, 0.25))
+		this.getDataEnt().status.filter(r => r.decay == "time").forEach(e => this.status().minStatus(e.name, 0.25))
 	}
 	// Debug
 	refreshEntity() {
-		let tag = ["ultimate","liberator_target","silence","lectaze_target","fireing_zone","catlye_ult"]
+		let tag = ["silent_target","ultimate","liberator_target","silence","lectaze_target","fireing_zone","catlye_ult"]
 		system.run(() => this.removeTags(...tag))
 	}
 	fixEntity() {
@@ -613,13 +611,13 @@ export class Specialist extends Entity {
 		if(!lib.single) lib.single = false
 		let dash = lib.ver || 0
 
-		lib.sp.knockback(lib.vel, 0, 0.8)
+		lib.sp.knockback(lib.vel, 0.1, 0.8)
 		system.runTimeout(() => {
-			lib.sp.knockback(lib.velocity, dash, -3.7)
+			lib.sp.knockback(lib.velocity, dash, -8.7)
 			this.bind(0.7)
 			system.runTimeout(() => {
 				lib.sp.impactParticle()
-				if(lib.single == true) {
+				if(lib.single !== true) {
 					world.getDimension(this.player.dimension.id).getEntities({ location: this.player.location, maxDistance: 6, minDistance: 0, excludeNames: [`${this.player.name}`]}).forEach(e => {
 			        	let ent = new Entity(e)
 			            ent.addDamage(dmg * lib.multiplier, { cause: "entityAttack", damagingEntity: this.player })
@@ -629,8 +627,8 @@ export class Specialist extends Entity {
 					lib.ent.addDamage(dmg * lib.multiplier, { cause: "entityAttack", damagingEntity: this.player })
 				}
 				if(typeof func === 'function') func.call()
-			}, 4)
-		}, 16)
+			}, 3)
+		}, 15)
 	}
 	// Player Method
 	getItemCount(name) {
@@ -652,6 +650,11 @@ export class Specialist extends Entity {
 			container.addItem(itemStack)
         })
 	}
+	setItem(item, amount = 1) {
+		let newItem = new ItemStack(item);
+		newItem.amount = amount
+		this.player.getComponent("inventory").container.setItem(this.player.selectedSlotIndex, newItem)
+    }
 	refreshPlayer() {
 		this.refreshEntity()
 		this.fixPlayer()
@@ -669,7 +672,7 @@ export class Specialist extends Entity {
         this.setData(data)
 	}
 	controllerUi({ options }) {
-		let data = this.getData(), maps = new Game(world), stamina = this.getStamina(), thirst = this.getThirst(), day = world.getDay(), time = Math.floor(Number((world.getTimeOfDay()/10).toFixed(0)) + 600), status = this.status().getAll(), sts = "", spMax = Math.floor((data.specialist.lvl * 5) + 34 + (data.specialist.lvl *12)), perXp = Number(data.specialist.xp / spMax * 100).toFixed(2);
+		let data = this.getData(), maps = new Game(world), stamina = this.getStamina(), thirst = this.getThirst(), day = world.getDay(), time = Math.floor(Number((world.getTimeOfDay()/10).toFixed(0)) + 600), status = this.status().getAll(), sts = "", spMax = Math.floor((data.specialist.lvl * 14) + 40 + (data.specialist.lvl * 8)), perXp = Number(data.specialist.xp / spMax * 100).toFixed(2);
 		time >= 2400 ? time = Math.floor(time - 2400) : 0
 		let dis = String(time).split("").reverse();
 

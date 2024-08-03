@@ -53,12 +53,12 @@
         "cz_form2@cz_common.full_panel_no_buttons": {
 	      "$title_panel": "common_dialogs.standard_title_label",
 	      "$title_size": [ "100% - 14px", 10 ],
-	      "size": [520, 260],
+	      "size": [500, 260],
 	      "$text_name": "cz.user",
 	      "$title_text_binding_type": "none",
 	      "$child_control": "server_form.user_panel",
 	      "layer": 2,
-		  "alpha": 0.2,
+		  "alpha": 0.23,
 	      "bindings": [
 			{
 			  "binding_name": "#title_text"
@@ -347,13 +347,13 @@
           "layer": 2,
           "anchor_from": "bottom_left",
           "anchor_to": "bottom_left",
-          "offset": [ "-19% -5", "-27%" ],
+          "offset": [ "-18% -5", "-27%" ],
           "controls": [
             {
               "player_renderer_panel": {
                 "type": "panel",
-                "size": [ 68, 68 ],
-                "offset": [ 0, -12 ],
+                "size": [ 64, 64 ],
+                "offset": [ 0, -10 ],
 
                 "controls": [
                   {
@@ -480,8 +480,8 @@
                 "type": "image",
                 "layer": 4,
                 "anchor_from": "center",
-                "size": [38, 38],
-                "offset": [-18, 0],
+                "size": [34, 34],
+                "offset": [-18, -2],
                 "bindings":[
                   {
                     "binding_name": "#form_button_texture",
@@ -516,7 +516,7 @@
           "$button_text_binding_type": "collection",
           "$button_text_grid_collection_name": "form_buttons",
           "$button_text_max_size": [ "110%", 45 ],
-          "$default_text_color": [0.45,0.45,0.18],
+          "$default_text_color": [0.35,0.95,0.88],
           "$button_font_scale_factor": 1,
           "$text_layer": 6,
           "bindings": [
@@ -574,10 +574,10 @@
             {
               "image": {
                 "type": "image",
-                "layer": 7,
+                "layer": 6,
                 "anchor_from": "middle_left",
                 "size": [30, 30],
-                "alpha": 0.4,
+                "alpha": 0.25,
                 "offset": ["-50%", 0],
                 "bindings":[
                   {

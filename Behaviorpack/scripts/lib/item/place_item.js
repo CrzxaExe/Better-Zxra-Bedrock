@@ -6,6 +6,7 @@ specialItem.placeItem("vial", (player, item, block) => {
 	
 	switch(block.type.id.split(":")[1]) {
 		case "water":
+		  if(item.amount - 1 < 1) return sp.setItem("cz:vial_water", 1);
 		  let prevItem = new ItemStack(item.typeId)
 		  prevItem.amount = item.amount - 1
 	  	player.getComponent("inventory").container.setItem(player.selectedSlotIndex, prevItem)

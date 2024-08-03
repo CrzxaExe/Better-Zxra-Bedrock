@@ -1,15 +1,15 @@
-import { EffectTypes, world } from "@minecraft/server";
+import { EffectTypes, world, system } from "@minecraft/server";
 import { pasif, Entity, spawnParticles } from "./system.js";
 import { Modifier } from "./lib/ZxraLib/module.js";
 
 // Pasif Slayer
-pasif.addHitPasif("slayer", (user, target, lib) => {
+pasif.addHitPasif("slayer", (user, target, { multiplier, ent, velocity }) => {
 	if(!user || !target) return
-    lib.ent.addEffect([{ name: "wither", duration: 60, lvl: 5 }])
+    ent.addEffect([{ name: "wither", duration: 60, lvl: 5 }])
 	let userHealth = user.getComponent("health"), percenDamage = Math.round(userHealth.currentValue) / userHealth.defaultValue, damage = Math.floor(Math.round(10 * percenDamage) + (target.getComponent("health").defaultValue / 4));
 
-	if(damage > 250) damage = 250
-	lib.ent.addDamage(damage * lib.multiplier, { cause: "entityAttack", damagingEntity: user }, { vel: lib.velocity, hor: percenDamage*2 , ver: 0 })
+	if(damage > 250) damage = 250;
+	ent.addDamage(damage * multiplier, { cause: "entityAttack", damagingEntity: user }, { vel: velocity, hor: percenDamage*2 , ver: 0 })
 })
 pasif.addHitedPasif("slayer", (user, target, lib) => {
 	if(!user || !target) return// Pasif Thornification
@@ -149,8 +149,8 @@ pasif.addHitedPasif("century", (user, target, { sp }) => {
 
 // Pasif Katana
 pasif.addHitPasif("katana", (user, target, option) => {
-	if(!user || !target) return
-	if(target.isOnGround == false || target.getEffect("slowness") || target.getEffect("weakness")) target.applyDamage((20 - Number(option.item.getTier()) * option.multiplier), { cause: "entityAttack", damagingEntity: user})
+	if(!user || !target) return;
+	let dmg = 11;
 
 	switch(user.getComponent("inventory").container.getSlot(user.selectedSlotIndex).typeId.split(":")[1]) {
 		case "silent":// Pasif In Leaf
@@ -161,11 +161,30 @@ pasif.addHitPasif("katana", (user, target, option) => {
 		  }
 
 		  let ran = Math.floor(Math.random() * 5) + 1//Pasif
-		  if(ran < 5) return
+		  if(ran < 5) break;
           option.ent.knockback(user.getVelocity(), 0, 0.8)
           option.ent.addEffect([{ name: "slow_falling", duration: 16, lvl: 1 }])
 		  break;
+	   case "musha":// Pasif Decisive
+	      let stk = option.musha[user.id] || { atk: 0, stack: 0 };
+	      option.musha[user.id] = stk;
+
+          dmg += stk.stack
+	      console.warn(JSON.stringify(stk))
+	
+	      if(stk.stack >= 5) break;
+	      if(stk.atk + 1 >= 4) {
+		    option.musha[user.id].stack = stk.stack + 1
+		    option.musha[user.id].atk = 0
+		  } else option.musha[user.id].atk = stk.atk + 1
+	      break;
+	   default:
+	      break;
 	}
+
+	if(target.isOnGround == false || option.ent.hasDebuffEffect()) dmg += Math.floor(18 - Number(option.item.getTier()));
+    
+    target.applyDamage(dmg * option.multiplier, { cause: "entityAttack", damagingEntity: user })
 })
 
 // Pasif Hammer

@@ -397,7 +397,7 @@ const guildBuy = (player, { select, id, token, shop }) => {
   let stack = shop[select], itm = stack.item.replace("cz:","").split("_").map(e => e.charAt(0).toUpperCase() + e.slice(1)).join(" ");
   let ui = new ModalFormData()
     .title({ rawtext: [{ translate: "guild.token" },{ text: ` ${token}` }]})
-    .textField({ rawtext: [{ translate: "system.wantBuy" },{ text: ` 1 ${itm} ${stack.price} ` },{ translate: "guild.token" }]}, { translate: "system.input.buy" })
+    .textField({ rawtext: [{ translate: "system.wantBuy" },{ text: ` ${stack.amount} ${itm} ${stack.price} ` },{ translate: "guild.token" }]}, { translate: "system.input.buy" })
     .show(player)
     .then(r => {
       if(r.canceled) return;
@@ -408,7 +408,7 @@ const guildBuy = (player, { select, id, token, shop }) => {
       if(stack.price * amount > token)
         return player.sendMessage({ translate: "system.buy.outToken" });
 
-      player.runCommand(`give @s ${stack.item} ${amount}`)
+      player.runCommand(`give @s ${stack.item} ${amount * stack.amount}`)
       player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${amount} ${itm} ` },{ translate: "system.buy2" },{ text: `${amount * stack.price} ` },{ translate: "guild.token" }]})
       new Game().guild().minToken(id, stack.price*amount)
 

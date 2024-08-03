@@ -16,7 +16,7 @@ weapon.registerWeapon("crusher", (player, lib, event) => {
 
 	  lib.sp.minStamina("value", 10)// Stamina
 	  player.playAnimation("animation.weapon.crushing", { blendOutTime: 0.35 })// Animation
-	  lib.sp.runCommand([`camerashake add @s 1.2 0.08`,`damage @e[r=6,name=${lib.notSelf}] ${Math.floor((20*power+10) *lib.multiplier)} entity_attack entity @s`])
+	  lib.sp.runCommand([`camerashake add @s 1.2 0.08`,`damage @e[r=6,name=${lib.notSelf}] ${Math.floor((10*power+8) *lib.multiplier)} entity_attack entity @s`])
 	  if(player.isOnGround == true) enParticle(player, "cz:impact_particle")
 	} else if(player.isOnGround == false && player.isSneaking == false) {// Skill 3
 	  if(lib.sp.cooldown().isCd("crusher3", 6) == true) return
@@ -29,7 +29,7 @@ weapon.registerWeapon("crusher", (player, lib, event) => {
 	  let ent = new Entity(target.entity)
 
       system.runTimeout(() => {
-	    ent.addDamage((power*8+14) *lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, hor: 0, ver: power*0.3 })
+	    ent.addDamage((power*8+8) *lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, hor: 0, ver: power*0.3 })
 	    ent.addEffect([{ name: "slowness", duration: 120, lvl: 1 }])
 	  }, 6)
 	} else {// Skill 1
@@ -41,10 +41,9 @@ weapon.registerWeapon("crusher", (player, lib, event) => {
 	  lib.sp.minStamina("value", 8)// Stamina
 	  player.playAnimation("animation.weapon.push", { blendOutTime: 0.35 })// Animation
 
-      let ent = new Entity(entity.entity)
       entity.entity.addTag("silence")
 
-      ent.addDamage((power*4+16) * lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.velocity, hor: power*2+2, ver: 0 })
+      ent.addDamage((power*4+8) * lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.velocity, hor: power*2+2, ver: 0 })
       system.runTimeout(() => entity.entity.runCommand("tag @s remove silence"), 60)
 	}
 })
@@ -57,13 +56,12 @@ weapon.registerWeapon("bringer", (player, lib, event) => {
 
 		if(lib.sp.cooldown().isCd("bringer2", 5) == true) return
 
-		let ent = new Entity(entity.entity)
 		lib.sp.minStamina("value", 16)
 		player.playAnimation("animation.weapon.dash.atk", { blendOutTime: 0.35 })// Animation
 		player.teleport(entity.entity.location, { rotation: player.getRotation() })
 		lib.sp.knockback(lib.velocity, 2, 0)
 
-		system.runTimeout(() => { ent.addDamage(35*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.velocity, hor: 3, ver: 0 }) }, 3)
+		system.runTimeout(() => { new Entity(entity.entity).addDamage(18*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.velocity, hor: 3, ver: 0 }) }, 3)
 	} else if(player.isOnGround == false) {// Skill 3
 	    if(lib.sp.cooldown().isCd("bringer3", 8) == true) return
 
@@ -75,7 +73,7 @@ weapon.registerWeapon("bringer", (player, lib, event) => {
 		lib.sp.addEffect([{ name: "resistance", duration: 12, lvl: 1 }])
 		lib.sp.bind(1.35)
 		system.runTimeout(() => {
-			lib.sp.runCommand([`damage @e[r=7,name=${lib.notSelf}] ${Math.floor(35 * lib.multiplier)} entity_attack entity @s`,`effect @e[r=7,name=${lib.notSelf}] wither 3 1 true`])
+			lib.sp.runCommand([`damage @e[r=7,name=${lib.notSelf}] ${Math.floor(20 * lib.multiplier)} entity_attack entity @s`,`effect @e[r=7,name=${lib.notSelf}] wither 3 1 true`])
 		}, 11)
 	} else {// Skill 1
 	    if(lib.sp.cooldown().isCd("bringer1", 1.5) == true) return
@@ -85,7 +83,7 @@ weapon.registerWeapon("bringer", (player, lib, event) => {
 		lib.sp.knockback(lib.velocity, 2.3, 0)
 
 		system.runTimeout(() => {
-			lib.sp.runCommand([`damage @e[r=4,name=${lib.notSelf}] ${Math.floor(15 * lib.multiplier)} entity_attack entity @s`,`effect @e[r=4,name=${lib.notSelf}] wither 3 1 true`])
+			lib.sp.runCommand([`damage @e[r=4,name=${lib.notSelf}] ${Math.floor(12 * lib.multiplier)} entity_attack entity @s`,`effect @e[r=4,name=${lib.notSelf}] wither 3 1 true`])
         }, 5)
 	}
 })
@@ -101,21 +99,20 @@ weapon.registerWeapon("berserk", async (player, lib, event) => {
 
 	    system.runTimeout(() => {
 			world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`] }).forEach(e => {
-				let ent = new Entity(e)
-				ent.addDamage(player.getComponent("health").defaultValue/5, { cause: "entityAttack", damagingEntity: e })
+				new Entity(e).addDamage(player.getComponent("health").defaultValue/5, { cause: "entityAttack", damagingEntity: e })
 				lib.sp.addDamage(player.getComponent("health").defaultValue/10, { cause: "entityAttack", damagingEntity: e })
 				lib.berserk[player.id] = Math.floor(lib.berserk[player.id] + 6)
 			})
 		}, 3)
 	} else if(player.isSneaking == false && player.isOnGround == false) {// Skill 3
-		if(lib.sp.cooldown().isCd("berserk3", 17) == true) return
+		if(lib.sp.cooldown().isCd("berserk3", 15) == true) return
 		lib.sp.minStamina("value", 30)
 
-		let stack = lib.berserk[player.id] || 0, dmg = 42
+		let stack = lib.berserk[player.id] || 0, dmg = 18
 		player.playAnimation("animation.weapon.impact", { blendOutTime: 0.35 })// Animation
 
-		if(stack > 30) dmg = Math.floor(dmg + stack*4)
-		if(lib.multiplier > 1) lib.multiplier *= 1.8
+		if(stack > 30) dmg = Math.floor(dmg + stack*2)
+		if(lib.multiplier > 1.2) lib.multiplier *= 1.5
 		player.triggerEvent("cz:no_fall_5s")
 
 		await lib.sp.impactSkill(dmg, lib)
@@ -128,7 +125,7 @@ weapon.registerWeapon("berserk", async (player, lib, event) => {
 		lib.sp.minStamina("value", 8)
 
 		system.runTimeout(() => {
-			lib.sp.runCommand([`execute positioned ^^^2 run damage @e[name=${lib.notSelf},r=2.5] ${Math.floor(42 * lib.multiplier)} entity_attack entity @s`])
+			lib.sp.runCommand([`execute positioned ^^^2 run damage @e[name=${lib.notSelf},r=2.5] ${Math.floor(16 * lib.multiplier)} entity_attack entity @s`])
 		}, 13)
 	}
 })

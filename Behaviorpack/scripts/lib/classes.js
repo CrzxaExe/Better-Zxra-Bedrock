@@ -13,8 +13,7 @@ class Ultimate {
 	}
 
 	getUlt() {
-		let data = this.plyr.getData().ult || []
-		return data
+		return this.plyr.getData().ult || []
 	}
 	addUlt(obj)  {
 		let data = this.plyr.getData(), ult = data.ult, flt = ult.find(e => e.wpn == obj.wpn)
@@ -125,15 +124,10 @@ class status {
 	}
 	hasStatusName(name) {
 		if(!name) return
-		let find = this.getAll().find(e => e.name == name), gets = true
-
-		if(!find) gets = false
-		return gets
+	    return this.getAll().some(e => e.name == name)
 	}
 	getStatusBy(finder) {
-		let data = this.getAll()
-		let res = data.find(e => finder[Object.keys(finder)[0]] == e[Object.keys(finder)[0]])
-		return res
+		return this.getAll().find(e => finder[Object.keys(finder)[0]] == e[Object.keys(finder)[0]])
 	}
 	addStatus(name, dur, lib) {
 		if(!name) return new Error("Status What?")
@@ -156,7 +150,7 @@ class status {
 		if(!name) return
 		let duration = dur || 1, data = this.getData(), find = data.status.findIndex(e => e.name == name)
 
-		if(find == undefined) return
+		if(find === -1) return
 		data.status[find].duration - duration <= 0 ? data.status.splice(find, 1) : data.status[find].duration -= duration;
 		this.setData(data)
 	}
@@ -164,7 +158,7 @@ class status {
 		if(!name) return
 		let data = this.getData(), find = data.status.findIndex(e => e.name == name)
 
-		if(!find) return
+		if(find === -1) return
 		data.status.splice(find, 1)
 		this.setData(data)
 	}
@@ -174,12 +168,13 @@ class status {
 		}
 	}
 	// Damage Up Status
-	dmgStat() {
+	dmgStat(plus = false) {
 		let data = this.getData(), filter = data.status.filter(e => e.type == "damage")
 		let multiplier = 1
+		if(plus) multiplier = 0
 
 		filter.forEach(e => {
-			e.stack == true ? multiplier = multiplier + (Number(e.lvl) * 0.1) : 0;
+			multiplier = multiplier + (Number(e.lvl) * 0.01);
 		})
 		return multiplier
 	}
@@ -188,7 +183,7 @@ class status {
 		let data = this.getData(), multiplier = this.dmgStat(), filter = data.status.filter(e => e.type == "skill")
 
 		filter.forEach(e => {
-			e.stack == true ? multiplier = multiplier + (e.lvl * 0.1) : 0;
+			multiplier = multiplier + (e.lvl * 0.01);
 		})
 		return multiplier
 	}

@@ -37,7 +37,7 @@ const settingPanel = (player, lib) => {
     xpMultiplier,
     deathLocation,
     damageIndicator,
-    starterItem, starterItems,
+    starterItem, starterItems, starterItemMessage,
     uiLevelRequirement
   } = lib.options,
   ui = new ModalFormData()
@@ -56,6 +56,7 @@ const settingPanel = (player, lib) => {
     .toggle({ translate: "option.deathLocation" }, deathLocation)
     .toggle({ translate: "option.damageIndicator" }, damageIndicator)
     .toggle({ translate: "option.starterItem" }, starterItem)
+    .textField({ translate: "option.starterItemMessage" }, { translate: "type.string" }, `${starterItemMessage}`)
     .textField({ translate: "option.starterItems" }, { translate: "type.string" }, `${starterItems}`)
     .toggle({ translate: "option.uiLevelRequirement" }, uiLevelRequirement)
 
@@ -64,7 +65,7 @@ const settingPanel = (player, lib) => {
     .then(e => {
       if(e.canceled) return;
 
-      let [uBR,dbg,sC,sE,sRv,sR,cC,cCP,sM,xM,dL,dI,sI,sIs,uLR] = e.formValues;
+      let [uBR,dbg,sC,sE,sRv,sR,cC,cCP,sM,xM,dL,dI,sI,sIM,sIs,uLR] = e.formValues;
       const newOptions = {
         useBzbRules: uBR,
         debug: dbg,
@@ -79,6 +80,7 @@ const settingPanel = (player, lib) => {
         deathLocation: dL,
         damageIndicator: dI,
         starterItem: sI,
+        starterItemMessage: sIM,
         starterItems:sIs,
         uiLevelRequirement: uLR
       };

@@ -13,8 +13,7 @@ system.runInterval(() => {
 			  let block = world.getDimension(dimension[i]).getBlock(e.location) || undefined
 			  if(block == undefined || !block || block == null) return
 
-			  let tile = new Tile(block)
-			  tile.generatePower(tile.data.getData().generator, 0.4)
+			  new Tile(block).generatePower(tile.data.getData().generator, 0.4)
 		    } catch(e) {
 			   //console.warn(e)
 		    }
@@ -24,9 +23,11 @@ system.runInterval(() => {
 
 // Panel Resource
 let core = (block, player, item) => {
-	let pln =  new Tile(block), map = new Game(world)
+	let pln =  new Tile(block);
 
-    let coreBody = { rawtext: [
+    let panel = new ActionFormData()
+	.title({ translate: `tile.${block.type.id.split(":")[1]}.name` })
+	.body({ rawtext: [
       { text: " \n" },
       { translate: "system.power" },
 	  { text: ` ${pln.getPower().text} Watt\n` },
@@ -40,9 +41,7 @@ let core = (block, player, item) => {
       { text: ` ${pln.getVolt()} ` },
       { translate: "system.volt" },
       { text: `/s\n \n \n \n \n \n` }
-    ]}, panel = new ActionFormData()
-	.title({ translate: `tile.${block.type.id.split(":")[1]}.name` })
-	.body(coreBody)
+    ]})
 	.button("On/Off")
 	.show(player).then(r => {
 		if(r.canceled) return

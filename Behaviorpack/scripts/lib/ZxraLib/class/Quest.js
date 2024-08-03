@@ -124,7 +124,6 @@ export class Quest {
 				case "cash":
 				  let gets = i.amount;
 				  if(new Game().guild().gd().find(e => e.member.some(r => r.id === this.player.id))) gets += i.amount/5;
-				  // console.warn(gets)
                   this.data.addMoney(gets);
                   break;
 				case "item":
@@ -136,6 +135,7 @@ export class Quest {
                   let guild = new Game().guild().gd().find(e => e.member.some(r => r.id === this.player.id));
                   if(!guild) return;
                   new Game().guild().addToken(guild.id, i.amount)
+                  new Game().guild().addXp(guild.id, i.amount*2)
                   break;
                 case "voxn": this.data.addVoxn(i.amount); break;
                 case "rep": this.data.addRep(i.amount); break;

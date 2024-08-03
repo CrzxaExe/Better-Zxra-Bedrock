@@ -28,6 +28,7 @@ import "./lib/blocks.js";
 // Import Weapon Skill
 import "./lib/weapons/unique.js";
 import "./lib/weapons/epic.js";
+import "./lib/weapons/legend.js";
 import "./lib/weapons/rare.js";
 
 let wounded = {},
@@ -39,7 +40,8 @@ let inGame = {
   skyler: {},
   catlye: {},
   lectaze: {},
-  berserk: {}
+  berserk: {},
+  musha: {}
 };
 let dimension = [
   // Minecraft Dimension
@@ -54,6 +56,8 @@ function setOptions(opt) {
 }
 export { setOptions };
 
+
+// Main Event
 system.beforeEvents.watchdogTerminate.subscribe(e => {
   e.cancel = true;
   world.sendMessage("[§l§2CZ§r] Zxra RPG " + e.terminateReason);
@@ -83,8 +87,7 @@ system.runInterval(async () => {
         .getDimension(e)
         .getEntities({ excludeTypes: ["cz:block_data"] })
         .forEach(r => {
-          let ent = new Entity(r);
-          ent.controllerStatus();
+          new Entity(r).controllerStatus();
         });
     });
   } catch (err) {
@@ -158,8 +161,7 @@ world.beforeEvents.playerLeave.subscribe(({ player }) => {
   //sp.refreshPlayer();
 });
 world.afterEvents.playerJoin.subscribe(e => {
-  let wld = new Game(world),
-    player = wld.getPlayerName(e.playerName);
+  let player = new Game().getPlayerName(e.playerName);
   if (!player) return;
   new Specialist(player).refreshPlayer();
 });
@@ -171,18 +173,17 @@ world.afterEvents.playerSpawn.subscribe(e => {
   if((!isFirst && !options.starterItem) || player.hasTag("hasJoin")) return;
   options.starterItems.split(/,/g).forEach(e => player.runCommand(`give @s ${e.split("*")[0].trim()} ${e.split("*")[1].trim()}`))
   player.addTag("hasJoin")
-  player.sendMessage({ translate: "system.welcome,item" })
+  player.sendMessage({ translate: options.starterItemMessage || "system.welcome.item" })
 });
 
 // Entities Change Health Event
 world.afterEvents.entityHealthChanged.subscribe(
   ({ entity, newValue, oldValue }) => {
     try {
-      let ent = new Entity(entity);
       //console.warn(newValue, oldValue)
 
       if (newValue - oldValue - 1 > 0) {
-        ent.selfParticle("cz:heal_particle");
+        new Entity(entity).selfParticle("cz:heal_particle");
       }
     } catch (err) {
       if (options.debug) console.warn(err);
@@ -210,6 +211,9 @@ world.afterEvents.entityDie.subscribe(async e => {
     cp.setValueDefaultStamina();
     cp.setValueDefaultThirst();
     new Game().leaderboard().addLb(corp, { amount: 1, type: "deaths" })
+
+    let guild = new Game().guild().gd().find(s => s.member.some(d => d.id === corp.id));
+    if(guild?.id) new Game().guild().setXp(guild.id, 0)
   }
 
   // Initializing Kill Pasif
@@ -308,7 +312,7 @@ world.afterEvents.entityHitEntity.subscribe(
         .container.getItem(e.damagingEntity.selectedSlotIndex),
       entity = e.damagingEntity,
       data = new Specialist(entity);
-    data.cooldown().setCd("stamina_regen", 3);
+    data.cooldown().setCd("stamina_regen", options.staminaExhaust);
     if (!item || e.hitEntity == undefined || !e.hitEntity) return;
 
     data.minStamina("value", 4);
@@ -365,11 +369,8 @@ world.afterEvents.entityHurt.subscribe(
 
 world.afterEvents.entityHurt.subscribe(({ hurtEntity, damage, damageSource: { cause, damagingEntity, damagingProjectile } }) => {
   if(!options.damageIndicator) return;
-  let indicator = world.getDimension(hurtEntity.dimension.id).spawnEntity("cz:indicator", { x: hurtEntity.location.x + Math.random(-0.5, 0.5), y: hurtEntity.location.y + Math.random(-0.8, 1), z: hurtEntity.location.z + Math.random(-0.5, 0.5) } );
-  indicator.nameTag = `${Object.keys(jsonData.damageColor).includes(cause) ? jsonData.damageColor[cause] : ""}${damage.toFixed(1)}`;
-  new Entity(indicator).knockback(indicator.getVelocity(), 0, 0.34)
-  
-  //console.warn(JSON.stringify(indicator.nameTag))
+  let indicator = world.getDimension(hurtEntity.dimension.id).spawnEntity("cz:indicator", { x: hurtEntity.location.x + Math.random(-0.5, 0.5), y: hurtEntity.location.y + 0.4 + Math.random(-0.8, 1.4), z: hurtEntity.location.z + Math.random(-0.5, 0.5) } );
+  indicator.nameTag = `${Object.keys(jsonData.damageColor).includes(cause) ? jsonData.damageColor[cause] : ""}${damage.toFixed(0)}`;
 });
 
 // Skill Event

@@ -59,7 +59,7 @@ let shopPanel = (plyr, lib) => {
          })
     })
 }, buyPanel = (player, type, id, bal, day) => {
-	let data = new Specialist(player), item = shops[type][id].item, price = shops[type][id].price, itm = item.replace("cz;","").charAt(0).toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
+	let data = new Specialist(player), item = shops[type][id].item, price = shops[type][id].price, itm = item.replace("cz:","").charAt().toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
 	let khn = new ModalFormData().title(`$${data.getMoney()}`)
 	.textField(itm + " $" + (price * day).toFixed(2), { translate: "system.buy.amount" })
 	.show(player).then(r => {
@@ -69,11 +69,11 @@ let shopPanel = (plyr, lib) => {
 		if(value < 1) return
 		if(data.getMoney() < price * value * day) return player.sendMessage({ translate: "system.buy.outMoney" })
 		player.runCommand(`give @s ${item} ${value}`)
-		player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${value} ${item} ` },{ translate: "system.buy2" },{ text: `$${(value * price * day).toFixed(2)}` }]})
+		player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${value} ${itm} ` },{ translate: "system.buy2" },{ text: `$${(value * price * day).toFixed(2)}` }]})
 		data.takeMoney(price * value * day)
 	})
 }, buyPanelVoxn = (player, type, id) => {
-	let data = new Specialist(player), item = shops[type][id].item, price = shops[type][id].price, itm = item.replace("cz;","").charAt(0).toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
+	let data = new Specialist(player), item = shops[type][id].item, price = shops[type][id].price, itm = item.replace("cz:","").charAt(0).toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
 	let khn = new ModalFormData().title(`${data.getVoxn()} Voxn`)
 	.textField(itm + " " + price +" Voxn", { translate: "system.buy.amount" })
 	.show(player).then(r => {
@@ -83,11 +83,11 @@ let shopPanel = (plyr, lib) => {
 		if(value < 1) return
 		if(data.getVoxn() < price * value) return player.sendMessage({ translate: "system.buy.outVoxn" })
 		player.runCommand(`give @s ${item} ${value}`)
-		player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${value} ${item} ` },{ translate: "system.buy2" },{ text: `${(value * price)} Voxn` }]})
+		player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${value} ${itm} ` },{ translate: "system.buy2" },{ text: `${(value * price)} Voxn` }]})
 		data.minVoxn(price * value)
 	})
 }, userPanel = (player) => {
-	let data = new Specialist(player), qs = new Quest(player), jlm = new ActionFormData()
+	let data = new Specialist(player), jlm = new ActionFormData()
 	.title(player.name)
 	.body({ translate: "cz.user.body" })
 	.button({ translate: "user.reset" })
@@ -119,11 +119,11 @@ let shopPanel = (plyr, lib) => {
 			case 8: data.resetDirty(); player.sendMessage({ translate: "system.reset.dirty" }); break;
 			case 9: data.addMoney(5000); player.sendMessage({ rawtext: [{ translate: "system.get" },{ text: " $5000" }]}); break;
 			case 10: data.addVoxn(20); player.sendMessage({ rawtext: [{ translate: "system.get" },{ text: " 20 Voxn" }]}); break;
-			case 11: qs.randomQuest(); break;
+			case 11: new Quest(player).randomQuest(); break;
 		}
     })
 }, transferPanel = (player) => {
-	let data = new Specialist(player), map = new Game(world), players = world.getPlayers().map(r => { return r.name })
+	let data = new Specialist(player), players = world.getPlayers().map(r => { return r.name })
 	players.splice(0, 0, "None")
 	players.splice(players.findIndex(f => f == player.name), 1)
 
@@ -136,21 +136,29 @@ let shopPanel = (plyr, lib) => {
 
 		let value = r.formValues, target = players[value[0]]
 		if(!target || target == "None") return player.sendMessage({ translate: "system.invalidPlayer.name" })
-		let tsp = map.getPlayerName(target)
+		let tsp = new Game().getPlayerName(target)
 		data.transferMoney(tsp, Number(value[1]))
 	})
 }
 
 specialItem.addItem("stats", (player, item, lib) => {
-	let data = new Specialist(player), game = new Game(world);
-	let specialist = data.getData(), spXp = specialist.specialist.xp || 0
+	let data = new Specialist(player), game = new Game(), guild = game.guild().gd().find(e => e.member.some(r => r.id === player.id));
+	let specialist = data.getData();
 
     let stats = new ActionFormData()
       .title("cz:user")
       .body(`${player.name}
-Lvl ${specialist.specialist.lvl} - ${spXp.toFixed(1)}Xp\n
+Lvl ${specialist.specialist.lvl} - ${specialist.specialist.xp.toFixed(1)}Xp\n
+Guild ${guild ? "["+guild.name+"§r]\nLvl "+guild.act.lvl+" | "+guild.act.xp+" XP" : "[None]"}\n
 Bal $${specialist.money.toFixed(2)}
-Voxn ${specialist.voxn}\nRep ${specialist.reputation}\nStamina ${(specialist.stamina.value.toFixed(1))}/${specialist.stamina.max + specialist.stamina.add}\nThirst ${Number(specialist.thirst.value).toFixed(2)}/${specialist.thirst.max}%\nDirty ${specialist.dirty}%
+Voxn ${specialist.voxn}
+Rep ${specialist.reputation}
+Stamina ${(specialist.stamina.value.toFixed(1))}/${specialist.stamina.max + specialist.stamina.add}
+Thirst ${Number(specialist.thirst.value).toFixed(2)}/${specialist.thirst.max}%
+Dirty ${specialist.dirty}%
+
+Active Player ${game.getOnlineCount()}
+Day ${world.getDay()}
       `)
       .button({ translate: "cz.shop" }, "textures/ui/store_cz_icon")
       .button({ translate: "cz.leaderboard" }, "textures/items/zxra_book")
@@ -175,8 +183,7 @@ Voxn ${specialist.voxn}\nRep ${specialist.reputation}\nStamina ${(specialist.sta
 })
 
 specialItem.addItem("quest_scroll", (player, item) => {
-	let data = new Quest(player);
-	data.randomQuest();
+	new Quest(player).randomQuest();
 })
 
 specialItem.addItem("stamina_up_book", (player) => {

@@ -18,6 +18,7 @@ export let setting = {
   deathLocation: true,
   damageIndicator: true,
   starterItem: true,
+  starterItemMessage: "system.welcome.item",
   starterItems: "cz:stats*1",
   uiLevelRequirement: true
 }
@@ -77,15 +78,15 @@ export const damageColor = {
 
 export var shop = {
   minerals: [
-    { item: "cz:chlorophyte_ingot", price: 16.3, img: "textures/items/chlorophyte/ingot" },
-    { item: "cz:dexterite_ingot", price: 16.3, img: "textures/items/dexterite/ingot" },
+    { item: "cz:chlorophyte_ingot", price: 14.3, img: "textures/items/chlorophyte/ingot" },
+    { item: "cz:dexterite_ingot", price: 14.3, img: "textures/items/dexterite/ingot" },
     { item: "copper_ingot", price: 0.4, img: "textures/items/copper_ingot" },
     { item: "diamond", price: 5.8, img: "textures/items/diamond" },
     { item: "cz:diamond_ingot", price: 10.6, img: "textures/items/diamond_ingot" },
     { item: "iron_ingot", price: 2.6, img: "textures/items/iron_ingot" },
     { item: "gold_ingot", price: 7.5, img: "textures/items/gold_ingot" },
     { item: "netherite_scrap", price: 9.4, img: "textures/items/netherite_scrap" },
-    { item: "cz:plasma_ingot", price: 16.3, img: "textures/items/plasma/ingot" }
+    { item: "cz:plasma_ingot", price: 14.3, img: "textures/items/plasma/ingot" }
   ],
   crops: [
     { item: "apple", price: 0.3, img: "textures/items/apple" },
@@ -115,6 +116,7 @@ export var shop = {
     { item: "cooked_salmon", price: 1.1, img: "textures/items/fish_salmon_cooked" },
     { item: "cookie", price: 0.6, img: "textures/items/cookie" },
     { item: "pumpkin_pie", price: 1.1, img: "textures/items/pumpkin_pie" },
+    { item: "golden_carrot", price: 1.0, img: "textures/items/carrot_golden" },
     { item: "salmon", price: 0.9, img: "textures/items/fish_salmon_raw" },
     { item: "cz:slice_bread", price: 0.8, img: "textures/items/food/slice_bread" },
     { item: "cz:toast", price: 1.1, img: "textures/items/food/toast" },
@@ -123,13 +125,17 @@ export var shop = {
   blocks: [
     { item: "brick", price: 0.4, img: "textures/blocks/brick" },
     { item: "cobblestone", price: 0.1, img: "textures/blocks/cobblestone" },
+    { item: "end_stone", price: 0.7, img: "textures/blocks/end_stone" },
     { item: "dirt", price: 0.3, img: "textures/blocks/dirt" },
     { item: "gravel", price: 0.2, img: "textures/blocks/gravel" },
+    { item: "ice", price: 0.4, img: "textures/blocks/ice" },
+    { item: "netherrack", price: 0.3, img: "textures/blocks/netherrack" },
     { item: "stone", price: 0.1, img: "textures/blocks/stone" }
   ],
   materials: [
     { item: "bone", price: 0.5, img: "textures/items/bone" },
-    { item: "book", price: 1.2, img: "textures/items/book" },
+    { item: "book", price: 1.2, img: "textures/items/book_normal" },
+    { item: "cz:ender_shard", price: 4.8, img: "textures/items/ender_shard" },
     { item: "string", price: 0.7, img: "textures/items/string" }
   ],
   redstone: [
@@ -147,6 +153,7 @@ export var shop = {
 }
 
 export const guildShop = [
+  { item: "totem_of_undying", amount: 2, price: 11, lvl: 0, img: "textures/items/totem" },
   { item: "cz:quest_scroll", amount: 1, price: 5, lvl: 0, img: "textures/items/quest_scroll" }
 ]
 
@@ -559,10 +566,55 @@ export let questIndex = [
 	],
 	reward: [
 	  { type: "cash", amount: 242.8 },
-	  { type: "rep", amount: 8 },
-	  { type: "voxn", amount: 3 },
+	  { type: "rep", amount: 12 },
+	  { type: "voxn", amount: 5 },
 	  { type: "item/diamond_pickaxe", amount: 1 },
 	  { type: "token", amount: 5 }
+	]
+  },
+  {
+	title: "quest.no18",
+	des: "quest.no18.des",
+	rep: 30,
+	task: [
+	  { act: "kill", target: "pig", amount: 89 },
+	  { act: "kill", target: "rabbit", amount: 32 }
+	],
+	reward: [
+	  { type: "cash", amount: 96.3 },
+	  { type: "rep", amount: 3 },
+	  { type: "voxn", amount: 4 },
+	  { type: "token", amount: 6 }
+	]
+  },
+  {
+	title: "quest.no19",
+	des: "quest.no19.des",
+	rep: 50,
+	task: [
+	  { act: "kill", target: "drowned", amount: 100 },
+	  { act: "kill", target: "zombie", amount: 64 }
+	],
+	reward: [
+	  { type: "cash", amount: 164.3 },
+	  { type: "rep", amount: 12 },
+	  { type: "voxn", amount: 8 },
+	  { type: "item/trident", amount: 1 },
+	  { type: "token", amount: 8 }
+	]
+  },
+  {
+	title: "quest.no20",
+	des: "quest.no20.des",
+	rep: 0,
+	task: [
+	  { act: "kill", target: "drowned", amount: 36 }
+	],
+	reward: [
+	  { type: "cash", amount: 76.3 },
+	  { type: "rep", amount: 4 },
+	  { type: "voxn", amount: 2 },
+	  { type: "token", amount: 7 }
 	]
   }
 ]

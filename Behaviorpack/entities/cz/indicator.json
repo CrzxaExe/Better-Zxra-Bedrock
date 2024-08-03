@@ -4,7 +4,7 @@
     "description": {
       "identifier": "cz:indicator",
       "is_summonable": true,
-      "is_spawnable": true
+      "runtime_identifier": "minecraft:snowball"
     },
     "component_groups": {
       "despawn": {
@@ -26,8 +26,8 @@
           "target": "self"
         },
         "time": [
-          0.6,
-          0.8
+          0.4,
+          0.6
         ]
       },
       "minecraft:physics": {
@@ -43,6 +43,28 @@
       "minecraft:pushable": {
         "is_pushable": false,
         "is_pushable_by_piston": false
+      },
+      "minecraft:projectile": {
+        "on_hit": {
+          "impact_damage": {
+            "damage": 0,
+            "destroy_on_hit": false
+          },
+          "stick_in_ground": {
+            "shake": 0.35
+          }
+        },
+        "power": 6,
+        "gravity": 0.189,
+        "uncertainty_base": 1,
+        "uncertainty_multiplier": 0,
+        "should_bounce": true,
+        "anchor": 1,
+        "offset": [
+          0,
+          0,
+          0
+        ]
       }
     },
     "events": {

@@ -192,6 +192,17 @@ export const bringer = [
   "§r[3]§3 Jump"
 ]
 
+export const musha = [
+  "§rType §dKatana",
+  "§rRarity §dLegend",
+  "Tag: Force, DPS",
+  " ",
+  "§rPasif: §3[Decisive]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3"
+]
+
 export const katana = [
   "§rType Sword/§dKatana",
   "§rRarity §dRare"
