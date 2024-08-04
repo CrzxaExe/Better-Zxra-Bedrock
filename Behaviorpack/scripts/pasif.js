@@ -4,7 +4,7 @@ import { Modifier } from "./lib/ZxraLib/module.js";
 
 // Pasif Slayer
 pasif.addHitPasif("slayer", (user, target, { multiplier, ent, velocity }) => {
-	if(!user || !target) return
+	if(!user || !target || target.typeId.split(":")[1] === "item") return
     ent.addEffect([{ name: "wither", duration: 60, lvl: 5 }])
 	let userHealth = user.getComponent("health"), percenDamage = Math.round(userHealth.currentValue) / userHealth.defaultValue, damage = Math.floor(Math.round(10 * percenDamage) + (target.getComponent("health").defaultValue / 4));
 
@@ -12,7 +12,7 @@ pasif.addHitPasif("slayer", (user, target, { multiplier, ent, velocity }) => {
 	ent.addDamage(damage * multiplier, { cause: "entityAttack", damagingEntity: user }, { vel: velocity, hor: percenDamage*2 , ver: 0 })
 })
 pasif.addHitedPasif("slayer", (user, target, lib) => {
-	if(!user || !target) return// Pasif Thornification
+	if(!user || !target || target.typeId.split(":")[1] === "item") return// Pasif Thornification
 	let item = user.getComponent("inventory").container.getItem(user.selectedSlotIndex);
 	if(item.typeId.split(":")[1] !== "kyles") return
 
@@ -33,7 +33,7 @@ pasif.addHitPasif("reaper", (user, target, { item, multiplier, sp, soul }) => {
 	if(!user || !target) return
     let userHealth = user.getComponent("health"), notSelf = "!" + user.name, heal = 2, tier = item.getTier()
 
-    user.runCommand(`execute positioned ^^^2 run damage @e[r=2.5,name=${notSelf}] ${Math.floor((12 - Number(tier)) * multiplier)} entity_attack entity @s`)
+    user.runCommand(`execute positioned ^^^2 run damage @e[r=2.5,name=${notSelf},type=!item] ${Math.floor((12 - Number(tier)) * multiplier)} entity_attack entity @s`)
     world.getDimension(user.dimension.id).spawnEntity("cz:particles<cz:liberator_swing_particle>", target.location)
 
     if(user.getComponent("inventory").container.getSlot(user.selectedSlotIndex).typeId.split(":")[1] == "liberator") {
@@ -63,7 +63,7 @@ pasif.addKillPasif("reaper", (user, target, { soul, sp }) => {
 
 // Pasif ArtSword
 pasif.addHitPasif("artsword", (user, target, option) => {
-	if(!user || !target) return
+	if(!user || !target || target.typeId.split(":")[1] === "item") return
 	let item = user.getComponent("inventory").container.getSlot(user.selectedSlotIndex)
 
 	switch(item.typeId.split(":")[1]) {
@@ -90,7 +90,7 @@ pasif.addHitPasif("artsword", (user, target, option) => {
 			world.getDimension(target.dimension.id).spawnEntity("minecraft:lightning_bolt",target.location)
 		  } else target.addTag("boltizer_atk")
 		
-		  target.runCommand(`damage @e[r=6,c=1,name=${option.notSelf},tag=!boltizer_atk] ${3*option.multiplier} lightning entity ${user.name}`)// Pasif ArChain
+		  target.runCommand(`damage @e[r=6,c=1,name=${option.notSelf},tag=!boltizer_atk,type=!item] ${3*option.multiplier} lightning entity ${user.name}`)// Pasif ArChain
 		  break;
 	}
 })
@@ -115,14 +115,14 @@ pasif.addHitedPasif("artsword", (user, target, lib) => {
 	switch(item.typeId.split(":")[1]) {
 		case "destreza":// Pasif Thornifi
 		  if(!user.hasTag("skill")) return
-		  user.runCommand(`damage @e[r=3,name=${lib.notSelf}] ${9*lib.multiplier} poison entity @s`)
+		  user.runCommand(`damage @e[r=3,name=${lib.notSelf},type=!item] ${9*lib.multiplier} poison entity @s`)
 		  break;
 	}
 })
 
 // Pasif Century
 pasif.addHitPasif("century", (user, target, lib) => {
-	if(!user || !target) return
+	if(!user || !target || target.typeId.split(":")[1] === "item") return
 	let tier = lib.item.getTier(), item = user.getComponent("inventory").container.getItem(user.selectedSlotIndex), dmg = 14 - Number(tier), range = 1.5
 
 	switch(item.typeId.split(":")[1]) {
@@ -134,7 +134,7 @@ pasif.addHitPasif("century", (user, target, lib) => {
 		  lib.sp.knockback(user.getVelocity(), 0.5, 0)
 		  break;
 	}
-	target.runCommand(`damage @e[r=${range},name=${lib.notSelf}] ${dmg *lib.multiplier} entity_attack entity @s`)
+	target.runCommand(`damage @e[r=${range},name=${lib.notSelf},type=!item] ${dmg *lib.multiplier} entity_attack entity @s`)
 })
 pasif.addHitedPasif("century", (user, target, { sp }) => {
 	if(!user || !target) return
@@ -149,7 +149,7 @@ pasif.addHitedPasif("century", (user, target, { sp }) => {
 
 // Pasif Katana
 pasif.addHitPasif("katana", (user, target, option) => {
-	if(!user || !target) return;
+	if(!user || !target || target.typeId.split(":")[1] === "item") return;
 	let dmg = 11;
 
 	switch(user.getComponent("inventory").container.getSlot(user.selectedSlotIndex).typeId.split(":")[1]) {
@@ -170,7 +170,6 @@ pasif.addHitPasif("katana", (user, target, option) => {
 	      option.musha[user.id] = stk;
 
           dmg += stk.stack
-	      console.warn(JSON.stringify(stk))
 	
 	      if(stk.stack >= 5) break;
 	      if(stk.atk + 1 >= 4) {
@@ -189,7 +188,7 @@ pasif.addHitPasif("katana", (user, target, option) => {
 
 // Pasif Hammer
 pasif.addHitPasif("hammer", (user, target, option) => {
-	if(!user || !target) return
+	if(!user || !target || target.typeId.split(":")[1] === "item") return
 	let tier = Number(option.item.getTier())
     target.addEffect(EffectTypes.get("slowness"), 60, { amplifier: 0 })
 	let item = user.getComponent("inventory").container.getSlot(user.selectedSlotIndex);
@@ -207,7 +206,7 @@ pasif.addHitPasif("hammer", (user, target, option) => {
 
 // Pasif Spear
 pasif.addHitPasif("spear", (user, target, option) => {
-	if(!user || !target) return
+	if(!user || !target || target.typeId.split(":")[1] === "item") return
     let item = user.getComponent("inventory").container.getSlot(user.selectedSlotIndex), tier = Number(option.item.getTier())
 
     let distance = Math.sqrt((user.location.x - target.location.x) ** 2 + (user.location.z - target.location.z) ** 2), damage = Math.floor(11 + (1.1 * distance) - tier)
@@ -238,7 +237,7 @@ pasif.addKillPasif("spear", (user, target, lib) => {
 
 //Pasif Staff
 pasif.addHitPasif("staff", (user, target, lib) => {
-	if(!user || !target) return
+	if(!user || !target || target.typeId.split(":")[1] === "item") return
 	let tier = lib.item.getTier(), item = user.getComponent("inventory").container.getSlot(user.selectedSlotIndex)
 	
 	switch(item.typeId.split(":")[1]) {
@@ -250,7 +249,7 @@ pasif.addHitPasif("staff", (user, target, lib) => {
 
 // Pasif Greatsword
 pasif.addHitPasif("greatsword", (user, target, lib) => {
-	if(!user || !target) return
+	if(!user || !target || target.typeId.split(":")[1] === "item") return
 	let item = user.getComponent("inventory").container.getSlot(user.selectedSlotIndex), cd = lib.sp.cooldown().cd("greatsword_crit", 5), damage = Math.floor(14 - lib.item.getTier())
 	
 	cd.skill !== true ? lib.sp.cooldown().addCd("greatsword_crit", 5) : damage *= 2;
@@ -263,7 +262,7 @@ pasif.addHitedPasif("greatsword", (user, target, lib) => {
 
 	switch(item.typeId.split(":")[1]) {
 		case "berserk":// Pasif W-Harm
-	  	let con = lib.berserk[user.id] || 0, plus = Number(lib.damage)
+	  	let con = lib.berserk[user.id] || 0, plus = Number(lib.damage + 2)
 	  	con + plus < 70 ? lib.berserk[user.id] = con + plus : lib.berserk[user.id] = 70
 		  break;
 	}
@@ -271,7 +270,7 @@ pasif.addHitedPasif("greatsword", (user, target, lib) => {
 
 // Pasif Briefcase
 pasif.addHitPasif("briefcase", (user, target, lib) => {
-	if(!user || !target) return
+	if(!user || !target || target.typeId.split(":")[1] === "item") return
 	let item = user.getComponent("inventory").container.getSlot(user.selectedSlotIndex), tier = Number(lib.item.getTier()), status = lib.ent.status(), damage = 0;
 	
 	switch(item.typeId.split(":")[1]) {

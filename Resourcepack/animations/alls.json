@@ -4495,11 +4495,6 @@
 						"0.4167": [-1, 0, -2]
 					}
 				}
-			},
-			"sound_effects": {
-				"0.0417": {
-					"effect": "sword_grab"
-				}
 			}
 		},
 		"animation.weapon.draw.reaper": {

@@ -403,7 +403,7 @@ export class Specialist extends Entity {
 		try {
 			let col = cds.getAllCd().filter(e => e.name.includes(item.typeId.split(":")[1]))
 			col.forEach(r => act.push(`S-${r.name.replace(item.typeId.split(":")[1], "")} ${Math.round(r.duration)}s`))
-			if(cd.error == true && itemStack.getTag().includes("greatsword")) act.push(`[+]`)
+			if(cd.error == true && itemStack.getTag().includes("greatsword")) act.push(`<+>`)
 			if(Object.keys(lib.berserk).includes(this.player.id) && lib.berserk[this.player.id] !== undefined && lib.berserk[this.player.id] > 0 && item.typeId == "cz:berserk") act.push(`W-Harm ${lib.berserk[this.player.id]}`)
 			if(Object.keys(lib.soul).includes(this.player.id) && lib.soul[this.player.id] !== undefined ) act.push(`${lib.soul[this.player.id]} Soul`)
 			if(Object.keys(lib.catlye).includes(this.player.ud) && lib.catlye[this.player] >= 3 && item.typeId == "cz:catlye") act.push(`Skill 1 Upgrade`)
@@ -618,7 +618,7 @@ export class Specialist extends Entity {
 			system.runTimeout(() => {
 				lib.sp.impactParticle()
 				if(lib.single !== true) {
-					world.getDimension(this.player.dimension.id).getEntities({ location: this.player.location, maxDistance: 6, minDistance: 0, excludeNames: [`${this.player.name}`]}).forEach(e => {
+					world.getDimension(this.player.dimension.id).getEntities({ location: this.player.location, maxDistance: 6, minDistance: 0, excludeNames: [`${this.player.name}`], excludeTypes: ["minecraft:item"]}).forEach(e => {
 			        	let ent = new Entity(e)
 			            ent.addDamage(dmg * lib.multiplier, { cause: "entityAttack", damagingEntity: this.player })
 			        })

@@ -409,12 +409,12 @@ export let questIndex = [
   {
 	title: "quest.no7",
 	des: "quest.no7.des",
-	rep: 60,
+	rep: 120,
 	task: [
 	  { act: "kill", target: "ender_dragon", amount: 1 }
 	],
 	reward: [
-	  { type: "cash", amount: 223.9 },
+	  { type: "cash", amount: 1023.9 },
 	  { type: "rep", amount: 8 },
 	  { type: "voxn", amount: 4 },
 	  { type: "item/cz:diamond_ascend", amount: 1 },
@@ -424,12 +424,12 @@ export let questIndex = [
   {
 	title: "quest.no8",
 	des: "quest.no8.des",
-	rep: 120,
+	rep: 230,
 	task: [
 	  { act: "kill", target: "ender_dragon", amount: 5 }
 	],
 	reward: [
-	  { type: "cash", amount: 1239.8 },
+	  { type: "cash", amount: 8239.8 },
 	  { type: "rep", amount: 18 },
 	  { type: "voxn", amount: 14 },
 	  { type: "item/cz:diamond_ascend", amount: 2 },

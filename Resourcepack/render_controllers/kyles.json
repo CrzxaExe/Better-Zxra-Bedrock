@@ -21,6 +21,15 @@
           "horn": "!v.is_first_person"
         },
         {
+          "leftArmor": "!v.is_first_person"
+        },
+        {
+          "rightArmor": "!v.is_first_person"
+        },
+        {
+          "backArmor": "!v.is_first_person"
+        },
+        {
           "zavarm2": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
         },
         {

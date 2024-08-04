@@ -16,7 +16,7 @@ weapon.registerWeapon("crusher", (player, lib, event) => {
 
 	  lib.sp.minStamina("value", 10)// Stamina
 	  player.playAnimation("animation.weapon.crushing", { blendOutTime: 0.35 })// Animation
-	  lib.sp.runCommand([`camerashake add @s 1.2 0.08`,`damage @e[r=6,name=${lib.notSelf}] ${Math.floor((10*power+8) *lib.multiplier)} entity_attack entity @s`])
+	  lib.sp.runCommand([`camerashake add @s 1.2 0.08`,`damage @e[r=6,name=${lib.notSelf},type=!item] ${Math.floor((10*power+8) *lib.multiplier)} entity_attack entity @s`])
 	  if(player.isOnGround == true) enParticle(player, "cz:impact_particle")
 	} else if(player.isOnGround == false && player.isSneaking == false) {// Skill 3
 	  if(lib.sp.cooldown().isCd("crusher3", 6) == true) return
@@ -24,7 +24,7 @@ weapon.registerWeapon("crusher", (player, lib, event) => {
 	  lib.sp.minStamina("value", 19)// Stamina
 	  player.playAnimation("animation.kyle.slash", { blendOutTime: 0.35 })// Animation
 
-	  let target = player.getEntitiesFromViewDirection({ maxDistance: 6 })[0]
+	  let target = player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item"] })[0]
 	  if(!target) return
 	  let ent = new Entity(target.entity)
 
@@ -33,7 +33,7 @@ weapon.registerWeapon("crusher", (player, lib, event) => {
 	    ent.addEffect([{ name: "slowness", duration: 120, lvl: 1 }])
 	  }, 6)
 	} else {// Skill 1
-	  let entity = player.getEntitiesFromViewDirection({ maxDistance: 5 })[0];
+	  let entity = player.getEntitiesFromViewDirection({ maxDistance: 5, excludeTypes: ["minecraft:item"] })[0];
       if(!entity || entity == null || entity == undefined) return
 
       if(lib.sp.cooldown().isCd("crusher1", 3) == true) return
@@ -51,7 +51,7 @@ weapon.registerWeapon("crusher", (player, lib, event) => {
 // Bringer
 weapon.registerWeapon("bringer", (player, lib, event) => {
 	if(player.isSneaking) {// Skill 2
-		let entity = player.getEntitiesFromViewDirection({ maxDistance: 9 })[0]
+		let entity = player.getEntitiesFromViewDirection({ maxDistance: 9, excludeTypes: ["minecraft:item"] })[0]
 		if(!entity) return
 
 		if(lib.sp.cooldown().isCd("bringer2", 5) == true) return
@@ -73,8 +73,8 @@ weapon.registerWeapon("bringer", (player, lib, event) => {
 		lib.sp.addEffect([{ name: "resistance", duration: 12, lvl: 1 }])
 		lib.sp.bind(1.35)
 		system.runTimeout(() => {
-			lib.sp.runCommand([`damage @e[r=7,name=${lib.notSelf}] ${Math.floor(20 * lib.multiplier)} entity_attack entity @s`,`effect @e[r=7,name=${lib.notSelf}] wither 3 1 true`])
-		}, 11)
+			lib.sp.runCommand([`damage @e[r=7,name=${lib.notSelf},type=!item] ${Math.floor(20 * lib.multiplier)} entity_attack entity @s`,`effect @e[r=7,name=${lib.notSelf},type=!item] wither 3 1 true`])
+		}, 12)
 	} else {// Skill 1
 	    if(lib.sp.cooldown().isCd("bringer1", 1.5) == true) return
 
@@ -83,7 +83,7 @@ weapon.registerWeapon("bringer", (player, lib, event) => {
 		lib.sp.knockback(lib.velocity, 2.3, 0)
 
 		system.runTimeout(() => {
-			lib.sp.runCommand([`damage @e[r=4,name=${lib.notSelf}] ${Math.floor(12 * lib.multiplier)} entity_attack entity @s`,`effect @e[r=4,name=${lib.notSelf}] wither 3 1 true`])
+			lib.sp.runCommand([`damage @e[r=4,name=${lib.notSelf},type=!item] ${Math.floor(12 * lib.multiplier)} entity_attack entity @s`,`effect @e[r=4,name=${lib.notSelf}] wither 3 1 true`])
         }, 5)
 	}
 })
@@ -98,7 +98,7 @@ weapon.registerWeapon("berserk", async (player, lib, event) => {
 		lib.sp.status().addStatus("s-up", 10, { type: "skill", lvl: 10 })
 
 	    system.runTimeout(() => {
-			world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`] }).forEach(e => {
+			world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item"] }).forEach(e => {
 				new Entity(e).addDamage(player.getComponent("health").defaultValue/5, { cause: "entityAttack", damagingEntity: e })
 				lib.sp.addDamage(player.getComponent("health").defaultValue/10, { cause: "entityAttack", damagingEntity: e })
 				lib.berserk[player.id] = Math.floor(lib.berserk[player.id] + 6)
@@ -125,7 +125,7 @@ weapon.registerWeapon("berserk", async (player, lib, event) => {
 		lib.sp.minStamina("value", 8)
 
 		system.runTimeout(() => {
-			lib.sp.runCommand([`execute positioned ^^^2 run damage @e[name=${lib.notSelf},r=2.5] ${Math.floor(16 * lib.multiplier)} entity_attack entity @s`])
+			lib.sp.runCommand([`execute positioned ^^^2 run damage @e[name=${lib.notSelf},r=2.5,type=!item] ${Math.floor(16 * lib.multiplier)} entity_attack entity @s`])
 		}, 13)
 	}
 })
