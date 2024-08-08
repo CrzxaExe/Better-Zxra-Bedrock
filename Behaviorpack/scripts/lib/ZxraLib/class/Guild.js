@@ -225,6 +225,7 @@ class Guild {
 
     if(find === -1) return;
     data[find].act.lvl = value;
+    data[find].act.xp = 0;
     this.setGd(data)
   };
   resetLvl(id) {

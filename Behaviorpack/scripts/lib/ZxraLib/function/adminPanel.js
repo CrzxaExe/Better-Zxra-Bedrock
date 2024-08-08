@@ -9,6 +9,7 @@ const adminPanel = (player, lib) => {
     .body({ translate: "cz.adminPanel.body" })
     .button({ translate: "system.settings" })
     .button({ translate: "system.economy" })
+    .button({ translate: "system.guildLvl" })
     .button({ translate: "system.guildToken" })
     .button("Voxn")
     .button({ translate: "system.reset.leaderboard" })
@@ -20,9 +21,10 @@ const adminPanel = (player, lib) => {
       switch(e.selection) {
         case 0: settingPanel(player, lib); break;
         case 1: economy(player, lib); break;
-        case 2: guildToken(player, lib); break;
-        case 3: voxn(player, lib); break;
-        case 4: resetLb(player, lib); break;
+        case 2: guildLvl(player, lib); break;
+        case 3: guildToken(player, lib); break;
+        case 4: voxn(player, lib); break;
+        case 5: resetLb(player, lib); break;
       }
     })
 };
@@ -191,6 +193,36 @@ const guildToken = (player, lib) => {
         case 0: new Game().guild().addToken(guilds[id].id, amount); break;
         case 1: new Game().guild().minToken(guilds[id].id, amount); break;
         case 2: new Game().guild().setToken(guilds[id].id, amount); break;
+      }
+      
+      adminPanel(player, lib)
+    })
+};
+
+const guildLvl = (player, lib) => {
+  let guilds = new Game().guild().gd();
+  let ui = new ModalFormData()
+    .title({ translate: "system.guildLvl" })
+    .dropdown({ translate: "system.method.gdLvl" },[
+      { translate: "system.add" },
+      { translate: "system.min" },
+      { translate: "system.set" }
+    ])
+    .dropdown({ translate: "guild.name" }, guilds.map(r => r.name))
+    .textField({ translate: "type.value" },{ translate: "type.number" })
+    .show(player)
+    .then(e => {
+      if(e.canceled) return;
+
+      let [type, id, amount] = e.formValues;
+      if(!id) return;
+      
+      amount = Number(amount)
+      
+      switch(type) {
+        case 0: new Game().guild().addLvl(guilds[id].id, amount); break;
+        case 1: new Game().guild().minLvl(guilds[id].id, amount); break;
+        case 2: new Game().guild().setLvl(guilds[id].id, amount); break;
       }
       
       adminPanel(player, lib)

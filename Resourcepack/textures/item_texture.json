@@ -254,6 +254,9 @@
     "vial_fireres_def_2": {
       "textures": "textures/items/alchemy/fireres_def/2"
     },
+    "vial_stamina_drop_0": {
+      "textures": "textures/items/alchemy/stamina_drop/0"
+    },
     "netherite_steel_ingot": {
       "textures": "textures/items/netherite_steel_ingot"
     },

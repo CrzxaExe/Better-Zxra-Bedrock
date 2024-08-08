@@ -23,6 +23,12 @@ specialItem.useItem("vial_stamina_2", (player) => {
 	data.addThirst("value", 10)
 })
 
+specialItem.useItem("vial_stamina_drop_0", (player) => {
+	let data = new Specialist(player)
+	data.addThirst("value", 10)
+	data.status().addStatus("stamina_stuck", 60*1, { decay: "time", lvl: 1, stack: false, type: "st_stuck"})
+})
+
 // Atk Buff
 specialItem.useItem("vial_atk_0", (player) => {
 	let data = new Specialist(player)

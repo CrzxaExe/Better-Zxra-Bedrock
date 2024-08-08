@@ -410,6 +410,7 @@ system.guild.del=Ingin menghapus perserikatan
 system.guild.del1=? Ini akan terhapus secara permanen
 system.guild.delete=§4Hapus Perserikatan
 system.guild.edit=Ubah Perserikatan
+system.guild.full=Perserikatan telah penuh
 system.guild.have=Kamu telah bergabung ke persekutuan lain
 system.guild.noMember=Tidak Memiliki Anggota
 system.guild.isOwner=Kamu adalah pemilik Persikatan ini

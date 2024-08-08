@@ -1,4 +1,6 @@
 import { ActionFormData, ModalFormData, MessageFormData } from "@minecraft/server-ui";
+import { ItemStack, EnchantmentType, system } from "@minecraft/server";
+//import { MinecraftEnchantmentTypes } from "@minecraft/vanilla-data";
 import { Specialist } from "../../../system.js";
 import { Game } from "../module.js";
 
@@ -215,6 +217,7 @@ const guildJoin = (player, { id, name }) => {
       let gd = new Game().guild(), guild = gd.gd().find(r => r.member.some(d => d.id === player.id));
 
       if(guild) return player.sendMessage({ translate: "system.guild.have" })
+      if(gd.getGuildById(id).member.length + 1 > gd.getGuildById(id).maxMember) return player.sendMessage({ translate: "system.guild.full" })
 
       gd.addMemberGuild(id, player)
       player.sendMessage({ translate: "system.guild.joined" })
@@ -272,6 +275,9 @@ const guildAcc = (player, { id, apply, select }) => {
           player.sendMessage({ rawtext: [{ text: `${apply[select].username} ` },{ translate: "system.guild.rejected" }]})
           break;
         case 1:
+          if(new Game().guild().getGuildById(id).member.length + 1 > new Game().guild().getGuildById(id).maxMember)
+            return player.sendMessage({ translate: "system.guild.full" });
+
           new Game().guild().approveMemberGuild(id , apply[select]);
           player.sendMessage({ rawtext: [{ text: `${apply[select].username} ` },{ translate: "system.guild.accepted" }]})
           break;
@@ -370,19 +376,20 @@ const guildKick = (player, { member, id, select }) => {
 
 const guildShop = (player) => {
   let guild = new Game().guild().gd().find(e => e.member.some(r => r.id === player.id)),
-    shop = jsonData.guildShop.filter(r => r.lvl >= guild.act.lvl);
+    shop = jsonData.guildShop.filter(r => guild.act.lvl >= r.lvl);
 
   let ui = new ActionFormData()
     .title("cz:guild_shop")
     .body({ translate: "guild.shop.body" })
 
   shop.forEach(e => {
-    let name = e.item.replace("cz:", "").replace(/_/g, " ") || "none",
-      modName = name
+    let name = e.item.replace("cz:", "").replace("minecraft:","").replace(/_/g, " ") || "none";
+    if(e.enchant) name = "Book " + e.enchant.split("*")[0].split("_").map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(" ") + " Lvl" + e.enchant.split("*")[1];
+    let modName = name
         .split(" ")
         .map(e => e.charAt(0).toUpperCase() + e.slice(1))
         .join(" ");
-    ui.button(`${e.amount ? e.amount : "1"} ${modName}\n${e.price} Token`, e.img)
+    ui.button(`${e.amount ? e.amount > 1 ? e.amount+" " : "" : ""}${modName}\n${e.price} Token`, e.img)
   })
   
   ui.show(player)
@@ -394,7 +401,7 @@ const guildShop = (player) => {
 };
 
 const guildBuy = (player, { select, id, token, shop }) => {
-  let stack = shop[select], itm = stack.item.replace("cz:","").split("_").map(e => e.charAt(0).toUpperCase() + e.slice(1)).join(" ");
+  let stack = shop[select], itm = stack.item.replace("cz:","").replace("minecraft:", "").split("_").map(e => e.charAt(0).toUpperCase() + e.slice(1)).join(" ");
   let ui = new ModalFormData()
     .title({ rawtext: [{ translate: "guild.token" },{ text: ` ${token}` }]})
     .textField({ rawtext: [{ translate: "system.wantBuy" },{ text: ` ${stack.amount} ${itm} ${stack.price} ` },{ translate: "guild.token" }]}, { translate: "system.input.buy" })
@@ -407,6 +414,9 @@ const guildBuy = (player, { select, id, token, shop }) => {
       
       if(stack.price * amount > token)
         return player.sendMessage({ translate: "system.buy.outToken" });
+      
+      if(stack.enchant)
+        return guildBuyEnchant(player, { token, id, amount, item: stack.item, enchant: stack.enchant, price: stack.price })
 
       player.runCommand(`give @s ${stack.item} ${amount * stack.amount}`)
       player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${amount} ${itm} ` },{ translate: "system.buy2" },{ text: `${amount * stack.price} ` },{ translate: "guild.token" }]})
@@ -414,6 +424,21 @@ const guildBuy = (player, { select, id, token, shop }) => {
 
       guildShop(player)
     })
+};
+
+const guildBuyEnchant = (player, { amount, id, token, item, price, enchant }) => {
+  if(amount * price > token)
+    return player.sendMessage({ translate: "system.buy.outToken" });
+
+  let itemStack = new ItemStack(item)
+  itemStack.getComponent("enchantable").addEnchantment({ type: new EnchantmentType(enchant.split("*")[0]), level: Number(enchant.split("*")[1]) })
+
+  for(let i = 1;i<=amount;i++) {
+    player.getComponent("inventory").container.addItem(itemStack)
+  }
+
+  player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${amount} ${item} ` },{ translate: "system.buy2" },{ text: `${amount * price} ` },{ translate: "guild.token" }]})
+  new Game().guild().minToken(id, price*amount)
 };
 
 export { guildUi, guildList };

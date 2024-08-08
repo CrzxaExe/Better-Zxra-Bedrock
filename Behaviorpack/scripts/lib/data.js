@@ -9,6 +9,7 @@ export let setting = {
   staminaExhaust: 3,
   staminaRecovery: 1.5,
   staminaRun: 1.0,
+  thirstDown: 0.003,
   customChat: true,
   customChatPrefix: "%guild%name > %msg",
   shopMultiplier: 1.0,
@@ -83,7 +84,7 @@ export var shop = {
     { item: "copper_ingot", price: 0.4, img: "textures/items/copper_ingot" },
     { item: "diamond", price: 5.8, img: "textures/items/diamond" },
     { item: "cz:diamond_ingot", price: 10.6, img: "textures/items/diamond_ingot" },
-    { item: "iron_ingot", price: 2.6, img: "textures/items/iron_ingot" },
+    { item: "iron_ingot", price: 2.0, img: "textures/items/iron_ingot" },
     { item: "gold_ingot", price: 7.5, img: "textures/items/gold_ingot" },
     { item: "netherite_scrap", price: 9.4, img: "textures/items/netherite_scrap" },
     { item: "cz:plasma_ingot", price: 14.3, img: "textures/items/plasma/ingot" }
@@ -112,9 +113,12 @@ export var shop = {
     { item: "cooked_beef", price: 1.3, img: "textures/items/beef_cooked" },
     { item: "cooked_chicken", price: 1.0, img: "textures/items/chicken_cooked" },
     { item: "cooked_cod", price: 1.0, img: "textures/items/fish_cooked" },
-    { item: "cooked_mutton", price: 1.0, img: "textures/items/mutton_cooked" },
+    { item: "cooked_mutton", price: 1.1, img: "textures/items/mutton_cooked" },
+    { item: "cooked_porkchop", price: 1.3, img: "textures/items/porkchop_cooked" },
     { item: "cooked_salmon", price: 1.1, img: "textures/items/fish_salmon_cooked" },
     { item: "cookie", price: 0.6, img: "textures/items/cookie" },
+    { item: "mutton", price: 0.8, img: "textures/items/mutton_raw" },
+    { item: "porkchop", price: 1.0, img: "textures/items/porkchop_raw" },
     { item: "pumpkin_pie", price: 1.1, img: "textures/items/pumpkin_pie" },
     { item: "golden_carrot", price: 1.0, img: "textures/items/carrot_golden" },
     { item: "salmon", price: 0.9, img: "textures/items/fish_salmon_raw" },
@@ -130,30 +134,79 @@ export var shop = {
     { item: "gravel", price: 0.2, img: "textures/blocks/gravel" },
     { item: "ice", price: 0.4, img: "textures/blocks/ice" },
     { item: "netherrack", price: 0.3, img: "textures/blocks/netherrack" },
+    { item: "obsidian", price: 12.3, img: "textures/blocks/obsidian" },
     { item: "stone", price: 0.1, img: "textures/blocks/stone" }
   ],
   materials: [
     { item: "bone", price: 0.5, img: "textures/items/bone" },
     { item: "book", price: 1.2, img: "textures/items/book_normal" },
     { item: "cz:ender_shard", price: 4.8, img: "textures/items/ender_shard" },
+    { item: "flint", price: 0.4, img: "textures/items/flint" },
+    { item: "paper", price: 0.3, img: "textures/items/paper" },
+    { item: "quartz", price: 1.3, img: "textures/items/quartz" },
+    { item: "slimeball", price: 0.9, img: "textures/items/slimeball" },
+    { item: "sugar", price: 0.2, img: "textures/items/sugar" },
     { item: "string", price: 0.7, img: "textures/items/string" }
   ],
   redstone: [
-    { item: "piston", price: 3.2, img: "textures/blocks/piston_side" },
+    { item: "hopper", price: 10.3, img: "textures/items/hopper" },
+    { item: "lever", price: 0.9, img: "textures/items/lever" },
+    { item: "piston", price: 8.2, img: "textures/blocks/piston_side" },
     { item: "redstone", price: 0.7, img: "textures/items/redstone_dust" },
     { item: "redstone_block", price: 6.1, img: "textures/blocks/redstone_block" },
     { item: "redstone_lamp", price: 2.4, img: "textures/blocks/redstone_lamp_off" },
     { item: "redstone_torch", price: 1.4, img: "textures/blocks/redstone_torch_on" }
   ],
   special: [
-    { item: "cz:card_of_return", price: 5, voxn: true, img: "textures/items/cards/teleport" },
-    { item: "cz:card_of_teleportation", price: 6, voxn: true, img: "textures/items/cards/teleport" },
-    { item: "cz:card_of_worldspawn", price: 5, voxn: true, img: "textures/items/cards/teleport" }
+    { item: "cz:card_of_return", price: 6, voxn: true, img: "textures/items/cards/teleport" },
+    { item: "cz:card_of_teleportation", price: 7, voxn: true, img: "textures/items/cards/teleport" },
+    { item: "cz:card_of_worldspawn", price: 6, voxn: true, img: "textures/items/cards/teleport" }
   ]
 }
 
 export const guildShop = [
-  { item: "totem_of_undying", amount: 2, price: 11, lvl: 0, img: "textures/items/totem" },
+  { item: "minecraft:enchanted_book", enchant: "aqua_affinity*1", amount: 1, price: 23, lvl: 5, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "bane_of_arthropods*1", amount: 1, price: 25, lvl: 5, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "blast_protection*1", amount: 1, price: 26, lvl: 5, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "breach*1", amount: 1, price: 25, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "channeling*1", amount: 1, price: 30, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "density*1", amount: 1, price: 40, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "depth_strider*1", amount: 1, price: 29, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "efficiency*1", amount: 1, price: 27, lvl: 5, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "feather_falling*1", amount: 1, price: 30, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "fire_aspect*1", amount: 1, price: 28, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "fire_protection*1", amount: 1, price: 26, lvl: 5, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "flame*1", amount: 1, price: 28, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "fortune*1", amount: 1, price: 32, lvl: 7, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "frost_walker*1", amount: 1, price: 28, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "impaling*1", amount: 1, price: 30, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "infinity*1", amount: 1, price: 38, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "knockback*1", amount: 1, price: 29, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "looting*1", amount: 1, price: 31, lvl: 7, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "loyalty*1", amount: 1, price: 28, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "luck_of_the_sea*1", amount: 1, price: 23, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "lure*1", amount: 1, price: 30, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "mending*1", amount: 1, price: 48, lvl: 10, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "multishot*1", amount: 1, price: 35, lvl: 7, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "piercing*1", amount: 1, price: 26, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "power*1", amount: 1, price: 32, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "projectile_protection*1", amount: 1, price: 26, lvl: 5, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "protection*1", amount: 1, price: 26, lvl: 5, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "punch*1", amount: 1, price: 27, lvl: 7, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "quick_charge*1", amount: 1, price: 26, lvl: 7, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "respiration*1", amount: 1, price: 32, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "riptide*1", amount: 1, price: 32, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "sharpness*1", amount: 1, price: 38, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "silk_touch*1", amount: 1, price: 35, lvl: 7, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "smite*1", amount: 1, price: 25, lvl: 5, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "soul_speed*1", amount: 1, price: 30, lvl: 7, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "swift_sneak*1", amount: 1, price: 32, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "thorns*1", amount: 1, price: 38, lvl: 7, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "unbreaking*1", amount: 1, price: 35, lvl: 6, img: "textures/items/book_enchanted" },
+  { item: "minecraft:enchanted_book", enchant: "wind_burst*1", amount: 1, price: 32, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "golden_apple", amount: 6, price: 20, lvl: 0, img: "textures/items/apple_golden" },
+  { item: "shulker_shell", amount: 6, price: 25, lvl: 7, img: "textures/items/shulker_shell" },
+  { item: "totem_of_undying", amount: 2, price: 19, lvl: 0, img: "textures/items/totem" },
   { item: "cz:quest_scroll", amount: 1, price: 5, lvl: 0, img: "textures/items/quest_scroll" }
 ]
 
@@ -174,7 +227,7 @@ export let npcFile = {
     emotion: 0,
     status: [],
     stat: {
-	  talkMaxOptions: 3,
+	  talkMaxOptions: 2,
       maxMood: 3,
       emotions: [
         "angry",
@@ -558,7 +611,7 @@ export let questIndex = [
   {
 	title: "quest.no17",
 	des: "quest.no17.des",
-	rep: 100,
+	rep: 10_000_000,
 	task: [
 	  { act: "destroy", target: "gold_ore", amount: 140 },
 	  { act: "destroy", target: "iron_ore", amount: 140 },
@@ -575,7 +628,7 @@ export let questIndex = [
   {
 	title: "quest.no18",
 	des: "quest.no18.des",
-	rep: 30,
+	rep: 30_000_000,
 	task: [
 	  { act: "kill", target: "pig", amount: 89 },
 	  { act: "kill", target: "rabbit", amount: 32 }
@@ -590,7 +643,7 @@ export let questIndex = [
   {
 	title: "quest.no19",
 	des: "quest.no19.des",
-	rep: 50,
+	rep: 50_000_000,
 	task: [
 	  { act: "kill", target: "drowned", amount: 100 },
 	  { act: "kill", target: "zombie", amount: 64 }
@@ -606,7 +659,7 @@ export let questIndex = [
   {
 	title: "quest.no20",
 	des: "quest.no20.des",
-	rep: 0,
+	rep: 10_000_000,
 	task: [
 	  { act: "kill", target: "drowned", amount: 36 }
 	],

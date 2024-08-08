@@ -46,8 +46,8 @@ let shopPanel = (plyr, lib) => {
 		// Button item factory
 		shops[menu].forEach(i => {
 	      let name = i.item.replace("cz:", "").replace(/_/gi, " "), img = i.img || ""
-	      if(i.voxn) return bol.button(`§l§e${name.charAt(0).toUpperCase() + name.slice(1)}\n${i.price} Voxn`, img)
-          bol.button(`§l§e${name.charAt(0).toUpperCase() + name.slice(1)}\n$${(i.price * day).toFixed(2)}`, img)
+	      if(i.voxn) return bol.button(`${name.charAt(0).toUpperCase() + name.slice(1)}\n${i.price} Voxn`, img)
+          bol.button(`${name.charAt(0).toUpperCase() + name.slice(1)}\n$${(i.price * day).toFixed(2)}`, img)
           
         })
 

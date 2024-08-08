@@ -241,7 +241,7 @@
           "anchor_to": "top_left",
           "anchor_from": "top_left",
           "$show_background": false,
-          "size": [ "100%", "100%" ],
+          "size": [ "100%", "97%" ],
           "$scrolling_content": "server_form.shop_scrolling_content",
           "$scroll_size": [ 5, "100% - 4px" ],
           "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
@@ -457,7 +457,7 @@
 
   "shop_button": {
     "type": "panel",
-    "size": [96, 50],
+    "size": [96, 60],
     "alpha": 0.7,
     "controls":[
       {
@@ -479,6 +479,7 @@
               "image": {
                 "type": "image",
                 "layer": 4,
+                "alpha": 0.6,
                 "anchor_from": "center",
                 "size": [34, 34],
                 "offset": [-18, -2],
@@ -511,12 +512,12 @@
           "$pressed_button_name": "button.form_button_click",
           "anchor_from": "top_left",
           "anchor_to": "top_left",
-          "size": [ 96, 50 ],
+          "size": [ 96, 60 ],
           "$button_text": "#form_button_text",
           "$button_text_binding_type": "collection",
           "$button_text_grid_collection_name": "form_buttons",
           "$button_text_max_size": [ "110%", 45 ],
-          "$default_text_color": [0.35,0.95,0.88],
+          "$default_text_color": [0.38,0.95,0.91],
           "$button_font_scale_factor": 1,
           "$text_layer": 6,
           "bindings": [

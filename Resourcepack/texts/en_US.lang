@@ -410,6 +410,7 @@ system.guild.del=Want to delete
 system.guild.del1=Guild? It will delete permanently
 system.guild.delete=§4Delete Guild
 system.guild.edit=Edit Guild
+system.guild.full=Guild was full
 system.guild.have=You has joined to another guild
 system.guild.isOwner=You are the owner of this guild
 system.guild.join=Join Guild

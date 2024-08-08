@@ -479,7 +479,7 @@ export class Specialist extends Entity {
 		return this.getData().stamina;
 	};
 	addStamina(key, amount) {
-		if(["creative","spectator"].includes(this.player.getGameMode()))
+		if((["creative","spectator"].includes(this.player.getGameMode()) && amount < 1) || this.status().getStatusBy({ type: "st_stuck" }) )
 		  return;
 
 		let data = this.getData(), total = data.stamina[key] + Number(amount);
@@ -489,6 +489,7 @@ export class Specialist extends Entity {
 		this.setData(data);
 	};
 	minStamina(key, amount) {
+		if(this.status().getStatusBy({ type: "st_stuck" })) return;
 		this.addStamina(key, -Number(amount));
 	};
 	setStamina(key, value) {
@@ -501,11 +502,8 @@ export class Specialist extends Entity {
 		this.setStamina("value", this.getStamina().max + this.getStamina().add);
 	};
 	controllerStamina({ options }) {
-		if(["creative","spectator"].includes(this.player.getGameMode()))
-		  return;
-
 		let data = this.getStamina(), stm = options.staminaRecovery || 1.5, runOut = options.staminaRun || 1, cd = this.cooldown(), sts = this.status();
-		let down = sts.getStatusBy({ type: "stamina_down" }), exhaust = sts.getStatusBy({ type: "stamina_exhaust" }), up = sts.getStatusBy({ type: "stamina_up" }), additional = data.add || 0;
+		let exhaust = sts.getStatusBy({ type: "stamina_exhaust" }), up = sts.getStatusBy({ type: "stamina_up" }), additional = data.add || 0;
 
 		if(this.player.isSprinting == true || this.player.isSwimming == true) {
 			data.value - runOut <= 0 ? this.setStamina("value", 0) : stm = -runOut;
