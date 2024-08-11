@@ -169,7 +169,7 @@ class status {
 	}
 	// Damage Up Status
 	dmgStat(plus = false) {
-		let data = this.getData(), filter = data.status.filter(e => e.type == "damage")
+		let filter = this.getData().status.filter(e => e.type == "damage")
 		let multiplier = 1
 		if(plus) multiplier = 0
 
@@ -180,13 +180,16 @@ class status {
 	}
 	// Skill Up Status
 	skillStat() {
-		let data = this.getData(), multiplier = this.dmgStat(), filter = data.status.filter(e => e.type == "skill")
+		let filter = this.getData().status.filter(e => e.type == "skill")
 
-		filter.forEach(e => {
-			multiplier = multiplier + (e.lvl * 0.01);
-		})
-		return multiplier
+		return filter.reduce((all, cur) => all += cur.lvl * 0.01, this.dmgStat())
 	}
+	// Stamina Recovery Status
+	staminaUpStat() {
+		let filter = this.getData().status.filter(e => e.type == "stamina_up");
+
+		return filter.reduce((all, cur) => all += cur.lvl * 0.01, 1)
+    }
 	
 }
 

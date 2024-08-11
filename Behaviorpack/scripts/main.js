@@ -105,8 +105,8 @@ world.beforeEvents.chatSend.subscribe(async e => {
 
     function sendMsgEvent() {
       const guild = new Game().guild().gd().find(s => s.member.some(r => r.id === e.sender.id));
-      world.sendMessage(
-        options.customChatPrefix
+      world.sendMessage({
+        text: options.customChatPrefix
           .replace(/%name/gi, e.sender.name)
           .replace(/%msg/gi, msg.join(" "))
           .replace(/%lvl/gi, e.sender.level)
@@ -121,7 +121,9 @@ world.beforeEvents.chatSend.subscribe(async e => {
           *. %rep    = Player Reputation
           *. %guild  = Player Guild - Visible when player has/join guild
           */
-      );
+          // fix issue % is missing
+          .replace(/%/gi, "percen")
+      });
       new Game().leaderboard().addLb(e.sender, { amount: 1, type: "chatting" })
     }
 

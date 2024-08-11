@@ -150,7 +150,7 @@ pasif.addHitedPasif("century", (user, target, { sp }) => {
 // Pasif Katana
 pasif.addHitPasif("katana", (user, target, option) => {
 	if(!user || !target || target.typeId.split(":")[1] === "item") return;
-	let dmg = 11;
+	let dmg = 11 - option.item.getTier();
 
 	switch(user.getComponent("inventory").container.getSlot(user.selectedSlotIndex).typeId.split(":")[1]) {
 		case "silent":// Pasif In Leaf
@@ -181,7 +181,7 @@ pasif.addHitPasif("katana", (user, target, option) => {
 	      break;
 	}
 
-	if(target.isOnGround == false || option.ent.hasDebuffEffect()) dmg += Math.floor(18 - Number(option.item.getTier()));
+	if(target.isOnGround == false || option.ent.hasDebuffEffect()) dmg += Math.floor(9 - Number(option.item.getTier()));
     
     target.applyDamage(dmg * option.multiplier, { cause: "entityAttack", damagingEntity: user })
 })

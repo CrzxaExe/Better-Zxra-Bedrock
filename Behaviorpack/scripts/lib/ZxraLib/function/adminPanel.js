@@ -104,7 +104,7 @@ const resetLb = (player, lib) => {
     .show(player)
     .then(e => {
       if(e.canceled || !e.selection || e.selection === 0)
-        return;
+        return adminPanel(player, lib);
 
       player.sendMessage({ translate: "system.reseted.leaderboard" })
       new Game().leaderboard().resetLb()
@@ -124,7 +124,7 @@ const economy = (player, lib) => {
     .textField({ translate: "type.value" },{ translate: "type.number" })
     .show(player)
     .then(e => {
-      if(e.canceled) return;
+      if(e.canceled) return adminPanel(player, lib);
 
       let [type, id, value] = e.formValues, plyr = players[id];
       if(!plyr)
@@ -136,8 +136,6 @@ const economy = (player, lib) => {
         case 1: sp.takeMoney(value); break;
         case 2: sp.setMoney(value); break;
       }
-
-      adminPanel(player, lib)
     })
 };
 
@@ -154,7 +152,7 @@ const voxn = (player, lib) => {
     .textField({ translate: "type.value" },{ translate: "type.number" })
     .show(player)
     .then(e => {
-      if(e.canceled) return;
+      if(e.canceled) return adminPanel(player, lib);
 
       let [type, id, value] = e.formValues, plyr = players[id];
       if(!plyr)
@@ -166,8 +164,6 @@ const voxn = (player, lib) => {
         case 1: sp.minVoxn(value); break;
         case 2: sp.setVoxn(value); break;
       }
-
-      adminPanel(player, lib)
     })
 };
 
@@ -184,7 +180,7 @@ const guildToken = (player, lib) => {
     .textField({ translate: "type.value" },{ translate: "type.number" })
     .show(player)
     .then(e => {
-      if(e.canceled) return;
+      if(e.canceled) return adminPanel(player, lib);
 
       let [type, id, amount] = e.formValues;
       if(!id) return;
@@ -194,8 +190,6 @@ const guildToken = (player, lib) => {
         case 1: new Game().guild().minToken(guilds[id].id, amount); break;
         case 2: new Game().guild().setToken(guilds[id].id, amount); break;
       }
-      
-      adminPanel(player, lib)
     })
 };
 
@@ -212,7 +206,7 @@ const guildLvl = (player, lib) => {
     .textField({ translate: "type.value" },{ translate: "type.number" })
     .show(player)
     .then(e => {
-      if(e.canceled) return;
+      if(e.canceled) return adminPanel(player, lib);
 
       let [type, id, amount] = e.formValues;
       if(!id) return;
@@ -224,8 +218,6 @@ const guildLvl = (player, lib) => {
         case 1: new Game().guild().minLvl(guilds[id].id, amount); break;
         case 2: new Game().guild().setLvl(guilds[id].id, amount); break;
       }
-      
-      adminPanel(player, lib)
     })
 };
 

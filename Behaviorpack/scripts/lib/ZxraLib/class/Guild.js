@@ -119,7 +119,7 @@ class Guild {
     this.rejectMemberGuild(id, player)
   };
 
-  applyMemberGuild(id, obj) {
+  applyMemberGuild(id, player) {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
     if(find === -1) return;

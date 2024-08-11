@@ -18,7 +18,8 @@
       },
       "minecraft:health": {
         "value": 10,
-        "max": 10
+        "max": 10,
+        "min": 1
       },
       "minecraft:movement": {
         "value": 0.18
@@ -99,7 +100,7 @@
           "priority": 2,
           "speed_multiplier": 5,
           "start_distance": 5,
-          "stop_distance": 2.5
+          "stop_distance": 2
         },
         "minecraft:damage_sensor": {
           "triggers": [

@@ -80,7 +80,7 @@
         "minecraft:projectile": {
           "on_hit": {
             "impact_damage": {
-              "damage": 64,
+              "damage": 18,
               "destroy_on_hit": false,
               "knockback": true
             },
@@ -103,7 +103,7 @@
           ]
         },
         "minecraft:timer": {
-          "time": 10,
+          "time": 6,
           "looping": false,
           "time_down_event": {
             "event": "minecraft:despawn"

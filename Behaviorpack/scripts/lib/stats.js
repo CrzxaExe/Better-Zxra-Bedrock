@@ -52,7 +52,7 @@ export const destiny = [
 export const skyler = [
  "§rType Sword/§dArtSword",
  "§rRarity §dUnique",
- "Tag: Debuff, DOT, Dps",
+ "Tag: Debuff, DOT, Dps, Elemental",
  " ",
  "§rPasif: §3[Fireing]§r, §3[Burns Out]",
  "§rSkill:",
@@ -127,9 +127,9 @@ export const destreza = [
 ]
 
 export const boltizer = [
- "§rType Sword -§dArtsword",
+ "§rType Sword/§dArtsword",
  "§rRarity §dUnique",
- "Tag: Debuff, Nuker, Dps",
+ "Tag: Debuff, Nuker, Dps, Elemental",
  " ",
  "§rPasif: §3[Electicity]§r, §3[ArChain]",
  "§rSkill:",
@@ -193,14 +193,14 @@ export const bringer = [
 ]
 
 export const musha = [
-  "§rType §dKatana",
+  "§rType Sword/§dKatana",
   "§rRarity §dLegend",
-  "Tag: Force, DPS",
+  "Tag: DPS",
   " ",
   "§rPasif: §3[Decisive]",
   "§rSkill:",
-  "§r[1]§3",
-  "§r[2]§3"
+  "§r[1]§3 No Jump",
+  "§r[2]§3 Jump"
 ]
 
 export const katana = [

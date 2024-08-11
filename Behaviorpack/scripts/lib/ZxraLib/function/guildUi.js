@@ -238,7 +238,7 @@ const guildRequest = (player, { id, name }) => {
 
       if(guild) return player.sendMessage({ translate: "system.guild.have" })
 
-      gd.applyMemberGuild(id, player.id)
+      gd.applyMemberGuild(id, player)
       player.sendMessage({ translate: "system.guild.requested" })
     })
 };

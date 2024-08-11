@@ -23,10 +23,16 @@ specialItem.useItem("vial_stamina_2", (player) => {
 	data.addThirst("value", 10)
 })
 
-specialItem.useItem("vial_stamina_drop_0", (player) => {
+specialItem.useItem("vial_stamina_stuck_0", (player) => {
 	let data = new Specialist(player)
 	data.addThirst("value", 10)
-	data.status().addStatus("stamina_stuck", 60*1, { decay: "time", lvl: 1, stack: false, type: "st_stuck"})
+	data.status().addStatus("stamina_stuck", 60*0.8, { decay: "time", lvl: 1, stack: false, type: "st_stuck"})
+})
+
+specialItem.useItem("vial_stamina_recovery_0", (player) => {
+	let data = new Specialist(player)
+	data.addThirst("value", 10)
+	data.status().addStatus("stamina_recovery", 60*1, { decay: "time", lvl: 1, stack: false, type: "st_recovery"})
 })
 
 // Atk Buff

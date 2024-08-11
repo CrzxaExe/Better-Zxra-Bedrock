@@ -60,8 +60,8 @@
           "on_hit": {
             "impact_damage": {
               "damage": [
-                20,
-                50
+                12,
+                15
               ],
               "destroy_on_hit": true
             }
@@ -95,8 +95,8 @@
           "on_hit": {
             "impact_damage": {
               "damage": [
-                60,
-                65
+                15,
+                17
               ]
             },
             "definition_event": {

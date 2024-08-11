@@ -1,0 +1,29 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:blue_brick_concrete"
+    },
+    "pattern": [
+      "PP",
+      "PP"
+    ],
+    "key": {
+      "P": {
+        "item": "minecraft:blue_concrete"
+      }
+    },
+    "result": {
+      "item": "cz:blue_brick_concrete",
+      "count": 4
+    },
+    "tags": [
+      "workbench"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:concrete"
+      }
+    ]
+  }
+}

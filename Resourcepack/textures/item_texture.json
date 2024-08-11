@@ -254,8 +254,11 @@
     "vial_fireres_def_2": {
       "textures": "textures/items/alchemy/fireres_def/2"
     },
-    "vial_stamina_drop_0": {
-      "textures": "textures/items/alchemy/stamina_drop/0"
+    "vial_stamina_stuck_0": {
+      "textures": "textures/items/alchemy/stamina_stuck/0"
+    },
+    "vial_stamina_recovery_0": {
+      "textures": "textures/items/alchemy/stamina_recovery/0"
     },
     "netherite_steel_ingot": {
       "textures": "textures/items/netherite_steel_ingot"
