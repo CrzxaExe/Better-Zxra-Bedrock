@@ -97,7 +97,7 @@
         }
       },
       "cz:change_1": {
-        "run_command": {
+        "queue_command": {
           "command": []
         }
       }

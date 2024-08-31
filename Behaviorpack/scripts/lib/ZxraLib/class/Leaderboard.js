@@ -47,7 +47,7 @@ class Leaderboard extends Game {
         switch(r.selection) {
           case 0:
             let chat = data.chatting
-              .sort((a, b) => a.count > b.count)
+              .sort((a, b) => b.count - a.count)
               .reduce((arr, r, i) => {
                 arr.push({ text: `\n${i+1}. ${r.name} - ` },{ translate: "system.chat" },{ text: ` ${r.count}`})
                 return arr
@@ -56,7 +56,7 @@ class Leaderboard extends Game {
             break;
           case 1:
             let death = data.deaths
-              .sort((a, b) => a.count > b.count)
+              .sort((a, b) => b.count - a.count)
               .reduce((arr, r, i) => {
                 arr.push({ text: `\n${i+1}. ${r.name} -` },{ text: ` ${r.count} `},{ translate: "system.death" })
                 return arr
@@ -65,14 +65,14 @@ class Leaderboard extends Game {
             break;
           case 2:
             let guilds = new Game().guild().gd()
-              .sort((a, b) => a - b)
+              .sort((a, b) => b - a)
               .map((e, i) => `\n${i+1}. ${e.name}§r lvl ${e.act.lvl}`)
               .join("")
             gui2.title({ translate: "cz.leaderboard.guild" }).body({ rawtext: [{ translate: "cz.leaderboard.guild.body" },{ text: guilds }]}).button({ translate: "system.yes" }).show(player)
             break;
           case 3:
             let kill = data.kills
-              .sort((a, b) => a.count > b.count)
+              .sort((a, b) => b.count - a.count)
               .reduce((arr, r, i) => {
                 arr.push({ text: `\n${i+1}. ${r.name} - ` },{ translate: "system.kill" },{ text: ` ${r.count} mob`})
                 return arr
@@ -85,7 +85,7 @@ class Leaderboard extends Game {
               
               return { id: t.id, name: t.name, money: sp.money };
             })
-            .sort((a, b) => a.money > b.money)
+            .sort((a, b) => b.money - a.money)
             .reduce((arr, r, i) => {
                arr.push({ text: `\n${i+1}. ${r.name} - $${r.money}`})
                return arr
@@ -98,7 +98,7 @@ class Leaderboard extends Game {
               
               return { id: t.id, name: t.name, rep: sp.reputation };
             })
-            .sort((a, b) => a.rep > b.rep)
+            .sort((a, b) => b.rep - a.rep)
             .reduce((arr, r, i) => {
                arr.push({ text: `\n${i+1} ${r.name} ` },{ translate: "system.rep" },{ text: ` ${r.rep}`})
                return arr
@@ -111,7 +111,7 @@ class Leaderboard extends Game {
               
               return { id: t.id, name: t.name, specialist: sp.specialist.lvl };
             })
-            .sort((a, b) => a.specialist > b.specialist)
+            .sort((a, b) => b.specialist - a.specialist)
             .reduce((arr, r, i) => {
                arr.push({ text: `\n${i+1}. ${r.name} - ` },{ translate: "system.sp" },{ text: ` ${r.specialist}`})
                return arr
@@ -124,7 +124,7 @@ class Leaderboard extends Game {
               
               return { id: t.id, name: t.name, voxn: sp.voxn };
             })
-            .sort((a, b) => a.voxn > b.voxn)
+            .sort((a, b) => b.voxn - a.voxn)
             .reduce((arr, r, i) => {
                arr.push({ text: `\n${i+1}. ${r.name} - ${r.voxn} Voxn`})
                return arr

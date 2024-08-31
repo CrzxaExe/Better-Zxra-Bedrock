@@ -18,7 +18,7 @@
                 "any_of": [
                   {
                     "test": "rider_count",
-                    "value": false,
+                    "value": 1,
                     "subject": "self"
                   },
                   {
@@ -111,7 +111,7 @@
             }
           },
           {
-            "run_command": {
+            "queue_command": {
               "command": []
             }
           }
@@ -134,7 +134,7 @@
             }
           },
           {
-            "run_command": {
+            "queue_command": {
               "command": []
             }
           }

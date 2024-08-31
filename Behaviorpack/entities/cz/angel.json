@@ -106,7 +106,7 @@
             }
           },
           {
-            "run_command": {
+            "queue_command": {
               "command": [
                 "playanimation @s animation.angel.spawn ii 1"
               ]
@@ -166,7 +166,7 @@
             "summon_20"
           ]
         },
-        "run_command": {
+        "queue_command": {
           "command": [
             "effect @s instant_health 1 2 true"
           ]

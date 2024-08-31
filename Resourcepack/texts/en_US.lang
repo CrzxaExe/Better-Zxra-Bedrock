@@ -1,5 +1,7 @@
 action.hint.exit.cz:seat=Sneak or jump to stand
 
+cmd.announce=Announcement chat
+cmd.fchat=Fake chat
 cmd.give=/give command but batch version
 cmd.gma=Change to gamemode adventure
 cmd.gmc=Change to gamemode creative
@@ -318,6 +320,7 @@ option.starterItem=Starter Item
 option.starterItemMessage=Starter Item Message (Translate)
 option.starterItems=Starter Items Form
 option.submit=Change Settings
+option.thirstDown=Thirst Decay
 option.uiLevelRequirement=Ui Level Requirement
 option.xpMultiplier=XP Multiplier
 
@@ -376,6 +379,7 @@ system.acc.info=Do you want to accept this?
 system.add=Add
 system.addDay=Day add
 system.addTime=Time add
+system.announcement.pronounce=[§4Announcement§r]
 system.buy=You just bought 
 system.buy2=for 
 system.buy.amount=Amount of item

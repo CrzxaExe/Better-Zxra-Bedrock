@@ -2,6 +2,183 @@
   "pools": [
     {
       "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:wooden_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:stone_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:iron_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:golden_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:diamond_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:netherite_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:dexterite_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:chloropythe_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:plasma_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:mina_axe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:minarite_axe",
+          "count": 1
+        }
+      ],
       "entries": [
         {
           "type": "item",

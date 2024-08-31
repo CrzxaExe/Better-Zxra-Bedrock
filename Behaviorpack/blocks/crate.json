@@ -1,35 +1,22 @@
 {
-  "format_version": "1.16.100",
+  "format_version": "1.21.20",
   "minecraft:block": {
     "description": {
-      "identifier": "cz:crate"
+      "identifier": "cz:crate",
+      "menu_category": {
+        "category": "items"
+      }
     },
     "components": {
-      "minecraft:creative_category": {
-        "category": "items",
-        "group": "none"
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.8
       },
-      "minecraft:destroy_time": 5.0,
       "minecraft:friction": 0.6,
       "minecraft:map_color": "#8c660b",
-      "minecraft:flammable": {
-        "flame_odds": 50,
-        "burn_odds": 0
-      },
-      "minecraft:loot": "loot_tables/empty.json",
-      "minecraft:on_player_destroyed": {
-        "event": "drop",
-        "target": "self"
-      },
-      "minecraft:display_name": "crate",
+      "minecraft:flammable": true,
+      "minecraft:loot": "loot_tables/block/crate.json",
       "tag:wood": {}
     },
-    "events": {
-      "drop": {
-        "spawn_loot": {
-          "table": "loot_tables/block/crate"
-        }
-      }
-    }
+    "events": {}
   }
 }

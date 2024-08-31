@@ -118,7 +118,7 @@ Command.addCmd("time", (player, { msg, rawMsg }) => {
 // Give multiple
 Command.addCmd("give", (player, { msg, rawMsg }) => {
   if(!player) return
-  let gm = new Game(world), target = msg[1] || player.name, items = rawMsg.split(" ").slice(2).map(r => { return { item: r.split("*")[0], amount: r.split("*")[1]} }), allPlayers = world.getAllPlayers()
+  let gm = new Game(), target = msg[1] || player.name, items = rawMsg.split(" ").slice(2).map(r => { return { item: r.split("*")[0], amount: r.split("*")[1]} }), allPlayers = world.getAllPlayers()
   system.run(() => {
     try {
       switch(msg[1]) {
@@ -159,3 +159,28 @@ Command.addCmd("tsp", (player) => {
   if(!loc) return player.sendMessage({ translate: "system.cannot.teleport" });
   system.run(() => player.runCommand(`execute in ${loc.dimension.id.split(":")[1]} run tp @s ${loc.x} ${loc.y} ${loc.z}`))
 }, { des: "cmd.tsp", admin: true })
+
+// Fake Chat
+Command.addCmd("fchat", (player, { msg, rawMsg, functions }) => {
+  let target = new Game().getPlayerName(msg[1])
+
+  if (!target)
+    return player.sendMessage({ translate: "system.invalidPlayer" });
+  
+  system.run(() => {
+    functions.sendMsgEvent(target, msg.slice(2), new Specialist(target).getData())
+  })
+}, { des: "cmd.fchat", admin: true })
+
+// Announcement Chat
+Command.addCmd("announce", (player, { msg }) => {
+  system.run(() => {
+    world.sendMessage({
+      rawtext: [
+        { translate: "system.announcement.pronounce" },
+        { text: `\n${msg.slice(1).join(" ")}` },
+        { text: `\n- ${player.name}` }
+      ]
+    })
+  })
+}, { des: "cmd.announce", admin: true })

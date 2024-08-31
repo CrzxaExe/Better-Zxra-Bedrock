@@ -824,7 +824,7 @@
             "life_2"
           ]
         },
-        "run_command": {
+        "queue_command": {
           "command": [
             "effect @s instant_damage 1 255"
           ]

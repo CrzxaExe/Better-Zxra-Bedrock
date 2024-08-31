@@ -5,7 +5,7 @@
     0
   ],
   "cz:crate": {
-    "sound": "plank",
+    "sound": "wood",
     "textures": "crate"
   },
   "cz:plasma_core": {
@@ -17,49 +17,49 @@
     "textures": "forge"
   },
   "cz:plate": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:workbench": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:alchemy_set": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:altar": {
     "sound": "stone"
   },
   "cz:oak_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:warped_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:bamboo_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:cherry_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:crimson_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:jungle_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:mangrove_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:dark_oak_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:birch_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:spruce_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:acacia_chair": {
-    "sound": "plank"
+    "sound": "wood"
   },
   "cz:dexterite_ore": {
     "sound": "stone",

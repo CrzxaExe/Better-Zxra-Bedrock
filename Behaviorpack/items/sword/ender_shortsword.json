@@ -1,5 +1,5 @@
 {
-  "format_version": "1.20.20",
+  "format_version": "1.21.10",
   "minecraft:item": {
     "description": {
       "identifier": "cz:ender_shortsword",
@@ -14,9 +14,7 @@
       "minecraft:hand_equipped": true,
       "minecraft:damage": 13,
       "minecraft:can_destroy_in_creative": false,
-      "minecraft:icon": {
-        "texture": "ender_shortsword"
-      },
+      "minecraft:icon": "ender_shortsword",
       "minecraft:display_name": {
         "value": "item.ender_sword.name"
       },
@@ -43,106 +41,57 @@
         "value": 15
       },
       "minecraft:mining_speed": 1.5,
-      "minecraft:weapon": {
-        "on_hurt_entity": {
-          "event": "lose_durability"
-        }
-      },
       "minecraft:digger": {
         "use_efficiency": true,
         "destroy_speeds": [
           {
             "block": "minecraft:monster_egg",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:web",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:bamboo",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:pumpkin",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:lit_pumpkin",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:leaves",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:leaves9",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:cocoa",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:vine",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:hay_block",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           },
           {
             "block": "minecraft:target",
-            "speed": 9,
-            "on_dig": {
-              "event": "lose_durability"
-            }
+            "speed": 9
           }
-        ],
-        "on_dig": {
-          "event": "lose_durability"
-        }
+        ]
       },
-      "tag:minecraft:is_sword": {}
-    },
-    "events": {
-      "lose_durability": {
-        "damage": {
-          "type": "none",
-          "amount": 1,
-          "target": "self"
-        }
-      }
+      "tag:minecraft:is_sword": {},
+      "minecraft:custom_components": ["cz:durability"]
     }
   }
 }

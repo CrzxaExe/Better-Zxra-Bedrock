@@ -34,6 +34,7 @@ const settingPanel = (player, lib) => {
     useBzbRules,
     debug,
     staminaCooldown, staminaExhaust, staminaRun, staminaRecovery,
+    thirstDown,
     customChat, customChatPrefix,
     shopMultiplier,
     xpMultiplier,
@@ -51,6 +52,7 @@ const settingPanel = (player, lib) => {
     .textField({ translate: "option.staminaExhaust" }, { translate: "type.float" }, `${staminaExhaust}`)
     .textField({ translate: "option.staminaRecovery" }, { translate: "type.float" }, `${staminaRecovery}`)
     .textField({ translate: "option.staminaRun" }, { translate: "type.float" }, `${staminaRun}`)
+    .textField({ translate: "option.thirstDown" }, { translate: "type.float" }, `${thirstDown}`)
     .toggle({ translate: "option.customChat" }, customChat)
     .textField({ translate: "option.customChatPrefix" }, { translate: "type.string" }, `${customChatPrefix}`)
     .textField({ translate: "option.shopMultiplier" }, { translate: "type.float" }, `${shopMultiplier}`)
@@ -65,9 +67,10 @@ const settingPanel = (player, lib) => {
     .submitButton({ translate: "option.submit" })
     .show(player)
     .then(e => {
-      if(e.canceled) return;
+      if(e.canceled)
+        return adminPanel(player, lib);
 
-      let [uBR,dbg,sC,sE,sRv,sR,cC,cCP,sM,xM,dL,dI,sI,sIM,sIs,uLR] = e.formValues;
+      let [uBR,dbg,sC,sE,sRv,sR,tD,cC,cCP,sM,xM,dL,dI,sI,sIM,sIs,uLR] = e.formValues;
       const newOptions = {
         useBzbRules: uBR,
         debug: dbg,
@@ -75,6 +78,7 @@ const settingPanel = (player, lib) => {
         staminaExhaust: Number(sE),
         staminaRecovery: Number(sRv),
         staminaRun: Number(sR),
+        thirstDown:tD,
         customChat: cC,
         customChatPrefix: cCP,
         shopMultiplier: Number(sM),
@@ -124,7 +128,8 @@ const economy = (player, lib) => {
     .textField({ translate: "type.value" },{ translate: "type.number" })
     .show(player)
     .then(e => {
-      if(e.canceled) return adminPanel(player, lib);
+      if(e.canceled)
+        return adminPanel(player, lib);
 
       let [type, id, value] = e.formValues, plyr = players[id];
       if(!plyr)

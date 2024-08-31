@@ -313,7 +313,7 @@
         }
       },
       "cz:open_menu": {
-        "run_command": {
+        "queue_command": {
           "command": [
             "scriptevent cz:yuri_menu"
           ],

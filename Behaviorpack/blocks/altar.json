@@ -1,5 +1,5 @@
 {
-  "format_version": "1.20.10",
+  "format_version": "1.21.20",
   "minecraft:block": {
     "description": {
       "identifier": "cz:altar",
@@ -19,11 +19,7 @@
     "components": {
       "minecraft:friction": 0.4,
       "minecraft:map_color": "#ffffff",
-      "minecraft:loot": "loot_tables/empty.json",
-      "minecraft:on_player_destroyed": {
-        "event": "drop",
-        "target": "self"
-      },
+      "minecraft:loot": "loot_tables/block/altar.json",
       "minecraft:geometry": "geometry.altar",
       "minecraft:material_instances": {
         "*": {
@@ -74,20 +70,14 @@
       },
       "minecraft:flammable": false,
       "minecraft:destructible_by_mining": {
-        "seconds_to_destroy": 6.0
+        "seconds_to_destroy": 3.0
       },
       "tag:metal": {}
     },
-    "events": {
-      "drop": {
-        "spawn_loot": {
-          "table": "loot_tables/block/altar"
-        }
-      }
-    },
+    "events": {},
     "permutations": [
       {
-        "condition": "q.block_property('minecraft:cardinal_direction') == 'south'",
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'south'",
         "components": {
           "minecraft:transformation": {
             "rotation": [
@@ -99,7 +89,7 @@
         }
       },
       {
-        "condition": "q.block_property('minecraft:cardinal_direction') == 'east'",
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'east'",
         "components": {
           "minecraft:transformation": {
             "rotation": [
@@ -111,7 +101,7 @@
         }
       },
       {
-        "condition": "q.block_property('minecraft:cardinal_direction') == 'north'",
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'north'",
         "components": {
           "minecraft:transformation": {
             "rotation": [
@@ -123,7 +113,7 @@
         }
       },
       {
-        "condition": "q.block_property('minecraft:cardinal_direction') == 'west'",
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'west'",
         "components": {
           "minecraft:transformation": {
             "rotation": [

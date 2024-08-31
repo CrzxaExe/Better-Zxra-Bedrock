@@ -1,30 +1,22 @@
 {
-  "format_version": "1.16.100",
+  "format_version": "1.21.20",
   "minecraft:block": {
     "description": {
-      "identifier": "cz:blue_brick_concrete"
+      "identifier": "cz:blue_brick_concrete",
+      "menu_category": {
+        "category": "construction"
+      }
     },
     "components": {
-      "minecraft:creative_category": {
-        "category": "construction",
-        "group": "none"
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 2.0
       },
-      "minecraft:destroy_time": 7.0,
       "minecraft:friction": 0.6,
       "minecraft:map_color": "#2D2F90",
-      "minecraft:flammable": {
-        "flame_odds": 50,
-        "burn_odds": 0
-      },
+      "minecraft:flammable": false,
       "minecraft:loot": "loot_tables/block/concrete/brick/blue.json",
       "tag:stone": {}
     },
-    "events": {
-      "drop": {
-        "spawn_loot": {
-          "table": "loot_tables/block/concrete/brick/blue"
-        }
-      }
-    }
+    "events": {}
   }
 }

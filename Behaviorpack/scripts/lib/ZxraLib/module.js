@@ -20,6 +20,7 @@ export { Quest } from "./class/Quest.js";
 Function Section -------------------------------------------------------------
 */
 export { adminPanel, settingPanel } from "./function/adminPanel.js";
+export { durabilityControl } from "./function/durability.js";
 export { enParticle } from "./function/enParticle.js";
 export { guildUi, guildList } from "./function/guildUi.js";
 export { leveling } from "./function/leveling.js";

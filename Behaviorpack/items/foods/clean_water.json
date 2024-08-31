@@ -1,5 +1,5 @@
 {
-  "format_version": "1.20.20",
+  "format_version": "1.20.30",
   "minecraft:item": {
     "description": {
       "identifier": "cz:clean_water",
@@ -10,7 +10,7 @@
       }
     },
     "components": {
-      "minecraft:max_stack_size": 1,
+      "minecraft:max_stack_size": 6,
       "minecraft:icon": {
         "texture": "clean_water"
       },

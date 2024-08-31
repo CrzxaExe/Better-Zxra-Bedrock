@@ -207,8 +207,8 @@
   "chat2": {
     "anim_type": "offset",
     "easing": "in_out_quad",
-    "duration": 0.5,
-    "to": [ -220, 0 ],
+    "duration": 0.7,
+    "to": [ -420, 0 ],
     "from": [ 0, 0 ],
     "destroy_at_end": "chat_grid_item"
   },
@@ -216,7 +216,7 @@
   "cz_chat_alpha": {
     "anim_type": "alpha",
     "easing": "in_out_quad",
-    "duration": 0.4,
+    "duration": 0.5,
     "from": 0,
     "to": 1,
     "next": "@cz_anim.cz_chat_alpha1"
@@ -229,7 +229,7 @@
   "cz_chat_alpha2": {
     "anim_type": "alpha",
     "easing": "in_out_quad",
-    "duration": 1,
+    "duration": 0.7,
     "from": 1,
     "to": 0,
     "destroy_at_end": "@hud.chat_grid_item"

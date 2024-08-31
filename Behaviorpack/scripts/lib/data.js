@@ -311,6 +311,7 @@ export const guild = {
 export const toolsMod = {
   explosive: {
     maxLvl: 3,
+    type: ["sword"],
     up: [
       { price: 9.3, voxn: 2, item: [] },
       { price: 15.1, voxn: 3, item: ["gunpowder/5"] },
@@ -319,6 +320,7 @@ export const toolsMod = {
   },
   vampiric: {
     maxLvl: 2,
+    type: ["sword"],
     up: [
       { price: 12.4, voxn: 3, item: ["golden_apple/1"] },
       { price: 18.9, voxn: 3, item: ["golden_apple/2"] }
@@ -326,6 +328,7 @@ export const toolsMod = {
   },
   lifesteal: {
     maxLvl: 2,
+    type: ["sword"],
     up: [
       { price: 15.7, voxn: 4, item: ["soul_sand/20"] },
       { price: 20.5, voxn: 3, item: ["soul_sand/50","golden_apple/3"] }
@@ -333,6 +336,7 @@ export const toolsMod = {
   },
   slower: {
     maxLvl: 2,
+    type: ["sword"],
     up: [
       { price: 10.4, voxn: 2, item: [] },
       { price: 12.8, voxn: 3, item: ["gunpowder/10"] }
@@ -340,6 +344,7 @@ export const toolsMod = {
   },
   sweeping: {
     maxLvl: 1,
+    type: ["sword"],
     up: [
       { price: 12.7, voxn: 4, item: ["lapiz_lazuli/20"] }
     ]
@@ -611,7 +616,7 @@ export let questIndex = [
   {
 	title: "quest.no17",
 	des: "quest.no17.des",
-	rep: 10_000_000,
+	rep: 10,
 	task: [
 	  { act: "destroy", target: "gold_ore", amount: 140 },
 	  { act: "destroy", target: "iron_ore", amount: 140 },
@@ -628,7 +633,7 @@ export let questIndex = [
   {
 	title: "quest.no18",
 	des: "quest.no18.des",
-	rep: 30_000_000,
+	rep: 30,
 	task: [
 	  { act: "kill", target: "pig", amount: 89 },
 	  { act: "kill", target: "rabbit", amount: 32 }
@@ -643,7 +648,7 @@ export let questIndex = [
   {
 	title: "quest.no19",
 	des: "quest.no19.des",
-	rep: 50_000_000,
+	rep: 50,
 	task: [
 	  { act: "kill", target: "drowned", amount: 100 },
 	  { act: "kill", target: "zombie", amount: 64 }
@@ -659,7 +664,7 @@ export let questIndex = [
   {
 	title: "quest.no20",
 	des: "quest.no20.des",
-	rep: 10_000_000,
+	rep: 10,
 	task: [
 	  { act: "kill", target: "drowned", amount: 36 }
 	],

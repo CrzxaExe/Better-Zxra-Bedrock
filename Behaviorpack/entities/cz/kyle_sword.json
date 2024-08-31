@@ -49,7 +49,7 @@
         }
       },
       "cz:to_item": {
-        "run_command": {
+        "queue_command": {
           "command": [
             "give @p[r=3] cz:kyles 1"
           ]

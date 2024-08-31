@@ -1,0 +1,14 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:aggregate_feature": {
+    "description": {
+      "identifier": "cz:select_oak2_tree_feature"
+    },
+    "early_out": "first_success",
+    "features": [
+      "cz:custom_oak_tree0_feature",
+      "cz:custom_oak_tree1_feature",
+      "cz:custom_oak_tree2_feature"
+    ]
+  }
+}

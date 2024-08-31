@@ -494,7 +494,7 @@
         }
       },
       "cz:stun": {
-        "run_command": {
+        "queue_command": {
           "command": [
             "title @s actionbar You Are Stunned",
             "effect @s slowness 2 255 true",
@@ -505,7 +505,7 @@
         }
       },
       "cz:stun_reduce": {
-        "run_command": {
+        "queue_command": {
           "command": [
             "title @s actionbar Dodge",
             "tag @s remove stunned"
@@ -513,14 +513,14 @@
         }
       },
       "cz:on_rain": {
-        "run_command": {
+        "queue_command": {
           "command": [
             "title @s actionbar Rain"
           ]
         }
       },
       "cz:test": {
-        "run_command": {
+        "queue_command": {
           "command": [
             "say test"
           ]

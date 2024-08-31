@@ -203,6 +203,40 @@ export const musha = [
   "§r[2]§3 Jump"
 ]
 
+export const cervant = [
+  "§rType Sword/§dCentury",
+  "§rRarity §dLegend",
+  "Tag: DPS",
+  " ",
+  "§rPasif: §3[]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3"
+]
+
+export const hyrant = [
+  "§rType §dSpear",
+  "§rRarity §dLegend",
+  "Tag: DPS",
+  " ",
+  "§rPasif: §3[]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3"
+]
+
+export const cenryter = [
+  "§rType §dReaper",
+  "§rRarity §dEpic",
+  "Tag: DPS",
+  " ",
+  "§rPasif: §3[Our Fire]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3",
+  "§r[3]§3"
+]
+
 export const katana = [
   "§rType Sword/§dKatana",
   "§rRarity §dRare"

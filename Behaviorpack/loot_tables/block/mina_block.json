@@ -2,7 +2,31 @@
   "pools": [
     {
       "rolls": 1,
-      "entities": [
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:mina_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:mina_block",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:minarite_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
         {
           "type": "item",
           "name": "cz:mina_block",

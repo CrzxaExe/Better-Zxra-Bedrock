@@ -1,30 +1,24 @@
 {
-  "format_version": "1.16.100",
+  "format_version": "1.21.20",
   "minecraft:block": {
     "description": {
-      "identifier": "cz:chlorophyte_ore"
-    },
-    "components": {
-      "minecraft:creative_category": {
+      "identifier": "cz:chlorophyte_ore",
+      "menu_category": {
         "category": "nature",
         "group": "itemGroup.name.ore"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 4.0
       },
-      "minecraft:destroy_time": 18.0,
       "minecraft:friction": 0.6,
       "minecraft:map_color": "#C4FF89",
-      "minecraft:flammable": {
-        "flame_odds": 50,
-        "burn_odds": 0
-      },
+      "minecraft:flammable": false,
       "tag:tier_3": {},
-      "minecraft:loot": "loot_tables/block/chlorophyte.json"
+      "minecraft:loot": "loot_tables/block/chlorophyte.json",
+      "minecraft:custom_components": ["cz:ore_xp"]
     },
-    "events": {
-      "drop": {
-        "spawn_loot": {
-          "table": "loot_tables/block/chlorophyte"
-        }
-      }
-    }
+    "events": {}
   }
 }

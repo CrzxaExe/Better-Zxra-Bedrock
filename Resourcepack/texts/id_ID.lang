@@ -1,5 +1,7 @@
 action.hint.exit.cz:seat=Jongkok atau Lompat untuk berdiri
 
+cmd.announce=Pesan pengumuman
+cmd.fchat=Pesan palsu
 cmd.give=Perintah /give tetapi versi kumpulan
 cmd.gma=Ganti ke mode petualangan
 cmd.gmc=Ganti ke mode kreatif
@@ -318,6 +320,7 @@ option.starterItem=Barang Persiapan
 option.starterItemMessage=Pesan Barang Persiapan (Terjemahan)
 option.starterItems=Formulir Barang Persiapan
 option.submit=Ubah Pengaturan
+option.thirstDown=Penurunan Kehausan
 option.uiLevelRequirement=Ui Memerlukan Level
 option.xpMultiplier=Penggandaan XP
 
@@ -376,6 +379,7 @@ system.acc.info=Apakah kamu akan menyetujui ini?
 system.add=Tambah
 system.addDay=Menambahkan hari sebanyak
 system.addTime=Menambahkan waktu sebanyak
+system.announcement.pronounce=[§4Pengumuman§r]
 system.buy=Kamu telah membeli 
 system.buy2=dengan harga 
 system.buy.amount=Jumlah item

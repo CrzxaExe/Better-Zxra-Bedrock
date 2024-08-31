@@ -1,5 +1,5 @@
 {
-  "format_version": "1.20.10",
+  "format_version": "1.21.20",
   "minecraft:block": {
     "description": {
       "identifier": "cz:alchemy_set",
@@ -19,11 +19,7 @@
     "components": {
       "minecraft:friction": 0.4,
       "minecraft:map_color": "#cc9f58",
-      "minecraft:loot": "loot_tables/empty.json",
-      "minecraft:on_player_destroyed": {
-        "event": "drop",
-        "target": "self"
-      },
+      "minecraft:loot": "loot_tables/block/alchemy_set.json",
       "minecraft:geometry": "geometry.alchemy_set",
       "minecraft:material_instances": {
         "*": {
@@ -72,22 +68,16 @@
           16.0
         ]
       },
-      "minecraft:flammable": false,
+      "minecraft:flammable": true,
       "minecraft:destructible_by_mining": {
-        "seconds_to_destroy": 5.0
+        "seconds_to_destroy": 0.8
       },
       "tag:wood": {}
     },
-    "events": {
-      "drop": {
-        "spawn_loot": {
-          "table": "loot_tables/block/alchemy_set"
-        }
-      }
-    },
+    "events": {},
     "permutations": [
       {
-        "condition": "q.block_property('minecraft:cardinal_direction') == 'south'",
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'south'",
         "components": {
           "minecraft:transformation": {
             "rotation": [
@@ -99,7 +89,7 @@
         }
       },
       {
-        "condition": "q.block_property('minecraft:cardinal_direction') == 'east'",
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'east'",
         "components": {
           "minecraft:transformation": {
             "rotation": [
@@ -111,7 +101,7 @@
         }
       },
       {
-        "condition": "q.block_property('minecraft:cardinal_direction') == 'north'",
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'north'",
         "components": {
           "minecraft:transformation": {
             "rotation": [
@@ -123,7 +113,7 @@
         }
       },
       {
-        "condition": "q.block_property('minecraft:cardinal_direction') == 'west'",
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'west'",
         "components": {
           "minecraft:transformation": {
             "rotation": [

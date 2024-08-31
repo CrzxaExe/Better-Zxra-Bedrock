@@ -1,0 +1,225 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:wooden_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:stone_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:iron_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:golden_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:diamond_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "minecraft:netherite_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:diarite_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:firerite_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:dexterite_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:chloropythe_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:plasma_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:mina_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "match_tool",
+          "item": "cz:minarite_pickaxe",
+          "count": 1
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "cz:plasma_core",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

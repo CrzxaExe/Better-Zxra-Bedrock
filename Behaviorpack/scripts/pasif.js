@@ -31,16 +31,26 @@ pasif.addKillPasif("slayer", (user, target, lib) => {
 // Pasif Reaper
 pasif.addHitPasif("reaper", (user, target, { item, multiplier, sp, soul }) => {
 	if(!user || !target) return
+	let itemStack = user.getComponent("inventory").container.getSlot(user.selectedSlotIndex)
     let userHealth = user.getComponent("health"), notSelf = "!" + user.name, heal = 2, tier = item.getTier()
 
     user.runCommand(`execute positioned ^^^2 run damage @e[r=2.5,name=${notSelf},type=!item] ${Math.floor((12 - Number(tier)) * multiplier)} entity_attack entity @s`)
     world.getDimension(user.dimension.id).spawnEntity("cz:particles<cz:liberator_swing_particle>", target.location)
+    
+    switch(itemStack.typeId.split(":")[1]) {
+      case "liberator":// Pasif Gets Death
+        if(target.hasTag("liberator_target")) sp.runCommand([`event entity @e[r=10,type=cz:angel] cz:liberator_upgrade`,`execute as @e[r=10,type=cz:angel] at @s run particle cz:liberator_upgrade ~~~`])
 
-    if(user.getComponent("inventory").container.getSlot(user.selectedSlotIndex).typeId.split(":")[1] == "liberator") {
-      if(target.hasTag("liberator_target")) sp.runCommand([`event entity @e[r=10,type=cz:angel] cz:liberator_upgrade`,`execute as @e[r=10,type=cz:angel] at @s run particle cz:liberator_upgrade ~~~`])
-
-      heal += Number(soul[user.id]) || 0;
-      if(target.typeId !== "cz:angel") target.addTag("liberator_target")
+        heal += Number(soul[user.id]) || 0;
+        if(target.typeId !== "cz:angel") target.addTag("liberator_target")
+        break;
+      case "cenryter":// Pasif Our Fire
+        target.setOnFire(5)
+        if(target.isOnFire()) {
+          heal += 2
+          lib.sp.addEffect([{ name: "fire_resistance", duration: 100, lvl: 0 }])
+        }
+        break;
     }
 
     if(userHealth.currentValue + heal > userHealth.defaultValue) return userHealth.setCurrentValue(userHealth.defaultValue)

@@ -24,6 +24,8 @@ import "./commands.js";
 import "./lib/items.js";
 import "./lib/scriptsEvents.js";
 import "./lib/blocks.js";
+import "./lib/blockRegister.js";
+import "./lib/itemRegistry.js";
 
 // Import Weapon Skill
 import "./lib/weapons/unique.js";
@@ -103,15 +105,15 @@ world.beforeEvents.chatSend.subscribe(async e => {
     const sp = new Specialist(e.sender),
       data = sp.getData();
 
-    function sendMsgEvent() {
-      const guild = new Game().guild().gd().find(s => s.member.some(r => r.id === e.sender.id));
+    function sendMsgEvent(sender, message, dt) {
+      const guild = new Game().guild().gd().find(s => s.member.some(r => r.id === sender.id));
       world.sendMessage({
         text: options.customChatPrefix
-          .replace(/%name/gi, e.sender.name)
-          .replace(/%msg/gi, msg.join(" "))
-          .replace(/%lvl/gi, e.sender.level)
-          .replace(/%splvl/gi, data.specialist.lvl)
-          .replace(/%rep/gi, data.reputation)
+          .replace(/%name/gi, sender.name)
+          .replace(/%msg/gi, message.join(" "))
+          .replace(/%lvl/gi, sender.level)
+          .replace(/%splvl/gi, dt.specialist.lvl)
+          .replace(/%rep/gi, dt.reputation)
           .replace(/%guild/gi, guild?.name ? "["+guild.name+"§r] " : "")
           /*
           *. %name   = Player Name
@@ -134,15 +136,15 @@ world.beforeEvents.chatSend.subscribe(async e => {
     if (!find) {
       if (options.customChat !== true) return;
       e.cancel = true;
-      sendMsgEvent();
+      sendMsgEvent(e.sender, msg, data);
     } else {
       e.cancel = true;
       if (
         (find.admin === true && !e.sender.hasTag("Admin")) ||
         find.err === true
       )
-        return sendMsgEvent();
-      find.callback(e.sender, { msg, sp, rawMsg: e.message });
+        return sendMsgEvent(e.sender, msg, data);
+      find.callback(e.sender, { msg, sp, rawMsg: e.message, options, functions: { sendMsgEvent } });
     }
   } catch (err) {
     if (options.debug) console.warn(err);
