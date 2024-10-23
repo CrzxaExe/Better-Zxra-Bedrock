@@ -327,7 +327,15 @@
     "texture": "textures/cz/gray",
     "anchor_from": "top_left",
     "anchor_to": "top_left",
-    "size": [ "100%", "7%"],
+    "size": [ "100%", "7%" ],
+    "bindings": [
+      {
+        "binding_type": "view",
+        "source_control_name": "cz_menu_toggle",
+        "source_property_name": "(not #toggle_state)",
+        "target_property_name": "#visible"
+      }
+    ],
     "alpha": 0.4,
     "controls": [
       {
@@ -343,7 +351,7 @@
                 "offset": [ "6%", 0 ],
                 "anchor_from": "left_middle",
                 "anchor_to": "left_middle",
-                "text": "§lStart Screen"
+                "text": "§lBZB         "
               }
             },
             {
@@ -405,7 +413,7 @@
               "play_btn@cz_common.cz_clear_tem_button": {
 	            "$btn_func": "$play_button_target",
 	            "$text_button": "cz.menu.play",
-	            "size": [ 150, "22%" ],
+	            "size": [ 150, "22.4%" ],
 	            "$texture": "textures/items/quest_scroll"
 	          }
             },
@@ -440,7 +448,7 @@
                       "size": [ 62, 34 ],
                       "anchor_from": "right_middle",
                       "anchor_to": "right_middle",
-                      "alpha": 0.8,
+                      "alpha": 0.75,
                       "texture": "textures/cz/button/button_clear"
                     }
                   }
@@ -524,7 +532,7 @@
                 "$button_text": "<",
                 "anchor_from": "center",
                 "anchor_to": "center",
-                "size": [ 24, 74 ],
+                "size": [ 24, 68 ],
                 "$toggle_view_binding_name": "cz_menu_toggle"
               }
             }
@@ -534,79 +542,259 @@
     ]
   },
   "cz_new_info": {
-    "type": "stack_panel",
+    "type": "panel",
     "anchor_from": "bottom_right",
     "anchor_to": "bottom_right",
     "anims": ["@cz_anim.toasting"],
-    "size": [ 133, 50 ],
-    "offset": ["-0.9%", 0 ],
+    "offset": ["-1.35%", 0 ],
+    "size": [ 133, 48 ],
     "controls": [
       {
-        "mc_info": {
+        "zxras_logo": {
           "type": "image",
-          "texture": "textures/cz/button/button_clear",
-          "alpha": 0.7,
-          "size": [ 133, 50 ],
+          "texture": "pack_icon.png",
+          "anchor_from": "left_middle",
+          "anchor_to": "left_middle",
+          "layer": 70,
+          "offset": [ 9, 0 ],
+          "size": [ 32, 32 ]
+        }
+      },
+      {
+        "pn": {
+          "type": "stack_panel",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "size": [ 54, 20 ],
+          "offset": [ 6, -4 ],
           "controls": [
             {
-              "zxras_logo": {
-                "type": "image",
-                "texture": "textures/ui/zxra.png",
-                "anchor_from": "left_middle",
-                "anchor_to": "left_middle",
-                "layer": 70,
-                "offset": [ 1, 0 ],
-                "size": [ 44, 44 ]
+              "version_new": {
+                "type": "label",
+                "text": "#version",
+                "layer": 72,
+                "bindings": [
+                  {
+                    "binding_name": "#version"
+                  }
+                ]
               }
             },
             {
-              "pn": {
-                "type": "stack_panel",
-                "anchor_from": "center",
-                "anchor_to": "center",
-                "size": [ 54, 20 ],
-                "offset": [ 4, -4 ],
-                "controls": [
-                  {
-                    "version_new": {
-                      "type": "label",
-                      "text": "#version",
-                      "layer": 72,
-                      "bindings": [
-                        {
-                          "binding_name": "#version"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "copyright_new": {
-                      "type": "label",
-                      "text": "menu.copyright",
-                      "layer": 72
-                    }
-                  },
-                  {
-                    "ui_version": {
-                      "type": "label",
-                      "text": "Simple ZXRA UI",
-                      "layer": 72
-                    }
-                  }
-                ]
+              "copyright_new": {
+                "type": "label",
+                "text": "menu.copyright",
+                "layer": 72
+              }
+            },
+            {
+              "ui_version": {
+                "type": "label",
+                "text": "Simple ZxUI",
+                "layer": 72
               }
             }
           ]
         }
+      },
+      {
+        "tn@common_toggles.dark_text_toggle": {
+          "$toggle_name": "zxra_toggle",
+          "$button_text": "",
+          "$toggle_view_binding_name": "zxra_menu_toggle",
+          "size": [ 128, 44 ]
+        }
       }
     ]
   },
+  
+  "zxra_menu": {
+    "type": "image",
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "size": [ "50%", "80%" ],
+    "bindings": [
+      {
+        "binding_type": "view",
+        "source_control_name": "zxra_menu_toggle",
+        "source_property_name": "#toggle_state",
+        "target_property_name": "#visible"
+      }
+    ],
+    "alpha": 0.7,
+    "texture": "textures/cz/button/button_clear",
+    "controls": [
+      {
+        "panel": {
+          "type": "panel",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "size": [ "95%", "94%" ],
+          "controls": [
+            {
+              "scrolling_panel@common.scrolling_panel": {
+                "anchor_to": "center",
+                "anchor_from": "center",
+                "$show_background": false,
+                "size": [ "100%", "100%" ],
+                "$scrolling_content": "cz_start.zxra_scroll_content",
+                "$scroll_size": [ 2, "100% - 4px" ],
+                "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
+                "$scrolling_pane_offset": [ 2, 0 ],
+                "$scroll_bar_right_padding_size": [ 0, 0 ]
+              }
+            }
+            
+          ]
+        }
+      }
+
+    ]
+  },
+  
+  "zxra_scroll_content": {
+    "type": "stack_panel",
+    "size": [
+      "100% - 4px",
+      "100%c"
+    ],
+    "offset": [
+      2,
+      0
+    ],
+    "orientation": "vertical",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "controls": [
+      {
+        "top": {
+          "type": "stack_panel",
+          "size": [ "100%", "100%c" ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "controls": [
+            {
+              "img_slot": {
+                "type": "image",
+                "anchor_from": "center",
+                "anchor_to": "center",
+                "size": [ "100%", "100%c" ],
+                "texture": "textures/ui/Black",
+                "controls": [
+                  {
+                    "zxras_logo": {
+                      "type": "image",
+                      "anchor_from": "center",
+                      "anchor_to": "center",
+                      "texture": "pack_icon.png",
+                      "size": [ 90, 90 ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "pad": {
+                "type": "panel",
+                "size": [ 0, 8 ]
+              }
+            },
+            {
+              "label": {
+                "type": "label",
+                "anchor_from": "center",
+                "anchor_to": "center",
+                "text_alignment": "center",
+                "text": "§l§b[Project]§r§f Better Zxra Bedrock"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "padding": {
+          "type": "panel",
+          "size": [ 0, 14 ]
+        }
+      },
+      {
+        "version_cz": {
+          "type": "label",
+          "text": "cz.version"
+        }
+      },
+      {
+        "tag": {
+          "type": "label",
+          "text": "Economy, Guild, RPG, Utility"
+        }
+      },
+      {
+        "padding0": {
+          "type": "panel",
+          "size": [ 0, 5 ]
+        }
+      },
+      {
+        "addon_des": {
+          "type": "label",
+          "size": [ "100%", "default" ],
+          "text_alignment": "justify",
+          "text": "cz.des"
+        }
+      },
+      {
+        "padding1": {
+          "type": "panel",
+          "size": [ 0, 14 ]
+        }
+      },
+      {
+        "win": {
+          "type": "stack_panel",
+          "size": [ "100%c", 12 ],
+          "orientation": "horizontal",
+          "controls": [
+            {
+              "text": {
+                "type": "label",
+                "text": "cz.whatNew"
+              }
+            },
+            {
+              "version_cz": {
+                "type": "label",
+                "text": "cz.version"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "new": {
+          "type": "label",
+          "localize": false,
+          "text": "* Boss Kyle: \n  | Add new skill \n  | Reanimate some skill \n* Creating some new screen ui \n* Entity Yuri: \n  | New Art \n  | New Model \n  | Reanimate some animation\n* Fix Bugs \n+ New Block \n+ New Boss: Kal'sit\n+ New Item \n+ New Weapon \n* Reanimate some weapon skill"
+        }
+      }
+      
+    ]
+  },
+  
   "cz_others": {
     "type": "panel",
     "anchor_from": "top_right",
     "anchor_to": "top_right",
     "offset": [ 0, "7.5%" ],
     "size": [ "100%", "default" ],
+    "bindings": [
+      {
+        "binding_type": "view",
+        "source_control_name": "cz_menu_toggle",
+        "source_property_name": "(not #toggle_state)",
+        "target_property_name": "#visible"
+      }
+    ],
     "controls": [
       {
         "stack": {
@@ -756,12 +944,21 @@
       { "top@cz_start.cz_new_topbar": {} },
       { "main@cz_start.cz_new_main_buttons": {} },
       { "dev@cz_start.cz_new_info": {} },
+      { "zm@cz_start.zxra_menu": {} },
       { "others@cz_start.cz_others": {} },
       {
         "cz_skin_viewer_panel@cz_start.cz_skin_viewer_panel": {
           "anchor_from": "center_middle",
           "anchor_to": "center_middle",
-          "offset": [ 0, "2}%" ]
+          "offset": [ 0, "2%" ],
+          "bindings": [
+            {
+              "binding_type": "view",
+              "source_control_name": "zxra_menu_toggle",
+              "source_property_name": "(not #toggle_state)",
+              "target_property_name": "#visible"
+            }
+          ]
         }
       }
     ]

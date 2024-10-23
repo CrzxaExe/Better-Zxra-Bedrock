@@ -616,7 +616,7 @@ export class Specialist extends Entity {
 			system.runTimeout(() => {
 				lib.sp.impactParticle()
 				if(lib.single !== true) {
-					world.getDimension(this.player.dimension.id).getEntities({ location: this.player.location, maxDistance: 6, minDistance: 0, excludeNames: [`${this.player.name}`], excludeTypes: ["minecraft:item"]}).forEach(e => {
+					world.getDimension(this.player.dimension.id).getEntities({ location: this.player.location, maxDistance: 6, minDistance: 0, excludeNames: [`${this.player.name}`], excludeTypes: ["minecraft:item","cz:indicator"]}).forEach(e => {
 			        	let ent = new Entity(e)
 			            ent.addDamage(dmg * lib.multiplier, { cause: "entityAttack", damagingEntity: this.player })
 			        })

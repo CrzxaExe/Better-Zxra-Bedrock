@@ -27,6 +27,6 @@ export { leveling } from "./function/leveling.js";
 export { mergeObject } from "./function/mergeObject.js";
 export { questPanel } from "./function/questPanel.js";
 export { shuffleObjects } from "./function/shuffleObjects.js";
-export { teleportUi } from "./function/teleportUi.js";
+export { teleportUi, teleportToPlayer } from "./function/teleportUi.js";
 export { teleportConfirm } from "./function/teleportConfirm.js";
 export { uniqueId } from "./function/uniqueId.js";

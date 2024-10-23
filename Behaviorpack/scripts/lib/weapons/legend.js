@@ -5,7 +5,7 @@ import { weapon, Entity } from "../../system.js";
 weapon.registerWeapon("musha", (player, lib, event) => {
   let stk = lib.musha[player.id] || { atk: 0, stack: 0 };
   if(!player.isOnGround) {
-    let target = player.getEntitiesFromViewDirection({ maxDistance: 5, excludeTypes: ["minecraft:item"] })[0];
+    let target = player.getEntitiesFromViewDirection({ maxDistance: 5, excludeTypes: ["minecraft:item","cz:indicator"] })[0];
     if(!target) return;
     
     if(lib.sp.cooldown().isCd("musha2", 8) == true) return
@@ -21,7 +21,7 @@ weapon.registerWeapon("musha", (player, lib, event) => {
     player.playAnimation("animation.kyle.slash", { blendOutTime: 0.35 }) // Animation
 
     system.runTimeout(() => {
-  	lib.sp.runCommand([`execute positioned ^^^2 run damage @e[name=${lib.notSelf},r=3,type=!item] ${Math.floor((13+parseInt(stk.stack)) * lib.multiplier)} entity_attack entity @s`])
+  	lib.sp.runCommand([`execute positioned ^^^2 run damage @e[name=${lib.notSelf},r=3,type=!item,type=!cz:indicator] ${Math.floor((13+parseInt(stk.stack)) * lib.multiplier)} entity_attack entity @s`])
 	}, 5)
   }
 })

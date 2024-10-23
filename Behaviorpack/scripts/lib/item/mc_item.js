@@ -2,7 +2,7 @@ import { specialItem, Entity, Specialist } from "../../system.js";
 import { world, system, ItemStack } from "@minecraft/server";
 import { ActionFormData, MessageFormData, ModalFormData } from "@minecraft/server-ui";
 
-import { teleportUi, teleportConfirm } from '../ZxraLib/module.js';
+import { teleportUi, teleportConfirm, teleportToPlayer, Game } from '../ZxraLib/module.js';
 
 // Add Section
 specialItem.addItem("card_of_return", (player, item) => {
@@ -18,6 +18,12 @@ specialItem.addItem("card_of_teleportation", (player, item) => {
     teleportUi(player, item)
 })
 
+specialItem.addItem("card_of_player", (player, item) => {
+    if(!player || !item) return;
+
+    teleportToPlayer(player, item)
+})
+
 specialItem.addItem("card_of_worldspawn", (player, item) => {
     let loc = world.getDefaultSpawnLocation();
     if(!loc) return player.sendMessage({ translate: "system.playersp.no" });
@@ -27,29 +33,31 @@ specialItem.addItem("card_of_worldspawn", (player, item) => {
 
 
 specialItem.addItem("money_card", (player, item) => {
-  let sp = new Specialist(player);
-  sp.addMoney(2000)
+  new Specialist(player).addMoney(2000)
   player.sendMessage({ rawtext: [{ translate: "system.get" },{ text: " $2000" }]})
+  player.runCommand(`clear @s ${item.typeId} 0 1`)
+})
+
+specialItem.addItem("guild_max_member_up", (player, item) => {
+  let gd = new Game().guild().gd().findIndex(e => e.id === id);
+  if(!gd) return player.sendMessage({ translate: "system.guild.notHave" });
+  new Game().guild().addMaxMember(gd.id, 1);
   player.runCommand(`clear @s ${item.typeId} 0 1`)
 })
 
 // Use Section
 specialItem.useItem("potion", (player) => {
-	let data = new Specialist(player)
-	data.addThirst("value", 14)
+	new Specialist(player).addThirst("value", 14)
 })
 
 specialItem.useItem("honey_bottle", (player) => {
-	let data = new Specialist(player)
-	data.addThirst("value", 4)
+	new Specialist(player).addThirst("value", 4)
 })
 
 specialItem.useItem("apple", (player) => {
-	let data = new Specialist(player)
-	data.addThirst("value", 5)
+	new Specialist(player).addThirst("value", 5)
 })
 
 specialItem.useItem("melon_slice", (player) => {
-	let data = new Specialist(player)
-	data.addThirst("value", 4)
+	new Specialist(player).addThirst("value", 4)
 })

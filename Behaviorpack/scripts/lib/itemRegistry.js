@@ -5,16 +5,13 @@ world.beforeEvents.worldInitialize.subscribe(({ itemComponentRegistry }) => {
   /*
    *. Item Function
    */
-   
-   itemComponentRegistry.registerCustomComponent(
-     "cz:durability",
-     {
-       onMineBlock({ source }) {
-         durabilityControl(source)
-       },
-       onHitEntity({ attackingEntity }) {
-         durabilityControl(attackingEntity)
-       }
-     }
-   )
-})
+
+  itemComponentRegistry.registerCustomComponent("cz:durability", {
+    onMineBlock({ source }) {
+      durabilityControl(source);
+    },
+    onHitEntity({ attackingEntity }) {
+      durabilityControl(attackingEntity, 2);
+    },
+  });
+});

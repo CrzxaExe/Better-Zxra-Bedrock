@@ -231,6 +231,19 @@ class Guild {
   resetLvl(id) {
     this.setLvl(id, 0);
   };
+  
+  // Max Member Method
+  addMaxMember(id, value = 1) {
+    let data = this.gd(), find = data.findIndex(e => e.id === id);
+
+    if(find === -1) return;
+    data[find].maxMember += Number(value);
+    this.setGd(data);
+  };
+  minMaxMember(id, value) {
+    this.addMember(id, -Number(value))
+  };
+  
 };
 
 export { Guild };

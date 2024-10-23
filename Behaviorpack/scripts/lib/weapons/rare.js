@@ -10,7 +10,7 @@ weapon.registerWeapon("greatsword", (player, lib, event) => {
 	lib.sp.minStamina("value", 14)
 
 	system.runTimeout(() => {
-		lib.sp.runCommand([`execute positioned ^^^2 run damage @e[name=${lib.notSelf},r=2.5,type=!item] ${Math.floor(22 * lib.multiplier)} entity_attack entity @s`])
+		lib.sp.runCommand([`execute positioned ^^^2 run damage @e[name=${lib.notSelf},r=2.5,type=!item,type=!cz:indicator] ${Math.floor(22 * lib.multiplier)} entity_attack entity @s`])
 	}, 13)
 })
 
@@ -22,7 +22,7 @@ weapon.registerWeapon("reaper", (player, lib, event) => {
     lib.sp.minStamina("value", 8)
 
 	system.runTimeout(() => {
-		lib.sp.runCommand([`damage @e[r=4,name=${lib.notSelf},type=!item] ${Math.floor(9 * lib.multiplier)} entity_attack entity @s`])
+		lib.sp.runCommand([`damage @e[r=4,name=${lib.notSelf},type=!item,type=!cz:indicator] ${Math.floor(9 * lib.multiplier)} entity_attack entity @s`])
     }, 2)
 })
 
@@ -34,7 +34,7 @@ weapon.registerWeapon("hammer", (player, lib, event) => {
     lib.sp.minStamina("value", 12)
 
 	system.runTimeout(() => {
-		lib.sp.runCommand([`damage @e[r=4,name=${lib.notSelf},type=!item] ${Math.floor(14 * lib.multiplier)} entity_attack entity @s`])
+		lib.sp.runCommand([`damage @e[r=4,name=${lib.notSelf},type=!item,type=!cz:indicator] ${Math.floor(14 * lib.multiplier)} entity_attack entity @s`])
     }, 2)
 })
 
@@ -45,7 +45,7 @@ weapon.registerWeapon("katana", (player, lib, event) => {
 	player.playAnimation("animation.weapon.slice.up", { blendOutTime: 0.35 })// Animation
     lib.sp.minStamina("value", 7)
 
-	player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item"] }).forEach(e => {
+	player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
 		let ent = new Entity(e.entity)
 		ent.addDamage(14*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, hor: 2, ver: 0 })
 		ent.addEffect([{ name: "weakness", duration: 20, lvl: 1 }])
@@ -56,7 +56,7 @@ weapon.registerWeapon("katana", (player, lib, event) => {
 weapon.registerWeapon("spear", (player, lib, event) => {
 	if(lib.sp.cooldown().isCd("spear", 6) == true) return
 
-	let entity = player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item"] })[0].entity || undefined, distance = Math.sqrt((player.location.x - entity.location.x) ** 2 + (player.location.z - entity.location.z) ** 2) || 0
+	let entity = player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item","cz:indicator"] })[0].entity || undefined, distance = Math.sqrt((player.location.x - entity.location.x) ** 2 + (player.location.z - entity.location.z) ** 2) || 0
 
 	player.playAnimation("animation.weapon.dash.atk", { blendOutTime: 0.35 })// Animation
 	lib.sp.minStamina("value", 6)

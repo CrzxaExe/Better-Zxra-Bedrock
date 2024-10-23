@@ -250,7 +250,7 @@ const guildApplier = (player, { id, apply }) => {
 
   if(apply.length < 1)
     ui.button({ translate: "system.cancel" });
-  apply.forEach(e => ui.button(e.name));
+  apply.forEach(e => ui.button(e.username));
 
   ui.show(player)
     .then(e => {
@@ -376,12 +376,34 @@ const guildKick = (player, { member, id, select }) => {
 
 const guildShop = (player) => {
   let guild = new Game().guild().gd().find(e => e.member.some(r => r.id === player.id)),
-    shop = jsonData.guildShop.filter(r => guild.act.lvl >= r.lvl);
+    shop = jsonData.guildShop.filter(r => guild.act.lvl >= r.lvl),
+    types = shop.reduce((all, c) => {
+      if(!all.includes(c.type)) all.push(c.type)
+      return all
+    },[]);
+  // console.warn(types)
 
   let ui = new ActionFormData()
     .title("cz:guild_shop")
     .body({ translate: "guild.shop.body" })
 
+  types.forEach(e => ui.button({ translate: "cz."+e }))
+  
+  ui.show(player)
+    .then(e => {
+      if(e.canceled) return;
+      let type = types[e.selection];
+      
+      guildSubShop(player, { id: guild.id, token: guild.token, shop: shop.filter(r => r.type == type), type })
+    })
+};
+
+const guildSubShop = (player, { type, shop, token, id }) => {
+  //console.warn(JSON.stringify(shop))
+  let ui = new ActionFormData()
+    .title({ translate: "cz."+type })
+    .body({ translate: "guild.shop.body" })
+  
   shop.forEach(e => {
     let name = e.item.replace("cz:", "").replace("minecraft:","").replace(/_/g, " ") || "none";
     if(e.enchant) name = "Book " + e.enchant.split("*")[0].split("_").map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(" ") + " Lvl" + e.enchant.split("*")[1];
@@ -394,9 +416,9 @@ const guildShop = (player) => {
   
   ui.show(player)
     .then(e => {
-      if(e.canceled) return;
+      if(e.canceled) return
       
-      guildBuy(player, { select: e.selection, id: guild.id, token: guild.token, shop })
+      guildBuy(player, { select: e.selection, id, token, shop })
     })
 };
 
@@ -404,7 +426,7 @@ const guildBuy = (player, { select, id, token, shop }) => {
   let stack = shop[select], itm = stack.item.replace("cz:","").replace("minecraft:", "").split("_").map(e => e.charAt(0).toUpperCase() + e.slice(1)).join(" ");
   let ui = new ModalFormData()
     .title({ rawtext: [{ translate: "guild.token" },{ text: ` ${token}` }]})
-    .textField({ rawtext: [{ translate: "system.wantBuy" },{ text: ` ${stack.amount} ${itm} ${stack.price} ` },{ translate: "guild.token" }]}, { translate: "system.input.buy" })
+    .textField({ rawtext: [{ translate: "system.wantBuy" },{ text: ` ${stack.amount} ${itm}${stack.enchant ? ` (${stack.enchant.split("*")[0]} lvl ${stack.enchant.split("*")[1]})` : ""} ${stack.price} ` },{ translate: "guild.token" }]}, { translate: "system.input.buy" })
     .show(player)
     .then(r => {
       if(r.canceled) return;

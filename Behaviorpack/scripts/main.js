@@ -3,7 +3,7 @@ import {
   world,
   system,
   EntityTypes,
-  EffectTypes
+  EffectTypes,
 } from "@minecraft/server";
 import {
   pasif,
@@ -43,24 +43,23 @@ let inGame = {
   catlye: {},
   lectaze: {},
   berserk: {},
-  musha: {}
+  musha: {},
 };
 let dimension = [
   // Minecraft Dimension
   "minecraft:overworld",
   "minecraft:nether",
-  "minecraft:the_end"
+  "minecraft:the_end",
 ];
 
 // Function to update options
 function setOptions(opt) {
-  options = opt
+  options = opt;
 }
 export { setOptions };
 
-
 // Main Event
-system.beforeEvents.watchdogTerminate.subscribe(e => {
+system.beforeEvents.watchdogTerminate.subscribe((e) => {
   e.cancel = true;
   world.sendMessage("[§l§2CZ§r] Zxra RPG " + e.terminateReason);
 });
@@ -73,22 +72,22 @@ system.runInterval(async () => {
 
       sp.controllerActionBar({
         endless,
-        ...inGame
+        ...inGame,
       });
       sp.controllerCooldown();
       sp.controllerStamina({
-        options
+        options,
       });
       sp.controllerThirst();
       sp.controllerUi({
-        options
+        options,
       });
     }
-    dimension.forEach(e => {
+    dimension.forEach((e) => {
       world
         .getDimension(e)
         .getEntities({ excludeTypes: ["cz:block_data"] })
-        .forEach(r => {
+        .forEach((r) => {
           new Entity(r).controllerStatus();
         });
     });
@@ -98,7 +97,7 @@ system.runInterval(async () => {
 }, 5);
 
 // Chat Event
-world.beforeEvents.chatSend.subscribe(async e => {
+world.beforeEvents.chatSend.subscribe(async (e) => {
   try {
     let msg = e.message.split(" "),
       cmd = msg[0];
@@ -106,7 +105,10 @@ world.beforeEvents.chatSend.subscribe(async e => {
       data = sp.getData();
 
     function sendMsgEvent(sender, message, dt) {
-      const guild = new Game().guild().gd().find(s => s.member.some(r => r.id === sender.id));
+      const guild = new Game()
+        .guild()
+        .gd()
+        .find((s) => s.member.some((r) => r.id === sender.id));
       world.sendMessage({
         text: options.customChatPrefix
           .replace(/%name/gi, sender.name)
@@ -114,25 +116,25 @@ world.beforeEvents.chatSend.subscribe(async e => {
           .replace(/%lvl/gi, sender.level)
           .replace(/%splvl/gi, dt.specialist.lvl)
           .replace(/%rep/gi, dt.reputation)
-          .replace(/%guild/gi, guild?.name ? "["+guild.name+"§r] " : "")
+          .replace(/%guild/gi, guild?.name ? "[" + guild.name + "§r] " : "")
           /*
-          *. %name   = Player Name
-          *. %msg    = Message from player
-          *. %lvl    = Player Level
-          *. %splvl  = Specialist Level
-          *. %rep    = Player Reputation
-          *. %guild  = Player Guild - Visible when player has/join guild
-          */
+           *. %name   = Player Name
+           *. %msg    = Message from player
+           *. %lvl    = Player Level
+           *. %splvl  = Specialist Level
+           *. %rep    = Player Reputation
+           *. %guild  = Player Guild - Visible when player has/join guild
+           */
           // fix issue % is missing
-          .replace(/%/gi, "percen")
+          .replace(/%/gi, "percen"),
       });
-      new Game().leaderboard().addLb(e.sender, { amount: 1, type: "chatting" })
+      new Game().leaderboard().addLb(e.sender, { amount: 1, type: "chatting" });
     }
 
     let find;
     cmd.startsWith("+")
-      ? (find = Command.getCmd().find(s => s.cmd == cmd.slice(1)))
-      : (find = Command.getN().find(s => s.cmd == cmd));
+      ? (find = Command.getCmd().find((s) => s.cmd == cmd.slice(1)))
+      : (find = Command.getN().find((s) => s.cmd == cmd));
     if (!find) {
       if (options.customChat !== true) return;
       e.cancel = true;
@@ -144,7 +146,13 @@ world.beforeEvents.chatSend.subscribe(async e => {
         find.err === true
       )
         return sendMsgEvent(e.sender, msg, data);
-      find.callback(e.sender, { msg, sp, rawMsg: e.message, options, functions: { sendMsgEvent } });
+      find.callback(e.sender, {
+        msg,
+        sp,
+        rawMsg: e.message,
+        options,
+        functions: { sendMsgEvent },
+      });
     }
   } catch (err) {
     if (options.debug) console.warn(err);
@@ -152,7 +160,7 @@ world.beforeEvents.chatSend.subscribe(async e => {
 });
 
 // Initialing Addon
-world.afterEvents.worldInitialize.subscribe(e => {
+world.afterEvents.worldInitialize.subscribe((e) => {
   let wld = new Game(world);
   options = wld.getSetting();
   if (options.debug) console.warn(JSON.stringify(options));
@@ -164,20 +172,28 @@ world.beforeEvents.playerLeave.subscribe(({ player }) => {
   let sp = new Specialist(player);
   //sp.refreshPlayer();
 });
-world.afterEvents.playerJoin.subscribe(e => {
+world.afterEvents.playerJoin.subscribe((e) => {
   let player = new Game().getPlayerName(e.playerName);
   if (!player) return;
   new Specialist(player).refreshPlayer();
 });
-world.afterEvents.playerSpawn.subscribe(e => {
+world.afterEvents.playerSpawn.subscribe((e) => {
   let player = e.player,
     isFirst = e.initialSpawn;
   new Specialist(player).refreshPlayer();
-  
-  if((!isFirst && !options.starterItem) || player.hasTag("hasJoin")) return;
-  options.starterItems.split(/,/g).forEach(e => player.runCommand(`give @s ${e.split("*")[0].trim()} ${e.split("*")[1].trim()}`))
-  player.addTag("hasJoin")
-  player.sendMessage({ translate: options.starterItemMessage || "system.welcome.item" })
+
+  if ((!isFirst && !options.starterItem) || player.hasTag("hasJoin")) return;
+  options.starterItems
+    .split(/,/g)
+    .forEach((e) =>
+      player.runCommand(
+        `give @s ${e.split("*")[0].trim()} ${e.split("*")[1].trim()}`
+      )
+    );
+  player.addTag("hasJoin");
+  player.sendMessage({
+    translate: options.starterItemMessage || "system.welcome.item",
+  });
 });
 
 // Entities Change Health Event
@@ -196,28 +212,32 @@ world.afterEvents.entityHealthChanged.subscribe(
 );
 
 // Entities Die Event
-world.afterEvents.entityDie.subscribe(async e => {
+world.afterEvents.entityDie.subscribe(async (e) => {
   const murder = e.damageSource.damagingEntity,
     corp = e.deadEntity;
   if (corp instanceof Player) {
     let cp = new Specialist(corp);
-    if(options.deathLocation) corp.sendMessage({
-      rawtext: [
-        { translate: "system.youDie" },
-        {
-          text: `§2[${corp.location.x.toFixed(2)} ${corp.location.y.toFixed(
-            2
-          )} ${corp.location.z.toFixed(2)}]§r`
-        }
-      ]
-    });
+    if (options.deathLocation)
+      corp.sendMessage({
+        rawtext: [
+          { translate: "system.youDie" },
+          {
+            text: `§2[${corp.location.x.toFixed(2)} ${corp.location.y.toFixed(
+              2
+            )} ${corp.location.z.toFixed(2)}]§r`,
+          },
+        ],
+      });
     cp.minRep(Math.floor(cp.getRep() / 5));
     cp.setValueDefaultStamina();
     cp.setValueDefaultThirst();
-    new Game().leaderboard().addLb(corp, { amount: 1, type: "deaths" })
+    new Game().leaderboard().addLb(corp, { amount: 1, type: "deaths" });
 
-    let guild = new Game().guild().gd().find(s => s.member.some(d => d.id === corp.id));
-    if(guild?.id) new Game().guild().setXp(guild.id, 0)
+    let guild = new Game()
+      .guild()
+      .gd()
+      .find((s) => s.member.some((d) => d.id === corp.id));
+    if (guild?.id) new Game().guild().setXp(guild.id, 0);
   }
 
   // Initializing Kill Pasif
@@ -231,17 +251,19 @@ world.afterEvents.entityDie.subscribe(async e => {
       ) * options.xpMultiplier
     );
     new Quest(murder).controller({ act: "kill", target: corp });
-    new Game().leaderboard().addLb(murder, { amount: 1, type: "kills" })
+    new Game().leaderboard().addLb(murder, { amount: 1, type: "kills" });
 
     const item = murder
       .getComponent("inventory")
       .container.getItem(murder.selectedSlotIndex);
-    let itemPasif = pasif.Pasif.kill.find(x => item.getTags().includes(x.type));
+    let itemPasif = pasif.Pasif.kill.find((x) =>
+      item.getTags().includes(x.type)
+    );
     if (!itemPasif) return;
     itemPasif.callback(murder, corp, {
       sp: murderData,
       ...inGame,
-      multiplier: murderData.status().dmgStat()
+      multiplier: murderData.status().dmgStat(),
     });
   }
 });
@@ -249,11 +271,14 @@ world.afterEvents.entityDie.subscribe(async e => {
 // Break Block Event
 world.afterEvents.playerBreakBlock.subscribe(
   ({ brokenBlockPermutation, player }) => {
-    new Quest(player).controller({ act: "destroy", target: brokenBlockPermutation }); // Quest Controller - Destroy
+    new Quest(player).controller({
+      act: "destroy",
+      target: brokenBlockPermutation,
+    }); // Quest Controller - Destroy
   }
 );
 
-world.afterEvents.playerPlaceBlock.subscribe(e => {
+world.afterEvents.playerPlaceBlock.subscribe((e) => {
   let player = e.player,
     block =
       /*player.getComponent("inventory").container.getSlot(player.selectedSlotIndex) ||*/ player.getBlockFromViewDirection()
@@ -264,7 +289,7 @@ world.afterEvents.playerPlaceBlock.subscribe(e => {
 world.afterEvents.itemStartUseOn.subscribe(({ block, itemStack, source }) => {
   if (!block || !itemStack) return;
   let find = specialItem.con.find(
-    e => e.item === itemStack.typeId.split(":")[1]
+    (e) => e.item === itemStack.typeId.split(":")[1]
   );
 
   if (!find) return;
@@ -272,14 +297,14 @@ world.afterEvents.itemStartUseOn.subscribe(({ block, itemStack, source }) => {
 });
 
 // Use Item On
-world.afterEvents.itemUseOn.subscribe(e => {
+world.afterEvents.itemUseOn.subscribe((e) => {
   let block = e.block,
     player = e.source,
     item = e.itemStack;
   if (!item || item == undefined || !item.typeId || item.typeId == undefined)
     return;
   let special = BlockUi.blocks.find(
-    x =>
+    (x) =>
       x.block == block.type.id.split(":")[1] &&
       x.item.includes(item.typeId.split(":")[1])
   );
@@ -292,7 +317,7 @@ world.afterEvents.itemUseOn.subscribe(e => {
 world.afterEvents.itemUse.subscribe(({ itemStack, source }) => {
   // Initializing Special Item Callback
   let special = specialItem.item.find(
-    x => x.item === itemStack.typeId.split(":")[1]
+    (x) => x.item === itemStack.typeId.split(":")[1]
   );
   if (!special) return;
 
@@ -301,7 +326,7 @@ world.afterEvents.itemUse.subscribe(({ itemStack, source }) => {
 world.afterEvents.itemCompleteUse.subscribe(({ itemStack, source }) => {
   // Initializing Special Use Item Callback
   let special = specialItem.use.find(
-    x => x.item === itemStack.typeId.split(":")[1]
+    (x) => x.item === itemStack.typeId.split(":")[1]
   );
   if (!special) return;
 
@@ -310,7 +335,7 @@ world.afterEvents.itemCompleteUse.subscribe(({ itemStack, source }) => {
 
 // Hitting Entity Event
 world.afterEvents.entityHitEntity.subscribe(
-  async e => {
+  async (e) => {
     let item = e.damagingEntity
         .getComponent("inventory")
         .container.getItem(e.damagingEntity.selectedSlotIndex),
@@ -320,7 +345,9 @@ world.afterEvents.entityHitEntity.subscribe(
     if (!item || e.hitEntity == undefined || !e.hitEntity) return;
 
     data.minStamina("value", 4);
-    let itemPasif = pasif.Pasif.hit.find(x => item.getTags().includes(x.type));
+    let itemPasif = pasif.Pasif.hit.find((x) =>
+      item.getTags().includes(x.type)
+    );
     if (!itemPasif) return;
     return itemPasif.callback(entity, e.hitEntity, {
       silentState,
@@ -330,7 +357,7 @@ world.afterEvents.entityHitEntity.subscribe(
       item: new Items(item),
       notSelf: "!" + entity.name,
       ...inGame,
-      multiplier: data.status().dmgStat()
+      multiplier: data.status().dmgStat(),
     });
   },
   { entityTypes: ["minecraft:player"] }
@@ -338,7 +365,7 @@ world.afterEvents.entityHitEntity.subscribe(
 
 // Player Hited Event
 world.afterEvents.entityHurt.subscribe(
-  e => {
+  (e) => {
     let item = e.hurtEntity
         .getComponent("inventory")
         .container.getItem(e.hurtEntity.selectedSlotIndex),
@@ -354,7 +381,7 @@ world.afterEvents.entityHurt.subscribe(
     )
       return;
 
-    let itemPasif = pasif.Pasif.hited.find(x =>
+    let itemPasif = pasif.Pasif.hited.find((x) =>
         item.getTags().includes(x.type)
       ),
       ent = new Entity(e.damageSource.damagingEntity);
@@ -365,20 +392,36 @@ world.afterEvents.entityHurt.subscribe(
       ent,
       notSelf: "!" + e.hurtEntity.name,
       multiplier: sp.status().dmgStat(),
-      ...inGame
+      ...inGame,
     });
   },
   { entityTypes: ["minecraft:player"] }
 );
 
-world.afterEvents.entityHurt.subscribe(({ hurtEntity, damage, damageSource: { cause, damagingEntity, damagingProjectile } }) => {
-  if(!options.damageIndicator) return;
-  let indicator = world.getDimension(hurtEntity.dimension.id).spawnEntity("cz:indicator", { x: hurtEntity.location.x + Math.random(-0.5, 0.5), y: hurtEntity.location.y + 0.4 + Math.random(-0.8, 1.4), z: hurtEntity.location.z + Math.random(-0.5, 0.5) } );
-  indicator.nameTag = `${Object.keys(jsonData.damageColor).includes(cause) ? jsonData.damageColor[cause] : ""}${damage.toFixed(0)}`;
-});
+world.afterEvents.entityHurt.subscribe(
+  ({
+    hurtEntity,
+    damage,
+    damageSource: { cause, damagingEntity, damagingProjectile },
+  }) => {
+    if (!options.damageIndicator) return;
+    let indicator = world
+      .getDimension(hurtEntity.dimension.id)
+      .spawnEntity("cz:indicator", {
+        x: hurtEntity.location.x + Math.random(-0.5, 0.5),
+        y: hurtEntity.location.y + 0.4 + Math.random(-0.8, 1.4),
+        z: hurtEntity.location.z + Math.random(-0.5, 0.5),
+      });
+    indicator.nameTag = `${
+      Object.keys(jsonData.damageColor).includes(cause)
+        ? jsonData.damageColor[cause]
+        : ""
+    }${damage.toFixed(0)}`;
+  }
+);
 
 // Skill Event
-world.afterEvents.itemReleaseUse.subscribe(async e => {
+world.afterEvents.itemReleaseUse.subscribe(async (e) => {
   let item = e.itemStack,
     entity = e.source,
     data = new Specialist(entity);
@@ -390,7 +433,7 @@ world.afterEvents.itemReleaseUse.subscribe(async e => {
   let velocity = {
     x: (Math.cos(rot.y) - Math.sin(rot.y)) * 1,
     y: 0,
-    z: (Math.sin(rot.y) + Math.cos(rot.y)) * 1
+    z: (Math.sin(rot.y) + Math.cos(rot.y)) * 1,
   };
 
   try {
@@ -400,7 +443,7 @@ world.afterEvents.itemReleaseUse.subscribe(async e => {
       .setLore(stats[item.typeId.split(":")[1]]);
 
     let skills = weapon.weapons.find(
-      x => x.weaponName == item.typeId.split(":")[1]
+      (x) => x.weaponName == item.typeId.split(":")[1]
     );
     if (!skills) return;
 
@@ -415,7 +458,7 @@ world.afterEvents.itemReleaseUse.subscribe(async e => {
         sp: data,
         endless,
         multiplier: data.status().skillStat(),
-        ...inGame
+        ...inGame,
       },
       e
     );
