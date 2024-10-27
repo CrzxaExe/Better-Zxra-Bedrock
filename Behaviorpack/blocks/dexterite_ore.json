@@ -12,7 +12,6 @@
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 4.0
       },
-      "minecraft:friction": 0.6,
       "minecraft:map_color": "#CEFDFF",
       "minecraft:flammable": false,
       "tag:tier_3": {},

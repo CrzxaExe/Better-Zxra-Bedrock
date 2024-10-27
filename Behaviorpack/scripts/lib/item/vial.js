@@ -58,6 +58,11 @@ specialItem.useItem("vial_heal_1", (player, item) => {
 	data.addThirst("value", 10)
 	data.heal(25)
 })
+specialItem.useItem("vial_heal_2", (player, item) => {
+	let data = new Specialist(player)
+	data.addThirst("value", 10)
+	data.heal(30)
+})
 
 // Skill Buff
 specialItem.useItem("vial_skill_0", (player) => {
@@ -69,6 +74,11 @@ specialItem.useItem("vial_skill_1", (player) => {
 	let data = new Specialist(player)
 	data.addThirst("value", 10)
 	data.status().addStatus("skill_power", 60*3.1, { decay: "time", lvl: 60, stack: false, type: "skill"})
+})
+specialItem.useItem("vial_skill_2", (player) => {
+	let data = new Specialist(player)
+	data.addThirst("value", 10)
+	data.status().addStatus("skill_power", 60*3.6, { decay: "time", lvl: 70, stack: false, type: "skill"})
 })
 
 // Speed & Jump Buff

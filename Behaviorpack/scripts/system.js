@@ -1,6 +1,6 @@
 import { EffectTypes, ItemStack, system, world, Player } from "@minecraft/server";
-import { Ultimate, Cooldown, status, Temp } from "./lib/classes.js";
-import { Dirty, Ench, Game, leveling } from "./lib/ZxraLib/module.js";
+import { Cooldown, status } from "./lib/classes.js";
+import { Dirty, Ench, Game, leveling, Temp } from "./lib/ZxraLib/module.js";
 import { Npc } from "./lib/npc-class.js";
 import * as data from "./lib/data.js";
 
@@ -265,7 +265,7 @@ export class Entity {
 		this.knockback(vel, hor, ver)
 	}
 	addDamage(dmg = 1, cause = { cause: "entityAttack", damagingEntity: this.entity }, knock) {
-		this.entity.applyDamage(Math.floor(dmg), cause)
+		this.entity.applyDamage(Math.floor(dmg * this.entity.status().fragileStat()), cause)
 
 		if(!knock) return
 		this.knockback(knock.vel, knock.hor, knock.ver)
@@ -707,10 +707,6 @@ export class Specialist extends Entity {
         `, 
          {fadeInDuration: 0, fadeOutDuration: 0, stayDuration: 0}
         )
-	}
-	// Ultimate Method
-	getUltimate() {
-		return new Ultimate(this.player)
 	}
 	// Cooldown
 	cooldown() {

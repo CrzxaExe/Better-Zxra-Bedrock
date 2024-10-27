@@ -1,26 +1,8 @@
 import { world } from "@minecraft/server";
 import { Specialist, Entity, Items } from "../system.js";
 export {
-	Ultimate,
 	Cooldown,
-	status,
-	Temp
-}
-
-class Ultimate {
-	constructor(player) {
-		this.plyr = new Specialist(player)
-	}
-
-	getUlt() {
-		return this.plyr.getData().ult || []
-	}
-	addUlt(obj)  {
-		let data = this.plyr.getData(), ult = data.ult, flt = ult.find(e => e.wpn == obj.wpn)
-		if(!find) {
-			data.ult == undefined ? data.ult = [] : 0
-		}
-	}
+	status
 }
 
 class Cooldown {
@@ -169,59 +151,19 @@ class status {
 	}
 	// Damage Up Status
 	dmgStat(plus = false) {
-		let filter = this.getData().status.filter(e => e.type == "damage")
-		let multiplier = 1
-		if(plus) multiplier = 0
-
-		filter.forEach(e => {
-			multiplier = multiplier + (Number(e.lvl) * 0.01);
-		})
-		return multiplier
+		return this.getData().status.filter(e => e.type == "damage").reduce((all, cur) => all +=  Number(cur.lvl) * 0.01, plus ? 1 : 0);
 	}
 	// Skill Up Status
 	skillStat() {
-		let filter = this.getData().status.filter(e => e.type == "skill")
-
-		return filter.reduce((all, cur) => all += cur.lvl * 0.01, this.dmgStat())
+		return this.getData().status.filter(e => e.type == "skill").reduce((all, cur) => all += cur.lvl * 0.01, this.dmgStat());
 	}
 	// Stamina Recovery Status
 	staminaUpStat() {
-		let filter = this.getData().status.filter(e => e.type == "stamina_up");
-
-		return filter.reduce((all, cur) => all += cur.lvl * 0.01, 1)
+		return this.getData().status.filter(e => e.type == "stamina_up").reduce((all, cur) => all += cur.lvl * 0.01, 1);
+    }
+    // Fragile Status
+    fragileStat() {
+        return this.getData().status.filter(e => e.type == "fragile").reduce((all, cur) => all += Number(cur.lvl) * 0.01, 1);
     }
 	
-}
-
-class Temp {
-	constructor(player) {
-		if(!player) throw new Error("No Player")
-		this.player = new Specialist(player)
-	}
-
-	getData() {
-		return this.player.getData()
-	}
-	setData(obj) {
-		this.player.setData(obj)
-	}
-	getTemp() {
-		return this.getData().temp
-	}
-	add(amount) {
-		let data = this.getData(), num = Number(amount) || 0
-		data.temp = data.temp + num
-		this.setData(data)
-	}
-	min(amount) {
-		this.add(-Number(amount))
-	}
-	set(num) {
-		let data = this.getData(), m = Number(num) || 0
-		data.temp = m
-		this.setData(data)
-	}
-	reset() {
-		this.set(32)
-	}
 }

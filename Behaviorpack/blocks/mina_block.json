@@ -8,7 +8,6 @@
       }
     },
     "components": {
-      "minecraft:friction": 0.6,
       "minecraft:map_color": "#4AE4E4",
       "minecraft:flammable": false,
       "tag:heavy_ingot_block": {},

@@ -11,7 +11,6 @@
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 2.0
       },
-      "minecraft:friction": 0.6,
       "minecraft:map_color": "#454545",
       "minecraft:flammable": true,
       "minecraft:loot": "loot_tables/block/plasma_core.json",

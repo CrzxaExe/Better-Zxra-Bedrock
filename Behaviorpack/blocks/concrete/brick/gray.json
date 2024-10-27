@@ -11,7 +11,6 @@
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 2.0
       },
-      "minecraft:friction": 0.6,
       "minecraft:map_color": "#373A3E",
       "minecraft:flammable": false,
       "minecraft:loot": "loot_tables/block/concrete/brick/gray.json",

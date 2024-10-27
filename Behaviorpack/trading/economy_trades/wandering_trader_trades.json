@@ -289,6 +289,123 @@
           ]
         },
         {
+          "num_to_select": 3,
+          "trades": [
+            {
+              "max_uses": 3,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 18
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:vial_atk_1"
+                }
+              ]
+            },
+            {
+              "max_uses": 3,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 15
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:vial_atk_0"
+                }
+              ]
+            },
+            {
+              "max_uses": 3,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 12
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:vial_heal_0"
+                }
+              ]
+            },
+            {
+              "max_uses": 3,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 16
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:vial_heal_1"
+                }
+              ]
+            },
+            {
+              "max_uses": 3,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 18
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:vial_heal_2"
+                }
+              ]
+            },
+            {
+              "max_uses": 3,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 18
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:vial_skill_0"
+                }
+              ]
+            },
+            {
+              "max_uses": 3,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 21
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:vial_skill_1"
+                }
+              ]
+            },
+            {
+              "max_uses": 3,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 23
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:vial_skill_2"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "num_to_select": 2,
           "trades": [
             {

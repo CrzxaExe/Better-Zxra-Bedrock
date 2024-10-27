@@ -119,6 +119,12 @@
     "card_teleport": {
       "textures": "textures/items/cards/teleport"
     },
+    "card_money": {
+      "textures": "textures/items/cards/money"
+    },
+    "card_xp": {
+      "textures": "textures/items/cards/xp"
+    },
     "chip": {
       "textures": "textures/items/chip"
     },
@@ -221,6 +227,9 @@
     "vial_heal_1": {
       "textures": "textures/items/alchemy/heal/1"
     },
+    "vial_heal_2": {
+      "textures": "textures/items/alchemy/heal/2"
+    },
     "vial_atk_0": {
       "textures": "textures/items/alchemy/atk/0"
     },
@@ -232,6 +241,9 @@
     },
     "vial_skill_1": {
       "textures": "textures/items/alchemy/skill/1"
+    },
+    "vial_skill_2": {
+      "textures": "textures/items/alchemy/skill/2"
     },
     "vial_shelter_0": {
       "textures": "textures/items/alchemy/shelter/0"

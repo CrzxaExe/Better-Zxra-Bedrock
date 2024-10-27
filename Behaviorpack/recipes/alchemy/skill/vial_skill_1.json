@@ -1,0 +1,41 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:vial_skill_1"
+    },
+    "pattern": [
+      " G",
+      "SHC",
+      " I"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:vial_skill_0"
+      },
+      "H": {
+        "item": "cz:vial_water"
+      },
+      "G": {
+        "item": "minecraft:golden_apple"
+      },
+      "S": {
+        "item": "minecraft:sugar"
+      },
+      "C": {
+        "item": "minecraft:nether_wart"
+      }
+    },
+    "tags": [
+      "alchemy"
+    ],
+    "result": [
+      {
+        "item": "cz:vial_skill_1"
+      },
+      {
+        "item": "cz:vial"
+      }
+    ]
+  }
+}
