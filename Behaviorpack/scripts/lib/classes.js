@@ -151,7 +151,7 @@ class status {
 	}
 	// Damage Up Status
 	dmgStat(plus = false) {
-		return this.getData().status.filter(e => e.type == "damage").reduce((all, cur) => all +=  Number(cur.lvl) * 0.01, plus ? 1 : 0);
+		return this.getData().status.filter(e => e.type == "damage").reduce((all, cur) => all +=  Number(cur.lvl) * 0.01, 1);
 	}
 	// Skill Up Status
 	skillStat() {

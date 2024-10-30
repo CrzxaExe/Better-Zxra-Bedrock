@@ -228,7 +228,7 @@ export const hyrant = [
 export const cenryter = [
   "§rType §dReaper",
   "§rRarity §dEpic",
-  "Tag: DPS",
+  "Tag: DPS, Force",
   " ",
   "§rPasif: §3[Our Fire]",
   "§rSkill:",

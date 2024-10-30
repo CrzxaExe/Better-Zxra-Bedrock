@@ -776,7 +776,7 @@
         "new": {
           "type": "label",
           "localize": false,
-          "text": "+ Adding new item shop: Wandering Trader* Boss Kyle: \n   | Add new skill \n   | Reanimate some skill \n* Creating some new screen ui \n* Entity Yuri: \n   | New Art \n   | New Model \n   | Reanimate some animation\n* Fix Bugs \n+ New Block \n+ New Boss: Kal'sit\n+ New Item \n+ New Vial: \n   | Heal 3\n   | Skill 3\n   | Stamina Recovery\n   | Stamina Stuck\n+ New Weapon \n* Reanimate some weapon skill"
+          "text": "+ Adding new item shop: Wandering Trader\n* Boss Kyle: \n   | Add new skill \n   | Reanimate some skill \n* Creating some new screen ui \n* Entity Yuri: \n   | New Art \n   | New Model \n   | Reanimate some animation\n* Fix Bugs \n+ New Block \n+ New Boss: Kal'sit\n+ New Item \n+ New Vial: \n   | Heal 3\n   | Skill 3\n   | Stamina Recovery\n   | Stamina Stuck\n+ New Weapon: \n   | Cenryter[Epic] - Reaper \n   | Cervant[Legend] - Century \n   | Hyrant[Legend] - Spear \n* Reanimate some weapon skill"
         }
       }
       

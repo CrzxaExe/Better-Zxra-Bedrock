@@ -46,7 +46,7 @@
           "variable.idle = !q.is_sprinting;",
           "variable.kyles = q.get_equipped_item_name=='kyles';",
           "variable.endless = q.get_equipped_item_name=='endless';",
-          "variable.reaper = q.get_equipped_item_name=='liberator' || q.get_equipped_item_name=='bringer';",
+          "variable.reaper = q.get_equipped_item_name=='liberator' || q.get_equipped_item_name=='bringer' || q.get_equipped_item_name=='cenryter';",
           "variable.draw_long = q.get_equipped_item_name=='destiny'  || q.get_equipped_item_name=='spear' || q.get_equipped_item_name=='skyler' || q.get_equipped_item_name=='lectaze' || q.get_equipped_item_name=='pandora' ||  q.get_equipped_item_name=='crusher' || q.get_equipped_item_name=='destreza' || q.get_equipped_item_name=='boltizer';",
           "variable.isCrzx = q.get_name=='CrzxaExe3' > 0;",
           "variable.gun = v.endless;",

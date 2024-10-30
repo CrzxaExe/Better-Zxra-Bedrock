@@ -1,5 +1,5 @@
 import { world } from "@minecraft/server";
-import { Leaderboard, Guild } from "../module.js";
+import { Leaderboard, Guild, ZxraLib } from "../module.js";
 import * as json from "../../data.js";
 
 class Game {
@@ -44,7 +44,7 @@ class Game {
 
   setWorldSetting(rules) {
     if(!rules) return;
-	console.warn("[BZB] Setting morld gamerules with custom rules...");
+	console.warn(`Load...\n[BZB] Version v${ZxraLib.packVersion}\n[BZB] Using ZxraLib v${ZxraLib.version}\n[BZB] Setting morld gamerules...`);
 	Object.keys(rules).forEach(r => world.getDimension("minecraft:overworld").runCommand(`gamerule ${r} ${rules[r]}`));
   };
   

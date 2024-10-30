@@ -2,6 +2,7 @@ action.hint.exit.cz:seat=Sneak or jump to stand
 
 cmd.announce=Announcement chat
 cmd.fchat=Fake chat
+cmd.gc=Send message to guild member
 cmd.give=/give command but batch version
 cmd.gma=Change to gamemode adventure
 cmd.gmc=Change to gamemode creative
@@ -9,6 +10,7 @@ cmd.gms=Change to gamemode survival
 cmd.gmsp=Change to gamemode spectator
 cmd.list=See all available commands
 cmd.mod=Set modifier of main hand item
+cmd.pp=See other player position
 cmd.psp=Your spawn point
 cmd.sit=Sit Anywhere
 cmd.time=Change time of world

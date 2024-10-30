@@ -1,15 +1,13 @@
 import { world, system, ItemStack } from "@minecraft/server";
 import { specialItem, Specialist } from "../system.js";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { Game, Quest, guildUi, adminPanel, questPanel } from "./ZxraLib/module.js";
+import { Game, Quest, guildUi, adminPanel, questPanel, shop } from "./ZxraLib/module.js";
 import * as data from "./data.js"
 
 import "./item/vial.js";
 import "./item/place_item.js";
 import "./item/mc_item.js";
 
-// Shop Items and price
-var shops = data.shop
 export {
 	userPanel
 }
@@ -44,7 +42,7 @@ let shopPanel = (plyr, lib) => {
 		}
 
 		// Button item factory
-		shops[menu].forEach(i => {
+		shop[menu].forEach(i => {
 	      let name = i.item.replace("cz:", "").replace(/_/gi, " "), img = i.img || ""
 	      if(i.voxn) return bol.button(`${name.charAt(0).toUpperCase() + name.slice(1)}\n${i.price} Voxn`, img)
           bol.button(`${name.charAt(0).toUpperCase() + name.slice(1)}\n$${(i.price * day).toFixed(2)}`, img)
@@ -54,12 +52,12 @@ let shopPanel = (plyr, lib) => {
         // Showing the item factory and get res
 		bol.show(plyr).then(r => {
 		  if(r.canceled) return
-		  let itms = shops[menu][r.selection];
+		  let itms = shop[menu][r.selection];
 		  itms.voxn ? buyPanelVoxn(plyr, menu, r.selection) : buyPanel(plyr, menu, r.selection, bal, day);
          })
     })
 }, buyPanel = (player, type, id, bal, day) => {
-	let data = new Specialist(player), item = shops[type][id].item, price = shops[type][id].price, itm = item.replace("cz:","").charAt().toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
+	let data = new Specialist(player), item = shop[type][id].item, price = shop[type][id].price, itm = item.replace("cz:","").charAt().toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
 	let khn = new ModalFormData().title(`$${data.getMoney()}`)
 	.textField(itm + " $" + (price * day).toFixed(2), { translate: "system.buy.amount" })
 	.show(player).then(r => {
@@ -73,7 +71,7 @@ let shopPanel = (plyr, lib) => {
 		data.takeMoney(price * value * day)
 	})
 }, buyPanelVoxn = (player, type, id) => {
-	let data = new Specialist(player), item = shops[type][id].item, price = shops[type][id].price, itm = item.replace("cz:","").charAt(0).toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
+	let data = new Specialist(player), item = shop[type][id].item, price = shop[type][id].price, itm = item.replace("cz:","").charAt(0).toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
 	let khn = new ModalFormData().title(`${data.getVoxn()} Voxn`)
 	.textField(itm + " " + price +" Voxn", { translate: "system.buy.amount" })
 	.show(player).then(r => {

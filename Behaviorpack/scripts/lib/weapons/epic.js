@@ -129,3 +129,18 @@ weapon.registerWeapon("berserk", async (player, lib, event) => {
 		}, 13)
 	}
 })
+
+// Cenryter
+weapon.registerWeapon("cenryter", (player, lib, event) => {
+  if(player.isSneaking) {
+    player.playAnimation("animation.weapon.upgrade", { blendOutTime: 0.35 })// Animation
+  } else if(!player.isOnGround) {
+    player.playAnimation("animation.weapon.swing.great", { blendOutTime: 0.35 })// Animation
+  } else {
+    player.playAnimation("animation.weapon.upslash", { blendOutTime: 0.35 })// Animation
+    
+    system.runTimeout(() => {
+      lib.sp.knockback(lib.velocity, -2.3, 0)
+    }, 6)
+  }
+})

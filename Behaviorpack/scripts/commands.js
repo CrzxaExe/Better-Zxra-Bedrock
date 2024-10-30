@@ -354,7 +354,7 @@ Command.addCmd(
 // Fake Chat
 Command.addCmd(
   "fchat",
-  (player, { msg, rawMsg, functions }) => {
+  (player, { msg, functions }) => {
     let target = new Game().getPlayerName(msg[1]);
 
     if (!target)
@@ -387,3 +387,45 @@ Command.addCmd(
   },
   { des: "cmd.announce", admin: true }
 );
+
+Command.addCmd(
+  "pp",
+  (player, { msg }) => {
+    let target = new Game().getPlayerName(msg[1]);
+
+    if (!target)
+      return player.sendMessage({ translate: "system.invalidPlayer" });
+
+    system.run(() => {
+      player.sendMessage({
+        rawtext: [
+          { text: `${target.name} > ${target.location.x} ${target.location.y} ${target.location.z} > ${target.dimension.id}` }
+        ]
+      })
+    });
+  },
+  { des: "cmd.pp", admin: true }
+)
+
+Command.addCmd(
+  "gc",
+  (player, { msg }) => {
+    let guild = new Game().guild().gd().find(e => e.member.some(r => r.id == player.id));
+
+    if(!guild) return;
+
+    system.run(() => {
+      for(let mem of guild.member) {
+        let member = new Game().getPlayerById(mem.id);
+        
+        if(!member) continue;
+        member.sendMessage({
+          rawtext: [
+            { text: `${guild?.name ? "[" + guild.name + "§r-" + player.name + "§r] " : ""} > ${msg.slice(1).join(" ")}` }
+          ]
+        })
+      }
+    });
+  },
+  { des: "cmd.gc" }
+)

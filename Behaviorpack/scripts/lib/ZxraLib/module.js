@@ -5,7 +5,8 @@
 */
 
 export const ZxraLib = {
-  version: "1.0.8",
+  packVersion: "1.3.5",
+  version: "1.0.9",
 }
 
 /*
@@ -21,6 +22,12 @@ export { Leaderboard } from "./class/Leaderboard.js";
 export { Modifier } from "./class/Modifier.js";
 export { Temp } from "./class/Temp.js";
 export { Quest } from "./class/Quest.js";
+
+/*
+Data Section -------------------------------------------------------------
+*/
+export { shop } from "./data/shop.js";
+
 
 /*
 Function Section -------------------------------------------------------------

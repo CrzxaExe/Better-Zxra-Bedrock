@@ -82,9 +82,9 @@ pasif.addHitPasif("reaper", (user, target, { item, multiplier, sp, soul }) => {
       break;
     case "cenryter": // Pasif Our Fire
       target.setOnFire(5);
-      if (target.isOnFire()) {
+      if (target.getComponent("onfire")) {
         heal += 2;
-        lib.sp.addEffect([{ name: "fire_resistance", duration: 100, lvl: 0 }]);
+        sp.addEffect([{ name: "fire_resistance", duration: 100, lvl: 0 }]);
       }
       break;
   }
@@ -386,7 +386,7 @@ pasif.addHitPasif("greatsword", (user, target, lib) => {
       .getComponent("inventory")
       .container.getSlot(user.selectedSlotIndex),
     cd = lib.sp.cooldown().cd("greatsword_crit", 5),
-    damage = Math.floor(14 - lib.item.getTier());
+    damage = Math.floor(10 - lib.item.getTier());
 
   cd.skill !== true
     ? lib.sp.cooldown().addCd("greatsword_crit", 5)

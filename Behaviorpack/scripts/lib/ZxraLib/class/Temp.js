@@ -33,3 +33,5 @@ class Temp {
 		this.set(32);
 	}
 }
+
+export { Temp };

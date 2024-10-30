@@ -265,7 +265,7 @@ export class Entity {
 		this.knockback(vel, hor, ver)
 	}
 	addDamage(dmg = 1, cause = { cause: "entityAttack", damagingEntity: this.entity }, knock) {
-		this.entity.applyDamage(Math.floor(dmg * this.entity.status().fragileStat()), cause)
+		this.entity.applyDamage(Math.floor(dmg * this.status().fragileStat()), cause)
 
 		if(!knock) return
 		this.knockback(knock.vel, knock.hor, knock.ver)
