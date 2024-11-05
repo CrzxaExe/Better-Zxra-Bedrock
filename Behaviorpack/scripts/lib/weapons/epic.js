@@ -133,14 +133,50 @@ weapon.registerWeapon("berserk", async (player, lib, event) => {
 // Cenryter
 weapon.registerWeapon("cenryter", (player, lib, event) => {
   if(player.isSneaking) {
+    if(lib.sp.cooldown().isCd("cenryter2", 6) == true) return
+	lib.sp.minStamina("value", 12)
+
     player.playAnimation("animation.weapon.upgrade", { blendOutTime: 0.35 })// Animation
-  } else if(!player.isOnGround) {
-    player.playAnimation("animation.weapon.swing.great", { blendOutTime: 0.35 })// Animation
+    
+    world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
+      if(!e.getComponent("onfire")) return
+      
+      lib.sp.heal(1)
+      (lib.sp.status().getStatus("our_fire")?.lvl || 0) + 4 <= 40 ? lib.sp.status().addStatus("our_fire", 10, { type: "skill", stack: true, lvl: 4 }) : 0;
+    })
+  } else if(player.getEffect("strength") && !player.isSneaking) {
+    if(lib.sp.cooldown().isCd("cenryter2", 4.5) == true) return
+	lib.sp.minStamina("value", 6)
+
+    player.playAnimation("animation.weapon.reaper.up", { blendOutTime: 0.35 })// Animation
+    
+    lib.sp.removeEffect(["strength"])
+    lib.sp.bind(0.7)
+    system.runTimeout(() => {
+      lib.sp.knockback(lib.vel, 0.5, 0.17)
+      system.runTimeout(() => {
+        player.getEntitiesFromViewDirection({ maxDistance: 4, excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
+          e.entity.setOnFire(5)
+          lib.sp.heal(1)
+          new Entity(e.entity).addDamage(21 * lib.multiplier, { cause: "entityAttack", damagingEntity: player },{ vel: lib.velocity, hor: 1.6, ver: 1.2 })
+        })
+      }, 2)
+    }, 6)
   } else {
+    if(lib.sp.cooldown().isCd("cenryter1", 5) == true) return
+	lib.sp.minStamina("value", 16)
+
     player.playAnimation("animation.weapon.upslash", { blendOutTime: 0.35 })// Animation
     
+    lib.sp.bind(0.5)
     system.runTimeout(() => {
-      lib.sp.knockback(lib.velocity, -2.3, 0)
+      lib.sp.addEffect([{ name: "strength", duration: 100, lvl: 1 }])
+      lib.sp.knockback(lib.vel, 2.3, 0)
+      world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
+        e.setOnFire(5)
+        lib.sp.heal(1)
+        new Entity(e).addDamage(15 * lib.multiplier, { cause: "entityAttack", damagingEntity: player })
+      })
     }, 6)
   }
 })

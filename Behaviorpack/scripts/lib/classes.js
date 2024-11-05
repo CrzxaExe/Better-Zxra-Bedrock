@@ -163,7 +163,7 @@ class status {
     }
     // Fragile Status
     fragileStat() {
-        return this.getData().status.filter(e => e.type == "fragile").reduce((all, cur) => all += Number(cur.lvl) * 0.01, 1);
+        return this.getData().status.filter(e => e.type == "fragile").reduce((all, cur) => cur.lvl * 0.01 + 1 > all ? all = cur.lvl * 0.01 + 1, 1);
     }
 	
 }

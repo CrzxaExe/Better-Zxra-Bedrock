@@ -220,7 +220,7 @@ pasif.addHitPasif("century", (user, target, lib) => {
     range = 1.5;
 
   switch (item.typeId.split(":")[1]) {
-    case "quezn":
+    case "quezn": // Quezn Skill 1
       dmg = 28;
       range = 3;
       lib.sp.status().removeStatus("quezn_charge");
@@ -228,11 +228,15 @@ pasif.addHitPasif("century", (user, target, lib) => {
       lib.sp.knockback(user.getVelocity(), 0.5, 0);
       break;
   }
-  target.runCommand(
-    `damage @e[r=${range},name=${lib.notSelf},type=!item] ${
-      dmg * lib.multiplier
-    } entity_attack entity @s`
-  );
+  world.getDimension(target.dimension.id).getEntities({ maxDistance: range, location: target.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
+    switch (item.typeId.split(":")[1]) {
+      case "cervant":
+        (lib.sp.status().getStatus("sharper")?.lvl || 0) + 1 <= 6 ? lib.sp.status().addStatus("sharper", 5, { type: "skill", stack: true, lvl: 1 }) : 0;
+        break;
+    }
+    
+    new Entity(e).addDamage(dmg * lib.multiplier, { cause: "entityAttack", damagingEntity: player })
+  })
 });
 pasif.addHitedPasif("century", (user, target, { sp }) => {
   if (!user || !target) return;
@@ -353,6 +357,9 @@ pasif.addHitPasif("spear", (user, target, option) => {
       if (lectaze + 1 < 5 || lectaze == undefined)
         option.lectaze[user.id] = lectaze + 1;
       damage += Number(option.lectaze[user.id]); // Pasif Creations
+      break;
+    case "hyrant": // Pasif Water Bind
+      target.getEffect("slowness") ? option.ent.addEffect([{ name: "slowness", duration: 60, lvl: 1 }]) : option.ent.bind(3);
       break;
   }
   target.applyDamage(damage * option.multiplier, {
