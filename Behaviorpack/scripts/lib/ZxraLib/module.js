@@ -6,7 +6,7 @@
 
 export const ZxraLib = {
   packVersion: "1.3.5",
-  version: "1.0.9",
+  version: "1.0.10",
 }
 
 /*
@@ -45,6 +45,7 @@ export {
 export { leveling } from "./function/leveling.js";
 export { mergeObject } from "./function/mergeObject.js";
 export { questPanel } from "./function/questPanel.js";
+export { runDialog } from "./function/dialog.js";
 export { shuffleObjects } from "./function/shuffleObjects.js";
 export {
   teleportUi,
