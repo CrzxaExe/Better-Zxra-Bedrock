@@ -119,6 +119,7 @@ weapon.registerWeapon("liberator", (player, lib, event) => {
         system.runTimeout(() => {
         	player.teleport(entity.entity.location, { rotation: player.getRotation() })
             ent.knockback(lib.velocity, 2, 0.5)
+            ent.selfParticle("cz:white_slash")
             ent.addEffect([{ name: "poison", duration: 20, lvl: 5 }, { name: "slowness", duration: 5, lvl: 3 }])
             lib.sp.removeEffect(["slowness", "weakness"])
         }, 6)
@@ -165,6 +166,7 @@ weapon.registerWeapon("liberator", (player, lib, event) => {
       lib.sp.addEffect([{ name: "speed", duration: 80, lvl: 2 }])
       world.getDimension(player.dimension.id).getEntities({ location: player.location, maxDistance: 5, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"]}).forEach(e => {
       	new Entity(e).addDamage((soul*3+12) * lib.multiplier, { cause: "entityAttack", damagingEntity: player })
+          new Entity(e).selfParticle("cz:white_slash")
           lib.sp.heal(1)
       })
 	}
@@ -310,6 +312,7 @@ weapon.registerWeapon("skyler", (player, lib, event) => {
 		  world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
 			let ent = new Entity(e)
 			e.setOnFire(5)
+			ent.selfParticle("cz:orange_slash")
 			ent.addDamage(12*lib.multiplier, { cause: "fire", damagingEntity: player }, { vel: lib.vel, hor: 0, ver: power+1.3 })
 			ent.particles(["cz:fireing_hit","cz:impact_down"])
 		  })
@@ -328,10 +331,11 @@ weapon.registerWeapon("skyler", (player, lib, event) => {
 		system.runTimeout(() => {
           lib.sp.knockback(lib.vel, distance*1.2, 0)
           target.setOnFire(5)
+          new Entity(target).selfParticle("cz:orange_slash")
 		  new Entity(target).addDamage(18*lib.multiplier, { cause: "fire", damagingEntity: player }, { vel: lib.vel, hor: 0.3, ver: 0 })
 		}, 3)
 	} else if(!player.isSneaking && !player.isOnGround && player.getEffect("fire_resistance")) {// Skill 3 - Special
-	    if(lib.sp.cooldown().isCd("skylerUlt", 20) == true) return
+	    if(lib.sp.cooldown().isCd("skylerUlt", 22) == true) return
 
 		player.playAnimation("animation.weapon.swash", { blendOutTime: 0.35 })// Animation
 		
@@ -348,6 +352,7 @@ weapon.registerWeapon("skyler", (player, lib, event) => {
 				world.getDimension(player.dimension.id).getEntities({ maxDistance: 5, location: player.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
 					let ent = new Entity(e)
 					e.setOnFire(5)
+					ent.selfParticle("minecraft:lava_particle")
 					ent.addDamage(3*lib.multiplier, { cause: "fire", damagingEntity: player })
 					ent.addEffect([{ name: "slowness", duration: 5, lvl: 0 },{ name: "weakness", duration: 5, lvl: 0 }])
 				})
@@ -369,6 +374,7 @@ weapon.registerWeapon("skyler", (player, lib, event) => {
 			player.getEntitiesFromViewDirection({ maxDistance: 7, excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(i => {
 				i.entity.setOnFire(5)
 				new Entity(i.entity).addDamage(14*lib.multiplier, { cause: "fire", damagingEntity: player }, { vel: lib.velocity, hor: 2.7, ver: 0 })
+				new Entity(i.entity).selfParticle("cz:orange_slash")
 			})
 		}, 4)
 	}
@@ -495,6 +501,7 @@ weapon.registerWeapon("lectaze", (player, lib, event) => {
 
 		  player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(i => {
 			new Entity(i.entity).addDamage(11*lib.multiplier, { cause: "entityAttack", damagingEntity: player })
+			new Entity(i.entity).selfParticle("cz:blue_light_slash")
 		  })
 		}, 4)
 	}
@@ -648,6 +655,7 @@ weapon.registerWeapon("quezn", (player, lib, event) => {
 			player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
 				let distance = Math.sqrt((player.location.x - e.entity.location.x) ** 2 + (player.location.z - e.entity.location.z) ** 2) || 0
 				new Entity(e.entity).addDamage(12*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, ver: -distance, hor: 0 })
+				new Entity(e.entity).selfParticle("cz:white_slash")
 			})
 		}, 3)
 	} else if(player.isSneaking == false && player.isOnGround == false) {// Skill 3
@@ -660,6 +668,7 @@ weapon.registerWeapon("quezn", (player, lib, event) => {
 		system.runTimeout(() => {
 			world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
 				new Entity(e).addDamage(12*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, ver: 0, hor: -50 })
+				new Entity(e).selfParticle("cz:white_slash")
 			})
 		}, 6)
 	} else if(player.isOnGround == true && lib.sp.status().hasStatusName("quezn_charge") == true) {
@@ -696,6 +705,7 @@ weapon.registerWeapon("destreza", (player, lib, event) => {
 
 		world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
 			let ent = new Entity(e)
+		    ent.selfParticle("cz:gray_slash")
 			ent.addDamage(14*lib.multiplier, { cause: "magic", damagingEntity: player })
 			ent.addEffect([{ name: "slowness", duration: 60, lvl: 1 },{ name: "poison", duration: 20, lvl: 4 }])
 		})
@@ -730,6 +740,7 @@ weapon.registerWeapon("destreza", (player, lib, event) => {
 		system.runTimeout(() => {
 	  	player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
 			let ent = new Entity(e.entity)
+			ent.selfParticle("cz:gray_slash")
 			ent.addEffect([{ name: "poison", duration: 60, lvl: 1 }])
 			ent.addDamage(12*lib.multiplier, { cause: "magic", damagingEntity: player }, { vel: lib.vel, hor: 1, ver: 0 })
 	  	})

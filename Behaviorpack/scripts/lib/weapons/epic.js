@@ -142,6 +142,7 @@ weapon.registerWeapon("cenryter", (player, lib, event) => {
       if(!e.getComponent("onfire")) return
       
       lib.sp.heal(1)
+      new Entity(e).selfParticle("cz:ourfire_absorb")
       if(Number((lib.sp.status().getStatus("our_fire")?.lvl) || 0) + 4 <= 40) {
         lib.sp.status().addStatus("our_fire", 10, { type: "skill", stack: true, lvl: 4 })
       }
@@ -157,6 +158,7 @@ weapon.registerWeapon("cenryter", (player, lib, event) => {
         player.getEntitiesFromViewDirection({ maxDistance: 4, excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
           e.entity.setOnFire(5)
           lib.sp.heal(1)
+          new Entity(e.entity).selfParticle("cz:orange_slash")
           new Entity(e.entity).addDamage(21 * lib.multiplier, { cause: "entityAttack", damagingEntity: player },{ vel: lib.velocity, hor: 1.4, ver: 0.7 })
         })
       }, 1)
@@ -174,6 +176,7 @@ weapon.registerWeapon("cenryter", (player, lib, event) => {
         e.setOnFire(5)
         lib.sp.heal(1)
         new Entity(e).addDamage(15 * lib.multiplier, { cause: "entityAttack", damagingEntity: player })
+        new Entity(e).selfParticle("cz:orange_slash")
       })
       system.runTimeout(() => {
         player.playAnimation("animation.weapon.dash.front", { blendOutTime: 0.35 })// Animation

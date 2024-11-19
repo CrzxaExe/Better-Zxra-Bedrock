@@ -1,15 +1,23 @@
 import { world, system } from "@minecraft/server";
 
-const runDialog = (arr) => {
-  const players = world.getPlayers()
-  let i = 0
-
-    const inv = system.runInterval(() => {
-      console.warn(arr[i])
-    }, 10)
-    system.setTimeout(() => system.clearRun(inv), (arr[i]).length*8+12)
+const runDialog = async (arr) => {
+  await handleDialog(arr, 0)
 }
 
-function handleDialog(text, i)
+async function handleDialog(arr, i) {
+  if(arr[i] === undefined || i >= arr.length) return
+
+  const interval = system.runInterval(() => {
+    world.getPlayers().forEach(player => {
+      player.onScreenDisplay.setActionBar({ translate: arr[i].text })
+    })
+  }, 5)
+  system.runTimeout(() => {
+    system.runTimeout(() => {
+      system.clearRun(interval)
+      handleDialog(arr, i+1)
+    }, 40)
+  }, (arr[i].time - 1) * 20)
+}
 
 export { runDialog }

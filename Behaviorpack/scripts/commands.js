@@ -431,9 +431,9 @@ Command.addCmd(
 )
 
 Command.addCmd(
-  "test",
+  "testdialog",
   (player, { msg }) => {
-    runDialog(["Ahok", "Jokowi Kontol","Agus Lagi Ngocok"])
+    runDialog([{ text: "Ahok", time: 2 }, { text: "Jokowi Kontol", time: 4 }, { text: "Agus Lagi Ngocok", time: 5 }])
   },
-  { des: "cmd.test" }
+  { des: "cmd.testdialog" }
 )
