@@ -2,20 +2,20 @@
   "format_version": "1.19.0",
   "minecraft:attachable": {
     "description": {
-      "identifier": "cz:cervant",
+      "identifier": "cz:undying",
       "materials": {
         "default": "entity_alphatest",
         "enchanted": "entity_alphatest_glint"
       },
       "textures": {
-        "default": "textures/items/weapon/cervant",
+        "default": "textures/items/weapon/undying",
         "enchanted": "textures/misc/enchanted_item_glint"
       },
       "geometry": {
         "default": "geometry.cz.medium_item"
       },
       "animations": {
-        "normal": "animation.cervant.key",
+        "normal": "animation.undying.key",
         "fp": "animation.item.normal.fp"
       },
       "scripts": {

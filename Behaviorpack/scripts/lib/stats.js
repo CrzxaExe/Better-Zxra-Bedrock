@@ -1,9 +1,9 @@
 export const kyles = [
- "§rType Sword/§dSlayer",
+ "§rType §dSlayer",
  "§rRarity §b§lLimited",
  "Tag: Nuker, DPS, Debuff",
  " ",
- "§rPasif: §3[Blooding]§r, §3[Thorns] ",
+ "§rPasif: §3[Blooding]§r, §3[Thorns]",
  "§rSkill:",
  "§r[1]§3 No Sneak",
  "§r[2]§3 Sneak",
@@ -50,7 +50,7 @@ export const destiny = [
 ]
 
 export const skyler = [
- "§rType Sword/§dArtSword",
+ "§rType §dArtSword",
  "§rRarity §dUnique",
  "Tag: Debuff, DOT, Dps, Elemental",
  " ",
@@ -102,7 +102,7 @@ export const quezn = [
 ]
 
 export const berserk = [
- "§rType Sword/§dGreatsword",
+ "§rType §dGreatsword",
  "§rRarity §dEpic",
  "Tag: Dps, Nuker",
  " ",
@@ -114,7 +114,7 @@ export const berserk = [
 ]
 
 export const destreza = [
- "§rType Sword/§dArtsword",
+ "§rType §dArtSword",
  "§rRarity §dUnique",
  "Tag: Dps, Debuff, Poison",
  " ",
@@ -127,7 +127,7 @@ export const destreza = [
 ]
 
 export const boltizer = [
- "§rType Sword/§dArtsword",
+ "§rType §dArtSword",
  "§rRarity §dUnique",
  "Tag: Debuff, Nuker, Dps, Elemental",
  " ",
@@ -168,7 +168,7 @@ export const pandora = [
 ]
 
 export const silent = [
- "§rType Sword/§dKatana",
+ "§rType §dKatana",
  "§rRarity §dUnique",
  "Tag: Nuker, DPS, Debuff",
  " ",
@@ -193,7 +193,7 @@ export const bringer = [
 ]
 
 export const musha = [
-  "§rType Sword/§dKatana",
+  "§rType §dKatana",
   "§rRarity §dLegend",
   "Tag: DPS",
   " ",
@@ -204,11 +204,11 @@ export const musha = [
 ]
 
 export const cervant = [
-  "§rType Sword/§dCentury",
+  "§rType §dCentury",
   "§rRarity §dLegend",
   "Tag: DPS, Nuker",
   " ",
-  "§rPasif: §3[]",
+  "§rPasif: §3[Sharp Slice]",
   "§rSkill:",
   "§r[1]§3",
   "§r[2]§3"
@@ -237,13 +237,98 @@ export const cenryter = [
   "§r[Special]§3 Strength-Eff"
 ]
 
+export const lighter = [
+  "§rType §dSpear",
+  "§rRarity §dLegend",
+  "Tag: DPS, Elemental",
+  " ",
+  "§rPasif: §3[]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3"
+]
+
+export const harmony = [
+  "§rType §dSpear",
+  "§rRarity §dLegend",
+  "Tag: DPS, Shield, Survival, Art",
+  " ",
+  "§rPasif: §3[Melody]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3"
+]
+
+export const mudrock = [
+  "§rType §dHammer",
+  "§rRarity §dUnique",
+  "Tag: DPS, Survival",
+  " ",
+  "§rPasif: §3[]§r, §3[]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3",
+  "§r[3]§3",
+  "§r[Special]§3"
+]
+
+export const sui = [
+  "§rType §dKatana",
+  "§rRarity §dLegend",
+  "Tag: DPS, Debuff, Art",
+  " ",
+  "§rPasif: §3[Attack State]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3"
+]
+
+export const yume_staff = [
+  "§rArt 8 Atk",
+  " ",
+  "§rType §dStaff",
+  "§rRarity §dEpic",
+  "Tag: DPS, AOE, Nuker",
+  " ",
+  "§rPasif: §3[]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3",
+  "§r[3]§3"
+]
+
+export const harmist_flute = [
+  "§rHeal 2 HP",
+  " ",
+  "§rType §dFlute",
+  "§rRarity §dLegend",
+  "Tag: DPS, Buff, Heal",
+  " ",
+  "§rPasif: §3[]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3"
+]
+
+export const undying = [
+  "§rType §dArtSword",
+  "§rRarity §dEpic",
+  "Tag: DPS, Elemental",
+  " ",
+  "§rPasif: §3[]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3",
+  "§r[3]§3"
+]
+
 export const katana = [
-  "§rType Sword/§dKatana",
+  "§rType §dKatana",
   "§rRarity §dRare"
 ]
 
 export const greatsword = [
-  "§rType Sword/§dGreatsword",
+  "§rType §dGreatsword",
   "§rRarity §dRare"
 ]
 
@@ -256,7 +341,6 @@ export const hammer = [
   "§rType §dHammer",
   "§rRarity §dRare"
 ]
-
 
 export const spear = [
   "§rType §dSpear",

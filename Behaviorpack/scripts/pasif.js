@@ -14,10 +14,10 @@ pasif.addHitPasif("slayer", (user, target, { multiplier, ent, velocity }) => {
         target.getComponent("health").defaultValue / 4
     );
 
-  if (damage > 250) damage = 250;
+  if (damage > 230) damage = 230;
   ent.addDamage(
     damage * multiplier,
-    { cause: "entityAttack", damagingEntity: user },
+    { cause: "void", damagingEntity: user },
     { vel: velocity, hor: percenDamage * 2, ver: 0 }
   );
 });
@@ -230,7 +230,7 @@ pasif.addHitPasif("century", (user, target, lib) => {
   }
   world.getDimension(target.dimension.id).getEntities({ maxDistance: range, location: target.location, minDistance: 0, excludeNames: [`${user.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
     switch (item.typeId.split(":")[1]) {
-      case "cervant":
+      case "cervant":// Pasif Sharp Slice
         (lib.sp.status().getStatus("sharper")?.lvl || 0) + 1 <= 6 ? lib.sp.status().addStatus("sharper", 5, { type: "skill", stack: true, lvl: 1 }) : 0;
         break;
     }
@@ -254,7 +254,7 @@ pasif.addHitedPasif("century", (user, target, { sp }) => {
 // Pasif Katana
 pasif.addHitPasif("katana", (user, target, option) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
-  let dmg = 11 - option.item.getTier();
+  let dmg = 11 - option.item.getTier(), cause = "entityAttack";
 
   switch (
     user
@@ -286,7 +286,11 @@ pasif.addHitPasif("katana", (user, target, option) => {
         option.musha[user.id].atk = 0;
       } else option.musha[user.id].atk = stk.atk + 1;
       break;
-    default:
+    case "sui": // Pasif Attack State
+      if(user.hasEffect("slowness")) {
+        cause = "magic"
+        dmg *= 1.2
+      }
       break;
   }
 
@@ -294,7 +298,7 @@ pasif.addHitPasif("katana", (user, target, option) => {
     dmg += Math.floor(9 - Number(option.item.getTier()));
 
   target.applyDamage(dmg * option.multiplier, {
-    cause: "entityAttack",
+    cause,
     damagingEntity: user,
   });
 });
@@ -310,7 +314,7 @@ pasif.addHitPasif("hammer", (user, target, option) => {
 
   let targetHealth = target.getComponent("health"),
     damage = Math.floor(8 + targetHealth.defaultValue / 5);
-  if (damage > 100 * (1 - 0.2 * tier)) damage = 50 * (1 - 0.2 * tier);
+  if (damage > 50 * (1 - 0.2 * tier)) damage = 50 * (1 - 0.2 * tier);
   target.applyDamage(damage * option.multiplier, {
     cause: "entityAttack",
     damagingEntity: user,
@@ -335,7 +339,8 @@ pasif.addHitPasif("spear", (user, target, option) => {
       (user.location.x - target.location.x) ** 2 +
         (user.location.z - target.location.z) ** 2
     ),
-    damage = Math.floor(11 + 1.1 * distance - tier);
+    damage = Math.floor(11 + 1.1 * distance - tier),
+    cause = "entityAttack";
 
   switch (item.typeId.split(":")[1]) {
     case "destiny": // Pasif Fears
@@ -363,9 +368,12 @@ pasif.addHitPasif("spear", (user, target, option) => {
         option.ent.bind(3)
       } else option.ent.addEffect([{ name: "slowness", duration: 60, lvl: 1 }]);
       break;
+    case "harmony": // Pasif Melody
+      cause = "magic";
+      break;
   }
   target.applyDamage(damage * option.multiplier, {
-    cause: "entityAttack",
+    cause,
     damagingEntity: user,
   });
 });
@@ -397,7 +405,7 @@ pasif.addHitPasif("greatsword", (user, target, lib) => {
     cd = lib.sp.cooldown().cd("greatsword_crit", 5),
     damage = Math.floor(10 - lib.item.getTier());
 
-  cd.skill !== true
+  !cd.skill
     ? lib.sp.cooldown().addCd("greatsword_crit", 5)
     : (damage *= 2);
 

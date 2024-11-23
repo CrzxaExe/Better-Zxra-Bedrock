@@ -1,0 +1,39 @@
+{
+  "format_version": "1.20.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "cz:sui",
+      "menu_category": {
+        "group": "none",
+        "category": "equipment",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:damage": 10,
+      "minecraft:icon": {
+        "texture": "sui"
+      },
+      "minecraft:can_destroy_in_creative": false,
+      "minecraft:max_stack_size": 1,
+      "minecraft:use_modifiers": {
+        "use_duration": 10,
+        "movement_modifier": 0.35
+      },
+      "minecraft:shooter": {
+        "charge_on_draw": true,
+        "max_draw_duration": 3.5
+      },
+      "minecraft:display_name": {
+        "value": "Sui"
+      },
+      "minecraft:tags": {
+        "tags": [
+          "katana",
+          "tier_2"
+        ]
+      },
+      "minecraft:hand_equipped": true
+    }
+  }
+}

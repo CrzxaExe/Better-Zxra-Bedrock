@@ -138,7 +138,7 @@ weapon.registerWeapon("cenryter", (player, lib, event) => {
 
     player.playAnimation("animation.weapon.upgrade", { blendOutTime: 0.35 })// Animation
     
-    world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
+    world.getDimension(player.dimension.id).getEntities({ maxDistance: 5, location: player.location, minDistance: 0, excludeNames: [`${player.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
       if(!e.getComponent("onfire")) return
       
       lib.sp.heal(1)
@@ -180,7 +180,7 @@ weapon.registerWeapon("cenryter", (player, lib, event) => {
       })
       system.runTimeout(() => {
         player.playAnimation("animation.weapon.dash.front", { blendOutTime: 0.35 })// Animation
-        system.runTimeout(() => lib.sp.knockback(lib.velocity, 3.3, 0), 2)
+        system.runTimeout(() => lib.sp.knockback(lib.vel, 3.3, 0), 2)
       },4)
     }, 9)
   }

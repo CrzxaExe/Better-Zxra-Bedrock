@@ -424,11 +424,6 @@
       "loop": true,
       "bones": {
         "rightItem": {
-          "rotation": [
-            0,
-            0,
-            0
-          ],
           "position": [
             0.3,
             -5.6,
@@ -438,6 +433,40 @@
             0.8,
             1.4,
             1.4
+          ]
+        }
+      }
+    },
+    "animation.undying.key": {
+      "loop": true,
+      "bones": {
+        "rightItem": {
+          "position": [
+            0.3,
+            -6.9,
+            4.4
+          ],
+          "scale": [
+            0.8,
+            1.4,
+            1.4
+          ]
+        }
+      }
+    },
+    "animation.cervant.key": {
+      "loop": true,
+      "bones": {
+        "rightItem": {
+          "position": [
+            0.3,
+            -5.6,
+            -2.5
+          ],
+          "scale": [
+            0.8,
+            1.15,
+            1.15
           ]
         }
       }
@@ -506,10 +535,35 @@
         }
       }
     },
+    "animation.mudrock.key": {
+      "loop": true,
+      "bones": {
+        "hammer": {
+          "position": [
+            0,
+            -2,
+            1
+          ]
+        }
+      }
+    },
     "animation.pandora.fpp": {
       "loop": true,
       "bones": {
         "suitcase": {
+          "scale": 1.9,
+          "position": [
+            0,
+            4,
+            0
+          ]
+        }
+      }
+    },
+    "animation.mudrock.fpp": {
+      "loop": true,
+      "bones": {
+        "hammer": {
           "scale": 1.9,
           "position": [
             0,

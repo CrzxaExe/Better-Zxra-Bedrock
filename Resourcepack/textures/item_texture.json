@@ -78,7 +78,7 @@
       "textures": "textures/items/weapon/hyrant"
     },
     "lighter": {
-      "textures": "textures/items/weapon/ligther"
+      "textures": "textures/items/weapon/lighter"
     },
     "musha": {
       "textures": "textures/items/weapon/musha"
@@ -97,6 +97,15 @@
     },
     "x-3r": {
       "textures": "textures/items/weapon/x-3r"
+    },
+    "azyh": {
+      "textures": "textures/items/weapon/azyh"
+    },
+    "sui": {
+      "textures": "textures/items/weapon/sui"
+    },
+    "mudrock": {
+      "textures": "textures/items/weapon/mudrock"
     },
     "dough": {
       "textures": "textures/items/dough"

@@ -6,18 +6,24 @@ const runDialog = async (arr) => {
 
 async function handleDialog(arr, i) {
   if(arr[i] === undefined || i >= arr.length) return
+  
+  if(arr[i].sound) world.getPlayers().forEach(player => {
+    player.runCommand(`playsound ${arr[i].sound} @s`)
+  })
+
+  if(!arr[i].delay) arr[i].delay = 1
 
   const interval = system.runInterval(() => {
     world.getPlayers().forEach(player => {
       player.onScreenDisplay.setActionBar({ translate: arr[i].text })
     })
-  }, 5)
+  }, 4)
   system.runTimeout(() => {
+    system.clearRun(interval)
     system.runTimeout(() => {
-      system.clearRun(interval)
       handleDialog(arr, i+1)
-    }, 40)
-  }, (arr[i].time - 1) * 20)
+    }, arr[i].delay * 20)
+  }, arr[i].time * 20)
 }
 
 export { runDialog }

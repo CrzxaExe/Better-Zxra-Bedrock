@@ -13,6 +13,7 @@ cmd.mod=Atur modifikasi dari item di tangan kanan
 cmd.pp=Lihat posisi pemain lain
 cmd.psp=Lokasi spawn player
 cmd.sit=Duduk di manapun
+cmd.testdialog=Mengetes dialog story
 cmd.time=Mengganti waktu dari dunia
 cmd.tsp=Teleportasi ke lokasi kemunculanmu
 cmd.wsp=Lokasi spawn dunia
@@ -388,6 +389,9 @@ sort.money=Sortir berdasarkan Uang
 sort.rep=Sortir berdasarkan Reputasi
 sort.specialist=Sortir berdasarkan Level Spesialis
 sort.voxn=Sortir berdasarkan Voxn
+
+story.0-0=2069 - Terra
+story.0-1=Dunia telah banyak berubah
 
 system.acc=Persetujuan
 system.acc.info=Apakah kamu akan menyetujui ini?

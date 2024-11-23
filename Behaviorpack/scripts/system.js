@@ -398,11 +398,9 @@ export class Specialist extends Entity {
 	}
 	async controllerActionBar(lib) {
 		let act = [], item = await this.player.getComponent("inventory").container.getSlot(this.player.selectedSlotIndex) || { typeId: "" }, ammo = lib.endless[this.player.id] || 0, itemStack = new Items(item)
-		let stamina = this.getStamina(), thirst = this.getThirst(), cd = this.cooldown().getCd("greatsword_crit"), cds = this.cooldown()
+		let stamina = this.getStamina(), thirst = this.getThirst(), cd = this.cooldown().getCd("greatsword_crit")
 
 		try {
-			let col = cds.getAllCd().filter(e => e.name.includes(item.typeId.split(":")[1]))
-			col.forEach(r => act.push(`S-${r.name.replace(item.typeId.split(":")[1], "")} ${Math.round(r.duration)}s`))
 			if(cd.error == true && itemStack.getTag().includes("greatsword")) act.push(`<+>`)
 			if(Object.keys(lib.berserk).includes(this.player.id) && lib.berserk[this.player.id] !== undefined && lib.berserk[this.player.id] > 0 && item.typeId == "cz:berserk") act.push(`W-Harm ${lib.berserk[this.player.id]}`)
 			if(Object.keys(lib.soul).includes(this.player.id) && lib.soul[this.player.id] !== undefined ) act.push(`${lib.soul[this.player.id]} Soul`)
@@ -669,8 +667,9 @@ export class Specialist extends Entity {
         if(er <= 0) return
         this.setData(data)
 	}
-	controllerUi({ options }) {
-		let data = this.getData(), maps = new Game(world), stamina = this.getStamina(), thirst = this.getThirst(), day = world.getDay(), time = Math.floor(Number((world.getTimeOfDay()/10).toFixed(0)) + 600), status = this.status().getAll(), sts = "", spMax = Math.floor((data.specialist.lvl * 14) + 40 + (data.specialist.lvl * 8)), perXp = Number(data.specialist.xp / spMax * 100).toFixed(2);
+	async controllerUi({ options }) {
+		try {
+		let data = this.getData(), maps = new Game(world), stamina = this.getStamina(), thirst = this.getThirst(), day = world.getDay(), time = Math.floor(Number((world.getTimeOfDay()/10).toFixed(0)) + 600), status = this.status().getAll(), spMax = Math.floor((data.specialist.lvl * 14) + 40 + (data.specialist.lvl * 8)), perXp = Number(data.specialist.xp / spMax * 100).toFixed(2);
 		time >= 2400 ? time = Math.floor(time - 2400) : 0
 		let dis = String(time).split("").reverse();
 
@@ -682,18 +681,24 @@ export class Specialist extends Entity {
 		if(!mm[1]) mm[1] = 0
 		
 		if(Number(String(dis[3]) + String(dis[2])) < 6) day++
-		if(status.length > 0) sts += "\nStatus"
 
-		status.forEach(e => {
+		let sts = status.reduce((all, cur) => {
 			let lvl = ""
 
-			switch(e.type) {
-				case "damage": lvl = ` +${e.lvl}% Atk`; break;
-				case "skill": lvl = ` +${e.lvl}% Skill`; break;
+			switch(cur.type) {
+				case "damage": lvl = ` +${cur.lvl}% Atk`; break;
+				case "skill": lvl = ` +${cur.lvl}% Skill`; break;
 			}
 
-			sts += `\n${(e.name.charAt(0).toUpperCase() + e.name.slice(1)).replaceAll("_", " ")}${lvl} | ${(e.duration).toFixed(0)}s`
-		})
+			all += `\n${(cur.name.charAt(0).toUpperCase() + cur.name.slice(1)).replaceAll("_", " ")}${lvl} | ${(cur.duration).toFixed(0)}s`
+			return all
+	    }, status.length > 0 ? "\nStatus" : "")
+
+	    let cd = this.cooldown().getAllCd()
+          .reduce((all, cur) => {
+		    all += `\n${cur.name} ${cur.duration.toFixed(2)}s`
+		    return all
+	      }, this.cooldown().getAllCd().length > 0 ? "\nCooldown" : "")
 		
         let disText = `${dis[3]}${dis[2]}:${mm[1]}${mm[0]}`
 		this.player.onScreenDisplay.setTitle(`cz:ui ${this.player.name}
@@ -703,10 +708,11 @@ export class Specialist extends Entity {
           §eS ${Math.round(stamina.value/(stamina.max + stamina.add) * 100)}% §b T ${Math.round(thirst.value/thirst.max * 100)}%§r
           §f${this.temp().getTemp()}° D ${this.dirtyness().getVal()}% Rep ${this.getRep()} AP ${maps.getOnlineCount()}
           ${data.specialist.lvl >= 8 || !options.uiLevelRequirement ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id : "minecraft:air" : ""}${data.specialist.lvl >= 10 || !options.uiLevelRequirement ? "\nDay "+day+" | "+disText : ""}
-          ${sts}
+          ${sts}${cd}
         `, 
          {fadeInDuration: 0, fadeOutDuration: 0, stayDuration: 0}
         )
+        } catch(error) { console.warn(error)}
 	}
 	// Cooldown
 	cooldown() {

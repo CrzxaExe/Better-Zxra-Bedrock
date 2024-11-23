@@ -79,7 +79,7 @@ system.runInterval(async () => {
         options,
       });
       sp.controllerThirst();
-      sp.controllerUi({
+      await sp.controllerUi({
         options,
       });
     }
@@ -405,7 +405,7 @@ world.afterEvents.entityHurt.subscribe(
     damageSource: { cause, damagingEntity, damagingProjectile },
   }) => {
     if (!options.damageIndicator) return;
-    let indicator = world
+    const indicator = world
       .getDimension(hurtEntity.dimension.id)
       .spawnEntity("cz:indicator", {
         x: hurtEntity.location.x + Math.random(-0.5, 0.5),

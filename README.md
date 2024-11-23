@@ -11,6 +11,10 @@ https://zxra-reactjs.vercel.app/project/bzb/
 
 ## Updating to v1.3.5
 
+What's new?
+<p>
+</p>
+
 ## New Features
 
 <h4>Blocks</h4>
@@ -18,28 +22,28 @@ https://zxra-reactjs.vercel.app/project/bzb/
 <h4>Entity</h4>
 Some vanilla mobs are getting buffed. 
 They will now has ability and pasif effect. 
-All new mob and boss original in this addon:
-- Elite Evoker
-- Kyle / Boss
+All new mob and boss original in this addon: <br/>
+- Elite Evoker <br/>
+- Kyle / Boss <br/>
 - Yuri
 
 
 <h4>Items</h4>
 
 <h4>Mechanic</h4>
-- Cooldown
-- Leveling
-- Stamina
-- Status
+- Cooldown <br/>
+- Leveling <br/>
+- Stamina <br/>
+- Status <br/>
 - Thirst
 
 <h4>System</h4>
-- Customable Addon Setting
-- Custom Chat
-- Custom Command
-- Guild
-- Scripting Code with JavaScript
-- Shop
+- Customable Addon Setting <br/>
+- Custom Chat <br/>
+- Custom Command <br/>
+- Guild <br/>
+- Scripting Code with JavaScript <br/>
+- Shop <br/>
 - Quest
 
 <h4>Ui</h4>

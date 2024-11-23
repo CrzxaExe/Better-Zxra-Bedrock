@@ -2,29 +2,29 @@
   "format_version": "1.19.0",
   "minecraft:attachable": {
     "description": {
-      "identifier": "cz:cervant",
+      "identifier": "cz:mudrock",
       "materials": {
         "default": "entity_alphatest",
         "enchanted": "entity_alphatest_glint"
       },
       "textures": {
-        "default": "textures/items/weapon/cervant",
+        "default": "textures/items/weapon/mudrock_entity",
         "enchanted": "textures/misc/enchanted_item_glint"
       },
       "geometry": {
-        "default": "geometry.cz.medium_item"
+        "default": "geometry.mudrock"
       },
       "animations": {
-        "normal": "animation.cervant.key",
-        "fp": "animation.item.normal.fp"
+        "player": "animation.mudrock.key",
+        "fpp": "animation.mudrock.fpp"
       },
       "scripts": {
         "animate": [
           {
-            "normal": "!c.is_first_person"
+            "player": "!c.is_first_person"
           },
           {
-            "fp": "c.is_first_person"
+            "fpp": "c.is_first_person"
           }
         ]
       },

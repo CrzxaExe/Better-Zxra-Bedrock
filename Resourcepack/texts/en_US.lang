@@ -13,6 +13,7 @@ cmd.mod=Set modifier of main hand item
 cmd.pp=See other player position
 cmd.psp=Your spawn point
 cmd.sit=Sit Anywhere
+cmd.testdialog=Testing story dialog
 cmd.time=Change time of world
 cmd.tsp=Teleport to your spawnpoint
 cmd.wsp=Get world spawn point
@@ -388,6 +389,9 @@ sort.money=Sort by Money
 sort.rep=Sort by Reputation
 sort.specialist=Sort by Specialist Level
 sort.voxn=Sort by Voxn
+
+story.0-0=2069 - Terra
+story.0-1=The world has been changes
 
 system.acc=Accept
 system.acc.info=Do you want to accept this?

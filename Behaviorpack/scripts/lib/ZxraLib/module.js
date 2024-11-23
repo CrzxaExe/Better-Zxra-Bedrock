@@ -27,6 +27,11 @@ export { Quest } from "./class/Quest.js";
 Data Section -------------------------------------------------------------
 */
 export { shop } from "./data/shop.js";
+export {
+  storyData,
+  storyDialog,
+  storyQuest
+} from "./data/storyData.js";
 
 
 /*

@@ -1,6 +1,6 @@
 import { system, world, ItemStack } from "@minecraft/server";
 import { Items, Specialist } from "./system.js";
-import { Command, Ench, Game, runDialog } from "./lib/ZxraLib/module.js";
+import { Command, Ench, Game, runDialog, storyDialog } from "./lib/ZxraLib/module.js";
 
 Command.add("kyle", async (player, lib) => {
   if (player.name !== "CrzxaExe3") return;
@@ -433,7 +433,7 @@ Command.addCmd(
 Command.addCmd(
   "testdialog",
   (player, { msg }) => {
-    runDialog([{ text: "Ahok", time: 2 }, { text: "Jokowi Kontol", time: 4 }, { text: "Agus Lagi Ngocok", time: 5 }])
+    runDialog(storyDialog[msg[1] || 0])
   },
   { des: "cmd.testdialog" }
 )
