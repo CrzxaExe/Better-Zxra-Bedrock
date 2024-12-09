@@ -11,8 +11,7 @@ class Ench {
 		return this.enchant().getEnchantments();
 	};
 	display() {
-		let data = this.getEnchants();
-		return data;
+		return this.getEnchants();
 	};
 };
 

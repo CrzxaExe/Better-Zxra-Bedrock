@@ -38,6 +38,10 @@
           {
             "cause": "fall",
             "deals_damage": false
+          },
+          {
+            "cause": "magic",
+            "damage_multipler": 0.8
           }
         ]
       },

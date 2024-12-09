@@ -26,11 +26,11 @@ Command.add("kyle", async (player, lib) => {
   }
 });
 Command.add("_loc", (player) => {
-  let loc = player.location;
+  const { x, y, z } = player.location;
   world.sendMessage(
-    `${player.name} => §l§2[${loc.x.toFixed(2)} ${loc.y.toFixed(
+    `${player.name} => §l§2[${x.toFixed(2)} ${y.toFixed(
       2
-    )} ${loc.z.toFixed(2)}]§r`
+    )} ${z.toFixed(2)}]§r`
   );
 });
 Command.add(".item", (player) => {
@@ -40,8 +40,7 @@ Command.add(".item", (player) => {
         .container.getItem(player.selectedSlotIndex),
       itm = new Items(item);
     if (!item) return;
-    let tag = itm.getTag(),
-      durability = item.getComponent("durability");
+    let durability = item.getComponent("durability");
     world.sendMessage({
       rawtext: [
         { text: `§b§l[${player.name}]§r =>\n ` },
@@ -58,7 +57,7 @@ Command.add(".item", (player) => {
           text: `${item.nameTag ? " §b[" + item.nameTag + "]§r" : ""} X ${
             item.amount
           }${
-            tag.length > 0
+            itm.getTag()?.length > 0
               ? "\n Tag: " +
                 itm
                   .getTag()
@@ -133,11 +132,10 @@ Command.addCmd(
         .sort((a, b) => a.cmd.localeCompare(b.cmd))
         .forEach((cur) => {
           if ((!player.hasTag("Admin") && cur.admin) || cur.err) return;
-          let des = cur.description,
-            admin = cur.admin || false;
+          let des = cur.description;
           hd.push({ text: `\n+${cur.cmd}` });
           if (des !== "") hd.push({ text: " | " }, { translate: des });
-          if (admin !== false) hd.push({ text: " - Admin" });
+          if (cur.admin) hd.push({ text: " - Admin" });
         });
     player.sendMessage({
       rawtext: [
@@ -157,12 +155,12 @@ Command.addCmd(
   "wsp",
   (player) => {
     if (!player) return;
-    let pos = world.getDefaultSpawnLocation();
+    let { x, y, z } = world.getDefaultSpawnLocation();
     player.sendMessage({
       rawtext: [
         { translate: "system.worldspawn" },
         {
-          text: ` §2[${pos.x.toFixed(2)} ${pos.y.toFixed(2)} ${pos.z.toFixed(
+          text: ` §2[${x.toFixed(2)} ${y.toFixed(2)} ${z.toFixed(
             2
           )}]§f`,
         },
@@ -321,11 +319,11 @@ Command.addCmd(
   "mod",
   (player) => {
     if (!player) return;
-    let item = player
-      .getComponent("inventory")
-      .container.getSlot(player.selectedSlotIndex);
     system.run(() => {
-      item.setLore(["§rExplosive 2", "§rVampiric"]);
+      player
+        .getComponent("inventory")
+        .container.getSlot(player.selectedSlotIndex)
+        .setLore(["§rExplosive 2", "§rVampiric"]);
     });
   },
   { des: "cmd.mod", admin: true, err: true }
@@ -355,7 +353,7 @@ Command.addCmd(
 Command.addCmd(
   "fchat",
   (player, { msg, functions }) => {
-    let target = new Game().getPlayerName(msg[1]);
+    const target = new Game().getPlayerName(msg[1]);
 
     if (!target)
       return player.sendMessage({ translate: "system.invalidPlayer" });
@@ -391,7 +389,7 @@ Command.addCmd(
 Command.addCmd(
   "pp",
   (player, { msg }) => {
-    let target = new Game().getPlayerName(msg[1]);
+    const target = new Game().getPlayerName(msg[1]);
 
     if (!target)
       return player.sendMessage({ translate: "system.invalidPlayer" });
@@ -410,7 +408,7 @@ Command.addCmd(
 Command.addCmd(
   "gc",
   (player, { msg }) => {
-    let guild = new Game().guild().gd().find(e => e.member.some(r => r.id == player.id));
+    const guild = new Game().guild().gd().find(e => e.member.some(r => r.id == player.id));
 
     if(!guild) return;
 

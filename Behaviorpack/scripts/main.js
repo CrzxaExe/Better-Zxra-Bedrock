@@ -37,7 +37,7 @@ let wounded = {},
   silentState = [],
   endless = {},
   options = {};
-let inGame = {
+const inGame = {
   soul: {},
   skyler: {},
   catlye: {},
@@ -45,7 +45,7 @@ let inGame = {
   berserk: {},
   musha: {},
 };
-let dimension = [
+const dimension = [
   // Minecraft Dimension
   "minecraft:overworld",
   "minecraft:nether",
@@ -66,9 +66,10 @@ system.beforeEvents.watchdogTerminate.subscribe((e) => {
 
 system.runInterval(async () => {
   try {
-    if (Object.keys(options).length < 1) options = new Game(world).getSetting();
+    if (Object.keys(options).length < 1)
+      options = new Game(world).getSetting();
     for (let plyr of world.getPlayers()) {
-      let sp = new Specialist(plyr);
+      const sp = new Specialist(plyr);
 
       sp.controllerActionBar({
         endless,
@@ -99,7 +100,7 @@ system.runInterval(async () => {
 // Chat Event
 world.beforeEvents.chatSend.subscribe(async (e) => {
   try {
-    let msg = e.message.split(" "),
+    const msg = e.message.split(" "),
       cmd = msg[0];
     const sp = new Specialist(e.sender),
       data = sp.getData();
@@ -161,7 +162,7 @@ world.beforeEvents.chatSend.subscribe(async (e) => {
 
 // Initialing Addon
 world.afterEvents.worldInitialize.subscribe((e) => {
-  let wld = new Game(world);
+  const wld = new Game(world);
   options = wld.getSetting();
   if (options.debug) console.warn(JSON.stringify(options));
   if (options.useBzbRules) wld.setWorldSetting(options.rules);
@@ -169,16 +170,16 @@ world.afterEvents.worldInitialize.subscribe((e) => {
 
 // Refresh Player
 world.beforeEvents.playerLeave.subscribe(({ player }) => {
-  let sp = new Specialist(player);
+  //let sp = new Specialist(player);
   //sp.refreshPlayer();
 });
 world.afterEvents.playerJoin.subscribe((e) => {
-  let player = new Game().getPlayerName(e.playerName);
+  const player = new Game().getPlayerName(e.playerName);
   if (!player) return;
   new Specialist(player).refreshPlayer();
 });
 world.afterEvents.playerSpawn.subscribe((e) => {
-  let player = e.player,
+  const player = e.player,
     isFirst = e.initialSpawn;
   new Specialist(player).refreshPlayer();
 
@@ -216,7 +217,7 @@ world.afterEvents.entityDie.subscribe(async (e) => {
   const murder = e.damageSource.damagingEntity,
     corp = e.deadEntity;
   if (corp instanceof Player) {
-    let cp = new Specialist(corp);
+    const cp = new Specialist(corp);
     if (options.deathLocation)
       corp.sendMessage({
         rawtext: [
@@ -233,7 +234,7 @@ world.afterEvents.entityDie.subscribe(async (e) => {
     cp.setValueDefaultThirst();
     new Game().leaderboard().addLb(corp, { amount: 1, type: "deaths" });
 
-    let guild = new Game()
+    const guild = new Game()
       .guild()
       .gd()
       .find((s) => s.member.some((d) => d.id === corp.id));
@@ -262,7 +263,9 @@ world.afterEvents.entityDie.subscribe(async (e) => {
     if (!itemPasif) return;
     itemPasif.callback(murder, corp, {
       sp: murderData,
+      item,
       ...inGame,
+      notSelf: "!" + murder.name,
       multiplier: murderData.status().dmgStat(),
     });
   }
@@ -340,24 +343,26 @@ world.afterEvents.entityHitEntity.subscribe(
         .getComponent("inventory")
         .container.getItem(e.damagingEntity.selectedSlotIndex),
       entity = e.damagingEntity,
-      data = new Specialist(entity);
-    data.cooldown().setCd("stamina_regen", options.staminaExhaust);
+      sp = new Specialist(entity),
+      itm = new Items(item);
+    sp.cooldown().setCd("stamina_regen", options.staminaExhaust || 3);
     if (!item || e.hitEntity == undefined || !e.hitEntity) return;
 
-    data.minStamina("value", 4);
+    sp.minStamina("value", options.staminaAction || 4);
     let itemPasif = pasif.Pasif.hit.find((x) =>
       item.getTags().includes(x.type)
     );
     if (!itemPasif) return;
     return itemPasif.callback(entity, e.hitEntity, {
       silentState,
-      sp: data,
+      sp,
       ent: new Entity(e.hitEntity),
-      itm: item,
-      item: new Items(item),
+      item,
+      itm,
       notSelf: "!" + entity.name,
+      tier: itm.getTier(),
       ...inGame,
-      multiplier: data.status().dmgStat(),
+      multiplier: sp.status().dmgStat(),
     });
   },
   { entityTypes: ["minecraft:player"] }
@@ -370,7 +375,7 @@ world.afterEvents.entityHurt.subscribe(
         .getComponent("inventory")
         .container.getItem(e.hurtEntity.selectedSlotIndex),
       sp = new Specialist(e.hurtEntity);
-    sp.cooldown().setCd("stamina_regen", 3);
+    sp.cooldown().setCd("stamina_regen", options.staminaExhaust || 3);
 
     e.hurtEntity.runCommand(`camerashake add @s 1.4 0.26`);
     if (
@@ -383,13 +388,13 @@ world.afterEvents.entityHurt.subscribe(
 
     let itemPasif = pasif.Pasif.hited.find((x) =>
         item.getTags().includes(x.type)
-      ),
-      ent = new Entity(e.damageSource.damagingEntity);
+      );
     if (!itemPasif) return;
     itemPasif.callback(e.hurtEntity, e.damageSource.damagingEntity, {
       damage: e.damage,
       sp,
-      ent,
+      ent: new Entity(e.damageSource.damagingEntity),
+      item,
       notSelf: "!" + e.hurtEntity.name,
       multiplier: sp.status().dmgStat(),
       ...inGame,
@@ -424,8 +429,8 @@ world.afterEvents.entityHurt.subscribe(
 world.afterEvents.itemReleaseUse.subscribe(async (e) => {
   let item = e.itemStack,
     entity = e.source,
-    data = new Specialist(entity);
-  data.cooldown().setCd("stamina_regen", 3);
+    sp = new Specialist(entity);
+  sp.cooldown().setCd("stamina_regen", options.staminaExhaust || 3);
 
   let vel = entity.getVelocity(),
     rot = entity.getRotation();
@@ -455,9 +460,9 @@ world.afterEvents.itemReleaseUse.subscribe(async (e) => {
         velocity,
         notSelf: "!" + entity.name,
         silentState,
-        sp: data,
+        sp,
         endless,
-        multiplier: data.status().skillStat(),
+        multiplier: sp.status().skillStat(),
         ...inGame,
       },
       e

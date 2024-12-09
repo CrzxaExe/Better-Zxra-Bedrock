@@ -52,6 +52,8 @@ const settingPanel = (player, lib) => {
       debug,
       staminaCooldown,
       staminaExhaust,
+      staminaAction,
+      staminaHurt,
       staminaRun,
       staminaRecovery,
       thirstDown,
@@ -71,11 +73,21 @@ const settingPanel = (player, lib) => {
 
       .toggle({ translate: "option.useBzbRules" }, useBzbRules)
       .toggle({ translate: "option.debug" }, debug)
+      .textField(
+        { translate: "option.staminaAction" },
+        { translate: "type.float" },
+        `${staminaAction}`
+      )
       .toggle({ translate: "option.staminaCooldown" }, staminaCooldown)
       .textField(
         { translate: "option.staminaExhaust" },
         { translate: "type.float" },
         `${staminaExhaust}`
+      )
+      .textField(
+        { translate: "option.staminaHurt" },
+        { translate: "type.float" },
+        `${staminaHurt}`
       )
       .textField(
         { translate: "option.staminaRecovery" },
@@ -131,8 +143,10 @@ const settingPanel = (player, lib) => {
         let [
           uBR,
           dbg,
+          sA,
           sC,
           sE,
+          sH,
           sRv,
           sR,
           tD,
@@ -150,8 +164,10 @@ const settingPanel = (player, lib) => {
         const newOptions = {
           useBzbRules: uBR,
           debug: dbg,
+          staminaAction: Number(sA),
           staminaCooldown: sC,
           staminaExhaust: Number(sE),
+          staminaHurt: Number(sH),
           staminaRecovery: Number(sRv),
           staminaRun: Number(sR),
           thirstDown: tD,

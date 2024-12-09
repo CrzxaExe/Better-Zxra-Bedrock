@@ -19,52 +19,49 @@ class Cooldown {
 		return this.getData().cd
 	}
 	getCd(name) {
-		let data = this.getData(), find = data.cd.find(e => e.name == name)
+		let find = this.getData().cd.find(e => e.name == name)
 
-		if(!find) return { error: true }
-		return find
+		return !find ? { error: true } : find;
 	}
-	cd(name, dur) {
+	cd(name, dur = 0) {
 		if(!name) return new Error("Cd what?")
-		let data = this.getCd(name), duration = dur || 0
+		let data = this.getCd(name)
 
 		if(data.error !== true) return { name: name, duration: data.duration, skill: false }
-		this.addCd(name, duration)
-		return { name, duration, skill: true }
+		this.addCd(name, dur)
+		return { name, dur, skill: true }
 	}
-	isCd(nm, dur = 1) {
-		if(!nm) return new Error("Cd what?")
-		let data = this.cd(nm, dur)
+	isCd(name, dur = 1) {
+		if(!name) return new Error("Cd what?")
 		
-		if(data.skill !== true) return true
-		return false
+		return !this.cd(name, dur).skill ? true : false;
 	}
-	addCd(nm, dur) {
-		if(!nm) return new Error("Cd what?")
-		let name = nm, duration = dur || 1, data = this.getData(), find = data.cd.find(e => e.name == name)
+	addCd(name, dur = 1) {
+		if(!name) return new Error("Cd what?")
+		let data = this.getData(), find = data.cd.find(e => e.name == name)
 
 		if(!find) {
 			if(!data.cd) data.cd = []
-			data.cd.push({ name, duration })
+			data.cd.push({ name, duration: dur })
 			this.setData(data)
 		} else {
 			let index = data.cd.findIndex(e => e.name == name)
-			data.cd[index].duration = duration
+			data.cd[index].duration = dur
 			this.setData(data)
 		}
 	}
-	setCd(nm, dur) {
-		let data = this.getData(), find = data.cd.findIndex(e => e.name == nm)
-		find === -1 ? data.cd.push({ name: nm, duration: Number(dur) }) : data.cd[find].duration = Math.max(data.cd[find].duration, Number(dur))
+	setCd(name, dur) {
+		let data = this.getData(), find = data.cd.findIndex(e => e.name == name)
+		find === -1 ? data.cd.push({ name, duration: Number(dur) }) : data.cd[find].duration = Math.max(data.cd[find].duration, Number(dur))
 
 		this.setData(data)
 	}
-	minCd(nm, dur) {
-		if(!nm) return new Error("Cd what?")
-		let name = nm, duration = dur || 0, data = this.getData(), find = data.cd.findIndex(e => e.name == name)
+	minCd(name, dur = 0) {
+		if(!name) return new Error("Cd what?")
+		let data = this.getData(), find = data.cd.findIndex(e => e.name == name)
 
 		if(find == undefined) return
-		data.cd[find].duration - duration <= 0 ? data.cd.splice(find, 1) : data.cd[find].duration -= duration;
+		data.cd[find].duration - dur <= 0 ? data.cd.splice(find, 1) : data.cd[find].duration -= dur;
 		this.setData(data)
 	}
 	removeCd(name) {
@@ -101,8 +98,7 @@ class status {
 		if(!name) return
 		let find = this.getAll().find(e => e.name == name)
 
-		if(!find) return { error: true }
-		return find
+		return !find ? { error: true } : find;
 	}
 	hasStatusName(name) {
 		if(!name) return
@@ -128,12 +124,12 @@ class status {
 		}
 		this.setData(data)
 	}
-	minStatus(name, dur) {
+	minStatus(name, dur = 1) {
 		if(!name) return
-		let duration = dur || 1, data = this.getData(), find = data.status.findIndex(e => e.name == name)
+		let data = this.getData(), find = data.status.findIndex(e => e.name == name)
 
 		if(find === -1) return
-		data.status[find].duration - duration <= 0 ? data.status.splice(find, 1) : data.status[find].duration -= duration;
+		data.status[find].duration - dur <= 0 ? data.status.splice(find, 1) : data.status[find].duration -= dur;
 		this.setData(data)
 	}
 	removeStatus(name) {
@@ -149,6 +145,9 @@ class status {
 			
 		}
 	}
+
+	// General Buff
+
 	// Damage Up Status
 	dmgStat(plus = false) {
 		return this.getData().status.filter(e => e.type == "damage").reduce((all, cur) => all +=  Number(cur.lvl) * 0.01, 1);
@@ -165,5 +164,15 @@ class status {
     fragileStat() {
         return this.getData().status.filter(e => e.type == "fragile").reduce((all, cur) => cur.lvl * 0.01 + 1 > all ? all = cur.lvl * 0.01 + 1 : 0, 1)
     }
-	
+    // Art Fragile Status
+    artFragileStat() {
+        return this.getData().status.filter(e => e.type == "art_fragile").reduce((all, cur) => cur.lvl * 0.01 + 1 > all ? all = cur.lvl * 0.01 + 1 : 0, 1)
+    }
+
+	// Types Damage
+
+	// Art Damage Buff
+    artDmgStat() {
+		return this.getData().status.filter(e => e.type == "art_up").reduce((all, cur) => all += cur.lvl * 0.01, this.dmgStat());
+	}
 }

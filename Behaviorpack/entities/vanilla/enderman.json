@@ -56,7 +56,7 @@
         },
         "minecraft:damage_sensor": {
           "triggers": {
-            "cause": "all",
+            "cause": "entity_attack",
             "damage_multiplier": 0.8
           }
         }

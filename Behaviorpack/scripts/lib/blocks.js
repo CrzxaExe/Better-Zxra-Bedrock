@@ -55,13 +55,12 @@ let core = (block, player, item) => {
 }
 
 BlockUi.addBlock("plasma_core", (block, player, item) => {
-	let data = new Tile(block)
 	switch(item.typeId.split(":")[1]) {
 		case "transmiter":
 	      core(block, player, item)
 	      break;
 	    case "plasma_dust":
-	      data.addFuel(3)
+	      new Tile(block).addFuel(3)
 	      player.runCommand(`clear @s ${item.typeId} 0 1`)
 	      break;
     }

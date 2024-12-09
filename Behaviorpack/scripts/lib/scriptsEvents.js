@@ -12,7 +12,10 @@ var dis = {}
 *. 3rd Party Features
 */
 system.afterEvents.scriptEventReceive.subscribe(s => {
-	let entity = s.sourceEntity, message = s.message.split(" "), id = s.id.split(":")[1], initiator = s.initiator || entity.getEntitiesFromViewDirection()[0] || undefined
+	let entity = s.sourceEntity,
+      message = s.message.split(" "),
+      id = s.id.split(":")[1],
+      initiator = s.initiator || entity.getEntitiesFromViewDirection()[0] || undefined;
 	//console.warn(JSON.stringify(s))
 
 	let find = Script.script.find(e => e.id == id)
@@ -29,33 +32,33 @@ class Script {
 }
 
 // Dash Feature
-Script.add("dash", (entity, lib) => {
-	let ent = new Entity(entity), hor = Number(lib.msg[0]) || 0, ver = Number(lib.msg[1]) || 0
+Script.add("dash", (entity, { msg }) => {
+	const [ hor = 0, ver = 0 ] = msg[0]
 
 	let vel = entity.getVelocity(), rot = entity.getRotation();
     rot.y = (rot.y + 45)* Math.PI/180;
-    let velocity = {
+    const velocity = {
 	  "x": (Math.cos(rot.y)-Math.sin(rot.y))*1,
 	  "y": 0,
 	  "z": (Math.sin(rot.y)+Math.cos(rot.y))*1,
 	}
 
-	ent.knockback(velocity, hor, ver)
+	new Entity(entity).knockback(velocity, Number(hor), Number(ver))
 })
 
 // Bind Feature
 Script.add("bind", (entity, { msg }) => {
-	let ent = new Entity(entity), dur = Number(msg[0]) || 1
-
-	ent.bind(dur)
+	new Entity(entity).bind(Number(msg[0]) || 1)
 })
 
 // Status Feature
 Script.add("status", async (entity, { msg }) => {
-	if(!lib.msg[0]) return
-	let ent = new Entity(entity), status = ent.status(), name = msg[0], duration = msg[1] || 1, lvl = msg[2] || 1, type = msg[3] || "none", decay = msg[5] || "time"
-	let stack
+	if(!msg[0]) return
+	let ent = new Entity(entity),
+      status = ent.status(),
+	  [ name, duration = 1, lvl = 1, type = "none", stack = false, decay = "time" ] = msg;
 	["yes","yup","true"].includes(msg[4]) ? stack = true : stack = false;
+	// console.warn(JSON.stringify({ name, duration, lvl, type, stack, decay }))
 
 	/*
 	*. param1 = name - String
@@ -66,7 +69,7 @@ Script.add("status", async (entity, { msg }) => {
 	*. param6 = decay type - String
 	*/
 	try {
-		await status.addStatus(name, duration, { lvl, type, stack, decay })
+		status.addStatus(name, duration, { lvl, type, stack, decay })
 	} finally {
 		status.addStatus(name, duration, { lvl, type, stack, decay })
 	}
@@ -74,8 +77,7 @@ Script.add("status", async (entity, { msg }) => {
 
 // Clear all status Feature
 Script.add("clear_all_status", (entity) => {
-	let ent = new Entity(entity)
-	ent.status().clearAll()
+	new Entity(entity).status().clearAll()
 })
 
 // Player menu Feature
@@ -97,8 +99,7 @@ Script.add("yuri_menu", (entity, { initiator }) => {
 // Set on fire Feature
 Script.add("set_on_fire", (entity, { msg }) => {
 	if(!entity) return
-	let duration = msg[0] || 1
-	entity.setOnFire(duration)
+	entity.setOnFire(msg[0] || 1)
 })
 
 // Money Features
@@ -108,8 +109,7 @@ Script.add("give_money", (entity, { msg }) => {
 	*. param: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), add = Number(msg[0]) || 0
-	sp.addMoney(add)
+	new Specialist(entity).addMoney(Number(msg[0]) || 0)
 })
 // Take Money Feature
 Script.add("take_money", (entity, { msg }) => {
@@ -117,8 +117,7 @@ Script.add("take_money", (entity, { msg }) => {
 	*. param: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), take = Number(msg[0]) || 0
-	sp.takeMoney(take)
+	new Specialist(entity).takeMoney(Number(msg[0]) || 0)
 })
 // Set Money Feature
 Script.add("set_money", (entity, { msg }) => {
@@ -126,14 +125,12 @@ Script.add("set_money", (entity, { msg }) => {
 	*. param: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), sets = Number(msg[0]) || 0
-	sp.setMoney(sets)
+	new Specialist(entity).setMoney(Number(msg[0]) || 0)
 })
 // Reset Money Feature
 Script.add("reset_money", (entity) => {
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity)
-	sp.resetMoney()
+	new Specialist(entity).resetMoney()
 })
 
 // Reputation Features
@@ -143,8 +140,7 @@ Script.add("add_rep", (entity, { msg }) => {
 	*. param: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), num = Number(msg[0]) || 0
-	sp.addRep(num)
+	new Specialist(entity).addRep(Number(msg[0]) || 0)
 })
 // Min Reputation Feature
 Script.add("min_rep", (entity, { msg }) => {
@@ -152,8 +148,7 @@ Script.add("min_rep", (entity, { msg }) => {
 	*. param: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), num = Number(msg[0]) || 0
-	sp.minRep(num)
+	new Specialist(entity).minRep(Number(msg[0]) || 0)
 })
 // Set Reputation Feature
 Script.add("set_rep", (entity, { msg }) => {
@@ -161,14 +156,12 @@ Script.add("set_rep", (entity, { msg }) => {
 	*. param: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), num = Number(msg[0]) || 0
-	sp.setRep(num)
+	new Specialist(entity).setRep(Number(msg[0]) || 0)
 })
 // Reset Reputation Feature
 Script.add("reset_rep", (entity) => {
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity)
-	sp.resetRep()
+	new Specialist(entity).resetRep()
 })
 
 // Specialist Features
@@ -178,9 +171,10 @@ Script.add("sp_add", (entity, { msg }) => {
 	*. param2: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), key = msg[0] || "xp", num = Number(msg[1]) || 0, data = sp.getData()
+	let sp = new Specialist(entity),
+      [ key = "xp", num = 0 ] = msg
 
-	if(data.specialist[key] == undefined) return
+	if(!sp.getData().specialist[key]) return
 	sp.addSpecialist(key, num)
 })
 
@@ -192,9 +186,10 @@ Script.add("add_thist", (entity, { msg }) => {
 	*. param2: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), key = msg[0] || "value", num = Number(msg[1]) || 0, data = sp.getThirst()
+	let sp = new Specialist(entity),
+      [ key = "value", num = 0 ] = msg
 
-	if(data[key] == undefined) return
+	if(!sp.getThirst()[key]) return
 	sp.addThirst(key, num)
 })
 // Min Thirst
@@ -204,9 +199,10 @@ Script.add("min_thist", (entity, { msg }) => {
 	*. param2: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), key = msg[0] || "value", num = Number(msg[1]) || 0, data = sp.getThirst()
+	let sp = new Specialist(entity),
+      [ key = "value", num = 0 ] = msg
 
-	if(data[key] == undefined) return
+	if(!sp.getThirst()[key]) return
 	sp.minThirst(key, num)
 })
 // Set Thirst
@@ -216,17 +212,16 @@ Script.add("set_thist", (entity, { msg }) => {
 	*. param2: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), key = msg[0] || "value", num = Number(msg[1]) || 0, data = sp.getThirst()
+	let sp = new Specialist(entity),
+      [ key = "value", num = 0 ] = msg
 
-	if(data[key] == undefined) return
+	if(!sp.getThirst()[key]) return
 	sp.setThirst(key, num)
 })
 // Reset Value Thirst
 Script.add("reset_value_thist", (entity) => {
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity)
-
-	sp.setValueDefaultThirst()
+	new Specialist(entity).setValueDefaultThirst()
 })
 // Stamina Features
 // Add Stamina
@@ -236,9 +231,10 @@ Script.add("add_stamina", (entity, { msg }) => {
 	*. param2: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), key = msg[0] || "value", num = Number(msg[1]) || 0, data = sp.getStamina()
+	let sp = new Specialist(entity),
+      [ key = "value", num = 0 ] = msg
 
-	if(data[key] == undefined) return
+	if(!sp.getStamina()[key]) return
 	sp.addStamina(key, num)
 })
 // Min Stamina
@@ -248,9 +244,10 @@ Script.add("min_stamina", (entity, { msg }) => {
 	*. param2: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), key = msg[0] || "value", num = Number(msg[1]) || 0, data = sp.getStamina()
+	let sp = new Specialist(entity),
+      [ key = "value", num = 0 ] = msg
 
-	if(data[key] == undefined) return
+	if(!sp.getStamina()[key]) return
 	sp.minStamina(key, num)
 })
 // Set Stamina
@@ -260,17 +257,16 @@ Script.add("set_stamina", (entity, { msg }) => {
 	*. param2: amount - Number
 	*/
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity), key = msg[0] || "value", num = Number(msg[1]) || 0, data = sp.getStamina()
+	let sp = new Specialist(entity),
+        [ key = "value", num = 0 ] = msg
 
-	if(data[key] == undefined) return
+	if(!sp.getStamina()[key]) return
 	sp.setStamina(key, num)
 })
 // Reset Value Stamina
 Script.add("reset_value_stamina", (entity) => {
 	if(!(entity instanceof Player)) return
-	let sp = new Specialist(entity)
-
-	sp.setValueDefaultStamina()
+	new Specialist(entity).setValueDefaultStamina()
 })
 
 

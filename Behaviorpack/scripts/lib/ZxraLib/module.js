@@ -6,7 +6,7 @@
 
 export const ZxraLib = {
   packVersion: "1.3.5",
-  version: "1.0.10",
+  version: "1.0.11",
 }
 
 /*

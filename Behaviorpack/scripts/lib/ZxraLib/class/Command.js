@@ -5,13 +5,11 @@ class Command {
     this.cmd.push({ cmd: name, callback: call, type: "none" });
   }
   static addCmd(name, call, opt = {}) {
-    let admin = opt.admin || false,
-      description = opt.des || "";
     this.cmd.push({
       cmd: name,
       callback: call,
-      admin,
-      description,
+      admin: opt.admin || false,
+      description: opt.des || "",
       type: "cmd",
       err: opt.err || false
     });

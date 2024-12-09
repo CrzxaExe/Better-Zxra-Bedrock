@@ -37,8 +37,8 @@ export class Quest {
 
     // Main Controller to update the quest data
 	controller(ops) {
-		let data = this.questData(), quest = this.getQuest()
-		if(data.quest == false) return
+		let quest = this.getQuest()
+		if(this.questData().quest == false) return
 
 		quest.task.forEach(i => {
 		  if(i.act !== ops.act) return
@@ -90,11 +90,10 @@ export class Quest {
 		this.setQuest(gets)
 	}
 	actRaw() {
-		let data = this.questData(), quest = this.getQuest(), text = "", id = 0
-		quest.task.forEach(i => {
+		let data = this.questData(), quest = this.getQuest(), text = "";
+		quest.task.forEach((i, id) => {
 			let name = i.target.replace("cz:", "").replace(/_/gi, " ")
 			text += `\n${i.act.charAt(0).toUpperCase() + i.act.slice(1)} ${(name.charAt(0).toUpperCase() + name.slice(1)).replace(/_/gi, " ")} ${data.task[id]}/${i.amount}`
-			id++
 		})
 		return text
 	}

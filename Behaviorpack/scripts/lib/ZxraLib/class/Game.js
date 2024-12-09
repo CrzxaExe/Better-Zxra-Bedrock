@@ -38,8 +38,8 @@ class Game {
   
   getEntityAtBlock(block, type) {
     if(!block || !type) return;
-	let entity = world.getDimension(block.dimension.id).getEntitiesAtBlockLocation(block.location), filtered = entity.filter(i => i.typeId.split(":")[1] == type);
-    return filtered[0];
+	let entity = world.getDimension(block.dimension.id).getEntitiesAtBlockLocation(block.location);
+    return entity.filter(i => i.typeId.split(":")[1] == type)[0];
   };
 
   setWorldSetting(rules) {

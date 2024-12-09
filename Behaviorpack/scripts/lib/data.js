@@ -8,6 +8,8 @@ export let setting = {
   staminaCooldown: true,
   staminaExhaust: 3,
   staminaRecovery: 1.5,
+  staminaAction: 4,
+  staminaHurt: 3,
   staminaRun: 1.0,
   thirstDown: 0.003,
   customChat: true,

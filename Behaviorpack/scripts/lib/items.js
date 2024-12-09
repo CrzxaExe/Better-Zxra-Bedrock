@@ -13,9 +13,9 @@ export {
 }
 
 let shopPanel = (plyr, lib) => {
-	let data = new Specialist(plyr), bal = "cz:shop", day = lib.options.shopMultiplier
+	let data = new Specialist(plyr), day = lib.options.shopMultiplier
 	let hpk = new ActionFormData()
-	  .title(bal)
+	  .title("cz:shop")
 	  .body({ translate: "cz.shop.body" })
 	  .button({ translate: "cz.blocks" }, "textures/blocks/bookshelf")
 	  .button({ translate: "cz.crops" }, "textures/items/wheat")
@@ -28,7 +28,10 @@ let shopPanel = (plyr, lib) => {
 	// Showing Shop panel and getting the res
 	hpk.show(plyr).then(r => {
 		if(r.canceled) return
-		let menu = "", bol = new ActionFormData().title(bal).body({ translate: "cz.shop.body" })
+		let menu = "blocks",
+          bol = new ActionFormData()
+            .title("cz:shop")
+            .body({ translate: "cz.shop.body" })
 
 		// Get menu
 		switch(r.selection) {
@@ -52,56 +55,64 @@ let shopPanel = (plyr, lib) => {
         // Showing the item factory and get res
 		bol.show(plyr).then(r => {
 		  if(r.canceled) return
-		  let itms = shop[menu][r.selection];
-		  itms.voxn ? buyPanelVoxn(plyr, menu, r.selection) : buyPanel(plyr, menu, r.selection, bal, day);
+		  shop[menu][r.selection].voxn ?
+            buyPanelVoxn(plyr, menu, r.selection) :
+            buyPanel(plyr, menu, r.selection, "cz:shop", day);
          })
     })
 }, buyPanel = (player, type, id, bal, day) => {
-	let data = new Specialist(player), item = shop[type][id].item, price = shop[type][id].price, itm = item.replace("cz:","").charAt().toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
-	let khn = new ModalFormData().title(`$${data.getMoney()}`)
-	.textField(itm + " $" + (price * day).toFixed(2), { translate: "system.buy.amount" })
-	.show(player).then(r => {
-		if(r.canceled || r.formValues[0] == undefined) return
-
-		let value = r.formValues[0] || 0
-		if(value < 1) return
-		if(data.getMoney() < price * value * day) return player.sendMessage({ translate: "system.buy.outMoney" })
-		player.runCommand(`give @s ${item} ${value}`)
-		player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${value} ${itm} ` },{ translate: "system.buy2" },{ text: `$${(value * price * day).toFixed(2)}` }]})
-		data.takeMoney(price * value * day)
-	})
+	let data = new Specialist(player),
+      { item, price } = shop[type][id],
+      itm = item.replace("cz:","").charAt().toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " "),
+	  khn = new ModalFormData().title(`$${data.getMoney()}`)
+	    .textField(itm + " $" + (price * day).toFixed(2), { translate: "system.buy.amount" })
+	    .show(player).then(r => {
+	      if(r.canceled || r.formValues[0] == undefined) return
+      
+	      let value = r.formValues[0] || 0
+	      if(value < 1) return
+	      if(data.getMoney() < price * value * day) return player.sendMessage({ translate: "system.buy.outMoney" })
+	      player.runCommand(`give @s ${item} ${value}`)
+	      player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${value} ${itm} ` },{ translate: "system.buy2" },{ text: `$${(value * price * day).toFixed(2)}` }]})
+	      data.takeMoney(price * value * day)
+	    })
 }, buyPanelVoxn = (player, type, id) => {
-	let data = new Specialist(player), item = shop[type][id].item, price = shop[type][id].price, itm = item.replace("cz:","").charAt(0).toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " ")
-	let khn = new ModalFormData().title(`${data.getVoxn()} Voxn`)
-	.textField(itm + " " + price +" Voxn", { translate: "system.buy.amount" })
-	.show(player).then(r => {
-		if(r.canceled || r.formValues[0] == undefined) return
-
-		let value = r.formValues[0] || 0
-		if(value < 1) return
-		if(data.getVoxn() < price * value) return player.sendMessage({ translate: "system.buy.outVoxn" })
-		player.runCommand(`give @s ${item} ${value}`)
-		player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${value} ${itm} ` },{ translate: "system.buy2" },{ text: `${(value * price)} Voxn` }]})
-		data.minVoxn(price * value)
-	})
+	let data = new Specialist(player),
+	  { item, price } = shop[type][id],
+      itm = item.replace("cz:","").charAt(0).toUpperCase() + item.replace("cz:", "").slice(1).replace(/_/gi, " "),
+	  khn = new ModalFormData()
+        .title(`${data.getVoxn()} Voxn`)
+	    .textField(itm + " " + price +" Voxn", { translate: "system.buy.amount" })
+	    .show(player).then(r => {
+	   	if(r.canceled || r.formValues[0] == undefined) return
+  
+	   	let value = r.formValues[0] || 0
+	   	if(value < 1) return
+   		if(data.getVoxn() < price * value) return player.sendMessage({ translate: "system.buy.outVoxn" })
+	   	player.runCommand(`give @s ${item} ${value}`)
+	   	player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${value} ${itm} ` },{ translate: "system.buy2" },{ text: `${(value * price)} Voxn` }]})
+	   	data.minVoxn(price * value)
+    	})
 }, userPanel = (player) => {
-	let data = new Specialist(player), jlm = new ActionFormData()
-	.title(player.name)
-	.body({ translate: "cz.user.body" })
-	.button({ translate: "user.reset" })
-	.button({ translate: "system.transfer" })
-	.button({ translate: "system.reload" })
-	if(player.hasTag("Admin")) {
-	  jlm.button({ translate: "user.reset.bal" })
-	  jlm.button({ translate: "user.reset.stamina" })
-	  jlm.button({ translate: "user.reset.temp" })
-	  jlm.button({ translate: "user.reset.thirst" })
-	  jlm.button({ translate: "user.reset.rep" })
-	  jlm.button({ translate: "user.reset.dirty" })
-	  jlm.button({ rawtext: [{ translate: "system.add" },{ text: " $5000" }]})
-	  jlm.button({ rawtext: [{ translate: "system.add" },{ text: " 20 Voxn" }]})
-	  jlm.button({ translate: "user.random.quest" })
-	}
+	let data = new Specialist(player),
+      jlm = new ActionFormData()
+	    .title(player.name)
+	    .body({ translate: "cz.user.body" })
+	    .button({ translate: "user.reset" })
+	    .button({ translate: "system.transfer" })
+	    .button({ translate: "system.reload" })
+
+    if(player.hasTag("Admin")) {
+      jlm.button({ translate: "user.reset.bal" })
+      jlm.button({ translate: "user.reset.stamina" })
+      jlm.button({ translate: "user.reset.temp" })
+      jlm.button({ translate: "user.reset.thirst" })
+      jlm.button({ translate: "user.reset.rep" })
+      jlm.button({ translate: "user.reset.dirty" })
+      jlm.button({ rawtext: [{ translate: "system.add" },{ text: " $5000" }]})
+      jlm.button({ rawtext: [{ translate: "system.add" },{ text: " 20 Voxn" }]})
+      jlm.button({ translate: "user.random.quest" })
+    }
 
 	jlm.show(player).then(r => {
 		if(r.canceled) return
@@ -122,7 +133,7 @@ let shopPanel = (plyr, lib) => {
     })
 }, transferPanel = (player) => {
 	let data = new Specialist(player), players = world.getPlayers().map(r => { return r.name })
-	players.splice(0, 0, "None")
+	players.unshift("None")
 	players.splice(players.findIndex(f => f == player.name), 1)
 
 	let pnl = new ModalFormData()
@@ -132,10 +143,9 @@ let shopPanel = (plyr, lib) => {
 	.show(player).then(r => {
 		if(r.canceled) return
 
-		let value = r.formValues, target = players[value[0]]
+		let [user, amount] = r.formValues, target = players[user]
 		if(!target || target == "None") return player.sendMessage({ translate: "system.invalidPlayer.name" })
-		let tsp = new Game().getPlayerName(target)
-		data.transferMoney(tsp, Number(value[1]))
+		data.transferMoney(new Game().getPlayerName(target), Number(amount))
 	})
 }
 
@@ -157,7 +167,7 @@ Dirty ${specialist.dirty}%
 
 Active Player ${game.getOnlineCount()}
 Day ${world.getDay()}
-      `)
+      `.trim())
       .button({ translate: "cz.shop" }, "textures/ui/store_cz_icon")
       .button({ translate: "cz.leaderboard" }, "textures/items/zxra_book")
       .button({ translate: "cz.quest" }, "textures/items/book_writable")
@@ -192,12 +202,12 @@ specialItem.addItem("stamina_up_book", (player) => {
 })
 
 specialItem.addItem("compass", (player, item) => {
-	let rot = player.getRotation(), compass = ""
+	let { y } = player.getRotation(), compass = "compass.north"
 
-	if(rot.y > -45 && rot.y < 49) compass = "compass.south"
-	if(rot.y > -165 && rot.y < -39) compass = "compass.east"
-	if(rot.y > 45 && rot.y < 149) compass = "compass.west"
-	if(rot.y > 135 && rot.y < 230) compass = "compass.north"
+	if(y > -45 && y < 49) compass = "compass.south"
+	if(y > -165 && y < -39) compass = "compass.east"
+	if(y > 45 && y < 149) compass = "compass.west"
+	if(y > 135 && y < 230) compass = "compass.north"
 
 	// Displaying the compass
 	player.onScreenDisplay.setActionBar({ translate: `${compass}` })

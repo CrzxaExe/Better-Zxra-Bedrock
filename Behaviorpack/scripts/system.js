@@ -78,9 +78,9 @@ export class Items {
 		return this.item.getTags()
 	}
 	getTier() {
-		let tag = this.getTag(), gets = 0
-		tag.forEach(t => t.startsWith("tier_") ? gets = Number(t.split("_")[1]) : 0)
-		return Number(gets)
+		return this.getTag()
+          .filter(e => e.startsWith("tier_"))
+          .reduce((all, cur) => cur.split("_")[1] > all ? all = cur.split("_")[1] : 0, 0 )
 	}
 	getType() {
 		return this.getTag().find(e => data.weaponType.includes(e))
@@ -112,10 +112,10 @@ export class Tile {
 		return { power: data.power, text: `${Number(data.power.stored).toFixed(2)}/${data.power.max}` }
 	}
 	addPower(amount) {
-		let data = this.data.getData(), has = this.getPower()
+		let data = this.data.getData();
 		amount= Number(amount)
 
-		if(has == undefined) return
+		if(this.getPower() == undefined) return
 		data.power.stored + amount <= data.power.max ? data.power.stored += amount : data.power.stored = data.power.max;
 		this.data.setData(data)
 	}
@@ -127,9 +127,9 @@ export class Tile {
 		return on
 	}
 	switchPower(type) {
-		let data = this.data.getData(), status = this.getPowerStatus()
+		let data = this.data.getData();
 
-		if(status == undefined) return Error("Not power block")
+		if(this.getPowerStatus() == undefined) return Error("Not power block")
 		data.powerStatus = !data.powerStatus
 
 		switch(type) {
@@ -265,7 +265,18 @@ export class Entity {
 		this.knockback(vel, hor, ver)
 	}
 	addDamage(dmg = 1, cause = { cause: "entityAttack", damagingEntity: this.entity }, knock) {
-		this.entity.applyDamage(Math.floor(dmg * this.status().fragileStat()), cause)
+		let up = 1;
+		
+		switch(cause.cause) {
+			case "entityAttack":
+			  up = this.status().fragileStat()
+			  break;
+			case "magic":
+			  up = this.status().artFragileStat()
+			  break;
+		}
+
+		this.entity.applyDamage(Math.round(dmg * up), cause)
 
 		if(!knock) return
 		this.knockback(knock.vel, knock.hor, knock.ver)
@@ -318,7 +329,18 @@ export class Entity {
 	}
 	controllerStatus() {
 		this.getDataEnt().status.filter(r => r.decay == "time").forEach(e => this.status().minStatus(e.name, 0.25))
+		this.controllerEffectStatus(this.getDataEnt().status)
 	}
+	controllerEffectStatus(obj) {
+		for(let sts of obj) {
+			switch(sts.type) {
+				case "wet":
+				    if(this.entity.getComponent("onfire")) this.entity.extinguishFire()
+				    break;
+				default: continue;
+			}
+	    }
+    }
 	// Debug
 	refreshEntity() {
 		let tag = ["silent_target","ultimate","liberator_target","silence","lectaze_target","fireing_zone","catlye_ult"]
@@ -384,7 +406,8 @@ export class Specialist extends Entity {
 
 	// Specialist Method
 	addSpecialist(key, amount) {
-		let data = this.getData(), lvlUp = Math.floor((data.specialist.lvl * 14) + 40 + (data.specialist.lvl * 8))
+		let data = this.getData(),
+           lvlUp = Math.floor((data.specialist.lvl * 14) + 40 + (data.specialist.lvl * 8))
 		data.specialist[key] = data.specialist[key] + Number(amount)
 
 		if(key == "xp" && data.specialist[key] > lvlUp) {
@@ -397,7 +420,7 @@ export class Specialist extends Entity {
 		this.setData(data)
 	}
 	async controllerActionBar(lib) {
-		let act = [], item = await this.player.getComponent("inventory").container.getSlot(this.player.selectedSlotIndex) || { typeId: "" }, ammo = lib.endless[this.player.id] || 0, itemStack = new Items(item)
+		let act = [], item = this.player.getComponent("inventory").container.getSlot(this.player.selectedSlotIndex) || { typeId: "" }, ammo = lib.endless[this.player.id] || 0, itemStack = new Items(item)
 		let stamina = this.getStamina(), thirst = this.getThirst(), cd = this.cooldown().getCd("greatsword_crit")
 
 		try {
@@ -437,7 +460,6 @@ export class Specialist extends Entity {
 	};
 	transferMoney(target, amount) {
 		let data = new Specialist(target);
-		amount = Number(amount);
 
 		if(this.getMoney() < amount*1.2) return this.player.sendMessage({ rawtext: [{ translate: "system.transfer.outMoney" },{ text: `$${amount*1.2}`}]});
 		data.addMoney(amount);
@@ -500,8 +522,14 @@ export class Specialist extends Entity {
 		this.setStamina("value", this.getStamina().max + this.getStamina().add);
 	};
 	controllerStamina({ options }) {
-		let data = this.getStamina(), stm = options.staminaRecovery || 1.5, runOut = options.staminaRun || 1, cd = this.cooldown(), sts = this.status();
-		let exhaust = sts.getStatusBy({ type: "stamina_exhaust" }), up = sts.getStatusBy({ type: "stamina_up" }), additional = data.add || 0;
+		let data = this.getStamina(),
+          stm = options.staminaRecovery || 1.5,
+          runOut = options.staminaRun || 1,
+          cd = this.cooldown(),
+          sts = this.status(),
+		  exhaust = sts.getStatusBy({ type: "stamina_exhaust" }),
+          up = sts.getStatusBy({ type: "stamina_up" }),
+          additional = data.add || 0;
 
 		if(this.player.isSprinting == true || this.player.isSwimming == true) {
 			data.value - runOut <= 0 ? this.setStamina("value", 0) : stm = -runOut;
@@ -558,7 +586,9 @@ export class Specialist extends Entity {
 		if(["creative","spectator"].includes(this.player.getGameMode()))
 		  return;
 
-		let data = this.getThirst(), minus = 0.003, status = this.status(), thirstEff = status.getStatusBy({ type: "thirst" }) || { lvl: 0 };
+		let data = this.getThirst(),
+          minus = 0.003,
+          thirstEff = this.status().getStatusBy({ type: "thirst" }) || { lvl: 0 };
 
 		if(this.player.isSprinting) minus = minus + 0.03;
 		if(this.player.dimension.id.split(":")[1] == "nether") minus += 0.02;
@@ -603,24 +633,22 @@ export class Specialist extends Entity {
 		return new Dirty(this.player)
 	}
 	// Template Skill
-	async impactSkill(dmg, lib, func) {
-		if(!lib.single) lib.single = false
-		let dash = lib.ver || 0
+	async impactSkill(dmg, { single, ver, velocity, sp, ent, multiplier }, func) {
+		if(!single) single = false
 
-		lib.sp.knockback(lib.vel, 0.1, 0.8)
+		sp.knockback(vel, 0.1, 0.8)
 		system.runTimeout(() => {
-			lib.sp.knockback(lib.velocity, dash, -8.7)
+			sp.knockback(velocity, ver || 0, -8.7)
 			this.bind(0.7)
 			system.runTimeout(() => {
-				lib.sp.impactParticle()
-				if(lib.single !== true) {
+				sp.impactParticle()
+				if(single !== true) {
 					world.getDimension(this.player.dimension.id).getEntities({ location: this.player.location, maxDistance: 6, minDistance: 0, excludeNames: [`${this.player.name}`], excludeTypes: ["minecraft:item","cz:indicator"]}).forEach(e => {
-			        	let ent = new Entity(e)
-			            ent.addDamage(dmg * lib.multiplier, { cause: "entityAttack", damagingEntity: this.player })
+			        	new Entity(e).addDamage(dmg * multiplier, { cause: "entityAttack", damagingEntity: this.player })
 			        })
 				} else {
-					if(!lib.ent) return
-					lib.ent.addDamage(dmg * lib.multiplier, { cause: "entityAttack", damagingEntity: this.player })
+					if(!ent) return
+					ent.addDamage(dmg * multiplier, { cause: "entityAttack", damagingEntity: this.player })
 				}
 				if(typeof func === 'function') func.call()
 			}, 3)
