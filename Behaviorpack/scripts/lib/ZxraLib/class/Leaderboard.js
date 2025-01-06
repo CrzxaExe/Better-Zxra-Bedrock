@@ -39,7 +39,6 @@ class Leaderboard extends Game {
       .show(player)
       .then(r => {
         let data = this.lb();
-        //console.warn(JSON.stringify(data))
 
         if(r.canceled) return;
         let gui2 = new ActionFormData()

@@ -207,6 +207,27 @@
           }
         }
       },
+      "shield_magic_1": {
+        "minecraft:timer": {
+          "time": 8,
+          "looping": false,
+          "time_down_event": {
+            "event": "cz:shield_break"
+          }
+        },
+        "minecraft:damage_sensor": {
+          "triggers": {
+            "deals_damage": false,
+            "on_damage": {
+              "filters": {
+                "test": "has_damage",
+                "value": "magic"
+              },
+              "event": "cz:shield_break"
+            }
+          }
+        }
+      },
       "no_fall_5s": {
         "minecraft:timer": {
           "time": 5,
@@ -228,7 +249,27 @@
           }
         }
       },
-      "float": {}
+      "float": {},
+      "health1": {
+        "minecraft:health": {
+          "max": 22
+        }
+      },
+      "health2": {
+        "minecraft:health": {
+          "max": 24
+        }
+      },
+      "health3": {
+        "minecraft:health": {
+          "max": 26
+        }
+      },
+      "health4": {
+        "minecraft:health": {
+          "max": 28
+        }
+      }
     },
     "components": {
       "minecraft:experience_reward": {
@@ -529,7 +570,8 @@
       "cz:shield_break": {
         "remove": {
           "component_groups": [
-            "shield_1"
+            "shield_1",
+            "shield_magic_1"
           ]
         }
       },
@@ -537,6 +579,13 @@
         "add": {
           "component_groups": [
             "shield_1"
+          ]
+        }
+      },
+      "cz:shield_magic_1": {
+        "add": {
+          "component_groups": [
+            "shield_magic_1"
           ]
         }
       },
@@ -551,6 +600,62 @@
         "remove": {
           "component_groups": [
             "no_fall_5s"
+          ]
+        }
+      },
+      "cz:max_health_player_22": {
+        "add": {
+          "component_groups": [
+            "health1"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "health2",
+            "health3",
+            "health4"
+          ]
+        }
+      },
+      "cz:max_health_player_24": {
+        "add": {
+          "component_groups": [
+            "health2"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "health1",
+            "health3",
+            "health4"
+          ]
+        }
+      },
+      "cz:max_health_player_26": {
+        "add": {
+          "component_groups": [
+            "health3"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "health1",
+            "health2",
+            "health4"
+          ]
+        }
+      },
+      "cz:max_health_player_28": {
+        "add": {
+          "component_groups": [
+            "health4"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "health1",
+            "health2",
+            "health3"
           ]
         }
       }

@@ -1,12 +1,14 @@
 // Templating Skill
+import { skillData } from "../module.js";
 
 class Skill {
-  constructor(entity) {
-    if(!entity) throw new Error("Not have agent")
-    this.main = entity
+  static s = []
+  
+  static runSkill(name, lib) {
+    const callback = this.s.find(e => e.name === name);
+    if(!callback) return;
+    callback.run(lib);
   }
-  
-  
 }
 
 export { Skill };

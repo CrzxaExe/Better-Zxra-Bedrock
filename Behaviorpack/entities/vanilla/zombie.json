@@ -193,7 +193,18 @@
             "on_damage": {
               "filters": {
                 "test": "has_damage",
-                "value": "fatal"
+                "value": "fatal",
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  },
+                  {
+                    "test": "has_tag",
+                    "value": "silence",
+                    "operator": "!="
+                  }
+                ]
               },
               "event": "cz:zombie_life_1",
               "target": "self"

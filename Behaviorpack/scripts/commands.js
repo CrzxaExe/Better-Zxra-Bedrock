@@ -1,6 +1,6 @@
 import { system, world, ItemStack } from "@minecraft/server";
-import { Items, Specialist } from "./system.js";
-import { Command, Ench, Game, runDialog, storyDialog } from "./lib/ZxraLib/module.js";
+import { Specialist } from "./system.js";
+import { Command, Ench, Game, runDialog, storyDialog, Items } from "./lib/ZxraLib/module.js";
 
 Command.add("kyle", async (player, lib) => {
   if (player.name !== "CrzxaExe3") return;

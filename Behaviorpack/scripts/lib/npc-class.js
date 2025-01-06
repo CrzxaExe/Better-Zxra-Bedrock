@@ -1,7 +1,7 @@
 import { system, world, Player, ItemStack } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { Entity, Specialist } from "../system.js";
-import { shuffleObjects } from "./ZxraLib/module.js";
+import { Specialist } from "../system.js";
+import { shuffleObjects, Entity } from "./ZxraLib/module.js";
 import * as option from "./data.js";
 
 export {

@@ -162,6 +162,7 @@ item.badge.name=Badge
 item.berserk.name=Berserk
 item.boltizer.name=Boltizer
 item.bringer.name=Bringer
+item.card_of_player.name=Card Of Player
 item.card_of_return.name=Card Of Return
 item.card_of_teleportation.name=Card Of Teleportation
 item.card_of_worldspawn.name=Card Of World Spawn
@@ -304,6 +305,11 @@ item.zxra_book.name=Zxra Book
 
 itemGroup.name.chairs=Chairs
 
+npc.ask=Asking with villager
+npc.buy=Buys item from villager
+npc.sell=Sell item to villager
+npc.shop.farmer=Farmer Trader
+npc.shop.farmer.body=Whats up Specialist, what can i help for you?
 npc.yuri.talk1_a=Oh its because i want to serve it to my old brother. But, he run away from home by something. I will find him and treat him with my love.
 npc.yuri.talk1_q=Why do you want to be maid?
 npc.yuri.talk2_a=What's wrong, Master? You look so confuse, do you enough to sleep? Or you want to do something more important?

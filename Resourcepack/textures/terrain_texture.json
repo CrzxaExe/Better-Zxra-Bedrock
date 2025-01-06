@@ -1,7 +1,7 @@
 {
   "num_mip_levels": 4,
   "padding": 8,
-  "resource_pack_name": "vanilla",
+  "resource_pack_name": "cz",
   "texture_data": {
     "crate": {
       "textures": [

@@ -1,9 +1,5 @@
 {
-  "format_version": [
-    1,
-    1,
-    0
-  ],
+  "format_version": "1.21.40",
   "cz:crate": {
     "sound": "wood",
     "textures": "crate"
@@ -13,8 +9,7 @@
     "textures": "plasma_core"
   },
   "cz:forge": {
-    "sound": "stone",
-    "textures": "forge"
+    "sound": "stone"
   },
   "cz:plate": {
     "sound": "wood"
@@ -146,7 +141,7 @@
     "textures": "concrete_brick_white"
   },
   "cz:yellow_brick_concrete": {
-    "sound": "stone",
-    "textures": "concrete_brick_yellow"
+    "textures": "concrete_brick_yellow",
+    "sound": "stone"
   }
 }

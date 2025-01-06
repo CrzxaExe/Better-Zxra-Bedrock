@@ -27,17 +27,20 @@ export let setting = {
 }
 
 export const weaponType = [
- "slayer",
- "reaper",
- "century",
- "gun",
- "staff",
  "artsword",
- "greatsword",
  "breifcase",
- "spear",
+ "century",
+ "dagger",
+ "flute",
+ "greatsword",
+ "gun",
+ "hammer",
  "katana",
- "hammer"
+ "lance",
+ "reaper",
+ "slayer",
+ "spear",
+ "staff"
 ]
 
 export const damageColor = {
@@ -265,6 +268,15 @@ export const toolsMod = {
     type: ["sword"],
     up: [
       { price: 12.7, voxn: 4, item: ["lapiz_lazuli/20"] }
+    ]
+  },
+  steal: {
+    maxLvl: 4,
+    type: ["sword"],
+    up: [
+      { price: 12.2, voxn: 2, item: [] },
+      { price: 14.7, voxn: 4, item: ["gold_ingot/5"] },
+      { price: 17.4, voxn: 7, item: ["gold_ingot/12"] }
     ]
   }
 }

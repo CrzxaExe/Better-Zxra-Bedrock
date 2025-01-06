@@ -162,6 +162,7 @@ item.badge.name=Bandage
 item.berserk.name=Berserk
 item.boltizer.name=Boltizer
 item.bringer.name=Bringer
+item.card_of_player.name=Kartu Pemain
 item.card_of_return.name=Kartu Kembali
 item.card_of_teleportation.name=Kartu Teleportasi
 item.card_of_worldspawn.name=Kartu Kemunculan Dunia
@@ -304,6 +305,11 @@ item.zxra_book.name=Buku Zxra
 
 itemGroup.name.chairs=Kursi
 
+npc.ask=Berbicara dengan penduduk desa
+npc.buy=Beli barang dari penduduk desa
+npc.sell=Jual barang ke penduduk desa
+npc.shop.farmer=Petani Pedagang
+npc.shop.farmer.body=Apakah Specialist, adakah yang bisa saya bantu?
 npc.yuri.talk1_a=Oh ini karena aku ingin melayani kakakku. Tetapi, dia lari dari rumah karena sesuatu. Aku akan menemukannya dan memperlakukannya dengan cinta.
 npc.yuri.talk1_q=Kenapa kamu menjadi pelayan?
 npc.yuri.talk2_a=Apa ada yang salah, Tuan? Kamu terlihat bingung, apakah kamu sudah cukup tidur? Atau kamu ingin melakukan sesuatu yang penting?

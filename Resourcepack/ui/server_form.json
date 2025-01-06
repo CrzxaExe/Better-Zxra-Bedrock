@@ -205,6 +205,28 @@
 	    }
       },
       {
+        "cz_form8@cz_common.npc_panel_ui": {
+	      "$title_panel": "common_dialogs.standard_title_label",
+	      "$title_size": [ "100% - 14px", 10 ],
+	      "size": [400, 124],
+	      "$text_name": "npc.shop.farmer",
+	      "$title_text_binding_type": "none",
+	      "$child_control": "server_form.npc_panel",
+	      "layer": 2,
+		  "alpha": 1,
+	      "bindings": [
+			{
+			  "binding_name": "#title_text"
+			},
+			{
+			  "binding_type": "view",
+			  "source_property_name": "(#title_text = 'cz:npc_shop_farmer')",
+			  "target_property_name": "#visible"
+			}
+	      ]
+	    }
+      },
+      {
         "cz_form@common_dialogs.main_panel_no_buttons": {
 	      "$title_panel": "common_dialogs.standard_title_label",
 	      "$title_size": [ "100% - 14px", 10 ],
@@ -219,7 +241,7 @@
 			},
 			{
 			  "binding_type": "view",
-			  "source_property_name": "((#title_text - 'cz:shop') and (#title_text - 'cz:quest') and (#title_text - 'cz:guild_shop') and (#title_text - 'cz:yuri_menu0') and (#title_text - 'cz:yuri_menu3') and (#title_text - 'cz:yuri_menu2') and (#title_text - 'cz:yuri_menu1') and (#title_text - 'cz:user') = #title_text)",
+			  "source_property_name": "((#title_text - 'cz:npc_shop_farmer') and (#title_text - 'cz:shop') and (#title_text - 'cz:quest') and (#title_text - 'cz:guild_shop') and (#title_text - 'cz:yuri_menu0') and (#title_text - 'cz:yuri_menu3') and (#title_text - 'cz:yuri_menu2') and (#title_text - 'cz:yuri_menu1') and (#title_text - 'cz:user') = #title_text)",
 			  "target_property_name": "#visible"
 			}
 	      ]
@@ -347,7 +369,7 @@
           "layer": 2,
           "anchor_from": "bottom_left",
           "anchor_to": "bottom_left",
-          "offset": [ "-18% -5", "-27%" ],
+          "offset": [ "-18% -5px", "-27%" ],
           "controls": [
             {
               "player_renderer_panel": {
@@ -424,6 +446,30 @@
           "$scroll_size": [ 5, "100% - 4px" ],
           "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
           "$scrolling_pane_offset": [ 2, 0 ],
+          "$scroll_bar_right_padding_size": [ 0, 0 ]
+        }
+      }
+    ]
+  },
+  
+  "npc_panel" : {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "layer": 1,
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [0, "21%"],
+    "controls": [
+      {
+        "scrolling_panel@common.scrolling_panel": {
+          "anchor_to": "top_left",
+          "anchor_from": "top_left",
+          "$show_background": false,
+          "size": [ "100%", "100%" ],
+          "$scrolling_content": "server_form.long_form_scrolling_content",
+          "$scroll_size": [ 0, "100% - 4px" ],
+          "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
+          "$scrolling_pane_offset": [ 0, 0 ],
           "$scroll_bar_right_padding_size": [ 0, 0 ]
         }
       }

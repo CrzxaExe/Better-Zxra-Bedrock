@@ -34,7 +34,7 @@
         "speed_multiplier": 1
       },
       "minecraft:behavior.look_at_player": {
-        "priority": 9,
+        "priority": 5,
         "look_distance": 4
       },
       "minecraft:behavior.random_look_around": {

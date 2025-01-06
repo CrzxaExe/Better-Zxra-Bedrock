@@ -40,8 +40,25 @@
             "deals_damage": false
           },
           {
-            "cause": "magic",
-            "damage_multipler": 0.8
+            "cause": "fire",
+            "damage_multipler": 0.5
+          },
+          {
+            "damage_modifier": -8,
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "attack"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "projectile"
+                  }
+                ]
+              }
+            }
           }
         ]
       },

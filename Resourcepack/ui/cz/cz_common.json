@@ -135,7 +135,7 @@
     "size": ["100%", "100%"],
     "anchor_from": "bottom_middle",
     "anchor_to": "bottom_middle",
-    "offset": [0, "34%x - 20"],
+    "offset": [0, "40.7%x - 20px"],
     "$display|default": "textures/cz/art/yuri/face/0",
     "$text_name|default": "",
     "$panel_indent_size|default": [ "90% - 16px", "90% - 21px" ],
@@ -145,7 +145,7 @@
         "yuri_pnl": {
           "type": "panel",
           "size": [290, 290],
-          "offset": ["69% + 12","-25%"],
+          "offset": ["69% + 12px","-25%"],
           "layer": 0,
           "controls": [
             {
@@ -175,16 +175,78 @@
       },
       {
         "title_label@common_dialogs.title_label": {
-        "offset": [-30, "34.5% + 12"]
+        "offset": [-30, "27.5% + 12px"]
         }
       },
       {
         "panel_indent": {
           "type": "panel",
           "size": "$panel_indent_size",
-          "anchor_from": "bottom_middle",
-          "anchor_to": "bottom_middle",
           "offset": [ -30, "33.5%" ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "controls": [
+            { "inside_header_panel@$child_control": {} }
+          ]
+        }
+      }
+    ]
+  },
+  
+  "npc_panel_ui": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [0, "47.2%x - 20px"],
+    "$text_name|default": "",
+    "$panel_indent_size|default": [ "100% - 15px", "100% - 20px" ],
+    "$custom_background|default": "cz_common.dialog_action",
+    "controls": [
+      /*{
+        "yuri_pnl": {
+          "type": "panel",
+          "size": [290, 290],
+          "offset": ["69% + 12px","-25%"],
+          "layer": 0,
+          "controls": [
+            {
+              "face": {
+                "type": "image",
+                "texture": "$display",
+                "size": [290, 290],
+                "layer": 1
+              }
+            },
+            {
+              "base": {
+                "type": "image",
+                "texture": "textures/cz/art/yuri/base",
+                "size": [290, 290],
+                "layer": 0
+              }
+            }
+          ]
+        }
+      },*/
+      {
+        "common_panel@common.common_panel": {
+          "$dialog_background": "$custom_background",
+          "$show_close_button": false,
+          "offset": [0, "29.5%"]
+        }
+      },
+      {
+        "title_label@common_dialogs.title_label": {
+          "$title_text_color": [ 85, 25, 35 ],
+          "offset": [0, "1% + 12px"]
+        }
+      },
+      {
+        "panel_indent": {
+          "type": "panel",
+          "size": "$panel_indent_size",
+          "offset": [ 0, "6.5%" ],
           "anchor_from": "top_middle",
           "anchor_to": "top_middle",
           "controls": [
@@ -202,6 +264,12 @@
 
   "dialog_full_background@common_dialogs.dialog_background_common": {
     "size": [ "1000%", "500%" ],
+    "alpha": 0.7,
+    "texture": "textures/ui/Black"
+  },
+  
+  "dialog_action@common_dialogs.dialog_background_common": {
+    "size": [ "1000%", 144 ],
     "alpha": 0.4,
     "texture": "textures/ui/Black"
   },

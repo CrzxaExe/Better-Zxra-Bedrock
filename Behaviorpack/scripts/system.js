@@ -1,59 +1,15 @@
 import { EffectTypes, ItemStack, system, world, Player } from "@minecraft/server";
 import { Cooldown, status } from "./lib/classes.js";
-import { Dirty, Ench, Game, leveling, Temp } from "./lib/ZxraLib/module.js";
+import { Dirty, Ench, Game, leveling, Temp, Entity, Items } from "./lib/ZxraLib/module.js";
 import { Npc } from "./lib/npc-class.js";
 import * as data from "./lib/data.js";
 
-// Main Class of Weapon Pasif
-export class pasif {
-	static Pasif = {
-		hit: [],
-		hited: [],
-		run: [],
-		kill: []
-	}
-
-	static addHitPasif(type, callback) {
-		this.Pasif.hit.push({ type, callback })
-    }
-    static addHitedPasif(type, callback) {
-		this.Pasif.hited.push({ type, callback })
-    }
-    static addRunPasif(type, callback) {
-		this.Pasif.hit.push({ type, callback })
-    }
-    static addKillPasif(type, callback) {
-		this.Pasif.kill.push({ type, callback })
-    }
-}
-// Main Class of Skill Weapon
-export class weapon {
-	static weapons = []
-
-	static registerWeapon(weaponName, skill) { this.weapons.push({ weaponName, callback: skill }) }
-}
 // Main Class of Block UI
 export class BlockUi {
 	static blocks = []
 
 	static addBlock(block, callback, item) {
 		this.blocks.push({ block, item, callback })
-	}
-}
-// Main Class of Special Item
-export class specialItem {
-	static item = []
-	static use = []
-	static con = []
-
-	static addItem(item, callback) {
-		this.item.push({ item, callback })
-	}
-	static useItem(item, callback) {
-		this.use.push({ item, callback })
-	}
-	static placeItem(item, callback) {
-		this.con.push({ item, callback })
 	}
 }
 // Spawn Particle
@@ -63,38 +19,12 @@ export function spawnParticles(particle, dimension, location) {
 
 // Classes
 
-// Item Class
-export class Items {
-	constructor(item) {
-		if(!item) throw new Error("Invalid Item")
-		this.item = item
-	}
-
-	// Method
-	getDurability() {
-		return this.item.getComponent("durability")
-	}
-	getTag() {
-		return this.item.getTags()
-	}
-	getTier() {
-		return this.getTag()
-          .filter(e => e.startsWith("tier_"))
-          .reduce((all, cur) => cur.split("_")[1] > all ? all = cur.split("_")[1] : 0, 0 )
-	}
-	getType() {
-		return this.getTag().find(e => data.weaponType.includes(e))
-	}
-	enchant() {
-		return new Ench(this.item)
-	}
-}
 // Block Class
 export class Tile {
 	constructor(block) {
 		if(!block) throw new Error("Invalid block")
 		this.block = block
-		this.world = new Game(world)
+		this.world = new Game()
 		this.entity = this.world.getEntityAtBlock(this.block, "block_data")
 		if(!this.entity || this.entity == undefined || this.entity == null) {
           world.getDimension(block.dimension.id).spawnEntity("cz:block_data")
@@ -204,161 +134,6 @@ export class BlockEntity {
 	}
 	
 }
-// Entity Class
-export class Entity {
-	/*
-	 * Class for Entity
-	*/
-	constructor(entity) {
-		if(!entity) throw new Error("Invalid Entity")
-		this.entity = entity
-		this.raw = {
-			status: []
-		}
-	}
-
-	// Data Method
-	getDataEnt(name = "entitas") {
-		let data = this.raw
-		if(this.entity.getDynamicProperty(name) !== undefined) data = JSON.parse(this.entity.getDynamicProperty(name))
-		return data
-	}
-	setDataEnt(obj, name = "entitas") {
-		this.entity.setDynamicProperty(name, JSON.stringify(obj))
-	}
-	clearDataEnt(name = "entitas") {
-		this.entity.setDynamicProperty(name, JSON.stringify(this.raw))
-	}
-	// Effect Method
-	addEffect(effectArray) {
-		if(effectArray.length <= 0) return
-		effectArray.forEach(({ name, duration, lvl, hide = true }) => {
-          this.entity.addEffect(EffectTypes.get(name), duration, { amplifier: lvl, showParticles: hide })
-        })
-	}
-    hasEffect(array) {
-        return array.reduce((all, cur) => this.player.hasEffect(cur) ? all.push(cur) : 0, []) || []
-    }
-    removeEffect(array) {
-		array.forEach(i => this.entity.removeEffect(i))
-	}
-	hasDebuffEffect() {
-	    // this.player.getEffects().forEach(f => console.warn(JSON.stringify(f.typeId)))
-		return this.entity.getEffects()?.some(e => ["weakness","blindness","slowness","mining_fatigue","darkness","poison","wither","instant_damage"].includes(e.typeId))
-	}
-    // Essentials Method
-	runCommand(cmdArray) {
-		cmdArray.forEach(cmd => this.entity.runCommand(cmd))
-	}
-	heal(amount = 1) {
-		let hp = this.entity.getComponent("health")
-		amount = Math.abs(amount)
-	    hp.currentValue + amount >= hp.defaultValue ? hp.setCurrentValue(hp.defaultValue) : hp.setCurrentValue(hp.currentValue + amount)
-	}
-	knockback(vel, hor = 0, ver = 0) {
-		if(!vel) return new Error("No Velocity")
-
-		this.entity.applyKnockback(vel.x, vel.z, hor, ver)
-	}
-	dash(vel, hor, ver) {
-		this.selfParticle("cz:dash_particle")
-		this.knockback(vel, hor, ver)
-	}
-	addDamage(dmg = 1, cause = { cause: "entityAttack", damagingEntity: this.entity }, knock) {
-		let up = 1;
-		
-		switch(cause.cause) {
-			case "entityAttack":
-			  up = this.status().fragileStat()
-			  break;
-			case "magic":
-			  up = this.status().artFragileStat()
-			  break;
-		}
-
-		this.entity.applyDamage(Math.round(dmg * up), cause)
-
-		if(!knock) return
-		this.knockback(knock.vel, knock.hor, knock.ver)
-	}
-	selfParticle(particle, location = this.entity.location) {
-		if(!particle) return
-		world.getDimension(this.entity.dimension.id).spawnParticle(particle, location)
-	}
-	particles(par) {
-		par.forEach(e => this.selfParticle(e))
-	}
-	getEntityNearby(minDis = 1, maxDis = 0) {
-		return world.getDimension(this.entity.dimension.id).getEntities({ maxDistance: maxDis, minDistance: minDis, excludeNames: [`${this.entity.name}`] })
-	}
-	impactParticle() {
-		if(!this.entity.isOnGround) return
-		this.particles(["cz:impact_up","cz:impact_p"])
-	}
-	removeTags(...tag) {
-		tag.forEach(e => this.entity.removeTag(e))
-	}
-	healable(heal = 0, eff = []) {
-		let tamed = this.entity.getComponent("minecraft:is_tamed") || undefined
-		if(!["player", "cat", "yuri", "wolf"].includes(this.entity.typeId.split(":")[1])) return
-
-		switch(heal.source) {
-			case "catlye":
-			  let hp = this.entity.getComponent("health")
-			  hp.currentValue <= hp.defaultValue/4 ? heal += heal/2 : 0 ;
-			  break;
-		}
-
-		this.heal(heal)
-		this.addEffect(eff)
-	}
-	bind(dur = 0) {
-		this.addEffect([{ name: "slowness", duration: dur*20, lvl: 255, hide: false }])
-	}
-	// Npc Method
-	isNpc() {
-		return this.entity.getComponent("minecraft:type_family")
-	}
-	npc() {
-		if(this.isNpc() == false) return
-		return new Npc(this.entity)
-	}
-	// Status Method
-	status() {
-		return new status(this.entity)
-	}
-	controllerStatus() {
-		this.getDataEnt().status.filter(r => r.decay == "time").forEach(e => this.status().minStatus(e.name, 0.25))
-		this.controllerEffectStatus(this.getDataEnt().status)
-	}
-	controllerEffectStatus(obj) {
-		for(let sts of obj) {
-			switch(sts.type) {
-				case "wet":
-				    if(this.entity.getComponent("onfire")) this.entity.extinguishFire()
-				    break;
-				default: continue;
-			}
-	    }
-    }
-	// Debug
-	refreshEntity() {
-		let tag = ["silent_target","ultimate","liberator_target","silence","lectaze_target","fireing_zone","catlye_ult"]
-		system.run(() => this.removeTags(...tag))
-	}
-	fixEntity() {
-		let data = this.getDataEnt(), er = 0
-
-        Object.keys(this.raw).forEach(e => {
-        	if(!Object.keys(data).includes(e)) {
-              data[e] = this.raw[e]
-              er++
-            }
-        })
-        if(er <= 0) return
-        this.setDataEnt(data)
-	}
-}
 
 // Main Class of Player Stat
 export class Specialist extends Entity {
@@ -407,11 +182,11 @@ export class Specialist extends Entity {
 	// Specialist Method
 	addSpecialist(key, amount) {
 		let data = this.getData(),
-           lvlUp = Math.floor((data.specialist.lvl * 14) + 40 + (data.specialist.lvl * 8))
+           lvlUp = Math.floor((data.specialist.lvl * 18) + 40 + (data.specialist.lvl * 10))
 		data.specialist[key] = data.specialist[key] + Number(amount)
 
 		if(key == "xp" && data.specialist[key] > lvlUp) {
-			let vv = leveling(data.specialist.xp, data.specialist.lvl, (level) => Math.floor((level * 14) + 40 + (level * 8)));
+			let vv = leveling(data.specialist.xp, data.specialist.lvl, (level) => Math.floor((level * 18) + 40 + (level * 10)));
 			data.specialist.lvl = vv.lvl
 			data.stamina.add = 2 * vv.lvl
 			this.player.sendMessage(`Your Specialist Level Up to ${vv.lvl}`)
@@ -657,10 +432,10 @@ export class Specialist extends Entity {
 	// Player Method
 	getItemCount(name) {
 		let count = 0, container = this.player.getComponent("inventory").container
-		for(let i = 0; i <= container.size ; i++) {
+		for(let i = 0; i < container.size ; i++) {
 			try {
 			  let item = container.getSlot(i) || undefined 
-			  if(item === undefined) return
+			  if(item === undefined) continue
 			  item.typeId.split(":")[1] == name ? count += amount : 0;
 			} catch(err) {}
 		}
@@ -673,6 +448,26 @@ export class Specialist extends Entity {
 			itemStack.amount = amount || 1
 			container.addItem(itemStack)
         })
+	}
+	getItems() {
+		let arr = [], container = this.player.getComponent("inventory").container
+		for(let i = 0; i < container.size ; i++) {
+			try {
+			  let item = container.getSlot(i)?.getItem() || undefined
+			  if(item === undefined) continue;
+
+			  const findIndex = arr.findIndex(e => e.name == item.typeId.split(":")[1]);
+			  if(findIndex == -1) {
+				arr.push({ name: item.typeId.replace("minecraft:", ""), amount: item.amount || 1 })
+				continue;
+			  }
+			
+			  arr[findIndex].amount += item.amount || 1;
+			} catch(err) {
+				console.warn(err)
+            }
+		}
+		return arr
 	}
 	setItem(item, amount = 1) {
 		let newItem = new ItemStack(item);
@@ -710,21 +505,25 @@ export class Specialist extends Entity {
 		
 		if(Number(String(dis[3]) + String(dis[2])) < 6) day++
 
-		let sts = status.reduce((all, cur) => {
-			let lvl = ""
+		let sts = status
+		  .sort((a,b) => b.duration - a.duration)
+          .reduce((all, cur) => {
+			 let lvl = ""
 
-			switch(cur.type) {
+			 switch(cur.type) {
 				case "damage": lvl = ` +${cur.lvl}% Atk`; break;
 				case "skill": lvl = ` +${cur.lvl}% Skill`; break;
-			}
+				case "stack": lvl = ` > ${cur.lvl}`; break;
+		 	}
 
-			all += `\n${(cur.name.charAt(0).toUpperCase() + cur.name.slice(1)).replaceAll("_", " ")}${lvl} | ${(cur.duration).toFixed(0)}s`
-			return all
-	    }, status.length > 0 ? "\nStatus" : "")
+			 all += `${cur.name.split("_").map(e => e.charAt(0).toUpperCase() + e.slice(1)).join(" ")}${lvl} | ${(cur.duration).toFixed(0)}s\n`
+		 	return all
+	      }, status.length > 0 ? "\nStatus\n" : "")
 
 	    let cd = this.cooldown().getAllCd()
+	      .sort((a,b) => b.duration - a.duration)
           .reduce((all, cur) => {
-		    all += `\n${cur.name} ${cur.duration.toFixed(2)}s`
+		    all += `\n${cur.name.split("_").map(e => e.charAt(0).toUpperCase() + e.slice(1)).join(" ")} ${cur.duration.toFixed(2)}s`
 		    return all
 	      }, this.cooldown().getAllCd().length > 0 ? "\nCooldown" : "")
 		
@@ -735,8 +534,7 @@ export class Specialist extends Entity {
           §b§l${data.voxn} Voxn§r
           §eS ${Math.round(stamina.value/(stamina.max + stamina.add) * 100)}% §b T ${Math.round(thirst.value/thirst.max * 100)}%§r
           §f${this.temp().getTemp()}° D ${this.dirtyness().getVal()}% Rep ${this.getRep()} AP ${maps.getOnlineCount()}
-          ${data.specialist.lvl >= 8 || !options.uiLevelRequirement ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id : "minecraft:air" : ""}${data.specialist.lvl >= 10 || !options.uiLevelRequirement ? "\nDay "+day+" | "+disText : ""}
-          ${sts}${cd}
+          ${data.specialist.lvl >= 8 || !options.uiLevelRequirement ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id : "minecraft:air" : ""}${data.specialist.lvl >= 10 || !options.uiLevelRequirement ? "\nDay "+day+" | "+disText+"\n" : ""}${sts}${cd}
         `, 
          {fadeInDuration: 0, fadeOutDuration: 0, stayDuration: 0}
         )

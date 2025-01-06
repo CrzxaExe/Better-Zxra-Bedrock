@@ -59,4 +59,12 @@ class ItemContainer {
   }
 }
 
-export { ItemContainer };
+class BlockContainer {
+  constructor(block) {
+    if(!block)
+      throw new Error("No block");
+    this.block = block;
+  }
+}
+
+export { BlockContainer, ItemContainer };

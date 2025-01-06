@@ -243,7 +243,11 @@ class Guild {
   minMaxMember(id, value) {
     this.addMember(id, -Number(value))
   };
-  
+
+  // Other Method
+  getTeammate(id) {
+    return this.gd().find(e => e.member.some(r => r.id === id))?.member.map(e => e.username);
+  }
 };
 
 export { Guild };

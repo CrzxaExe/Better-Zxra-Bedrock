@@ -4,17 +4,22 @@ import {
   system,
   EntityTypes,
   EffectTypes,
+  GameMode,
 } from "@minecraft/server";
 import {
-  pasif,
-  weapon,
-  specialItem,
   Specialist,
-  Entity,
-  Items,
   BlockUi,
 } from "./system.js";
-import { Command, Game, Quest } from "./lib/ZxraLib/module.js";
+import {
+  Command,
+  Game,
+  Quest,
+  SpecialItem,
+  Weapon,
+  Entity,
+  Items,
+  summonXpAtPlayer,
+} from "./lib/ZxraLib/module.js";
 import * as stats from "./lib/stats.js";
 import * as jsonData from "./lib/data.js";
 
@@ -127,7 +132,7 @@ world.beforeEvents.chatSend.subscribe(async (e) => {
            *. %guild  = Player Guild - Visible when player has/join guild
            */
           // fix issue % is missing
-          .replace(/%/gi, "percen"),
+          .replace(/%/gi, "%%"),
       });
       new Game().leaderboard().addLb(e.sender, { amount: 1, type: "chatting" });
     }
@@ -201,15 +206,24 @@ world.afterEvents.playerSpawn.subscribe((e) => {
 world.afterEvents.entityHealthChanged.subscribe(
   ({ entity, newValue, oldValue }) => {
     try {
-      //console.warn(newValue, oldValue)
+      console.warn(newValue, oldValue)
 
-      if (newValue - oldValue - 1 > 0) {
-        new Entity(entity).selfParticle("cz:heal_particle");
+      if (oldValue - newValue < -1) {
+        const indicator = world
+          .getDimension(entity.dimension.id)
+          .spawnEntity("cz:indicator", {
+            x: entity.location.x,
+            y: entity.location.y + 1.9,
+            z: entity.location.z,
+          });
+        indicator.nameTag = `§2${(Math.abs(oldValue - newValue)).toFixed(0)}`;
+        new Entity(indicator).knockback(indicator.getVelocity(), 0, 5)
       }
     } catch (err) {
       if (options.debug) console.warn(err);
     }
-  }
+  },
+  { entityTypes: ["minecraft:player"] }
 );
 
 // Entities Die Event
@@ -257,7 +271,7 @@ world.afterEvents.entityDie.subscribe(async (e) => {
     const item = murder
       .getComponent("inventory")
       .container.getItem(murder.selectedSlotIndex);
-    let itemPasif = pasif.Pasif.kill.find((x) =>
+    let itemPasif = Weapon.Pasif.kill.find((x) =>
       item.getTags().includes(x.type)
     );
     if (!itemPasif) return;
@@ -278,20 +292,23 @@ world.afterEvents.playerBreakBlock.subscribe(
       act: "destroy",
       target: brokenBlockPermutation,
     }); // Quest Controller - Destroy
+    
+    //console.warn(JSON.stringify(brokenBlockPermutation.dimension), JSON.stringify(brokenBlockPermutation.getAllStates()), JSON.stringify(brokenBlockPermutation.getTags()))
+    if(player.getGameMode() === GameMode.creative) return;
+    if(!brokenBlockPermutation.hasTag("minecraft:crop") || brokenBlockPermutation.getState("growth") < 7) return;
+    summonXpAtPlayer(3, player);
+    new Specialist(player).addSpecialist("xp", 1);
   }
 );
 
 world.afterEvents.playerPlaceBlock.subscribe((e) => {
-  let player = e.player,
-    block =
-      /*player.getComponent("inventory").container.getSlot(player.selectedSlotIndex) ||*/ player.getBlockFromViewDirection()
-        .block;
+  /*const player = e.player*/
 });
 
 // Place Item Event
 world.afterEvents.itemStartUseOn.subscribe(({ block, itemStack, source }) => {
   if (!block || !itemStack) return;
-  let find = specialItem.con.find(
+  let find = SpecialItem.con.find(
     (e) => e.item === itemStack.typeId.split(":")[1]
   );
 
@@ -319,7 +336,7 @@ world.afterEvents.itemUseOn.subscribe((e) => {
 // Use Item Event
 world.afterEvents.itemUse.subscribe(({ itemStack, source }) => {
   // Initializing Special Item Callback
-  let special = specialItem.item.find(
+  let special = SpecialItem.item.find(
     (x) => x.item === itemStack.typeId.split(":")[1]
   );
   if (!special) return;
@@ -328,7 +345,7 @@ world.afterEvents.itemUse.subscribe(({ itemStack, source }) => {
 });
 world.afterEvents.itemCompleteUse.subscribe(({ itemStack, source }) => {
   // Initializing Special Use Item Callback
-  let special = specialItem.use.find(
+  let special = SpecialItem.use.find(
     (x) => x.item === itemStack.typeId.split(":")[1]
   );
   if (!special) return;
@@ -341,15 +358,16 @@ world.afterEvents.entityHitEntity.subscribe(
   async (e) => {
     let item = e.damagingEntity
         .getComponent("inventory")
-        .container.getItem(e.damagingEntity.selectedSlotIndex),
+        .container?.getItem(e.damagingEntity.selectedSlotIndex) || undefined,
       entity = e.damagingEntity,
-      sp = new Specialist(entity),
-      itm = new Items(item);
+      sp = new Specialist(entity);
     sp.cooldown().setCd("stamina_regen", options.staminaExhaust || 3);
     if (!item || e.hitEntity == undefined || !e.hitEntity) return;
+    console.warn(JSON.stringify(item))
+    let itm = new Item(item);
 
     sp.minStamina("value", options.staminaAction || 4);
-    let itemPasif = pasif.Pasif.hit.find((x) =>
+    let itemPasif = Weapon.Pasif.hit.find((x) =>
       item.getTags().includes(x.type)
     );
     if (!itemPasif) return;
@@ -362,6 +380,7 @@ world.afterEvents.entityHitEntity.subscribe(
       notSelf: "!" + entity.name,
       tier: itm.getTier(),
       ...inGame,
+      options,
       multiplier: sp.status().dmgStat(),
     });
   },
@@ -386,7 +405,7 @@ world.afterEvents.entityHurt.subscribe(
     )
       return;
 
-    let itemPasif = pasif.Pasif.hited.find((x) =>
+    let itemPasif = Weapon.Pasif.hited.find((x) =>
         item.getTags().includes(x.type)
       );
     if (!itemPasif) return;
@@ -447,7 +466,7 @@ world.afterEvents.itemReleaseUse.subscribe(async (e) => {
       .container.getSlot(entity.selectedSlotIndex)
       .setLore(stats[item.typeId.split(":")[1]]);
 
-    let skills = weapon.weapons.find(
+    let skills = Weapon.Skill.find(
       (x) => x.weaponName == item.typeId.split(":")[1]
     );
     if (!skills) return;
@@ -458,12 +477,14 @@ world.afterEvents.itemReleaseUse.subscribe(async (e) => {
         wounded,
         vel,
         velocity,
+        team: new Game().guild().getTeammate(entity.id) || [entity.name],
         notSelf: "!" + entity.name,
         silentState,
         sp,
         endless,
         multiplier: sp.status().skillStat(),
         ...inGame,
+        options,
       },
       e
     );

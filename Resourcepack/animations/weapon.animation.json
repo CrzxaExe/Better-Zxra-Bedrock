@@ -501,6 +501,28 @@
         }
       }
     },
+    "animation.azyh.key": {
+      "loop": true,
+      "bones": {
+        "rightItem": {
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "position": [
+            0.3,
+            -4.7,
+            -0.2
+          ],
+          "scale": [
+            0.8,
+            0.8,
+            0.8
+          ]
+        }
+      }
+    },
     "animation.berserk.key": {
       "loop": true,
       "bones": {
@@ -640,6 +662,28 @@
               0
             ]
           }
+        }
+      }
+    },
+    "animation.destiny.key": {
+      "loop": true,
+      "bones": {
+        "rightItem": {
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "position": [
+            0.3,
+            -12.1,
+            4.53
+          ],
+          "scale": [
+            0.8,
+            1.2,
+            1.2
+          ]
         }
       }
     }

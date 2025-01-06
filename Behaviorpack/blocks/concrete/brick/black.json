@@ -15,7 +15,6 @@
       "minecraft:flammable": false,
       "minecraft:loot": "loot_tables/block/concrete/brick/black.json",
       "tag:stone": {}
-    },
-    "events": {}
+    }
   }
 }

@@ -1,6 +1,13 @@
 {
   "namespace": "hud",
   // Waduh ngapain bang
+
+  "hide_ele": {
+    "type": "image",
+    "texture": "textures/ui/eye",
+    "size": [ 26, 26 ],
+    "layer": 13
+  },
   
   "welcomer": {
     "type": "label",
@@ -12,6 +19,22 @@
     "anchor_to": "top_center",
     "size": [ "default", 40 ],
     "shadow": true
+  },
+
+  "hide_btn": {
+    "type": "panel",
+    "size": [ 30, 30 ],
+    "controls": [
+      { "img@hud.hide_ele": {} },
+      {
+        "bton@common_toggles.dark_text_toggle": {
+          "$toggle_name": "czhide_toggle",
+          "$button_text": " ",
+          "size": [ 30, 30 ],
+          "$toggle_view_binding_name": "cz_hide_toggle"
+        }
+      }
+    ]
   },
 
   "zxras": {
@@ -70,6 +93,14 @@
     "anchor_to": "top_right",
     "anchor_from": "top_right",
     "alpha": 0,
+    "bindings": [
+      {
+        "binding_type": "view",
+        "source_control_name": "cz_hide_toggle",
+        "source_property_name": "(not #toggle_state)",
+        "target_property_name": "#visible"
+      }
+    ],
     "controls": [
       {
         "panel": {
@@ -192,6 +223,13 @@
               "anchor_from": "top_right"
             }
           },
+          /*{
+            "hide_btn@hud.hide_btn": {
+              "anchor_to": "bottom_right",
+              "anchor_from": "bottom_right",
+              "offset": [ -10, 0 ]
+            }
+          },*/
           {
            "player_bg": {
 	         "type": "image",
@@ -200,7 +238,7 @@
 	         "layer": 2,
 	         "anchor_from": "bottom_left",
 	         "anchor_to": "bottom_left",
-	         "offset": [ "3.5%", "-7%" ],
+	         "offset": [ "1.5%", "-7%" ],
 	         "controls": [
 	           {
 	             "player_renderer_panel": {

@@ -29,7 +29,7 @@
 	         "layer": 2,
 	         "anchor_from": "bottom_left",
 	         "anchor_to": "bottom_left",
-	         "offset": [ -70, "79% + 38" ],
+	         "offset": [ -70, "79% + 38px" ],
 	         "controls": [
 	           {
 	             "player_renderer_panel": {

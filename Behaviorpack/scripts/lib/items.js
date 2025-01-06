@@ -1,7 +1,7 @@
 import { world, system, ItemStack } from "@minecraft/server";
-import { specialItem, Specialist } from "../system.js";
+import { Specialist } from "../system.js";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { Game, Quest, guildUi, adminPanel, questPanel, shop } from "./ZxraLib/module.js";
+import { Game, Quest, guildUi, adminPanel, questPanel, shop, SpecialItem } from "./ZxraLib/module.js";
 import * as data from "./data.js"
 
 import "./item/vial.js";
@@ -83,6 +83,7 @@ let shopPanel = (plyr, lib) => {
 	  khn = new ModalFormData()
         .title(`${data.getVoxn()} Voxn`)
 	    .textField(itm + " " + price +" Voxn", { translate: "system.buy.amount" })
+	    .submitButton({ translate: "system.buy.button" })
 	    .show(player).then(r => {
 	   	if(r.canceled || r.formValues[0] == undefined) return
   
@@ -149,7 +150,7 @@ let shopPanel = (plyr, lib) => {
 	})
 }
 
-specialItem.addItem("stats", (player, item, lib) => {
+SpecialItem.addItem("stats", (player, item, lib) => {
 	let data = new Specialist(player), game = new Game(), guild = game.guild().gd().find(e => e.member.some(r => r.id === player.id));
 	let specialist = data.getData();
 
@@ -190,18 +191,18 @@ Day ${world.getDay()}
     })
 })
 
-specialItem.addItem("quest_scroll", (player, item) => {
+SpecialItem.addItem("quest_scroll", (player, item) => {
 	new Quest(player).randomQuest();
 })
 
-specialItem.addItem("stamina_up_book", (player) => {
+SpecialItem.addItem("stamina_up_book", (player) => {
     let data = new Specialist(player);
     data.addStamina("max", 4)
     data.runCommand([`clear @s cz:stamina_up_book 0 1`])
     player.onScreenDisplay.setActionBar(`Max Stamina++`)
 })
 
-specialItem.addItem("compass", (player, item) => {
+SpecialItem.addItem("compass", (player, item) => {
 	let { y } = player.getRotation(), compass = "compass.north"
 
 	if(y > -45 && y < 49) compass = "compass.south"
@@ -213,7 +214,7 @@ specialItem.addItem("compass", (player, item) => {
 	player.onScreenDisplay.setActionBar({ translate: `${compass}` })
 })
 
-specialItem.useItem("clean_water", (player, item) => {
+SpecialItem.useItem("clean_water", (player, item) => {
 	let data = new Specialist(player)
 	data.addThirst("value", 35)
 	data.addStamina("value", 20)

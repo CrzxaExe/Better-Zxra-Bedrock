@@ -110,17 +110,36 @@
         "damage": 3
       },
       "minecraft:damage_sensor": {
-        "triggers": {
-          "on_damage": {
-            "filters": {
-              "test": "is_family",
-              "subject": "other",
-              "value": "lightning"
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "lightning"
+              },
+              "event": "minecraft:become_charged"
             },
-            "event": "minecraft:become_charged"
+            "deals_damage": false
           },
-          "deals_damage": false
-        }
+          {
+            "damage_modifier": -5,
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "attack"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "projectile"
+                  }
+                ]
+              }
+            }
+          }
+        ]
       },
       "minecraft:target_nearby_sensor": {
         "inside_range": 3,

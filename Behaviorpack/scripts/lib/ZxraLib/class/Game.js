@@ -3,12 +3,9 @@ import { Leaderboard, Guild, ZxraLib } from "../module.js";
 import * as json from "../../data.js";
 
 class Game {
-  constructor(wld) {
-     this.game = wld || world
-  }
   // Data Method
-  getData(namespace = "option") {
-    let data;
+  getData(namespace = "option", def) {
+    let data = def;
     if(world.getDynamicProperty(namespace) !== undefined) data = JSON.parse(world.getDynamicProperty(namespace))
     return data
   };

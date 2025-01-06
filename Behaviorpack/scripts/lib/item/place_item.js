@@ -1,7 +1,8 @@
-import { specialItem, Entity, Specialist } from "../../system.js";
+import { Specialist } from "../../system.js";
+import { SpecialItem, Entity } from "../ZxraLib/module.js";
 import { world, system, ItemStack } from "@minecraft/server";
 
-specialItem.placeItem("vial", (player, item, block) => {
+SpecialItem.placeItem("vial", (player, item, block) => {
 	let sp = new Specialist(player)
 	
 	switch(block.type.id.split(":")[1]) {

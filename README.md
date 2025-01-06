@@ -16,7 +16,10 @@ https://zxra-reactjs.vercel.app/project/bzb/
 What's new?<br />
 ```
   # System
+  - Shop
   - Story
+
+  # Weapon
 ```
 
 ## All Features

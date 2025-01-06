@@ -1,5 +1,6 @@
 import { world } from "@minecraft/server";
-import { Specialist, Entity, Items } from "../system.js";
+import { Specialist } from "../system.js";
+import { Entity, Items } from "./ZxraLib/module.js";
 export {
 	Cooldown,
 	status
@@ -30,6 +31,10 @@ class Cooldown {
 		if(data.error !== true) return { name: name, duration: data.duration, skill: false }
 		this.addCd(name, dur)
 		return { name, dur, skill: true }
+	}
+	hasCd(name) {
+		if(!name) return new Error("Cd what?")
+		return this.getAllCd().some(e => e.name == name)
 	}
 	isCd(name, dur = 1) {
 		if(!name) return new Error("Cd what?")
@@ -147,6 +152,10 @@ class status {
 	}
 
 	// General Buff
+
+	healingEffectiveStat() {
+		return this.getData().status.filter(e => e.type == "healing_effective").reduce((all, cur) => all +=  Number(cur.lvl) * 0.1, 1);
+	}
 
 	// Damage Up Status
 	dmgStat(plus = false) {

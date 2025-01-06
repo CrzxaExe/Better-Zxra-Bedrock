@@ -1,14 +1,14 @@
 import { EffectTypes, world, system } from "@minecraft/server";
-import { pasif, Entity, spawnParticles } from "./system.js";
-import { Modifier } from "./lib/ZxraLib/module.js";
+import { Specialist, spawnParticles } from "./system.js";
+import { Modifier, Weapon, Entity } from "./lib/ZxraLib/module.js";
 
 // Pasif Slayer
-pasif.addHitPasif("slayer", (user, target, { multiplier, ent, velocity }) => {
+Weapon.addHitPasif("slayer", (user, target, { multiplier, ent, velocity }) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
   ent.addEffect([{ name: "wither", duration: 60, lvl: 5 }]);
   let userHealth = user.getComponent("health"),
     percenDamage =
-      Math.round(userHealth.currentValue) / userHealth.defaultValue,
+      Math.round(userHealth.currentValue) / userHealth.effectiveMax,
     damage = Math.floor(
       Math.round(10 * percenDamage) +
         target.getComponent("health").defaultValue / 4
@@ -21,7 +21,7 @@ pasif.addHitPasif("slayer", (user, target, { multiplier, ent, velocity }) => {
     { vel: velocity, hor: percenDamage * 2, ver: 0 }
   );
 });
-pasif.addHitedPasif("slayer", (user, target, { multiplier, ent, item }) => {
+Weapon.addHitedPasif("slayer", (user, target, { multiplier, ent, item }) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return; // Pasif Thornification
   if (item.typeId.split(":")[1] !== "kyles") return;
 
@@ -31,19 +31,19 @@ pasif.addHitedPasif("slayer", (user, target, { multiplier, ent, item }) => {
     damagingEntity: user,
   });
 });
-pasif.addKillPasif("slayer", (user, target, { item, sp }) => {
+Weapon.addKillPasif("slayer", (user, target, { item, sp }) => {
   if (!user) return; // Pasif Blooding
   if (!item || item.typeId !== "cz:kyles") return;
 
   sp.addEffect([
-    { name: "resistance", duration: 40, lvl: 1 },
-    { name: "speed", duration: 40, lvl: 0 },
+    { name: "resistance", duration: 2, lvl: 1 },
+    { name: "speed", duration: 2, lvl: 0 },
   ]);
   sp.heal(Math.floor(user.getComponent("health").defaultValue / 4));
 });
 
 // Pasif Reaper
-pasif.addHitPasif("reaper", (user, target, { item, itm, multiplier, sp, soul, notSelf, tier }) => {
+Weapon.addHitPasif("reaper", (user, target, { item, itm, multiplier, sp, soul, notSelf, tier }) => {
   if (!user || !target) return;
   let userHealth = user.getComponent("health"),
     heal = 2;
@@ -72,16 +72,16 @@ pasif.addHitPasif("reaper", (user, target, { item, itm, multiplier, sp, soul, no
       target.setOnFire(5);
       if (target.getComponent("onfire")) {
         heal += 2;
-        sp.addEffect([{ name: "fire_resistance", duration: 100, lvl: 0 }]);
+        sp.addEffect([{ name: "fire_resistance", duration: 5, lvl: 0 }]);
       }
       break;
   }
 
-  if (userHealth.currentValue + heal > userHealth.defaultValue)
-    return userHealth.setCurrentValue(userHealth.defaultValue);
+  if (userHealth.currentValue + heal > userHealth.effectiveMax)
+    return userHealth.setCurrentValue(userHealth.effectiveMax);
   userHealth.setCurrentValue(userHealth.currentValue + heal);
 });
-pasif.addKillPasif("reaper", (user, target, lib) => {
+Weapon.addKillPasif("reaper", (user, target, lib) => {
   if (!user) return;
   switch (lib.item.typeId.split(":")[1]) {
     case "liberator": // Pasif Soul Of Death
@@ -96,7 +96,7 @@ pasif.addKillPasif("reaper", (user, target, lib) => {
 });
 
 // Pasif ArtSword
-pasif.addHitPasif("artsword", (user, target, lib) => {
+Weapon.addHitPasif("artsword", (user, target, lib) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
 
   switch (lib.item.typeId.split(":")[1]) {
@@ -107,15 +107,15 @@ pasif.addHitPasif("artsword", (user, target, lib) => {
 
       if (skly !== undefined && skly > 0) {
         lib.ent.addEffect([
-          { name: "slowness", duration: 40, lvl: 2 },
-          { name: "weakness", duration: 40, lvl: 0 },
+          { name: "slowness", duration: 2, lvl: 2 },
+          { name: "weakness", duration: 2, lvl: 0 },
         ]);
         lib.ent.addDamage(18 * lib.multiplier, {
           cause: "fire",
           damagingEntity: user,
         });
         lib.sp.addEffect([
-          { name: "fire_resistance", duration: 80, lvl: 0 },
+          { name: "fire_resistance", duration: 4, lvl: 0 },
         ]);
         lib.sp.knockback(user.getVelocity(), 3.2, 0);
         skly - 1 >= 0
@@ -125,14 +125,14 @@ pasif.addHitPasif("artsword", (user, target, lib) => {
       break;
     case "destreza": // Art Destreza
       lib.ent.addEffect([
-        { name: "poison", duration: 60, lvl: 3 },
-        { name: "weakness", duration: 60, lvl: 0 },
+        { name: "poison", duration: 3, lvl: 3 },
+        { name: "weakness", duration: 3, lvl: 0 },
       ]);
       break;
     case "boltizer": // Pasif Electricity
       if (target.hasTag("boltizer_skill")) {
         target.removeTag("boltizer_skill");
-        lib.sp.addEffect([{ name: "resistance", duration: 5, lvl: 255 }]);
+        lib.sp.addEffect([{ name: "resistance", duration: 0.25, lvl: 255 }]);
         world
           .getDimension(target.dimension.id)
           .spawnEntity("minecraft:lightning_bolt", target.location);
@@ -148,7 +148,7 @@ pasif.addHitPasif("artsword", (user, target, lib) => {
       break;
   }
 });
-pasif.addKillPasif("artsword", (user, target, { item, notSelf }) => {
+Weapon.addKillPasif("artsword", (user, target, { item, notSelf, sp }) => {
   if (!user) return;
 
   switch (item.typeId.split(":")[1]) {
@@ -168,9 +168,15 @@ pasif.addKillPasif("artsword", (user, target, { item, notSelf }) => {
     case "destreza": // Pasif Juned
       target.runCommand(`effect @e[r=4,name=${notSelf}] poison 3 1`);
       break;
+    case "undying": // Pasif Return
+      sp.status().addStatus("undying_return", 5, { type: "skill", lvl: 30, stack: false });
+      sp.cooldown().getAllCd().filter(e => e.name.includes("undying"))?.forEach(e => {
+        sp.cooldown().removeCd(e.name)
+      })
+      break;
   }
 });
-pasif.addHitedPasif("artsword", (user, target, { item, notSelf, multiplier}) => {
+Weapon.addHitedPasif("artsword", (user, target, { item, notSelf, multiplier}) => {
   if (!user) return;
 
   switch (item.typeId.split(":")[1]) {
@@ -186,7 +192,7 @@ pasif.addHitedPasif("artsword", (user, target, { item, notSelf, multiplier}) => 
 });
 
 // Pasif Century
-pasif.addHitPasif("century", (user, target, { item, itm, sp, nultiplier }) => {
+Weapon.addHitPasif("century", (user, target, { item, itm, sp, multiplier }) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
   let tier = itm.getTier(),
     dmg = 14 - Number(tier),
@@ -204,25 +210,25 @@ pasif.addHitPasif("century", (user, target, { item, itm, sp, nultiplier }) => {
   world.getDimension(target.dimension.id).getEntities({ maxDistance: range, location: target.location, minDistance: 0, excludeNames: [`${user.name}`], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
     switch (item.typeId.split(":")[1]) {
       case "cervant":// Pasif Sharp Slice
-        (sp.status().getStatus("sharper")?.lvl || 0) + 1 <= 6 ? sp.status().addStatus("sharper", 5, { type: "skill", stack: true, lvl: 1 }) : 0;
+        (sp.status().getStatus("sharper")?.lvl || 0) + 1 <= 10 ? sp.status().addStatus("sharper", 5, { type: "skill", stack: true, lvl: 1 }) : 0;
         break;
     }
     
     new Entity(e).addDamage(dmg * multiplier, { cause: "entityAttack", damagingEntity: user })
   })
 });
-pasif.addHitedPasif("century", (user, target, { item, sp }) => {
+Weapon.addHitedPasif("century", (user, target, { item, sp }) => {
   if (!user || !target) return;
 
   switch (item.typeId.split(":")[1]) {
     case "quezn": // Pasif Gaslt
-      sp.addEffect([{ name: "resistance", duration: 60, lvl: 0 }]);
+      sp.addEffect([{ name: "resistance", duration: 3, lvl: 0 }]);
       break;
   }
 });
 
 // Pasif Katana
-pasif.addHitPasif("katana", (user, target, lib) => {
+Weapon.addHitPasif("katana", (user, target, lib) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
   let dmg = 11 - lib.itm.getTier(), cause = "entityAttack";
 
@@ -239,7 +245,7 @@ pasif.addHitPasif("katana", (user, target, lib) => {
       let ran = Math.floor(Math.random() * 5) + 1; //Pasif
       if (ran < 5) break;
       lib.ent.knockback(user.getVelocity(), 0, 0.8);
-      lib.ent.addEffect([{ name: "slow_falling", duration: 16, lvl: 1 }]);
+      lib.ent.addEffect([{ name: "slow_falling", duration: 0.7, lvl: 1 }]);
       break;
     case "musha": // Pasif Decisive
       let stk = lib.musha[user.id] || { atk: 0, stack: 0 };
@@ -271,12 +277,12 @@ pasif.addHitPasif("katana", (user, target, lib) => {
 });
 
 // Pasif Hammer
-pasif.addHitPasif("hammer", (user, target, { itm, item, multiplier, sp, ent }) => {
+Weapon.addHitPasif("hammer", (user, target, { itm, item, multiplier, sp, ent }) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
   target.addEffect(EffectTypes.get("slowness"), 60, { amplifier: 0 });
 
   let targetHealth = target.getComponent("health"),
-    damage = Math.floor(8 + targetHealth.defaultValue / 5);
+    damage = Math.floor(8 + targetHealth.effectiveMax / 5);
   if (damage > 50 * (1 - 0.2 * Number(itm.getTier()))) damage = 50 * (1 - 0.2 * Number(itm.getTier()));
   ent.addDamage(damage * multiplier, {
     cause: "entityAttack",
@@ -285,13 +291,13 @@ pasif.addHitPasif("hammer", (user, target, { itm, item, multiplier, sp, ent }) =
 
   switch (item.typeId.split(":")[1]) {
     case "crusher": // Pasif Stone Hit
-      sp.addEffect([{ name: "resistance", duration: 60, lvl: 0 }]);
+      sp.addEffect([{ name: "resistance", duration: 3, lvl: 0 }]);
       break;
   }
 });
 
 // Pasif Spear
-pasif.addHitPasif("spear", (user, target, lib) => {
+Weapon.addHitPasif("spear", (user, target, lib) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
 
   let distance = Math.sqrt(
@@ -305,10 +311,10 @@ pasif.addHitPasif("spear", (user, target, lib) => {
     case "destiny": // Pasif Fears
       if (target.hasTag("silence")) {
         if (
-          target.getComponent("health").defaultValue >
-          user.getComponent("health").defaultValue
+          target.getComponent("health").effectiveMax >
+          user.getComponent("health"). effectiveMax
         ) {
-          damage += 5 + target.getComponent("health").defaultValue / 4;
+          damage += 5 + target.getComponent("health").effectiveMax / 4;
         } else damage += 5;
       }
       target.addTag("silence");
@@ -325,10 +331,15 @@ pasif.addHitPasif("spear", (user, target, lib) => {
     case "hyrant": // Pasif Water Bind
       if(target.getEffect("slowness")) {
         lib.ent.bind(3)
-      } else lib.ent.addEffect([{ name: "slowness", duration: 60, lvl: 1 }]);
+      } else lib.ent.addEffect([{ name: "slowness", duration: 3, lvl: 1 }]);
       break;
     case "harmony": // Pasif Melody
       cause = "magic";
+      break;
+    case "lighter": // Pasif Burning Glare
+      if(target.getComponent("onfire")) {
+        lib.ent.addDamage((damage * lib.multiplier) * 0.3, { cause: "fire", damagingEntity: user })
+      }
       break;
   }
   lib.ent.addDamage(damage * lib.multiplier, {
@@ -336,12 +347,12 @@ pasif.addHitPasif("spear", (user, target, lib) => {
     damagingEntity: user,
   });
 });
-pasif.addKillPasif("spear", (user, target) => {
+Weapon.addKillPasif("spear", (user, target) => {
   if (!user || !target) return;
 });
 
 //Pasif Staff
-pasif.addHitPasif("staff", (user, target, { itm, item, ent }) => {
+Weapon.addHitPasif("staff", (user, target, { itm, item, ent }) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
   // let tier = itm.getTier(),
 
@@ -353,10 +364,10 @@ pasif.addHitPasif("staff", (user, target, { itm, item, ent }) => {
 });
 
 // Pasif Greatsword
-pasif.addHitPasif("greatsword", (user, target, { item, sp, ent, multiplier }) => {
+Weapon.addHitPasif("greatsword", (user, target, { item, sp, ent, multiplier }) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
   let cd = sp.cooldown().cd("greatsword_crit", 5),
-    damage = Math.floor(10 - lib.itm.getTier());
+    damage = Math.floor(13 - lib.itm.getTier());
 
   !cd.skill
     ? sp.cooldown().addCd("greatsword_crit", 5)
@@ -365,9 +376,9 @@ pasif.addHitPasif("greatsword", (user, target, { item, sp, ent, multiplier }) =>
   ent.addDamage(damage * multiplier, {
     cause: "entityAttack",
     damagingEntity: user,
-  });
+  }, { vel: sp.getVelocity(), hor: 1.2, ver: 0 });
 });
-pasif.addHitedPasif("greatsword", (user, target, lib) => {
+Weapon.addHitedPasif("greatsword", (user, target, lib) => {
   if (!user) return;
 
   switch (lib.item.typeId.split(":")[1]) {
@@ -382,7 +393,7 @@ pasif.addHitedPasif("greatsword", (user, target, lib) => {
 });
 
 // Pasif Briefcase
-pasif.addHitPasif("briefcase", (user, target, { item, itm, ent, multiplier }) => {
+Weapon.addHitPasif("briefcase", (user, target, { item, itm, ent, multiplier }) => {
   if (!user || !target || target.typeId.split(":")[1] === "item") return;
   let status = ent.status(),
     damage = 0;
@@ -392,8 +403,8 @@ pasif.addHitPasif("briefcase", (user, target, { item, itm, ent, multiplier }) =>
       let stack = status.getStatus("outBox").lvl || 0;
       if (stack > 0)
         ent.addEffect([
-          { name: "slowness", duration: 100, lvl: 1 },
-          { name: "weakness", duration: 100, lvl: 1 },
+          { name: "slowness", duration: 5, lvl: 1 },
+          { name: "weakness", duration: 5, lvl: 1 },
         ]); // Pasif Hit-Target
       damage = Math.floor(8 + 1 * stack);
       stack + 1 >= 6
@@ -417,8 +428,43 @@ pasif.addHitPasif("briefcase", (user, target, { item, itm, ent, multiplier }) =>
   });
 });
 
+// Pasif Lance
+Weapon.addHitPasif("lance", (user, target, { item, sp, ent, multiplier }) => {
+  if (!user || !target || target.typeId.split(":")[1] === "item") return;
+
+  switch (item.typeId.split(":")[1]) {
+    case "vitage": // Pasif Push Break
+      if(!sp.status().getStatus("push_break")?.lvl) return;
+
+      let dmg = (target.getComponent("health").effectiveMax / 5);
+      if(dmg >= 28) dmg = 28;
+
+      ent.addDamage(dmg*multiplier, { cause: "entityAttack", damagingEntity: user }, { vel: user.getVelocity(), hor: 0.7, ver: 0 })
+      sp.status().removeStatus("push_break")
+      break;
+  }
+});
+
+// Pasif Dagger
+Weapon.addHitPasif("dagger", (user, target, { item, sp, ent, multiplier, options }) => {
+  if (!user || !target || target.typeId.split(":")[1] === "item") return;
+
+  sp.addStamina("value", (options.staminaAction || 4) + 2);
+  if(target.typeId.split(":")[1] == "player") new Specialist(target).minStamina("value", 2);
+
+  switch (item.typeId.split(":")[1]) {
+    case "azyh": // Pasif Slicezer
+      if(!sp.status().getStatus("slicezer")?.lvl) return;
+
+      ent.addDamage(11*multiplier, { cause: "magic", damagingEntity: user }, { vel: user.getVelocity(), hor: 0.4, ver: 0 })
+      ent.bind(0.5)
+      ent.addEffect([{ name: "weakness", duration: 0.5, lvl: 255 }])
+      break;
+  }
+})
+
 // Custom Sword Modifier
-pasif.addHitPasif("minecraft:is_sword", (user, target, { item }) => {
+Weapon.addHitPasif("minecraft:is_sword", (user, target, { item }) => {
   if (!user || !target) return;
   let mods = item.getLore().map((e) => {
       return {
@@ -436,7 +482,7 @@ pasif.addHitPasif("minecraft:is_sword", (user, target, { item }) => {
     find.callback(user, target, { item, mod: e });
   });
 });
-pasif.addKillPasif("minecraft:is_sword", (user, target, { item }) => {
+Weapon.addKillPasif("minecraft:is_sword", (user, target, { item }) => {
   if (!user || !target) return;
   let mods = item.getLore().map((e) => {
       return {

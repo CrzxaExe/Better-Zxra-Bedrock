@@ -51,6 +51,9 @@
           "variable.gun = v.endless;",
           "variable.heavy = q.get_equipped_item_name=='berserk' || q.get_equipped_item_name=='mudrock' || q.get_equipped_item_name=='sui';",
           "variable.staff = q.get_equipped_item_name=='catlye' || q.get_equipped_item_name=='quezn' || q.get_equipped_item_name=='yume_staff' || q.get_equipped_item_name=='lighter';",
+          "variable.dagger = q.get_equipped_item_name=='azyh';",
+          "variable.lance = q.get_equipped_item_name=='vitage';",
+          "variable.flute = q.get_equipped_item_name=='harmist_flute';",
           "variable.isCrzx = q.get_name=='CrzxaExe3' > 0;"
         ],
         "animate": [
@@ -125,6 +128,9 @@
         "kyle_firstperson": "animation.kyle.first_person",
         "draw_long": "animation.draw.long",
         "draw_reaper": "animation.weapon.draw.reaper",
+        "draw_flute": "animation.weapon.flute",
+        "draw_dagger": "animation.weapon.dagger",
+        "draw_lance": "animation.weapon.lance",
         "run_reaper": "animation.weapon.run.reaper",
         "indicator_initialize": "animation.indicator.initialize",
         "chargings": "animation.charge",

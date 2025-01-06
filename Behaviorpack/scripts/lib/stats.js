@@ -1,27 +1,89 @@
-export const kyles = [
- "§rType §dSlayer",
- "§rRarity §b§lLimited",
- "Tag: Nuker, DPS, Debuff",
+// Alphabet please
+
+export const azyh = [
+  "§rType §dDagger",
+  "§rRarity §dLegend",
+  "Tag: DPS, Mobility, Debuff",
+  " ",
+  "§rPasif: §3[Slicezer]",
+  "§rSkill:",
+  "§r[1]§3 No Sneak",
+  "§r[2]§3 Sneak"
+]
+
+export const berserk = [
+ "§rType §dGreatsword",
+ "§rRarity §dEpic",
+ "Tag: Dps, Nuker",
  " ",
- "§rPasif: §3[Blooding]§r, §3[Thorns]",
+ "§rPasif: §3[W-Harm]§r",
+ "§rSkill:",
+ "§r[1]§3 No Sneak",
+ "§r[2]§3 Sneak",
+ "§r[3]§3 Jump"
+]
+
+export const boltizer = [
+ "§rType §dArtSword",
+ "§rRarity §dUnique",
+ "Tag: Debuff, Nuker, Dps, Elemental",
+ " ",
+ "§rPasif: §3[Electicity]§r, §3[ArChain]",
  "§rSkill:",
  "§r[1]§3 No Sneak",
  "§r[2]§3 Sneak",
  "§r[3]§3 Jump",
- "§r[Ultimate]§3 Jump"
+ "§r[Special]§3 Jump & Electricity-Sts"
 ]
 
-export const liberator = [
- "§rType §dReaper",
- "§rRarity §dUnique",
- "Tag: Survival, DPS, Summon, AOE, Heal",
+export const bringer = [
+  "§rType §dReaper",
+  "§rRarity §dEpic",
+  "Tag: Survival, Heal, AOE, DPS",
+  " ",
+  "§rPasif: §3[Slay Benefit]",
+  "§rSkill:",
+  "§r[1]§3 No Sneak",
+  "§r[2]§3 Sneak",
+  "§r[3]§3 Jump"
+]
+
+export const catlye = [
+ "§rHeal 4 HP",
  " ",
- "§rPasif: §3[Soul Of Death]§r, §3[Gets Death]",
+ "§rType Staff/§dHealing",
+ "§rRarity §dUnique",
+ "Tag: AOE, Heal",
+ " ",
+ "§rPasif: §3[Medicine]§r, §3[Don't Falls]",
  "§rSkill:",
  "§r[1]§3 No Sneak",
  "§r[2]§3 Sneak",
- "§r[3]§3 Speed-Eff & Sneaking",
- "§r[Special]§3 Jump"
+ "§r[3]§3 Jump",
+ "§r[Special]§3 3 × Skill 1"
+]
+
+export const cenryter = [
+  "§rType §dReaper",
+  "§rRarity §dEpic",
+  "Tag: DPS, Force, Mobility",
+  " ",
+  "§rPasif: §3[Our Fire]",
+  "§rSkill:",
+  "§r[1]§3 No Sneak",
+  "§r[2]§3 Sneak",
+  "§r[Special]§3 Strength-Eff"
+]
+
+export const cervant = [
+  "§rType §dCentury",
+  "§rRarity §dLegend",
+  "Tag: DPS, Nuker",
+  " ",
+  "§rPasif: §3[Sharp Slice]",
+  "§rSkill:",
+  "§r[1]§3",
+  "§r[2]§3"
 ]
 
 export const crusher = [
@@ -49,30 +111,17 @@ export const destiny = [
  "§r[Special]§3 Weakness-Eff"
 ]
 
-export const skyler = [
+export const destreza = [
  "§rType §dArtSword",
  "§rRarity §dUnique",
- "Tag: Debuff, DOT, Dps, Elemental",
+ "Tag: Dps, Debuff, Poison",
  " ",
- "§rPasif: §3[Fireing]§r, §3[Burns Out]",
+ "§rPasif: §3[Thornifi]§r, §3[Juned]",
  "§rSkill:",
  "§r[1]§3 No Sneak",
  "§r[2]§3 Sneak",
  "§r[3]§3 Jump",
- "§r[Special]§3 Jump & Fire-Res-Eff"
-]
-
-export const lectaze = [
- "§rType §dSpear",
- "§rRarity §dUnique",
- "Tag: Summon, Control, Dps",
- " ",
- "§rPasif: §3[Creations]§r, §3[Clip]",
- "§rSkill:",
- "§r[1]§3 No Sneak",
- "§r[2]§3 Sneak",
- "§r[3]§3 Jump",
- "§r[Special]§3 Jump & Strength-Eff"
+ "§r[Special]§3 Debuff-Eff"
 ]
 
 export const endless = [
@@ -88,159 +137,20 @@ export const endless = [
  "§r[Special]§3 Jump & Speed-Eff"
 ]
 
-export const quezn = [
- "§rType §dCentury",
- "§rRarity §dUnique",
- "Tag: AOE, Survival, Dps, Def",
- " ",
- "§rPasif: §3[Gaslt]§r, §3[R-Amx]",
- "§rSkill:",
- "§r[1]§3 No Sneak",
- "§r[2]§3 Sneak",
- "§r[3]§3 Jump",
- "§r[Special]§3 Quezn-Charge-Sts"
+export const greatsword = [
+  "§rType §dGreatsword",
+  "§rRarity §dRare"
 ]
 
-export const berserk = [
- "§rType §dGreatsword",
- "§rRarity §dEpic",
- "Tag: Dps, Nuker",
- " ",
- "§rPasif: §3[W-Harm]§r",
- "§rSkill:",
- "§r[1]§3 No Sneak",
- "§r[2]§3 Sneak",
- "§r[3]§3 Jump"
+export const hammer = [
+  "§rType §dHammer",
+  "§rRarity §dRare"
 ]
 
-export const destreza = [
- "§rType §dArtSword",
- "§rRarity §dUnique",
- "Tag: Dps, Debuff, Poison",
- " ",
- "§rPasif: §3[Thornifi]§r, §3[Juned]",
- "§rSkill:",
- "§r[1]§3 No Sneak",
- "§r[2]§3 Sneak",
- "§r[3]§3 Jump",
- "§r[Special]§3 Debuff-Eff"
-]
-
-export const boltizer = [
- "§rType §dArtSword",
- "§rRarity §dUnique",
- "Tag: Debuff, Nuker, Dps, Elemental",
- " ",
- "§rPasif: §3[Electicity]§r, §3[ArChain]",
- "§rSkill:",
- "§r[1]§3 No Sneak",
- "§r[2]§3 Sneak",
- "§r[3]§3 Jump",
- "§r[Special]§3 Jump & Electricity-Sts"
-]
-
-export const catlye = [
- "§rHeal 4 HP",
- " ",
- "§rType Staff/§dHealing",
- "§rRarity §dUnique",
- "Tag: AOE, Heal",
- " ",
- "§rPasif: §3[Medicine]§r, §3[Don't Falls]",
- "§rSkill:",
- "§r[1]§3 No Sneak",
- "§r[2]§3 Sneak",
- "§r[3]§3 Jump",
- "§r[Special]§3 3 × Skill 1"
-]
-
-export const pandora = [
- "§rType §dBriefCase",
- "§rRarity §dUnique",
- "Tag: Nuker, Dps",
- " ",
- "§rPasif: §3[Out Box]§r, §3[Hit-Target]",
- "§rSkill:",
- "§r[1]§3 No Sneak",
- "§r[2]§3 Sneak",
- "§r[3]§3 Jump",
- "§r[Special]§3 Jump & Sneak"
-]
-
-export const silent = [
- "§rType §dKatana",
- "§rRarity §dUnique",
- "Tag: Nuker, DPS, Debuff",
- " ",
- "§rPasif: §3[In Leaf]§r, §3[Slice]",
- "§rSkill:",
- "§r[1]§3 No Sneak",
- "§r[2]§3 Sneak",
- "§r[3]§3 Jump",
- "§r[Special]§3 Strength-Eff & Sneaking"
-]
-
-export const bringer = [
-  "§rType §dReaper",
-  "§rRarity §dEpic",
-  "Tag: Survival, Heal, AOE, DPS",
-  " ",
-  "§rPasif: §3[Slay Benefit]",
-  "§rSkill:",
-  "§r[1]§3 No Sneak",
-  "§r[2]§3 Sneak",
-  "§r[3]§3 Jump"
-]
-
-export const musha = [
-  "§rType §dKatana",
-  "§rRarity §dLegend",
-  "Tag: DPS",
-  " ",
-  "§rPasif: §3[Decisive]",
-  "§rSkill:",
-  "§r[1]§3 No Jump",
-  "§r[2]§3 Jump"
-]
-
-export const cervant = [
-  "§rType §dCentury",
-  "§rRarity §dLegend",
-  "Tag: DPS, Nuker",
-  " ",
-  "§rPasif: §3[Sharp Slice]",
-  "§rSkill:",
-  "§r[1]§3",
-  "§r[2]§3"
-]
-
-export const hyrant = [
-  "§rType §dSpear",
+export const harmist_flute = [
+  "§rType §dFlute",
   "§rRarity §dLegend",
   "Tag: DPS, Debuff",
-  " ",
-  "§rPasif: §3[Water Bind]",
-  "§rSkill:",
-  "§r[1]§3",
-  "§r[2]§3"
-]
-
-export const cenryter = [
-  "§rType §dReaper",
-  "§rRarity §dEpic",
-  "Tag: DPS, Force, Mobility",
-  " ",
-  "§rPasif: §3[Our Fire]",
-  "§rSkill:",
-  "§r[1]§3 No Sneak",
-  "§r[2]§3 Sneak",
-  "§r[Special]§3 Strength-Eff"
-]
-
-export const lighter = [
-  "§rType §dSpear",
-  "§rRarity §dLegend",
-  "Tag: DPS, Elemental",
   " ",
   "§rPasif: §3[]",
   "§rSkill:",
@@ -254,6 +164,72 @@ export const harmony = [
   "Tag: DPS, Shield, Survival, Art",
   " ",
   "§rPasif: §3[Melody]",
+  "§rSkill:",
+  "§r[1]§3 No Sneak",
+  "§r[2]§3"
+]
+
+export const hyrant = [
+  "§rType §dSpear",
+  "§rRarity §dLegend",
+  "Tag: DPS, Slow, Bind",
+  " ",
+  "§rPasif: §3[Water Bind]",
+  "§rSkill:",
+  "§r[1]§3 No Sneak",
+  "§r[2]§3"
+]
+
+export const katana = [
+  "§rType §dKatana",
+  "§rRarity §dRare"
+]
+
+export const kyles = [
+ "§rType §dSlayer",
+ "§rRarity §b§lLimited",
+ "Tag: Nuker, DPS, Debuff",
+ " ",
+ "§rPasif: §3[Blooding]§r, §3[Thorns]",
+ "§rSkill:",
+ "§r[1]§3 No Sneak",
+ "§r[2]§3 Sneak",
+ "§r[3]§3 Jump",
+ "§r[Ultimate]§3 Jump"
+]
+
+export const lectaze = [
+ "§rType §dSpear",
+ "§rRarity §dUnique",
+ "Tag: Summon, Control, Dps",
+ " ",
+ "§rPasif: §3[Creations]§r, §3[Clip]",
+ "§rSkill:",
+ "§r[1]§3 No Sneak",
+ "§r[2]§3 Sneak",
+ "§r[3]§3 Jump",
+ "§r[Special]§3 Jump & Strength-Eff"
+]
+
+export const liberator = [
+ "§rType §dReaper",
+ "§rRarity §dUnique",
+ "Tag: Survival, DPS, Summon, AOE, Heal",
+ " ",
+ "§rPasif: §3[Soul Of Death]§r, §3[Gets Death]",
+ "§rSkill:",
+ "§r[1]§3 No Sneak",
+ "§r[2]§3 Sneak",
+ "§r[3]§3 Speed-Eff & Sneaking",
+ "§r[Special]§3 Jump"
+]
+
+export const lighter = [
+  "§rType §dSpear",
+  "§rRarity §dLegend",
+  "Tag: DPS, Elemental",
+  " ",
+  "§rPasif: §3[Burning Glare]",
   "§rSkill:",
   "§r[1]§3",
   "§r[2]§3"
@@ -272,64 +248,41 @@ export const mudrock = [
   "§r[Special]§3"
 ]
 
-export const sui = [
+export const musha = [
   "§rType §dKatana",
   "§rRarity §dLegend",
-  "Tag: DPS, Debuff, Art",
+  "Tag: DPS",
   " ",
-  "§rPasif: §3[Attack State]",
+  "§rPasif: §3[Decisive]",
   "§rSkill:",
-  "§r[1]§3",
-  "§r[2]§3"
+  "§r[1]§3 No Jump",
+  "§r[2]§3 Jump"
 ]
 
-export const yume_staff = [
-  "§rArt 8 Atk",
-  " ",
-  "§rType §dStaff",
-  "§rRarity §dEpic",
-  "Tag: DPS, AOE, Nuker",
-  " ",
-  "§rPasif: §3[]",
-  "§rSkill:",
-  "§r[1]§3",
-  "§r[2]§3",
-  "§r[3]§3"
+export const pandora = [
+ "§rType §dBriefCase",
+ "§rRarity §dUnique",
+ "Tag: Nuker, DPS",
+ " ",
+ "§rPasif: §3[Out Box]§r, §3[Hit-Target]",
+ "§rSkill:",
+ "§r[1]§3 No Sneak",
+ "§r[2]§3 Sneak",
+ "§r[3]§3 Jump",
+ "§r[Special]§3 Jump & Sneak"
 ]
 
-export const harmist_flute = [
-  "§rHeal 2 HP",
-  " ",
-  "§rType §dFlute",
-  "§rRarity §dLegend",
-  "Tag: DPS, Buff, Heal",
-  " ",
-  "§rPasif: §3[]",
-  "§rSkill:",
-  "§r[1]§3",
-  "§r[2]§3"
-]
-
-export const undying = [
-  "§rType §dArtSword",
-  "§rRarity §dEpic",
-  "Tag: DPS, Elemental",
-  " ",
-  "§rPasif: §3[]",
-  "§rSkill:",
-  "§r[1]§3",
-  "§r[2]§3",
-  "§r[3]§3"
-]
-
-export const katana = [
-  "§rType §dKatana",
-  "§rRarity §dRare"
-]
-
-export const greatsword = [
-  "§rType §dGreatsword",
-  "§rRarity §dRare"
+export const quezn = [
+ "§rType §dCentury",
+ "§rRarity §dUnique",
+ "Tag: AOE, Survival, Dps, Def",
+ " ",
+ "§rPasif: §3[Gaslt]§r, §3[R-Amx]",
+ "§rSkill:",
+ "§r[1]§3 No Sneak",
+ "§r[2]§3 Sneak",
+ "§r[3]§3 Jump",
+ "§r[Special]§3 Quezn-Charge-Sts"
 ]
 
 export const reaper = [
@@ -337,12 +290,81 @@ export const reaper = [
   "§rRarity §dRare"
 ]
 
-export const hammer = [
-  "§rType §dHammer",
-  "§rRarity §dRare"
+export const silent = [
+ "§rType §dKatana",
+ "§rRarity §dUnique",
+ "Tag: Nuker, DPS, Debuff",
+ " ",
+ "§rPasif: §3[In Leaf]§r, §3[Slice]",
+ "§rSkill:",
+ "§r[1]§3 No Sneak",
+ "§r[2]§3 Sneak",
+ "§r[3]§3 Jump",
+ "§r[Special]§3 Strength-Eff & Sneaking"
+]
+
+export const skyler = [
+ "§rType §dArtSword",
+ "§rRarity §dUnique",
+ "Tag: Debuff, DOT, Dps, Elemental",
+ " ",
+ "§rPasif: §3[Fireing]§r, §3[Burns Out]",
+ "§rSkill:",
+ "§r[1]§3 No Sneak",
+ "§r[2]§3 Sneak",
+ "§r[3]§3 Jump",
+ "§r[Special]§3 Jump & Fire-Res-Eff"
 ]
 
 export const spear = [
   "§rType §dSpear",
   "§rRarity §dRare"
+]
+
+export const sui = [
+  "§rType §dKatana",
+  "§rRarity §dLegend",
+  "Tag: DPS, Debuff, Art",
+  " ",
+  "§rPasif: §3[Attack State]",
+  "§rSkill:",
+  "§r[1]§3 Any",
+  "§r[2]§3 S1 Active"
+]
+
+export const undying = [
+  "§rType §dArtSword",
+  "§rRarity §dEpic",
+  "Tag: DPS, Art",
+  " ",
+  "§rPasif: §3[Return]",
+  "§rSkill:",
+  "§r[1]§3 No Sneak",
+  "§r[2]§3",
+  "§r[3]§3"
+]
+
+export const vitage = [
+  "§rType §dLance",
+  "§rRarity §dLegend",
+  "Tag: DPS, Mobility",
+  " ",
+  "§rPasif: §3[Push Break]",
+  "§rSkill:",
+  "§r[1]§3 No Sneak",
+  "§r[2]§3 Sneak"
+]
+
+export const yume_staff = [
+  "§rArt 8 Atk",
+  " ",
+  "§rType §dStaff",
+  "§rRarity §dEpic",
+  "Tag: DPS, AOE, Nuker, Art",
+  " ",
+  "§rPasif: §3[Glance Mana]",
+  "§rSkill:",
+  "§r[1]§3 No Sneak",
+  "§r[2]§3 Sneak",
+  "§r[3]§3 Jump"
 ]

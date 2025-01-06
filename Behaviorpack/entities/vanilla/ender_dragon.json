@@ -64,8 +64,8 @@
         ]
       },
       "minecraft:health": {
-        "value": 6000,
-        "max": 6000
+        "value": 800,
+        "max": 800
       },
       "minecraft:boss": {
         "should_darken_sky": false,
@@ -84,16 +84,35 @@
         "max": 100
       },
       "minecraft:flying_speed": {
-        "value": 0.98
+        "value": 1.05
       },
       "minecraft:attack": {
         "damage": 24
       },
       "minecraft:damage_sensor": {
-        "triggers": {
-          "cause": "fall",
-          "deals_damage": false
-        }
+        "triggers": [
+          {
+            "cause": "fall",
+            "deals_damage": false
+          },
+          {
+            "damage_modifier": -10,
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "attack"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "projectile"
+                  }
+                ]
+              }
+            }
+          }
+        ]
       },
       "minecraft:on_start_landing": {
         "event": "minecraft:start_land",

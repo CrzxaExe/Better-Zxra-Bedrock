@@ -1,9 +1,9 @@
 import { EffectTypes, system, world, Player } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { Entity, Specialist } from "../system.js";
+import { Specialist } from "../system.js";
 import { userPanel } from "./items.js";
 import { Npc } from "./npc-class.js";
-import { Game } from './ZxraLib/module.js';
+import { Game, Entity, farmerShop } from './ZxraLib/module.js';
 import * as jsonData from "./data.js";
 
 var dis = {}
@@ -91,9 +91,13 @@ Script.add("player_menu", (entity) => {
 Script.add("yuri_menu", (entity, { initiator }) => {
 	if(!initiator) return
 	let ent = new Entity(initiator.entity)
-	if(ent.isNpc() == false) return
 	let npc = ent.npc()
 	npc.npcUi(entity)
+})
+
+// Shop[farmer] menu
+Script.add("shop_farmer_menu", (entity, { initiator }) => {
+  farmerShop(entity, initiator)
 })
 
 // Set on fire Feature
