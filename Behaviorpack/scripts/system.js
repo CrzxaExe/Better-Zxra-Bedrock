@@ -1,6 +1,5 @@
 import { EffectTypes, ItemStack, system, world, Player } from "@minecraft/server";
-import { Cooldown, status } from "./lib/classes.js";
-import { Dirty, Ench, Game, leveling, Temp, Entity, Items } from "./lib/ZxraLib/module.js";
+import { Dirty, Ench, Game, leveling, Temp, Entity, Items, Cooldown } from "./lib/ZxraLib/module.js";
 import { Npc } from "./lib/npc-class.js";
 import * as data from "./lib/data.js";
 
@@ -136,7 +135,7 @@ export class BlockEntity {
 }
 
 // Main Class of Player Stat
-export class Specialist extends Entity {
+export class Specialist {
 	/* CrzxaExe3---
 	*
 	*  Data of the player, will be saved inside minecraft world Dynamic Property
@@ -147,7 +146,7 @@ export class Specialist extends Entity {
 	*/
 	constructor(player) {
 		if(!player) throw new Error("Invalid Constructor of Player")
-		super(player)
+		
 		this.player = player
 
 		this.rawData = { 
@@ -260,7 +259,7 @@ export class Specialist extends Entity {
 		this.setData(data)
 	}
 	resetVoxn() {
-		this.setMoney(this.rawData.voxn)
+		this.setVoxn(this.rawData.voxn)
 	}
 	// Temperature Method
 	temp() {
@@ -274,7 +273,7 @@ export class Specialist extends Entity {
 		return this.getData().stamina;
 	};
 	addStamina(key, amount) {
-		if((["creative","spectator"].includes(this.player.getGameMode()) && amount < 1) || this.status().getStatusBy({ type: "st_stuck" }) )
+		if((["creative","spectator"].includes(this.player.getGameMode()) && amount < 1) || this.status().getAllStatusBy({ type: "st_stuck" }).length > 0 )
 		  return;
 
 		let data = this.getData(), total = data.stamina[key] + Number(amount);
@@ -284,7 +283,7 @@ export class Specialist extends Entity {
 		this.setData(data);
 	};
 	minStamina(key, amount) {
-		if(this.status().getStatusBy({ type: "st_stuck" })) return;
+		if(this.status().getAllStatusBy({ type: "st_stuck" }).length > 0) return;
 		this.addStamina(key, -Number(amount));
 	};
 	setStamina(key, value) {
@@ -302,18 +301,18 @@ export class Specialist extends Entity {
           runOut = options.staminaRun || 1,
           cd = this.cooldown(),
           sts = this.status(),
-		  exhaust = sts.getStatusBy({ type: "stamina_exhaust" }),
-          up = sts.getStatusBy({ type: "stamina_up" }),
+		  exhaust = sts.getAllStatusBy({ type: "stamina_exhaust" }),
+          up = sts.getAllStatusBy({ type: "stamina_up" }),
           additional = data.add || 0;
 
 		if(this.player.isSprinting == true || this.player.isSwimming == true) {
 			data.value - runOut <= 0 ? this.setStamina("value", 0) : stm = -runOut;
-			if(options.staminaCooldown) cd.setCd("stamina_regen", options.staminaExhaust || 3);
+			if(options.staminaCooldown) cd.addCd("stamina_regen", options.staminaExhaust || 3);
 		} else {
             if(data.value + stm > data.max + additional) {
               this.setStamina("value", data.max + additional);
               stm = 0;
-            } else cd.getCd("stamina_regen").error == undefined ? stm = 0 : 0;
+            } else cd.hasCd("stamina_regen") ? stm = 0 : 0;
         }
 
 		if(data.value <= 10) {
@@ -363,12 +362,12 @@ export class Specialist extends Entity {
 
 		let data = this.getThirst(),
           minus = 0.003,
-          thirstEff = this.status().getStatusBy({ type: "thirst" }) || { lvl: 0 };
+          thirstEff = this.status().decimalCalcStatus({ type: "thirst" }, 1, 0.01);
 
 		if(this.player.isSprinting) minus = minus + 0.03;
 		if(this.player.dimension.id.split(":")[1] == "nether") minus += 0.02;
 		if(data.value <= 0) this.addEffect([{ name: "nausea", duration: 25, lvl: 2 }, { name: "poison", duration: 25, lvl: 3 }]);
-		minus += Number(thirstEff.lvl)*0.02;
+		minus += Number(thirstEff)*0.02;
 
 		this.minThirst("value", minus);
 	};
@@ -542,11 +541,11 @@ export class Specialist extends Entity {
 	}
 	// Cooldown
 	cooldown() {
-		return new Cooldown(this.player)
+		return new Cooldown(this)
 	}
 	controllerCooldown() {
-		let cd = this.cooldown(), data = cd.getData()
-        data.cd.forEach(e => cd.minCd(e.name, 0.25))
+		let cd = this.cooldown(), data = cd.getAllCd()
+        data.forEach(e => cd.minCd(e.name, 0.25))
 	}
 }
 

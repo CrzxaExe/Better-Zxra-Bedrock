@@ -67,7 +67,7 @@
       },
       "minecraft:movement.glide": {
         "start_speed": 0.1,
-        "speed_when_turning": 0.3
+        "speed_when_turning": 0.9
       },
       "minecraft:burns_in_daylight": {},
       "minecraft:follow_range": {
@@ -76,7 +76,7 @@
       },
       "minecraft:behavior.avoid_mob_type": {
         "priority": 0,
-        "max_dist": 16.0,
+        "max_dist": 12.0,
         "ignore_visibility": true,
         "entity_types": [
           {
@@ -143,6 +143,27 @@
         ],
         "height_change_chance": 350,
         "goal_radius": 1.0
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "damage_multiplier": 1.5,
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "attack"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "projectile"
+                  }
+                ]
+              }
+            }
+          }
+        ]
       }
     }
   }

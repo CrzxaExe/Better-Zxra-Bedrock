@@ -1,10 +1,8 @@
-import { Specialist } from "../../system.js";
-import { SpecialItem, Entity } from "../ZxraLib/module.js";
+import { SpecialItem, Entity, Specialist } from "../ZxraLib/module.js";
 import { world, system, ItemStack } from "@minecraft/server";
 
 SpecialItem.useItem("vial_water", (player) => {
-	let data = new Specialist(player)
-	data.addThirst("value", 10)
+	new Specialist(player).addThirst("value", 10)
 })
 
 // Stamina

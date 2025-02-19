@@ -1,0 +1,13 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:aggregate_feature": {
+    "description": {
+      "identifier": "cz:select_mega_spruce_tree_feature"
+    },
+    "early_out": "first_success",
+    "features": [
+      "minecraft:mega_spruce_tree_feature",
+      "cz:super_mega_spruce_tree_feature"
+    ]
+  }
+}

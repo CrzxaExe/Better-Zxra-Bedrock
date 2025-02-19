@@ -1,7 +1,7 @@
 import { world, system, ItemStack } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { BlockUi, BlockEntity, Tile, Specialist } from "../system.js";
-import { Game } from "./ZxraLib/module.js";
+import { BlockUi, BlockEntity, Tile } from "../system.js";
+import { Game, Specialist } from "./ZxraLib/module.js";
 import * as data from "./data.js";
 
 // Ticking Block

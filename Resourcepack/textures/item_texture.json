@@ -215,6 +215,12 @@
     "steel_ingot": {
       "textures": "textures/items/steel_ingot"
     },
+    "heart_shard": {
+      "textures": "textures/items/heart_shard"
+    },
+    "heart_crystal": {
+      "textures": "textures/items/heart_crystal"
+    },
     "vial": {
       "textures": "textures/items/alchemy/vial"
     },

@@ -6,7 +6,7 @@
 
 export const ZxraLib = {
   packVersion: "1.3.5",
-  version: "1.0.13",
+  version: "1.0.14",
 }
 
 /*
@@ -17,6 +17,7 @@ export {
   BlockContainer,
   ItemContainer
 } from "./class/Container.js";
+export { Cooldown } from "./class/Cooldown.js";
 export { Dirty } from "./class/Dirty.js";
 export { Ench } from "./class/Ench.js";
 export { Entity } from "./class/Entity.js";
@@ -30,6 +31,8 @@ export { Leaderboard } from "./class/Leaderboard.js";
 export { Modifier } from "./class/Modifier.js";
 export { Quest } from "./class/Quest.js";
 export { Skill } from "./class/Skill.js";
+export { Specialist } from "./class/Specialist.js";
+export { Status } from "./class/Status.js";
 export { Temp } from "./class/Temp.js";
 export { Tile } from "./class/Tile.js";
 export { Waypoint } from "./class/Waypoint";
@@ -49,7 +52,7 @@ export {
   storyDialog,
   storyQuest
 } from "./data/storyData.js";
-
+export { rawSpecialist } from "./data/template.js";
 
 /*
 Function Section -------------------------------------------------------------
@@ -59,6 +62,14 @@ export {
   settingPanel
 } from "./function/adminPanel.js";
 export { areaHeal } from "./function/areaHeal.js";
+export {
+  getMaxHealthPercentage,
+  vector2Distance
+} from "./function/calc.js";
+export {
+  couponEdit,
+  couponUse
+} from "./function/coupon.js";
 export {
   runDialog,
   runPlayerDialog

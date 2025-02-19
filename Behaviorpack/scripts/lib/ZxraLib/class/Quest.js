@@ -1,6 +1,5 @@
 import { world, ItemStack, system } from "@minecraft/server";
-import { Game } from "../module.js";
-import { Specialist } from "../../../system.js";
+import { Game, Specialist } from "../module.js";
 import * as data from "../../data.js";
 
 export class Quest {

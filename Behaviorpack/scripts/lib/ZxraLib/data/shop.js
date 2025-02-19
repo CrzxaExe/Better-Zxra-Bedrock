@@ -94,20 +94,34 @@ export const shop = {
 export const npcShop = {
   farmer: {
     buy: [
-      { item: "potato", amount: 3, text: "item.potato.name", price: 1.1, img: "textures/items/potato" }
+      { item: "apple", amount: 3, text: "item.apple.name", price: 1.4, img: "textures/items/apple" },
+      { item: "bamboo", amount: 6, text: "item.bamboo.name", price: 1.4, img: "textures/items/bamboo" },
+      { item: "beetroot", amount: 3, text: "item.beetroot.name", price: 0.4, img: "textures/items/beetroot" },
+      { item: "beetroot_seeds", amount: 3, text: "item.beetroot_seeds.name", price: 0.2, img: "textures/items/seeds_beetroot" },
+      { item: "beetroot_soup", amount: 1, text: "item.beetroot_soup.name", price: 2.8, img: "textures/items/beetroot_soup" },
+      { item: "carrot", amount: 3, text: "item.carrot.name", price: 0.5, img: "textures/items/carrot" },
+      { item: "kelp", amount: 3, text: "item.kelp.name", price: 0.7, img: "textures/items/kelp" },
+      { item: "melon_seeds", amount: 3, text: "item.melon_seeds.name", price: 3.5, img: "textures/items/seeds_melon" },
+      { item: "potato", amount: 3, text: "item.potato.name", price: 1.1, img: "textures/items/potato" },
+      { item: "pumpkin_seeds", amount: 3, text: "item.pumpkin_seeds.name", price: 3.2, img: "textures/items/seeds_pumpkin" },
+      { item: "sugar_cane", amount: 3, text: "item.sugar_cane.name", price: 1.4, img: "textures/items/reeds" },
+      { item: "sweet_beries", amount: 6, text: "item.sweet_berries.name", price: 1.4, img: "textures/items/sweet_berries" },
+      { item: "wheat", amount: 3, text: "item.wheat.name", price: 1.4, img: "textures/items/wheat" },
+      { item: "wheat_seeds", amount: 3, text: "item.wheat_seeds.name", price: 1.1, img: "textures/items/seeds_wheat" }
     ],
     sell: [
-      { name: "apple", price: 0.4 },
-      { name: "bamboo", price: 0.2 },
-      { name: "beetroot", price: 0.1 },
-      { name: "carrot", price: 0.2 },
-      { name: "glow_berries", price: 0.3 },
-      { name: "kelp", price: 0.2 },
-      { name: "melon_slice", price: 0.3 },
-      { name: "potato", price: 0.3 },
-      { name: "sugar_cane", price: 0.4 },
-      { name: "sweet_berries", price: 0.2 },
-      { name: "wheat", price: 0.4 }
+      { name: "apple", text: "item.apple.name", price: 0.4 },
+      { name: "bamboo", text: "item.bamboo.name", price: 0.2 },
+      { name: "beetroot", text: "item.beetroot.name", price: 0.1 },
+      { name: "carrot", text: "item.carrot.name", price: 0.2 },
+      { name: "glow_berries", text: "item.glow_berries.name", price: 0.3 },
+      { name: "kelp", text: "item.kelp.name", price: 0.2 },
+      { name: "melon_slice", text: "item.melon_slice.name", price: 0.3 },
+      { name: "pumpkin", text: "tile.pumpkin.name", price: 1.1 },
+      { name: "potato", text: "item.potato.name", price: 0.3 },
+      { name: "sugar_cane", text: "item.sugar_cane.name", price: 0.4 },
+      { name: "sweet_berries", text: "item.sweet_berries.name", price: 0.2 },
+      { name: "wheat", text: "item.wheat.name", price: 0.4 }
     ]
   }
 };

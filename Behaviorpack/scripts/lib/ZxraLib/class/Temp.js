@@ -1,17 +1,19 @@
-import { Specialist } from "../../../system.js";
+import { Specialist } from "../module.js";
 
 class Temp {
-	constructor(player) {
-		if(!player)
-          throw new Error("No Player");
-		this.player = new Specialist(player);
+	constructor(sp) {
+		if(!sp)
+          throw new Error("No Specialist");
+        if(!(sp instanceof Specialist))
+          throw new Error("No match classes");
+		this.sp = sp;
 	}
 
 	getData() {
-		return this.player.getData();
+		return this.sp.getData();
 	}
 	setData(obj) {
-		this.player.setData(obj);
+		this.sp.setData(obj);
 	}
 	getTemp() {
 		return this.getData().temp;

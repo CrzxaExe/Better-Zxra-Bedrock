@@ -33,6 +33,31 @@
           "speed_multiplier": 1.3,
           "track_target": false
         },
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "test": "has_tag",
+                "value": "silence",
+                "operator": "!="
+              },
+              "event": "cz:ability_on"
+            }
+          ]
+        }
+      },
+      "ability": {
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "test": "has_tag",
+                "value": "silence"
+              },
+              "event": "cz:ability_off"
+            }
+          ]
+        },
         "minecraft:mob_effect": {
           "effect_range": 32,
           "effect_time": 5,
@@ -255,6 +280,20 @@
         "add": {
           "component_groups": [
             "minecraft:enderman_calm"
+          ]
+        }
+      },
+      "cz:ability_off": {
+        "remove": {
+          "component_groups": [
+            "ability"
+          ]
+        }
+      },
+      "cz:ability_on": {
+        "add": {
+          "component_groups": [
+            "ability"
           ]
         }
       }

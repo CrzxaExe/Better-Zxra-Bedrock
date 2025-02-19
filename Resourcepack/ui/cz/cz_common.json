@@ -136,7 +136,7 @@
     "anchor_from": "bottom_middle",
     "anchor_to": "bottom_middle",
     "offset": [0, "40.7%x - 20px"],
-    "$display|default": "textures/cz/art/yuri/face/0",
+    "$display|default": "textures/cz/art/yuri/skin/normal",
     "$text_name|default": "",
     "$panel_indent_size|default": [ "90% - 16px", "90% - 21px" ],
     "$custom_background|default": "dialog_background_hollow_3",
@@ -144,24 +144,17 @@
       {
         "yuri_pnl": {
           "type": "panel",
-          "size": [290, 290],
-          "offset": ["69% + 12px","-25%"],
-          "layer": 0,
+          "size": ["320%", "320%"],
+          "max_size": [590, 400],
+          "offset": ["60% + 12px","-30%"],
+          "layer": -1,
           "controls": [
             {
               "face": {
                 "type": "image",
                 "texture": "$display",
-                "size": [290, 290],
+                "size": ["122%", "122%"],
                 "layer": 1
-              }
-            },
-            {
-              "base": {
-                "type": "image",
-                "texture": "textures/cz/art/yuri/base",
-                "size": [290, 290],
-                "layer": 0
               }
             }
           ]

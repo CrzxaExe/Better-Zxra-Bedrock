@@ -1,7 +1,6 @@
-import { Game, mergeObject } from "../module.js";
+import { Game, mergeObject, Status } from "../module.js";
 import { EffectTypes, MolangVariableMap, system, world } from "@minecraft/server";
 import { Npc } from "../../npc-class.js";
-import { status } from "../../classes.js";
 
 class Entity {
   constructor(entity) {
@@ -10,15 +9,15 @@ class Entity {
   }
 
   // Data Method
-  getDataEnt(name = "entitas") {
-	return this.entity.getDynamicProperty(name) !== undefined ? JSON.parse(this.entity.getDynamicProperty(name)) : { status: [] };
+  getDataEnt(name = "entitas", defaultValue = { status: [] }) {
+	return this.entity.getDynamicProperty(name) ? JSON.parse(this.entity.getDynamicProperty(name)) : defaultValue;
   }
   setDataEnt(obj, name = "entitas") {
     if(!obj) return;
 	this.entity.setDynamicProperty(name, JSON.stringify(obj));
   }
-  clearDataEnt(name = "entitas") {
-	this.entity.setDynamicProperty(name, JSON.stringify({ status: [] }));
+  clearDataEnt(name = "entitas", defaultValue = { status: [] }) {
+	this.entity.setDynamicProperty(name, JSON.stringify(defaultValue));
   }
 
   // Validation
@@ -86,7 +85,6 @@ class Entity {
     if(typeof effect === "string") return this.entity.hasEffect(effect);
 
     if(!Array.isArray(effect)) return;
-
     return effect.reduce((all, cur) => this.entity.hasEffect(cur) ? all.push(cur) : 0, []) || []
   }
   hasDebuffEffect() {
@@ -117,7 +115,7 @@ class Entity {
     }
 
     if(!Array.isArray(particle)) return;
-    partcile.forEach(e => {
+    particle.forEach(e => {
       if(typeof e === "string") {
         this.selfParticle(e);
         return;
@@ -145,11 +143,12 @@ class Entity {
   }
   bind(duration) {
     this.addEffect({ name: "slowness", duration, lvl: 254, showParticles: false })
+    this.selfParticle("cz:bind", { x: this.entity.location.x, y: this.entity.location.y + 2.3, z: this.entity.location.z })
   }
 
   // Stat Method
   status() {
-    return new status(this.entity);
+    return new Status(this);
   }
   
   // Controller
@@ -162,6 +161,9 @@ class Entity {
 	  switch(sts.type) {
 	    case "wet":
           if(this.getComponent("onfire")) this.entity.extinguishFire()
+          break;
+        case "silence":
+          this.entity.addTag("silence");
           break;
 	  }
 	}
@@ -179,10 +181,10 @@ class Entity {
 
     switch(option.cause) {
       case "entityAttack":
-        multiplier = this.status().fragileStat();
+        multiplier = this.status().decimalCalcStatus({ type: "fragile" }, 1, 0.01, true);
         break;
       case "magic":
-        multiplier = this.status().artFragileStat();
+        multiplier = this.status().decimalCalcStatus({ type: "art_fragile" }, 1, 0.01, true);
         break;
     }
 
@@ -206,7 +208,7 @@ class Entity {
         break;
     }
 
-    this.heal(heal.amount * this.status().healingEffectiveStat());
+    this.heal(heal.amount * this.status(). decimalCalcStatus({ type: "healing_effective" }, 1, 0.01, true));
     this.addEffect(effect);
   }
   

@@ -1,5 +1,4 @@
-import { uniqueId, mergeObject, leveling } from "../module.js";
-import { Specialist } from "../../../system.js";
+import { uniqueId, mergeObject, leveling, Specialist } from "../module.js";
 import * as jsonData from "../../data.js";
 
 class Guild {

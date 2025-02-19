@@ -1,7 +1,6 @@
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import { system } from "@minecraft/server";
-import { Specialist } from "../../../system.js";
-import { Entity, npcShop, npcShopDialog, runPlayerDialog, Game } from "../module.js";
+import { Specialist, Entity, npcShop, npcShopDialog, runPlayerDialog, Game } from "../module.js";
 
 const askDialog = (player, type) => {
   runPlayerDialog(player, npcShopDialog[type][Math.floor(Math.random() * npcShopDialog[type].length)], 0);
@@ -31,7 +30,7 @@ const buyItem = (player, buy, type, rn) => {
   
   const ui = new ModalFormData()
     .title({ translate: "system.confim.buy" })
-    .textField({ text: `${buy.amount} x ` },{ translate: buy.text },{ text: ` ${buy.price}` }, { translate: "system.buy.amoumt" })
+    .textField({ rawtext: [{ text: `${buy.amount} x ` },{ translate: buy.text },{ text: ` $${buy.price}` }]}, { translate: "system.buy.amoumt" })
     .submitButton({ translate: "system.buy.button" })
     .show(player)
     .then(e => {
@@ -57,7 +56,7 @@ const buyItem = (player, buy, type, rn) => {
       
       sp.runCommand(`give @s ${buy.item} ${amount}`);
       sp.takeMoney(Number(amount * buy.price).toFixed(1));
-      player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${amount} ${buy.item} ` },{ translate: "system.buy2" },{ text: `$${Number(amount * buy.price).toFixed(2)}` }]})
+      player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${amount} ` },{ translate: buy.item },{ translate: "system.buy2" },{ text: `$${Number(amount * buy.price).toFixed(2)}` }]})
     })
 }
 
@@ -78,7 +77,7 @@ const sellItem = (player, type, rn) => {
     .title({ translate: `npc.shop.${type}.sell` })
     .dropdown({ translate: "system.itemName" }, container.map(e => {
       const shopItem = shop.find(r => r.name == e.name);
-      return e.name.replace("cz:", "").split("_").map(r => r.charAt(0).toUpperCase() + r.slice(1) ).join(" ") + " x" + e.amount + " §e$" + shopItem.price + "§r(§e$" + Number(e.amount * shopItem.price).toFixed(1) + "§r)"
+      return { rawtext: [{ translate: shopItem.text },{ text: ` x ${e.amount} §e$${shopItem.price}§r(§e$${Number(e.amount * shopItem.price).toFixed(1)}§r)` }]}
     }))
     .textField({ translate: "system.itemAmount" }, { translate: "type.number" })
     .submitButton({ translate: "cz.sellItem" })

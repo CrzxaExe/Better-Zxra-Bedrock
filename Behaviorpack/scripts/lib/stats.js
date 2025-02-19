@@ -14,7 +14,7 @@ export const azyh = [
 export const berserk = [
  "§rType §dGreatsword",
  "§rRarity §dEpic",
- "Tag: Dps, Nuker",
+ "Tag: DPS, Nuker",
  " ",
  "§rPasif: §3[W-Harm]§r",
  "§rSkill:",
@@ -26,7 +26,7 @@ export const berserk = [
 export const boltizer = [
  "§rType §dArtSword",
  "§rRarity §dUnique",
- "Tag: Debuff, Nuker, Dps, Elemental",
+ "Tag: Debuff, Nuker, DPS, Elemental",
  " ",
  "§rPasif: §3[Electicity]§r, §3[ArChain]",
  "§rSkill:",
@@ -82,14 +82,14 @@ export const cervant = [
   " ",
   "§rPasif: §3[Sharp Slice]",
   "§rSkill:",
-  "§r[1]§3",
-  "§r[2]§3"
+  "§r[1]§3 No Sneak",
+  "§r[2]§3 Sneak"
 ]
 
 export const crusher = [
  "§rType §dHammer",
  "§rRarity §dEpic",
- "Tag: Debuff",
+ "Tag: DPS, Debuff",
  " ",
  "§rPasif: §r§3[Stone Hit]",
  "§rSkill:",
@@ -101,7 +101,7 @@ export const crusher = [
 export const destiny = [
  "§rType §dSpear",
  "§rRarity §dUnique",
- "Tag: Dps, Force, Mobility",
+ "Tag: DPS, Force, Mobility",
  " ",
  "§rPasif: §3[Fears]§r, §3[Gl-3T]",
  "§rSkill:",
@@ -114,7 +114,7 @@ export const destiny = [
 export const destreza = [
  "§rType §dArtSword",
  "§rRarity §dUnique",
- "Tag: Dps, Debuff, Poison",
+ "Tag: DPS, Debuff, Poison",
  " ",
  "§rPasif: §3[Thornifi]§r, §3[Juned]",
  "§rSkill:",
@@ -127,7 +127,7 @@ export const destreza = [
 export const endless = [
  "§rType Gun/§dDouble Gun",
  "§rRarity §dUnique",
- "Tag: Spam, Dps",
+ "Tag: Spam, DPS",
  " ",
  "§rPasif: §3[EndPoint]§r, §3[End Ammo]",
  "§rSkill:",
@@ -152,9 +152,9 @@ export const harmist_flute = [
   "§rRarity §dLegend",
   "Tag: DPS, Debuff",
   " ",
-  "§rPasif: §3[]",
+  "§rPasif: §3[Bad Note]",
   "§rSkill:",
-  "§r[1]§3",
+  "§r[1]§3 No Sneak",
   "§r[2]§3"
 ]
 
@@ -166,7 +166,7 @@ export const harmony = [
   "§rPasif: §3[Melody]",
   "§rSkill:",
   "§r[1]§3 No Sneak",
-  "§r[2]§3"
+  "§r[2]§3 Sneak"
 ]
 
 export const hyrant = [
@@ -177,7 +177,7 @@ export const hyrant = [
   "§rPasif: §3[Water Bind]",
   "§rSkill:",
   "§r[1]§3 No Sneak",
-  "§r[2]§3"
+  "§r[2]§3 Sneak"
 ]
 
 export const katana = [
@@ -231,8 +231,8 @@ export const lighter = [
   " ",
   "§rPasif: §3[Burning Glare]",
   "§rSkill:",
-  "§r[1]§3",
-  "§r[2]§3"
+  "§r[1]§3 No Sneak",
+  "§r[2]§3 Sneak"
 ]
 
 export const mudrock = [
@@ -275,7 +275,7 @@ export const pandora = [
 export const quezn = [
  "§rType §dCentury",
  "§rRarity §dUnique",
- "Tag: AOE, Survival, Dps, Def",
+ "Tag: AOE, Survival, DPS, Def",
  " ",
  "§rPasif: §3[Gaslt]§r, §3[R-Amx]",
  "§rSkill:",
@@ -306,7 +306,7 @@ export const silent = [
 export const skyler = [
  "§rType §dArtSword",
  "§rRarity §dUnique",
- "Tag: Debuff, DOT, Dps, Elemental",
+ "Tag: Debuff, DOT, DPS, Elemental",
  " ",
  "§rPasif: §3[Fireing]§r, §3[Burns Out]",
  "§rSkill:",
@@ -340,8 +340,8 @@ export const undying = [
   "§rPasif: §3[Return]",
   "§rSkill:",
   "§r[1]§3 No Sneak",
-  "§r[2]§3",
-  "§r[3]§3"
+  "§r[2]§3 Sneak",
+  "§r[3]§3 Jump"
 ]
 
 export const vitage = [

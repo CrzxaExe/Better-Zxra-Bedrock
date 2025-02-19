@@ -9,15 +9,25 @@
         }
       ],
       "textures": [
-        "Array.blink[query.variant]"
+        "Array.skin[query.variant]"
       ],
       "arrays": {
         "textures": {
-          "Array.blink": [
+          "Array.skin": [
             "Texture.normal",
-            "Texture.blink"
+            "Texture.combat"
           ]
         }
+      },
+      "uv_anim": {
+        "scale": [
+          1,
+          "1 / 25"
+        ],
+        "offset": [
+          0,
+          "Math.mod(Math.floor(query.life_time * 8), 25) / 25"
+        ]
       }
     }
   }

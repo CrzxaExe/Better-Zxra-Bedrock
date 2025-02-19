@@ -1,6 +1,6 @@
 import { world, system } from "@minecraft/server";
 import { MessageFormData } from "@minecraft/server-ui";
-import { Specialist } from "../../../system.js";
+import { Specialist } from "../module.js";
 
 export const teleportConfirm = (player, loc, text, item) => {
   if (!item) return;

@@ -422,6 +422,14 @@
       },
       "minecraft:follow_range": {
         "value": 64
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "magic",
+            "damage_multipler": 0.8
+          }
+        ]
       }
     },
     "events": {

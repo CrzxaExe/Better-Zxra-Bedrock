@@ -481,21 +481,13 @@
                 "controls": [
                   {
                     "gamerpic": {
-                      "type": "image",
-                      "anchor_from": "center",
-                      "anchor_to": "center",
+                      "type": "custom",
+                      "renderer": "profile_image_renderer",
                       "layer": 5,
                       "offset": [0, "-3%"],
                       "size": [ 71, 71 ],
                       "bindings": [
-                        {
-                          "binding_name": "#gamerpic_texture_path",
-                          "binding_name_override": "#texture"
-                        },
-                        {
-                          "binding_name": "#gamerpic_texture_location_type",
-                          "binding_name_override": "#texture_file_system"
-                        }
+                        { "binding_name": "#profile_image_options" }
                       ]
                     }
                   },
@@ -776,7 +768,7 @@
         "new": {
           "type": "label",
           "localize": false,
-          "text": "+ Adding new item shop: Wandering Trader\n+ Adding new status: Wet\n* Boss Kyle: \n   | Add new skill \n   | Reanimate some skill \n* Creating some new screen ui \n* Entity Yuri: \n   | New Art \n   | New Model \n   | Reanimate some animation\n+ Farming now gain xp when harvesting crop\n* Fix Bugs \n+ New Block \n+ New Boss: Kal'sit\n+ New Entity Variant: Villager [Farmer Shop]\n+ New Item \n+ New Vial: \n   | Heal 3\n   | Skill 3\n   | Stamina Recovery\n   | Stamina Stuck\n+ New Weapon: \n   | Azyh [Legend] - Dagger\n   | Cenryter [Epic] - Reaper\n   | Cervant [Legend] - Century\n   | Harmist Flute [Legend] - Flute\n   | Harmony [Legend] - Spear\n   | Hyrant [Legend] - Spear\n   | Lighter [Legend] - Spear\n   | Mudrock [Unique] - Hammer\n   | Sui [Legend] - Katana\n   | Undying [Epic] - Artsword\n   | Vitage [Legend] - Lance\n   | Yume Staff [Epic] - Staff\n* Now Entity has def\n* Reanimate some weapon skill\n* Shop item price adjust\n* Silence now work on some Entity: Zombie [2 Life]"
+          "text": "+ Adding new item shop: Wandering Trader\n+ Adding new status: Wet\n* Boss Kyle: \n   | Add new skill \n   | Reanimate some skill \n* Creating some new screen ui \n* Entity Yuri: \n   | New Art \n   | New Mechanic \n   | New Model \n   | New Skin \n   | Reanimate some animation\n+ Farming now gain xp when harvesting crop\n* Fix Bugs \n+ New Block \n+ New Boss: Kal'sit\n+ New Entity Variant: Villager [Farmer Shop]\n+ New Item \n+ New Vial: \n   | Heal 3\n   | Skill 3\n   | Stamina Recovery\n   | Stamina Stuck\n+ New Weapon: \n   | Azyh [Legend] - Dagger\n   | Cenryter [Epic] - Reaper\n   | Cervant [Legend] - Century\n   | Harmist Flute [Legend] - Flute\n   | Harmony [Legend] - Spear\n   | Hyrant [Legend] - Spear\n   | Lighter [Legend] - Spear\n   | Mudrock [Unique] - Hammer\n   | Sui [Legend] - Katana\n   | Undying [Epic] - Artsword\n   | Vitage [Legend] - Lance\n   | Yume Staff [Epic] - Staff\n* Now Entity has def\n* Reanimate some weapon skill\n* Shop item price adjust\n* Silence now work on some Entity: \n   | Blaze's Ability \n   | Drowned's Ability \n   | Enderman's Ability \n   | Evoker's Casting\n   | Zombie [2 Life]"
         }
       }
       

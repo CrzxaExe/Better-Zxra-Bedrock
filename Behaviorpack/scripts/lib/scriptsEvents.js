@@ -1,9 +1,8 @@
 import { EffectTypes, system, world, Player } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { Specialist } from "../system.js";
 import { userPanel } from "./items.js";
 import { Npc } from "./npc-class.js";
-import { Game, Entity, farmerShop } from './ZxraLib/module.js';
+import { Game, Entity, farmerShop, Specialist } from './ZxraLib/module.js';
 import * as jsonData from "./data.js";
 
 var dis = {}
@@ -49,6 +48,11 @@ Script.add("dash", (entity, { msg }) => {
 // Bind Feature
 Script.add("bind", (entity, { msg }) => {
 	new Entity(entity).bind(Number(msg[0]) || 1)
+})
+
+// Reset Specialist
+Script.add("sp_clear_data", (entity, { msg }) => {
+	new Specialist(entity).clearData()
 })
 
 // Status Feature

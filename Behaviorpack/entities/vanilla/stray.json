@@ -234,6 +234,35 @@
             }
           ]
         }
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "fire",
+            "damage_multipler": 1.3
+          },
+          {
+            "cause": "magic",
+            "damage_multipler": 0.7
+          },
+          {
+            "damage_modifier": -3,
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "attack"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "projectile"
+                  }
+                ]
+              }
+            }
+          }
+        ]
       }
     },
     "events": {

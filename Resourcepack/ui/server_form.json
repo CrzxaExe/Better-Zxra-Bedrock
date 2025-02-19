@@ -106,7 +106,7 @@
 	      "$text_name": "Yuri Zxra",
 	      "$title_text_binding_type": "none",
 	      "$child_control": "server_form.yuri_panel",
-	      "$display": "textures/cz/art/yuri/face/1",
+	      "$display": "textures/cz/art/yuri/skin/combat",
 	      "layer": 2,
 		  "alpha": 0.8,
 	      "bindings": [
@@ -127,63 +127,7 @@
 	    }
       },
       {
-        "cz_form5@cz_common.yuri_panel_ui": {
-	      "$title_panel": "common_dialogs.standard_title_label",
-	      "$title_size": [ "100% - 14px", 10 ],
-	      "size": [400, 120],
-	      "$text_name": "Yuri Zxra",
-	      "$title_text_binding_type": "none",
-	      "$child_control": "server_form.yuri_panel",
-	      "$display": "textures/cz/art/yuri/face/2",
-	      "layer": 2,
-		  "alpha": 0.8,
-	      "bindings": [
-			{
-			  "binding_name": "#gamertag",
-			  "binding_type": "collection",
-			  "binding_collection_name": "players_collection"
-			},
-			{
-			  "binding_name": "#title_text"
-			},
-			{
-			  "binding_type": "view",
-			  "source_property_name": "(#title_text = 'cz:yuri_menu2')",
-			  "target_property_name": "#visible"
-			}
-	      ]
-	    }
-      },
-      {
-        "cz_form6@cz_common.yuri_panel_ui": {
-	      "$title_panel": "common_dialogs.standard_title_label",
-	      "$title_size": [ "100% - 14px", 10 ],
-	      "size": [400, 120],
-	      "$text_name": "Yuri Zxra",
-	      "$title_text_binding_type": "none",
-	      "$child_control": "server_form.yuri_panel",
-	      "$display": "textures/cz/art/yuri/face/3",
-	      "layer": 2,
-		  "alpha": 0.8,
-	      "bindings": [
-			{
-			  "binding_name": "#gamertag",
-			  "binding_type": "collection",
-			  "binding_collection_name": "players_collection"
-			},
-			{
-			  "binding_name": "#title_text"
-			},
-			{
-			  "binding_type": "view",
-			  "source_property_name": "(#title_text = 'cz:yuri_menu3')",
-			  "target_property_name": "#visible"
-			}
-	      ]
-	    }
-      },
-      {
-        "cz_form7@cz_common.main_panel_no_buttons": {
+        "cz_form5@cz_common.main_panel_no_buttons": {
 	      "$title_panel": "common_dialogs.standard_title_label",
 	      "$title_size": [ "100% - 14px", 10 ],
 	      "size": [410, 330],
@@ -205,7 +149,7 @@
 	    }
       },
       {
-        "cz_form8@cz_common.npc_panel_ui": {
+        "cz_for68@cz_common.npc_panel_ui": {
 	      "$title_panel": "common_dialogs.standard_title_label",
 	      "$title_size": [ "100% - 14px", 10 ],
 	      "size": [400, 124],
@@ -241,7 +185,7 @@
 			},
 			{
 			  "binding_type": "view",
-			  "source_property_name": "((#title_text - 'cz:npc_shop_farmer') and (#title_text - 'cz:shop') and (#title_text - 'cz:quest') and (#title_text - 'cz:guild_shop') and (#title_text - 'cz:yuri_menu0') and (#title_text - 'cz:yuri_menu3') and (#title_text - 'cz:yuri_menu2') and (#title_text - 'cz:yuri_menu1') and (#title_text - 'cz:user') = #title_text)",
+			  "source_property_name": "((#title_text - 'cz:npc_shop_farmer') and (#title_text - 'cz:shop') and (#title_text - 'cz:quest') and (#title_text - 'cz:guild_shop') and (#title_text - 'cz:yuri_menu0') and (#title_text - 'cz:yuri_menu1') and (#title_text - 'cz:user') = #title_text)",
 			  "target_property_name": "#visible"
 			}
 	      ]

@@ -7,7 +7,6 @@ import {
   GameMode,
 } from "@minecraft/server";
 import {
-  Specialist,
   BlockUi,
 } from "./system.js";
 import {
@@ -19,6 +18,7 @@ import {
   Entity,
   Items,
   summonXpAtPlayer,
+  Specialist,
 } from "./lib/ZxraLib/module.js";
 import * as stats from "./lib/stats.js";
 import * as jsonData from "./lib/data.js";
@@ -84,8 +84,10 @@ system.runInterval(async () => {
       sp.controllerStamina({
         options,
       });
-      sp.controllerThirst();
-      await sp.controllerUi({
+      sp.controllerThirst({
+        options,
+      });
+      sp.controllerUi({
         options,
       });
     }
@@ -98,7 +100,7 @@ system.runInterval(async () => {
         });
     });
   } catch (err) {
-    if (options.debug) console.warn(err);
+    if (options.debug) console.warn("[Error] ticking error: "+err);
   }
 }, 5);
 
@@ -206,8 +208,6 @@ world.afterEvents.playerSpawn.subscribe((e) => {
 world.afterEvents.entityHealthChanged.subscribe(
   ({ entity, newValue, oldValue }) => {
     try {
-      console.warn(newValue, oldValue)
-
       if (oldValue - newValue < -1) {
         const indicator = world
           .getDimension(entity.dimension.id)
@@ -280,7 +280,7 @@ world.afterEvents.entityDie.subscribe(async (e) => {
       item,
       ...inGame,
       notSelf: "!" + murder.name,
-      multiplier: murderData.status().dmgStat(),
+      multiplier: murderData.status().decimalCalcStatus({ type: "damage" }, 1, 0.01),
     });
   }
 });
@@ -361,10 +361,9 @@ world.afterEvents.entityHitEntity.subscribe(
         .container?.getItem(e.damagingEntity.selectedSlotIndex) || undefined,
       entity = e.damagingEntity,
       sp = new Specialist(entity);
-    sp.cooldown().setCd("stamina_regen", options.staminaExhaust || 3);
+    sp.cooldown().addCd("stamina_regen", options.staminaExhaust || 3);
     if (!item || e.hitEntity == undefined || !e.hitEntity) return;
-    console.warn(JSON.stringify(item))
-    let itm = new Item(item);
+    let itm = new Items(item);
 
     sp.minStamina("value", options.staminaAction || 4);
     let itemPasif = Weapon.Pasif.hit.find((x) =>
@@ -377,11 +376,12 @@ world.afterEvents.entityHitEntity.subscribe(
       ent: new Entity(e.hitEntity),
       item,
       itm,
+      team: new Game().guild().getTeammate(entity.id) || [entity.name],
       notSelf: "!" + entity.name,
       tier: itm.getTier(),
       ...inGame,
       options,
-      multiplier: sp.status().dmgStat(),
+      multiplier: sp.status().decimalCalcStatus({ type: "damage" }, 1, 0.01),
     });
   },
   { entityTypes: ["minecraft:player"] }
@@ -394,7 +394,7 @@ world.afterEvents.entityHurt.subscribe(
         .getComponent("inventory")
         .container.getItem(e.hurtEntity.selectedSlotIndex),
       sp = new Specialist(e.hurtEntity);
-    sp.cooldown().setCd("stamina_regen", options.staminaExhaust || 3);
+    sp.cooldown().addCd("stamina_regen", options.staminaExhaust || 3);
 
     e.hurtEntity.runCommand(`camerashake add @s 1.4 0.26`);
     if (
@@ -415,7 +415,7 @@ world.afterEvents.entityHurt.subscribe(
       ent: new Entity(e.damageSource.damagingEntity),
       item,
       notSelf: "!" + e.hurtEntity.name,
-      multiplier: sp.status().dmgStat(),
+      multiplier: sp.status().decimalCalcStatus({ type: "damage" }, 1, 0.01),
       ...inGame,
     });
   },
@@ -449,7 +449,7 @@ world.afterEvents.itemReleaseUse.subscribe(async (e) => {
   let item = e.itemStack,
     entity = e.source,
     sp = new Specialist(entity);
-  sp.cooldown().setCd("stamina_regen", options.staminaExhaust || 3);
+  sp.cooldown().addCd("stamina_regen", options.staminaExhaust || 3);
 
   let vel = entity.getVelocity(),
     rot = entity.getRotation();
@@ -482,7 +482,7 @@ world.afterEvents.itemReleaseUse.subscribe(async (e) => {
         silentState,
         sp,
         endless,
-        multiplier: sp.status().skillStat(),
+        multiplier: sp.status().decimalCalcStatus({ type: "skill" }, sp.status().decimalCalcStatus({ type: "damage" }, 1, 0.01), 0.01),
         ...inGame,
         options,
       },

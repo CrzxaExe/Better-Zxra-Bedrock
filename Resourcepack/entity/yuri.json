@@ -4,11 +4,11 @@
     "description": {
       "identifier": "cz:yuri",
       "materials": {
-        "default": "skeleton"
+        "default": "custom_animated"
       },
       "textures": {
-        "normal": "textures/entity/yuri_new",
-        "blink": "textures/entity/yuri_blink"
+        "normal": "textures/entity/yuri/yuri_normal",
+        "combat": "textures/entity/yuri/yuri_combat"
       },
       "geometry": {
         "default": "geometry.yuri"

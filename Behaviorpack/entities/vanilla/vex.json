@@ -116,6 +116,31 @@
       "minecraft:physics": {
         "has_gravity": false,
         "has_collision": false
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "magic",
+            "damage_multipler": 1.5
+          },
+          {
+            "damage_modifier": -1,
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "attack"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "projectile"
+                  }
+                ]
+              }
+            }
+          }
+        ]
       }
     }
   }

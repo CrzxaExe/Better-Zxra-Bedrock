@@ -480,6 +480,7 @@ system.invalidPlayer.name=Tidak bisa mendapatkan nama pengguna
 system.keepOnDeath=Pertahankan saat mati
 system.kill=Membunuh
 system.listCmd=Daftar cmd yang tersedia:
+system.maxHealth.reached=Batas maksimal poin darah adalah %1$s, tidak bisa bertambah lagi untuk saat ini
 system.method.economy=Operasi ekonomi?
 system.method.gdLvl=Operasi Level Perserikatan?
 system.method.token=Operasi token?

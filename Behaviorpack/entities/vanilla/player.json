@@ -66,6 +66,9 @@
         },
         "minecraft:movement": {
           "value": 0.1
+        },
+        "minecraft:variant": {
+          "value": 1
         }
       },
       "silent_20": {
@@ -443,6 +446,9 @@
             "event": "cz:stun_reduce"
           }
         ]
+      },
+      "minecraft:variant": {
+        "value": 0
       }
     },
     "events": {

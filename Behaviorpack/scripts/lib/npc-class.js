@@ -1,7 +1,6 @@
 import { system, world, Player, ItemStack } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { Specialist } from "../system.js";
-import { shuffleObjects, Entity } from "./ZxraLib/module.js";
+import { shuffleObjects, Entity, Specialist } from "./ZxraLib/module.js";
 import * as option from "./data.js";
 
 export {
@@ -38,7 +37,7 @@ class YuriNpc {
 	openUi(player, lib) {
 		let npcData = option.npcFile.yuri
         let greet = npcData.stat.greet[Math.floor(Math.random() * npcData.stat.greet.length)], data = this.getData()
-		let ui = new ActionFormData().title(`cz:yuri_menu${data.emotion}`).body({ translate: greet })
+		let ui = new ActionFormData().title(`cz:yuri_menu${this.entity.getComponent("variant").value}`).body({ translate: greet })
 		.button({ translate: "yuri.action" })
         .button({ translate: "yuri.talking" })
         .button({ translate: "yuri.gift" })
@@ -55,7 +54,7 @@ class YuriNpc {
 
 	talkUi(player, lib) {
 		let data = this.getData(), rawData = option.npcFile.yuri, talk = shuffleObjects(rawData.stat.talk, rawData.stat.talkMaxOptions)
-		let ui = new ActionFormData().title(`cz:yuri_menu${data.emotion}`).body({ translate: "yuri.talkFor" })
+		let ui = new ActionFormData().title(`cz:yuri_menu${this.entity.getComponent("variant").value}`).body({ translate: "yuri.talkFor" })
 		talk.forEach(r => ui.button({ translate: r.text }))
 		ui.show(player).then(r => {
 			if(r.canceled) return
@@ -80,13 +79,13 @@ class YuriNpc {
 
     actionUi(player, lib) {
         let data = this.getData()
-		let ui = new ActionFormData().title(`cz:yuri_menu${data.emotion}`).body({ translate: "yuri.action.body" })
+		let ui = new ActionFormData().title(`cz:yuri_menu${this.entity.getComponent("variant").value}`).body({ translate: "yuri.action.body" })
         .button({ translate: "yuri.move" })
+        .button({ translate: "yuri.changeSkin" })
         .button({ translate: "yuri.scale" })
-        .button({ translate: "yuri.eyeFix" })
         .show(player)
         .then(r => {
-	        let sub = new ActionFormData().title(`cz:yuri_menu${data.emotion}`).body({ translate: "yuri.ask" })
+	        let sub = new ActionFormData().title(`cz:yuri_menu${this.entity.getComponent("variant").value}`).body({ translate: "yuri.ask" })
 	        if(r.canceled) return
 	        switch(r.selection) {
 		        case 0:
@@ -102,7 +101,18 @@ class YuriNpc {
 		            }
 		          })
 		          break;
-	            case 1:
+		        case 1:
+		          sub.button({ translate: "yuri.skin.normal" })
+		          sub.button({ translate: "yuri.skin.combat" })
+		          sub.show(player).then(s => {
+			        if(s.canceled) return
+			        switch(s.selection) {
+				      case 0: this.entity.triggerEvent("cz:change_to_normal_skin"); break;
+				      case 1: this.entity.triggerEvent("cz:change_to_combat_skin"); break;
+				    }
+			      })
+		          break;
+	            case 2:
 		          sub.button({ translate: "yuri.scale.l" })
 		          sub.button({ translate: "yuri.scale.n" })
 		          sub.button({ translate: "yuri.scale.p" })
@@ -114,9 +124,6 @@ class YuriNpc {
 				        case 2: this.entity.triggerEvent("cz:size_p"); break;
 		            }
 		          })
-		          break;
-		        case 2:
-		          this.entity.triggerEvent("cz:yuri_blink")
 		          break;
 	        }
         })

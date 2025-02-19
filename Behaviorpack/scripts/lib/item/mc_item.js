@@ -1,8 +1,12 @@
-import { Specialist } from "../../system.js";
 import { world, system, ItemStack } from "@minecraft/server";
 import { ActionFormData, MessageFormData, ModalFormData } from "@minecraft/server-ui";
 
-import { teleportUi, teleportConfirm, teleportToPlayer, Game, SpecialItem, Entity } from '../ZxraLib/module.js';
+import { teleportUi, teleportConfirm, teleportToPlayer, Game, SpecialItem, Entity, Specialist, couponEdit, couponUse, ItemContainer } from '../ZxraLib/module.js';
+
+// Const
+const PLAYER_MAX_HEALTH = 28;
+
+
 
 // Add Section
 SpecialItem.addItem("card_of_return", (player, item) => {
@@ -31,7 +35,6 @@ SpecialItem.addItem("card_of_worldspawn", (player, item) => {
     teleportConfirm(player, {...loc, dimension: { id: "minecraft:overworld" } }, { translate: "system.confirm.teleportSpawn" }, item)
 })
 
-
 SpecialItem.addItem("money_card", (player, item) => {
   new Specialist(player).addMoney(2000)
   player.sendMessage({ rawtext: [{ translate: "system.get" },{ text: " $2000" }]})
@@ -43,6 +46,24 @@ SpecialItem.addItem("guild_max_member_up", (player, item) => {
   if(!gd) return player.sendMessage({ translate: "system.guild.notHave" });
   new Game().guild().addMaxMember(gd.id, 1);
   player.runCommand(`clear @s ${item.typeId} 0 1`)
+})
+
+SpecialItem.addItem("heart_crystal", (player, item) => {
+  const hp = player.getComponent("health").defaultValue;
+  
+  if(hp + 2 > PLAYER_MAX_HEALTH) return player.sendMessage({ translate: "system.maxHealth.reached", with: [String(PLAYER_MAX_HEALTH)] })
+  player.triggerEvent(`cz:max_health_player_${hp + 2}`)
+  player.runCommand(`clear @s ${item.typeId} 0 1`)
+})
+
+SpecialItem.addItem("coupon_card", (player, item) => {
+  if(player.isSneaking) {
+    const container = new ItemContainer(item), data = container.getAll();
+    couponEdit(player, item, data, container);
+    return;
+  }
+  
+  couponUse(player, item);
 })
 
 // Use Section

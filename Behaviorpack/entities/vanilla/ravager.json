@@ -354,6 +354,31 @@
           "ravager",
           "mob"
         ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "magic",
+            "damage_multiplier": 1.5
+          },
+          {
+            "damage_modifier": -8,
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "attack"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "projectile"
+                  }
+                ]
+              }
+            }
+          }
+        ]
       }
     },
     "events": {

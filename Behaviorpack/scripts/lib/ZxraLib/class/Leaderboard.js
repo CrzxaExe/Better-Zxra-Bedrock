@@ -1,7 +1,6 @@
 import { world } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
-import { Specialist } from "../../../system.js";
-import { Game } from "../module.js";
+import { Specialist, Game } from "../module.js";
 import * as jsonData from "../../data.js";
 
 class Leaderboard extends Game {

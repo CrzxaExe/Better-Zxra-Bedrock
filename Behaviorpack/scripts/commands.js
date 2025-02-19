@@ -1,6 +1,5 @@
 import { system, world, ItemStack } from "@minecraft/server";
-import { Specialist } from "./system.js";
-import { Command, Ench, Game, runDialog, storyDialog, Items } from "./lib/ZxraLib/module.js";
+import { Command, Ench, Game, runDialog, storyDialog, Items, Specialist } from "./lib/ZxraLib/module.js";
 
 Command.add("kyle", async (player, lib) => {
   if (player.name !== "CrzxaExe3") return;
@@ -434,4 +433,34 @@ Command.addCmd(
     runDialog(storyDialog[msg[1] || 0])
   },
   { des: "cmd.testdialog" }
+)
+
+Command.addCmd(
+  "giveaway",
+  (player) => {
+    const item = player.getComponent("inventory").container.getSlot(player.selectedSlotIndex).getItem();
+
+    world.getAllPlayers().forEach(e => {
+      system.run(() => {
+        e.sendMessage({ translate: "system.giveaway", with: [player.name] })
+        e.getComponent("inventory").container.addItem(item)
+      })
+    })
+  },
+  { des: "cmd.giveaway", admin: true }
+)
+
+Command.addCmd(
+  "cloneitem",
+  (player, { msg }) => {
+    const item = player.getComponent("inventory").container.getSlot(player.selectedSlotIndex).getItem();
+
+    for(let i = 0; i < parseInt(msg[1]); i++) {
+      system.run(() => {
+        player.getComponent("inventory").container.addItem(item)
+      })
+    }
+    player.sendMessage({ translate: "system.item.clone", with: [String(msg[1])] })
+  },
+  { des: "cmd.cloneitem", admin: true }
 )

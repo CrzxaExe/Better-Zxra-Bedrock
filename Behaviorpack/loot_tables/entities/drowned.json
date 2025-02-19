@@ -12,7 +12,7 @@
               "function": "set_count",
               "count": {
                 "min": 2,
-                "max": 6
+                "max": 9
               }
             },
             {
@@ -56,17 +56,17 @@
         {
           "type": "item",
           "name": "minecraft:gold_ingot",
-          "weight": 5
+          "weight": 10
         },
         {
           "type": "item",
           "name": "minecraft:copper_ingot",
-          "weight": 5
+          "weight": 12
         },
         {
           "type": "item",
           "name": "minecraft:iron_ingot",
-          "weight": 5
+          "weight": 15
         }
       ]
     }

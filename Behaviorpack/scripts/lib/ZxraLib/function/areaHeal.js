@@ -1,5 +1,4 @@
-import { Specialist } from "../../../system.js";
-import { Game, Entity } from "../module.js";
+import { Specialist, Game, Entity } from "../module.js";
 import { world } from "@minecraft/server";
 
 const areaHeal = (player, { heal = 0, range = 3, minRange = 0, location }) => {

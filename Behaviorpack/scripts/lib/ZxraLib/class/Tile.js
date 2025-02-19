@@ -1,5 +1,5 @@
 import { world } from "@minecraft/server";
-import { Game, BlockContainer } from "../module";
+import { Game, BlockContainer } from "../module.js";
 
 class Tile {
   constructor(block) {

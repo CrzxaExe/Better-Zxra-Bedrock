@@ -1,6 +1,5 @@
-import { Specialist } from "../../system.js";
 import { world, system } from "@minecraft/server";
-import { Modifier, Entity } from "../ZxraLib/module.js";
+import { Modifier, Entity, Specialist } from "../ZxraLib/module.js";
 import * as option from "../data.js";
 
 
@@ -51,7 +50,7 @@ Modifier.addMod("lifesteal", "kill", (player, target, { item, mod }) => {
   let lvl = mod.lvl || 1;
   
   if(lvl > option.toolsMod.lifesteal.maxLvl) lvl = option.toolsMod.lifesteal.maxLvl
-  new Specialist(player).heal(lvl * 4)
+  new Specialist(player).heal(lvl * 2)
 }, { tag: ["minecraft:is_sword"] })
 
 Modifier.addMod("steal", "kill", (player, target, { item, mod }) => {

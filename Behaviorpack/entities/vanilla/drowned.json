@@ -128,6 +128,35 @@
                 "operator": "=="
               },
               "event": "cz:mob_ability_off"
+            },
+            {
+              "filters": {
+                "test": "has_tag",
+                "value": "silence",
+                "operator": "!="
+              },
+              "event": "cz:ability_on"
+            }
+          ]
+        }
+      },
+      "ability": {
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "test": "in_water_or_rain",
+                "value": false,
+                "operator": "=="
+              },
+              "event": "cz:mob_ability_off"
+            },
+            {
+              "filters": {
+                "test": "has_tag",
+                "value": "silence"
+              },
+              "event": "cz:ability_off"
             }
           ]
         },
@@ -473,12 +502,37 @@
       "cz:mob_ability_off": {
         "remove": {
           "component_groups": [
-            "has_ability"
+            "has_ability",
+            "ability"
           ]
         },
         "add": {
           "component_groups": [
             "no_ability"
+          ]
+        }
+      },
+      "cz:ability_off": {
+        "remove": {
+          "component_groups": [
+            "ability"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "has_ability"
+          ]
+        }
+      },
+      "cz:ability_on": {
+        "add": {
+          "component_groups": [
+            "ability"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "has_ability"
           ]
         }
       }

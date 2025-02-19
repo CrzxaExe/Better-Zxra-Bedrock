@@ -1,8 +1,6 @@
 import { ActionFormData, ModalFormData, MessageFormData } from "@minecraft/server-ui";
 import { ItemStack, EnchantmentType, system } from "@minecraft/server";
-//import { MinecraftEnchantmentTypes } from "@minecraft/vanilla-data";
-import { Specialist } from "../../../system.js";
-import { Game } from "../module.js";
+import { Specialist, Game } from "../module.js";
 
 import * as jsonData from "../../data.js";
 

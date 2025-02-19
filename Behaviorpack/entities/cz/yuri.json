@@ -58,7 +58,7 @@
               "component_groups": [
                 "cz:yuri_wild",
                 "cz:yuri_size_n",
-                "normal_eye"
+                "normal_skin"
               ]
             }
           }
@@ -185,9 +185,7 @@
               "component_groups": [
                 "cz:target_zombie",
                 "cz:target_creeper",
-                "cz:target_skeleton",
-                "cz:target_spider",
-                "cz:target_ravager"
+                "cz:target_skeleton"
               ]
             }
           }
@@ -199,9 +197,7 @@
             "remove": {
               "component_groups": [
                 "cz:target_zombie",
-                "cz:target_skeleton",
-                "cz:target_spider",
-                "cz:target_ravager"
+                "cz:target_skeleton"
               ]
             },
             "add": {
@@ -218,9 +214,7 @@
             "remove": {
               "component_groups": [
                 "cz:target_creeper",
-                "cz:target_skeleton",
-                "cz:target_spider",
-                "cz:target_ravager"
+                "cz:target_skeleton"
               ]
             },
             "add": {
@@ -237,9 +231,7 @@
             "remove": {
               "component_groups": [
                 "cz:target_creeper",
-                "cz:target_zombie",
-                "cz:target_spider",
-                "cz:target_ravager"
+                "cz:target_zombie"
               ]
             },
             "add": {
@@ -249,68 +241,6 @@
             }
           }
         ]
-      },
-      "cz:target_spider": {
-        "sequence": [
-          {
-            "remove": {
-              "component_groups": [
-                "cz:target_creeper",
-                "cz:target_zombie",
-                "cz:target_skeleton",
-                "cz:target_ravager"
-              ]
-            },
-            "add": {
-              "component_groups": [
-                "cz:target_spider"
-              ]
-            }
-          }
-        ]
-      },
-      "cz:target_ravager": {
-        "sequence": [
-          {
-            "remove": {
-              "component_groups": [
-                "cz:target_creeper",
-                "cz:target_zombie",
-                "cz:target_spider",
-                "cz:target_skeleton"
-              ]
-            },
-            "add": {
-              "component_groups": [
-                "cz:target_ravager"
-              ]
-            }
-          }
-        ]
-      },
-      "cz:yuri_blink": {
-        "add": {
-          "component_groups": [
-            "blink_eye"
-          ]
-        },
-        "remove": {
-          "component_groups": [
-            "normal_eye"
-          ]
-        }
-      },
-      "cz:yuri_not_blink": {
-        "remove": {
-          "component_groups": [
-            "blink_eye"
-          ]
-        },
-        "add": {
-          "component_groups": [
-            "normal_eye"
-          ]
-        }
       },
       "cz:open_menu": {
         "queue_command": {
@@ -318,6 +248,30 @@
             "scriptevent cz:yuri_menu"
           ],
           "target": "other"
+        }
+      },
+      "cz:change_to_normal_skin": {
+        "add": {
+          "component_groups": [
+            "normal_skin"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "combat_skin"
+          ]
+        }
+      },
+      "cz:change_to_combat_skin": {
+        "add": {
+          "component_groups": [
+            "combat_skin"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "normal_skin"
+          ]
         }
       }
     },
@@ -525,85 +479,12 @@
           "track_target": true
         }
       },
-      "cz:target_spider": {
-        "minecraft:behavior.nearest_attackable_target": {
-          "priority": 2,
-          "reselect_targets": true,
-          "entity_types": [
-            {
-              "filters": {
-                "test": "is_family",
-                "subject": "other",
-                "value": "spider"
-              },
-              "max_dist": 35
-            },
-            {
-              "filters": {
-                "test": "is_family",
-                "subject": "other",
-                "value": "cave_spider"
-              },
-              "max_dist": 35
-            }
-          ]
-        },
-        "minecraft:attack": {
-          "damage": 12
-        },
-        "minecraft:behavior.melee_attack": {
-          "priority": 2,
-          "speed_multiplier": 1.53,
-          "track_target": true
-        }
-      },
-      "cz:target_ravager": {
-        "minecraft:behavior.nearest_attackable_target": {
-          "priority": 2,
-          "reselect_targets": true,
-          "entity_types": [
-            {
-              "filters": {
-                "test": "is_family",
-                "subject": "other",
-                "value": "ravager"
-              },
-              "max_dist": 35
-            }
-          ]
-        },
-        "minecraft:attack": {
-          "damage": 20
-        },
-        "minecraft:behavior.melee_attack": {
-          "priority": 2,
-          "speed_multiplier": 1.53,
-          "track_target": true
-        }
-      },
-      "normal_eye": {
-        "minecraft:timer": {
-          "looping": false,
-          "time": [
-            2,
-            4
-          ],
-          "time_down_event": {
-            "event": "cz:yuri_blink"
-          }
-        },
+      "normal_skin": {
         "minecraft:variant": {
           "value": 0
         }
       },
-      "blink_eye": {
-        "minecraft:timer": {
-          "looping": false,
-          "time": 0.2,
-          "time_down_event": {
-            "event": "cz:yuri_not_blink"
-          }
-        },
+      "combat_skin": {
         "minecraft:variant": {
           "value": 1
         }

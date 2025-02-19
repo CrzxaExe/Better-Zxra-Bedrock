@@ -3,7 +3,7 @@ import { Weapon, Entity } from "../ZxraLib/module.js";
 
 // Greatsword
 Weapon.registerSkill("greatsword", (player, lib, event) => {
-	if(lib.sp.cooldown().isCd("greatsword", 8) == true) return
+	if(lib.sp.cooldown().cd("greatsword", 8)) return
 
 	player.playAnimation("animation.weapon.swing.great", { blendOutTime: 0.35 })// Animation
 	lib.sp.bind(1.2)
@@ -16,7 +16,7 @@ Weapon.registerSkill("greatsword", (player, lib, event) => {
 
 // Reaper
 Weapon.registerSkill("reaper", (player, lib, event) => {
-	if(lib.sp.cooldown().isCd("reaper", 6) == true) return
+	if(lib.sp.cooldown().cd("reaper", 6)) return
 
 	player.playAnimation("animation.weapon.slice.right", { blendOutTime: 0.35 })// Animation
     lib.sp.minStamina("value", 8)
@@ -30,7 +30,7 @@ Weapon.registerSkill("reaper", (player, lib, event) => {
 
 // Hammer
 Weapon.registerSkill("hammer", (player, lib, event) => {
-	if(lib.sp.cooldown().isCd("hammer", 5) == true) return
+	if(lib.sp.cooldown().cd("hammer", 5)) return
 
 	player.playAnimation("animation.weapon.crushing", { blendOutTime: 0.35 })// Animation
     lib.sp.minStamina("value", 12)
@@ -44,7 +44,7 @@ Weapon.registerSkill("hammer", (player, lib, event) => {
 
 // Katana
 Weapon.registerSkill("katana", (player, lib, event) => {
-	if(lib.sp.cooldown().isCd("katana", 5) == true) return
+	if(lib.sp.cooldown().cd("katana", 5)) return
 
 	player.playAnimation("animation.weapon.slice.up", { blendOutTime: 0.35 })// Animation
     lib.sp.minStamina("value", 7)
@@ -58,7 +58,7 @@ Weapon.registerSkill("katana", (player, lib, event) => {
 
 // Spear
 Weapon.registerSkill("spear", (player, lib, event) => {
-	if(lib.sp.cooldown().isCd("spear", 6) == true) return
+	if(lib.sp.cooldown().cd("spear", 6)) return
 
 	let entity = player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item","cz:indicator"] })[0].entity || undefined, distance = Math.sqrt((player.location.x - entity.location.x) ** 2 + (player.location.z - entity.location.z) ** 2) || 0
 

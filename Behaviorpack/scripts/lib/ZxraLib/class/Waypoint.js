@@ -1,5 +1,5 @@
 import { world } from "@minecraft/server";
-import { Game } from "../module";
+import { Game } from "../module.js";
 
 class Waypoint {
   getData() {

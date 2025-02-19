@@ -1,7 +1,6 @@
 import { world, system, ItemStack } from "@minecraft/server";
-import { Specialist } from "../system.js";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { Game, Quest, guildUi, adminPanel, questPanel, shop, SpecialItem } from "./ZxraLib/module.js";
+import { Game, Quest, Specialist, guildUi, adminPanel, questPanel, shop, SpecialItem } from "./ZxraLib/module.js";
 import * as data from "./data.js"
 
 import "./item/vial.js";
@@ -198,7 +197,7 @@ SpecialItem.addItem("quest_scroll", (player, item) => {
 SpecialItem.addItem("stamina_up_book", (player) => {
     let data = new Specialist(player);
     data.addStamina("max", 4)
-    data.runCommand([`clear @s cz:stamina_up_book 0 1`])
+    data.runCommand(`clear @s cz:stamina_up_book 0 1`)
     player.onScreenDisplay.setActionBar(`Max Stamina++`)
 })
 

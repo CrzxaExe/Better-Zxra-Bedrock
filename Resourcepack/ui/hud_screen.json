@@ -238,7 +238,7 @@
 	         "layer": 2,
 	         "anchor_from": "bottom_left",
 	         "anchor_to": "bottom_left",
-	         "offset": [ "1.5%", "-7%" ],
+	         "offset": [ "1.5%", "-4%" ],
 	         "controls": [
 	           {
 	             "player_renderer_panel": {

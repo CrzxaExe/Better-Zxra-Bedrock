@@ -480,6 +480,7 @@ system.invalidPlayer.name=Cannot get the Username
 system.keepOnDeath=Keep On Death
 system.kill=Kills
 system.listCmd=List cmd are available:
+system.maxHealth.reached=Max Health Point are %1$s, cannot go any further again now
 system.method.economy=Economy operation?
 system.method.gdLvl=Guild Level operation?
 system.method.token=Token operation?

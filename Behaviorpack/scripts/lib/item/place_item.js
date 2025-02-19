@@ -1,5 +1,4 @@
-import { Specialist } from "../../system.js";
-import { SpecialItem, Entity } from "../ZxraLib/module.js";
+import { SpecialItem, Entity, Specialist } from "../ZxraLib/module.js";
 import { world, system, ItemStack } from "@minecraft/server";
 
 SpecialItem.placeItem("vial", (player, item, block) => {

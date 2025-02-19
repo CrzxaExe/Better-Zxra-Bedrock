@@ -1,11 +1,11 @@
+import { world } from "@minecraft/server";
 import {
   ActionFormData,
   ModalFormData,
   MessageFormData,
 } from "@minecraft/server-ui";
-import { Specialist } from "../../../system.js";
 import { setOptions } from "../../../main.js";
-import { Game, mergeObject } from "../module.js";
+import { Game, mergeObject, Specialist } from "../module.js";
 
 const adminPanel = (player, lib) => {
   let ui = new ActionFormData()
@@ -170,7 +170,7 @@ const settingPanel = (player, lib) => {
           staminaHurt: Number(sH),
           staminaRecovery: Number(sRv),
           staminaRun: Number(sR),
-          thirstDown: tD,
+          thirstDown: Number(tD),
           customChat: cC,
           customChatPrefix: cCP,
           shopMultiplier: Number(sM),
@@ -208,7 +208,7 @@ const resetLb = (player, lib) => {
 };
 
 const economy = (player, lib) => {
-  let players = new Game().game.getPlayers(),
+  let players = world.getPlayers(),
     ui = new ModalFormData()
       .title({ translate: "system.economy" })
       .dropdown({ translate: "system.method.economy" }, [
@@ -246,7 +246,7 @@ const economy = (player, lib) => {
 };
 
 const voxn = (player, lib) => {
-  let players = new Game().game.getPlayers(),
+  let players = world.getPlayers(),
     ui = new ModalFormData()
       .title("Voxn")
       .dropdown({ translate: "system.method.voxn" }, [
