@@ -1,6 +1,7 @@
 import { ActionFormData, ModalFormData, MessageFormData } from "@minecraft/server-ui";
 import { ItemStack, EnchantmentType, system } from "@minecraft/server";
-import { Specialist, Game } from "../module.js";
+import { Specialist } from "../module.js";
+import { Terra } from "../class.js";
 
 import * as jsonData from "../../data.js";
 
@@ -8,7 +9,7 @@ const admin = ["admin","superadmin"],
   roleType = ["member","admin","superadmin"];
 
 const guildUi = (player) => {
-  let guild = new Game().guild().gd().find(e => e.member.some(r => r.id === player.id));
+  let guild = Terra.guild.gd().find(e => e.member.some(r => r.id === player.id));
   let ui = new ActionFormData()
     .title({ translate: "cz.guild" })
     .body({ translate: "cz.guild.body" })
@@ -55,7 +56,7 @@ const guildCreate = (player) => {
       const [name, des, ap] = r.formValues, sp = new Specialist(player);
       if(name.length < 1) return player.sendMessage({ translate: "system.guild.validation" })
 
-      let guild = new Game().guild().getGuild(name)
+      let guild = Terra.guild.getGuild(name)
       if(guild) return player.sendMessage({ translate: "system.guild.name.duplicate" })
       //console.warn(name, des, ap)
       let gui = new MessageFormData().title({ translate: "system.guild.createConfirm" })
@@ -71,7 +72,7 @@ const guildCreate = (player) => {
 
           if(sp.getMoney() < 1000) return player.sendMessage({ translate: "system.guild.create.noMoney" })
 
-          new Game().guild().createGuild({ name, des, lock }, player)
+          Terra.guild.createGuild({ name, des, lock }, player)
           sp.takeMoney(1000)
           player.sendMessage({ rawtext: [{ translate: "system.guild.created" },{ text: ` ${name}§r` }]})
         })
@@ -100,13 +101,13 @@ const guildEdit = (player, { name, id, des, request, member }) => {
       newAp === 1 ? newAp = true : newAp = false;
       //console.warn(newName, newDes, newAp)
 
-      new Game().guild().updateGuild(id, { name: newName, des: newDes, request: newAp })
+      Terra.guild.updateGuild(id, { name: newName, des: newDes, request: newAp })
       player.sendMessage({ rawtext: [{ translate: "system.guild.update" },{ text: ` ${newName}§r` }]})
     })
 };
 
 const guildList = (player) => {
-  let guild = new Game().guild().gd()
+  let guild = Terra.guild.gd()
   let ui = new ActionFormData()
     .title({ translate: "system.guild.list" })
     .body({ translate: "system.guild.list.body" })
@@ -181,7 +182,7 @@ const guildDelete = (player, { name, id }) => {
       if(s.canceled || !s.selection || s.selection === 0) return;
 
       player.sendMessage({ rawtext: [{ translate: "guild.deleted" },{ text: ` ${name}` }]})
-      new Game().guild().deleteGuild(id)
+      Terra.guild.deleteGuild(id)
     })
 };
 
@@ -197,7 +198,7 @@ const guildLeave = (player, { id, name, member }) => {
       if(s.canceled || !s.selection || s.selection === 0) return;
 
       if(member.some(e => e.id === player.id && e.role === "superadmin")) return player.sendMessage({ translate: "system.guild.isOwner" })
-      new Game().guild().removeMemberGuild(id, player.id)
+      Terra.guild.removeMemberGuild(id, player.id)
       player.sendMessage({ translate: "system.guild.leaved" })
     })
 };
@@ -212,7 +213,7 @@ const guildJoin = (player, { id, name }) => {
     .show(player)
     .then(s => {
       if(s.canceled || !s.selection || s.selection === 0) return;
-      let gd = new Game().guild(), guild = gd.gd().find(r => r.member.some(d => d.id === player.id));
+      let gd = Terra.guild, guild = gd.gd().find(r => r.member.some(d => d.id === player.id));
 
       if(guild) return player.sendMessage({ translate: "system.guild.have" })
       if(gd.getGuildById(id).member.length + 1 > gd.getGuildById(id).maxMember) return player.sendMessage({ translate: "system.guild.full" })
@@ -232,7 +233,7 @@ const guildRequest = (player, { id, name }) => {
     .show(player)
     .then(s => {
       if(s.canceled || !s.selection || s.selection === 0) return;
-      let gd = new Game().guild(), guild = gd.gd().find(r => r.member.some(d => d.id === player.id));
+      let gd = Terra.guild, guild = gd.gd().find(r => r.member.some(d => d.id === player.id));
 
       if(guild) return player.sendMessage({ translate: "system.guild.have" })
 
@@ -269,14 +270,14 @@ const guildAcc = (player, { id, apply, select }) => {
 
       switch(e.selection) {
         case 0:
-          new Game().guild().rejectMemberGuild(id , apply[select].id);
+          Terra.guild.rejectMemberGuild(id , apply[select].id);
           player.sendMessage({ rawtext: [{ text: `${apply[select].username} ` },{ translate: "system.guild.rejected" }]})
           break;
         case 1:
-          if(new Game().guild().getGuildById(id).member.length + 1 > new Game().guild().getGuildById(id).maxMember)
+          if(Terra.guild.getGuildById(id).member.length + 1 > Terra.guild.getGuildById(id).maxMember)
             return player.sendMessage({ translate: "system.guild.full" });
 
-          new Game().guild().approveMemberGuild(id , apply[select]);
+          Terra.guild.approveMemberGuild(id , apply[select]);
           player.sendMessage({ rawtext: [{ text: `${apply[select].username} ` },{ translate: "system.guild.accepted" }]})
           break;
       };
@@ -317,12 +318,12 @@ const guildUser = (player, { member, id, select }) => {
   ui.show(player)
     .then(e => {
       if(e.canceled) return;
-      
-      switch(e.selection) {
-        case 0: guildMember(player, { member, id }); break;
-        case 1: guildRole(player, { member, id, select }); break;
-        case 2: guildKick(player, { member, id, select }); break;
-      };
+
+      [
+        guildMember,
+        guildRole,
+        guildKick
+      ][e.selection]?.(player, { member, id, select })
     })
 };
 
@@ -347,7 +348,7 @@ const guildRole = (player, { member, id, select }) => {
 
       let [roleId] = e.formValues;
 
-      new Game().guild().updateMemberGuild(id, player, roleType[roleId])
+      Terra.guild.updateMemberGuild(id, player, roleType[roleId])
       player.sendMessage({ rawtext: [{ text: `${member[select].username} ` },{ translate: "system.guild.role.updated" }]})
     })
 };
@@ -367,13 +368,13 @@ const guildKick = (player, { member, id, select }) => {
     .then(e => {
       if(e.canceled || !e.selection || e.selection === 0) return;
 
-      new Game().guild().removeMemberGuild(id. player.id)
+      Terra.guild.removeMemberGuild(id. player.id)
       player.sendMessage({ rawtext: [{ text: `${member[select].username} ` },{ translate: "system.guild.kicked" }]})
     })
 };
 
 const guildShop = (player) => {
-  let guild = new Game().guild().gd().find(e => e.member.some(r => r.id === player.id)),
+  let guild = Terra.guild.gd().find(e => e.member.some(r => r.id === player.id)),
     shop = jsonData.guildShop.filter(r => guild.act.lvl >= r.lvl),
     types = shop.reduce((all, c) => {
       if(!all.includes(c.type)) all.push(c.type)
@@ -440,7 +441,7 @@ const guildBuy = (player, { select, id, token, shop }) => {
 
       player.runCommand(`give @s ${stack.item} ${amount * stack.amount}`)
       player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${amount} ${itm} ` },{ translate: "system.buy2" },{ text: `${amount * stack.price} ` },{ translate: "guild.token" }]})
-      new Game().guild().minToken(id, stack.price*amount)
+      Terra.guild.minToken(id, stack.price*amount)
 
       guildShop(player)
     })
@@ -458,7 +459,7 @@ const guildBuyEnchant = (player, { amount, id, token, item, price, enchant }) =>
   }
 
   player.sendMessage({ rawtext: [{ translate: "system.buy" },{ text: `${amount} ${item} ` },{ translate: "system.buy2" },{ text: `${amount * price} ` },{ translate: "guild.token" }]})
-  new Game().guild().minToken(id, price*amount)
+  Terra.guild.minToken(id, price*amount)
 };
 
 export { guildUi, guildList };

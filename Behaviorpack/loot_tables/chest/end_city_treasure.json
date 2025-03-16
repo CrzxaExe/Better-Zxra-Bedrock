@@ -135,6 +135,16 @@
         },
         {
           "type": "item",
+          "name": "cz:quezn",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "cz:undying",
+          "weight": 1
+        },
+        {
+          "type": "item",
           "name": "minecraft:horsearmordiamond",
           "weight": 1
         },

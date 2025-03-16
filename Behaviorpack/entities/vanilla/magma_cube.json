@@ -21,7 +21,7 @@
           "value": 0.75
         },
         "minecraft:attack": {
-          "damage": 10
+          "damage": 5
         },
         "minecraft:loot": {
           "table": "loot_tables/entities/magma_cube.json"
@@ -40,7 +40,7 @@
           "value": 0.66
         },
         "minecraft:attack": {
-          "damage": 8
+          "damage": 3
         },
         "minecraft:loot": {
           "table": "loot_tables/entities/magma_cube.json"

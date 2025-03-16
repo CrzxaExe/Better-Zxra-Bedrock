@@ -34,6 +34,21 @@
           "weight": 5
         },
         {
+          "type": "item",
+          "name": "cz:cervant",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "cz:azyh",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "cz:bringer",
+          "weight": 1
+        },
+        {
           "type": "empty",
           "weight": 5
         }

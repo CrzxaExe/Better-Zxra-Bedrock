@@ -1,0 +1,20 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "cz:endless_to_ascend"
+    },
+    "tags": [
+      "forger"
+    ],
+    "ingredients": [
+      {
+        "item": "cz:endless"
+      }
+    ],
+    "result": {
+      "item": "cz:unique_ascend"
+    },
+    "group": "unique_ascend"
+  }
+}

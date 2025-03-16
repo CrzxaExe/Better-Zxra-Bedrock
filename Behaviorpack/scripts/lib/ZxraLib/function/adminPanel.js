@@ -5,7 +5,8 @@ import {
   MessageFormData,
 } from "@minecraft/server-ui";
 import { setOptions } from "../../../main.js";
-import { Game, mergeObject, Specialist } from "../module.js";
+import { mergeObject, Specialist, runeAdmin } from "../module.js";
+import { Terra } from "../class.js";
 
 const adminPanel = (player, lib) => {
   let ui = new ActionFormData()
@@ -18,31 +19,22 @@ const adminPanel = (player, lib) => {
     .button("Voxn")
     .button({ translate: "system.reset.leaderboard" })
     .button({ translate: "system.announce" })
+    .button({ translate: "system.rune.add" })
 
     .show(player)
     .then((e) => {
       if (e.canceled) return;
 
-      switch (e.selection) {
-        case 0:
-          settingPanel(player, lib);
-          break;
-        case 1:
-          economy(player, lib);
-          break;
-        case 2:
-          guildLvl(player, lib);
-          break;
-        case 3:
-          guildToken(player, lib);
-          break;
-        case 4:
-          voxn(player, lib);
-          break;
-        case 5:
-          resetLb(player, lib);
-          break;
-      }
+      [
+        settingPanel,
+        economy,
+        guildLvl,
+        guildToken,
+        voxn,
+        resetLb,
+        announcePanel,
+        runeAdmin
+      ][e.selection]?.(player, lib);
     });
 };
 
@@ -185,7 +177,7 @@ const settingPanel = (player, lib) => {
 
         setOptions(mergeObject(lib.options, newOptions));
 
-        new Game().setSetting(mergeObject(lib.options, newOptions));
+        Terra.setSetting(mergeObject(lib.options, newOptions));
         player.sendMessage({ translate: "system.settings.update" });
       });
 };
@@ -203,7 +195,7 @@ const resetLb = (player, lib) => {
         return adminPanel(player, lib);
 
       player.sendMessage({ translate: "system.reseted.leaderboard" });
-      new Game().leaderboard().resetLb();
+      Terra.leaderboard().resetLb();
     });
 };
 
@@ -231,17 +223,11 @@ const economy = (player, lib) => {
           return player.sendMessage({ translate: "system.invalidPlayer" });
         let sp = new Specialist(plyr);
 
-        switch (type) {
-          case 0:
-            sp.addMoney(value);
-            break;
-          case 1:
-            sp.takeMoney(value);
-            break;
-          case 2:
-            sp.setMoney(value);
-            break;
-        }
+        [
+          sp.addMoney,
+          sp.takeMoney,
+          sp.setMoney,
+        ][type]?.(value)
       });
 };
 
@@ -284,7 +270,7 @@ const voxn = (player, lib) => {
 };
 
 const guildToken = (player, lib) => {
-  let guilds = new Game().guild().gd();
+  let guilds = Terra.guild.gd();
   let ui = new ModalFormData()
     .title({ translate: "system.guildToken" })
     .dropdown({ translate: "system.method.token" }, [
@@ -302,24 +288,23 @@ const guildToken = (player, lib) => {
       if (e.canceled) return adminPanel(player, lib);
 
       let [type, id, amount] = e.formValues;
-      if (!id) return;
 
       switch (type) {
         case 0:
-          new Game().guild().addToken(guilds[id].id, amount);
+          Terra.guild.addToken(guilds[id].id, parseInt(amount));
           break;
         case 1:
-          new Game().guild().minToken(guilds[id].id, amount);
+          Terra.guild.minToken(guilds[id].id, parseInt(amount));
           break;
         case 2:
-          new Game().guild().setToken(guilds[id].id, amount);
+          Terra.guild.setToken(guilds[id].id, parseInt(amount));
           break;
       }
     });
 };
 
 const guildLvl = (player, lib) => {
-  let guilds = new Game().guild().gd();
+  let guilds = Terra.guild.gd();
   let ui = new ModalFormData()
     .title({ translate: "system.guildLvl" })
     .dropdown({ translate: "system.method.gdLvl" }, [
@@ -337,19 +322,18 @@ const guildLvl = (player, lib) => {
       if (e.canceled) return adminPanel(player, lib);
 
       let [type, id, amount] = e.formValues;
-      if (!id) return;
 
-      amount = Number(amount);
+      amount = parseInt(amount);
 
       switch (type) {
         case 0:
-          new Game().guild().addLvl(guilds[id].id, amount);
+          Terra.guild.addLvl(guilds[id].id, amount);
           break;
         case 1:
-          new Game().guild().minLvl(guilds[id].id, amount);
+          Terra.guild.minLvl(guilds[id].id, amount);
           break;
         case 2:
-          new Game().guild().setLvl(guilds[id].id, amount);
+          Terra.guild.setLvl(guilds[id].id, amount);
           break;
       }
     });

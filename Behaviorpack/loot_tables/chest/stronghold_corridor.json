@@ -179,6 +179,31 @@
         },
         {
           "type": "item",
+          "name": "cz:bringer",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "cz:cenryter",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "cz:harmist_flute",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "cz:hyrant",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "cz:harmony",
+          "weight": 2
+        },
+        {
+          "type": "item",
           "name": "minecraft:saddle",
           "weight": 5
         },

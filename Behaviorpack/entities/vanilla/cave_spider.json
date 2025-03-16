@@ -182,23 +182,23 @@
       },
       "minecraft:spider_poison_easy": {
         "minecraft:attack": {
-          "damage": 6,
+          "damage": 3,
           "effect_name": "poison",
           "effect_duration": 2
         }
       },
       "minecraft:spider_poison_normal": {
         "minecraft:attack": {
-          "damage": 8,
+          "damage": 5,
           "effect_name": "poison",
-          "effect_duration": 9
+          "effect_duration": 5
         }
       },
       "minecraft:spider_poison_hard": {
         "minecraft:attack": {
-          "damage": 10,
+          "damage": 6,
           "effect_name": "poison",
-          "effect_duration": 17
+          "effect_duration": 8
         }
       }
     },
@@ -298,7 +298,7 @@
       "minecraft:damage_sensor": {
         "triggers": [
           {
-            "damage_modifier": -3,
+            "damage_modifier": -1,
             "on_damage": {
               "filters": {
                 "any_of": [

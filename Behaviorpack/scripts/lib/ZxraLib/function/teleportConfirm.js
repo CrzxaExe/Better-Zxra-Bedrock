@@ -37,8 +37,8 @@ export const teleportConfirm = (player, loc, text, item) => {
             loc.y
           } ${loc.z}`
         ]);
-        sp.addEffect([{ name: "blindness", duration: 60, lvl: 1 }]);
-        hp.setCurrentValue(Math.floor(hp.currentValue * 0.7));
+        sp.addEffect([{ name: "blindness", duration: 10, lvl: 1 }]);
+        hp.setCurrentValue(Math.floor(hp.currentValue * 0.5));
       }, 80);
     });
 };

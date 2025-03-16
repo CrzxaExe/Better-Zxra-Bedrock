@@ -31,7 +31,7 @@
         "minecraft:behavior.ranged_attack": {
           "priority": 4,
           "attack_interval_min": 1,
-          "attack_interval_max": 1,
+          "attack_interval_max": 2,
           "attack_radius": 16
         },
         "minecraft:shooter": {
@@ -58,7 +58,7 @@
           "track_target": true
         },
         "minecraft:attack": {
-          "damage": 12
+          "damage": 6
         },
         "minecraft:environment_sensor": {
           "triggers": {
@@ -378,7 +378,7 @@
             "damage_multiplier": 1.2
           },
           {
-            "damage_modifier": -5,
+            "damage_modifier": -3,
             "on_damage": {
               "filters": {
                 "any_of": [

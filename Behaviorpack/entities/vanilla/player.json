@@ -61,13 +61,14 @@
         "minecraft:timer": {
           "time": 5,
           "time_down_event": {
-            "event": "cz:clear"
+            "event": "cz:clear_with_shield",
+            "target": "self"
           }
         },
         "minecraft:movement": {
           "value": 0.1
         },
-        "minecraft:variant": {
+        "minecraft:skin_id": {
           "value": 1
         }
       },
@@ -208,6 +209,9 @@
               "event": "cz:shield_break"
             }
           }
+        },
+        "minecraft:skin_id": {
+          "value": 2
         }
       },
       "shield_magic_1": {
@@ -271,6 +275,42 @@
       "health4": {
         "minecraft:health": {
           "max": 28
+        }
+      },
+      "no_variant": {
+        "minecraft:skin_id": {
+          "value": 0
+        }
+      },
+      "mudrock_shield": {
+        "minecraft:skin_id": {
+          "value": 3
+        },
+        "minecraft:damage_sensor": {
+          "triggers": {
+            "deals_damage": false,
+            "on_damage": {
+              "event": "cz:mudrock_shield_break",
+              "filters": {
+                "test": "has_damage",
+                "operator": "!=",
+                "value": "none"
+              }
+            }
+          }
+        },
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "test": "has_equipment",
+                "domain": "hand",
+                "operator": "!=",
+                "value": "cz:mudrock"
+              },
+              "event": "cz:shield_break"
+            }
+          ]
         }
       }
     },
@@ -446,9 +486,6 @@
             "event": "cz:stun_reduce"
           }
         ]
-      },
-      "minecraft:variant": {
-        "value": 0
       }
     },
     "events": {
@@ -489,6 +526,11 @@
         "add": {
           "component_groups": [
             "liberator"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "no_variant"
           ]
         }
       },
@@ -540,6 +582,29 @@
           ]
         }
       },
+      "cz:clear_with_shield": {
+        "sequence": [
+          {
+            "remove": {
+              "component_groups": [
+                "liberator",
+                "silent_20",
+                "endless_skill1",
+                "lectaze_skill1",
+                "lectaze_ult",
+                "lectaze_slash",
+                "summon_kyles"
+              ]
+            }
+          },
+          {
+            "trigger": {
+              "event": "cz:reset_variant",
+              "target": "self"
+            }
+          }
+        ]
+      },
       "cz:stun": {
         "queue_command": {
           "command": [
@@ -571,13 +636,40 @@
           "command": [
             "say test"
           ]
+        },
+        "add": {
+          "component_groups": [
+            "no_variant"
+          ]
+        }
+      },
+      "cz:reset_variant": {
+        "add": {
+          "component_groups": [
+            "no_variant"
+          ]
         }
       },
       "cz:shield_break": {
         "remove": {
           "component_groups": [
             "shield_1",
-            "shield_magic_1"
+            "shield_magic_1",
+            "mudrock_shield"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "no_variant"
+          ]
+        }
+      },
+      "cz:mudrock_shield_break": {
+        "queue_command": {
+          "command": [
+            "scriptevent cz:min_lvl_status mudrock_shield 1",
+            "scriptevent cz:heal %user-hp/5",
+            "particle cz:mudrock_break ~~~"
           ]
         }
       },
@@ -585,6 +677,23 @@
         "add": {
           "component_groups": [
             "shield_1"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "no_variant"
+          ]
+        }
+      },
+      "cz:mudrock_shield": {
+        "add": {
+          "component_groups": [
+            "mudrock_shield"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "no_variant"
           ]
         }
       },

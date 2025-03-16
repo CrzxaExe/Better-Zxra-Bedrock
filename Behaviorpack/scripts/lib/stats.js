@@ -155,7 +155,7 @@ export const harmist_flute = [
   "§rPasif: §3[Bad Note]",
   "§rSkill:",
   "§r[1]§3 No Sneak",
-  "§r[2]§3"
+  "§r[2]§3 Sneak"
 ]
 
 export const harmony = [
@@ -238,11 +238,13 @@ export const lighter = [
 export const mudrock = [
   "§rType §dHammer",
   "§rRarity §dUnique",
-  "Tag: DPS, Survival",
+  "Tag: DPS, Survival, AOE",
   " ",
-  "§rPasif: §3[]§r, §3[]",
+  "§rPasif:",
+  "§r§3[Ward of the Fertile Soil]",
+  "§r§3[Unshakable Solidarity]",
   "§rSkill:",
-  "§r[1]§3",
+  "§r[1]§3 No Sneak",
   "§r[2]§3",
   "§r[3]§3",
   "§r[Special]§3"

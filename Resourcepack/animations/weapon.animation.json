@@ -686,6 +686,45 @@
           ]
         }
       }
+    },
+    "animation.shields": {
+      "loop": true,
+      "bones": {
+        "queznShield": {
+          "rotation": [
+            "0 - v.sneak * 5",
+            "-q.body_y_rotation + 0.35 * q.time_stamp",
+            0
+          ],
+          "position": [
+            0,
+            "Math.cos(q.time_stamp) * 4 + 6",
+            0
+          ],
+          "scale": [
+            1.6,
+            1.6,
+            1.6
+          ]
+        },
+        "mudrockShield": {
+          "rotation": [
+            0,
+            "-q.body_y_rotation",
+            0
+          ],
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            "1.2 + Math.cos(q.time_stamp) * 0.4",
+            "1.2 + Math.cos(q.time_stamp) * 0.4",
+            "1.2 + Math.cos(q.time_stamp) * 0.4"
+          ]
+        }
+      }
     }
   }
 }

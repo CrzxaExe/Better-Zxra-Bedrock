@@ -1,21 +1,21 @@
 {
-  "format_version": "1.20.20",
+  "format_version": "1.21.60",
   "minecraft:item": {
     "description": {
       "identifier": "cz:ascended_minarite_boots",
       "menu_category": {
         "category": "equipment",
-        "group": "itemGroup.name.boots",
+        "group": "minecraft:itemGroup.name.boots",
         "is_hidden_in_commands": false
       }
     },
     "components": {
       "minecraft:icon": {
-        "texture": "minarite_boots_asc"
+        "textures": { "default": "minarite_boots_asc" }
       },
       "minecraft:max_stack_size": 1,
       "minecraft:enchantable": {
-        "value": 10,
+        "value": 16,
         "slot": "armor_feet"
       },
       "minecraft:durability": {
@@ -35,12 +35,9 @@
           }
         ]
       },
-      "minecraft:mining_speed": 1,
-      "minecraft:damage": 3,
       "minecraft:wearable": {
         "slot": "slot.armor.feet",
-        "protection": 8,
-        "dispensable": true
+        "protection": 8
       },
       "minecraft:display_name": {
         "value": "item.ascended_minarite_boots.name"

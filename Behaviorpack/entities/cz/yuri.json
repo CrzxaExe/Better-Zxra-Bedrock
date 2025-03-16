@@ -26,7 +26,7 @@
         "height": 2.01
       },
       "minecraft:movement": {
-        "value": 0.21
+        "value": 0.17
       },
       "minecraft:jump.static": {},
       "minecraft:behavior.random_stroll": {
@@ -316,13 +316,13 @@
       "cz:follow_owner": {
         "minecraft:behavior.follow_owner": {
           "priority": 3,
-          "speed_multiplier": 1.4,
-          "start_distance": 5,
+          "speed_multiplier": 1.35,
+          "start_distance": 7,
           "stop_distance": 3
         },
         "minecraft:is_tamed": {},
         "minecraft:movement": {
-          "value": 0.23
+          "value": 0.17
         },
         "minecraft:navigation.walk": {
           "can_jump": true,
@@ -358,7 +358,7 @@
       },
       "cz:walk_idle": {
         "minecraft:movement": {
-          "value": 0.19
+          "value": 0.17
         },
         "minecraft:navigation.walk": {
           "can_jump": true,

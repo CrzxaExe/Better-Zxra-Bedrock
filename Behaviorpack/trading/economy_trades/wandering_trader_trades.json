@@ -406,7 +406,7 @@
           ]
         },
         {
-          "num_to_select": 2,
+          "num_to_select": 3,
           "trades": [
             {
               "max_uses": 8,
@@ -512,6 +512,95 @@
               "gives": [
                 {
                   "item": "cz:reaper"
+                }
+              ]
+            },
+            {
+              "max_uses": 1,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 24
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:greatsword"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "num_to_select": 1,
+          "trades": [
+            {
+              "max_uses": 1,
+              "wants": [
+                {
+                  "item": "cz:legend_ascend",
+                  "quantity": 10
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:azyh"
+                }
+              ]
+            },
+            {
+              "max_uses": 1,
+              "wants": [
+                {
+                  "item": "cz:legend_ascend",
+                  "quantity": 10
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:musha"
+                }
+              ]
+            },
+            {
+              "max_uses": 1,
+              "wants": [
+                {
+                  "item": "cz:legend_ascend",
+                  "quantity": 10
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:vitage"
+                }
+              ]
+            },
+            {
+              "max_uses": 1,
+              "wants": [
+                {
+                  "item": "cz:legend_ascend",
+                  "quantity": 10
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:hyrant"
+                }
+              ]
+            },
+            {
+              "max_uses": 1,
+              "wants": [
+                {
+                  "item": "cz:legend_ascend",
+                  "quantity": 10
+                }
+              ],
+              "gives": [
+                {
+                  "item": "cz:harmony"
                 }
               ]
             }

@@ -60,9 +60,9 @@
         },
         "minecraft:mob_effect": {
           "effect_range": 32,
-          "effect_time": 5,
+          "effect_time": 3,
           "mob_effect": "blindness",
-          "cooldown_time": 3,
+          "cooldown_time": 5,
           "entity_filter": {
             "all_of": [
               {
@@ -82,7 +82,7 @@
         "minecraft:damage_sensor": {
           "triggers": {
             "cause": "entity_attack",
-            "damage_multiplier": 0.8
+            "damage_multiplier": 0.9
           }
         }
       }
@@ -134,7 +134,7 @@
         ]
       },
       "minecraft:attack": {
-        "damage": 19
+        "damage": 10
       },
       "minecraft:follow_range": {
         "value": 64,

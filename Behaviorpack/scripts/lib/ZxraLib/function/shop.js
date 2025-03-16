@@ -1,6 +1,7 @@
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import { system } from "@minecraft/server";
-import { Specialist, Entity, npcShop, npcShopDialog, runPlayerDialog, Game } from "../module.js";
+import { Specialist, Entity, npcShop, npcShopDialog, runPlayerDialog } from "../module.js";
+import { Terra } from "../class.js";
 
 const askDialog = (player, type) => {
   runPlayerDialog(player, npcShopDialog[type][Math.floor(Math.random() * npcShopDialog[type].length)], 0);
@@ -62,7 +63,7 @@ const buyItem = (player, buy, type, rn) => {
 
 const sellItem = (player, type, rn) => {
   const shop = npcShop[type].sell,
-    guild = new Game().guild().getTeammate(player.id),
+    guild = Terra.guild.getTeammate(player.id),
     sp = new Specialist(player);
   const container = sp.getItems()?.filter(e => shop.map(r => r.name).includes(e.name))
     .sort((a,b) => a.name.localeCompare(b.name));

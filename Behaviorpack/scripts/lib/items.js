@@ -1,6 +1,9 @@
 import { world, system, ItemStack } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { Game, Quest, Specialist, guildUi, adminPanel, questPanel, shop, SpecialItem } from "./ZxraLib/module.js";
+import { Quest, Specialist, guildUi, adminPanel, questPanel, shop, SpecialItem, runePanel, formatName, gachaPanel } from "./ZxraLib/module.js";
+import {
+  Terra
+} from "./ZxraLib/class.js";
 import * as data from "./data.js"
 
 import "./item/vial.js";
@@ -27,21 +30,20 @@ let shopPanel = (plyr, lib) => {
 	// Showing Shop panel and getting the res
 	hpk.show(plyr).then(r => {
 		if(r.canceled) return
-		let menu = "blocks",
-          bol = new ActionFormData()
+		const bol = new ActionFormData()
             .title("cz:shop")
             .body({ translate: "cz.shop.body" })
 
 		// Get menu
-		switch(r.selection) {
-			case 0: menu = "blocks"; break;
-			case 1: menu = "crops"; break;
-			case 2: menu = "foods"; break;
-			case 3: menu = "materials"; break;
-			case 4: menu = "minerals"; break;
-			case 5: menu = "redstone"; break;
-			case 6: menu = "special"; break;
-		}
+		const menu = [
+		  "blocks",
+		  "crops",
+		  "foods",
+		  "materials",
+		  "minerals",
+		  "redstone",
+		  "special"
+		][r.selection]
 
 		// Button item factory
 		shop[menu].forEach(i => {
@@ -119,7 +121,7 @@ let shopPanel = (plyr, lib) => {
 		switch(r.selection) {
 			case 0: data.clearData(); player.sendMessage({ translate: "system.reset.user" }); break;
 			case 1: transferPanel(player); break;
-			case 2: world.getDimension(player.dimension.id).runCommand("reload"); break;
+			case 2: player.dimension.runCommand("reload"); break;
 			case 3: data.resetMoney(); player.sendMessage({ translate: "system.reset.bal" }); break;
 			case 4: data.resetAllStamina(); player.sendMessage({ translate: "system.reset.stamina" }); break;
 			case 5: data.temp().reset(); player.sendMessage({ translate: "system.reset.temp" }); break;
@@ -145,47 +147,53 @@ let shopPanel = (plyr, lib) => {
 
 		let [user, amount] = r.formValues, target = players[user]
 		if(!target || target == "None") return player.sendMessage({ translate: "system.invalidPlayer.name" })
-		data.transferMoney(new Game().getPlayerName(target), Number(amount))
+		data.transferMoney(Terra.getPlayerName(target), Number(amount))
 	})
 }
 
 SpecialItem.addItem("stats", (player, item, lib) => {
-	let data = new Specialist(player), game = new Game(), guild = game.guild().gd().find(e => e.member.some(r => r.id === player.id));
+	let data = new Specialist(player), guild = Terra.guild.gd().find(e => e.member.some(r => r.id === player.id));
 	let specialist = data.getData();
 
     let stats = new ActionFormData()
       .title("cz:user")
       .body(`${player.name}
-Lvl ${specialist.specialist.lvl} - ${specialist.specialist.xp.toFixed(1)}Xp\n
-Guild ${guild ? "["+guild.name+"§r]\nLvl "+guild.act.lvl+" | "+guild.act.xp+" XP" : "[None]"}\n
-Bal $${specialist.money.toFixed(2)}
-Voxn ${specialist.voxn}
+Lvl §s${specialist.specialist.lvl}§f | §e${specialist.specialist.xp.toFixed(1)}Xp§f\n
+Rune [${formatName(data.rune().getRune().usedRune)}]\n
+Guild ${guild ? "["+guild.name+"§r]\nLvl §s"+guild.act.lvl+"§f | §e"+guild.act.xp+" XP§f" : "[None]"}\n
+§e$${specialist.money.toFixed(1)}§f | §b${specialist.voxn} Voxn§f
 Rep ${specialist.reputation}
-Stamina ${(specialist.stamina.value.toFixed(1))}/${specialist.stamina.max + specialist.stamina.add}
-Thirst ${Number(specialist.thirst.value).toFixed(2)}/${specialist.thirst.max}%
-Dirty ${specialist.dirty}%
+§eStamina(S) ${(specialist.stamina.value.toFixed(1))} | ${Math.round(specialist.stamina.value / (specialist.stamina.max + specialist.stamina.add) * 100).toFixed(0)}%%§f
+§bThirst(T) ${Number(specialist.thirst.value).toFixed(2)} | ${Math.round(specialist.thirst.value / specialist.thirst.max * 100).toFixed(0)}%%§f
 
-Active Player ${game.getOnlineCount()}
-Day ${world.getDay()}
+Active Player ${Terra.getOnlineCount()} | Day ${world.getDay()}
       `.trim())
-      .button({ translate: "cz.shop" }, "textures/ui/store_cz_icon")
-      .button({ translate: "cz.leaderboard" }, "textures/items/zxra_book")
-      .button({ translate: "cz.quest" }, "textures/items/book_writable")
-      .button({ translate: "cz.guild" }, "textures/items/iron_sword")
-      .button({ translate: "cz.user" }, "textures/ui/icon_steve")
+      .button({ translate: "cz.shop" }, "textures/cz/icon/shop")
+      .button({ translate: "cz.guild" }, "textures/cz/icon/guild")
+      .button({ translate: "cz.rune" }, "textures/cz/icon/rune")
+      .button({ translate: "cz.leaderboard" }, "textures/cz/icon/leaderboard")
+      .button({ translate: "cz.gacha" }, "textures/cz/icon/gacha")
+      .button({ translate: "cz.quest" }, "textures/cz/icon/quest")
+      .button({ translate: "cz.user" }, "textures/cz/icon/user")
+      .button({ translate: "cz.redeem" }, "textures/cz/icon/redeem")
+      .button({ translate: "cz.wiki" }, "textures/cz/icon/wiki")
 
     if(player.hasTag("Admin"))
-      stats.button({ translate: "cz.adminPanel" }, "textures/items/stats")
+      stats.button({ translate: "cz.adminPanel" }, "textures/cz/icon/admin")
 
     stats.show(player).then(r => {
     	if(r.canceled) return
         switch(r.selection) {
         	case 0: shopPanel(player, lib); break;
-        	case 1: game.leaderboard().getLeaderboard(player); break;
-            case 2: questPanel(player); break;
-            case 3: guildUi(player); break;
-            case 4: userPanel(player); break;
-            case 5: adminPanel(player, lib); break;
+        	case 1: guildUi(player); break;
+            case 2: runePanel(player); break;
+            case 3: game.leaderboard().getLeaderboard(player);  break;
+            case 4: gachaPanel(player); break;
+            case 5: questPanel(player); break;
+            case 6: userPanel(player); break;
+            case 7: player.sendMessage({ translate: "system.comingSoon", with: ["Redeem"] }); break;
+            case 8: player.sendMessage({ translate: "system.comingSoon", with: ["Wiki"] }); break;
+            case 9: adminPanel(player, lib); break;
         }
     })
 })

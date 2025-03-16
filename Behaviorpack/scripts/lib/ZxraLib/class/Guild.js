@@ -2,11 +2,14 @@ import { uniqueId, mergeObject, leveling, Specialist } from "../module.js";
 import * as jsonData from "../../data.js";
 
 class Guild {
-  constructor(cls) {
-    if(!cls) throw new Error("Guild must have Game Class");
-    this.guild = cls;
-    this.lib = jsonData.guild
-  };
+  constructor() {
+    this.guild = null;
+  }
+
+  setup(game) {
+    if(this.guild) return;
+    this.guild = game;
+  }
 
   gd() {
     //console.warn(JSON.stringify(this.getData("guilds")))
@@ -114,8 +117,24 @@ class Guild {
 
     if(apply === -1) return;
     
-    this.addMemberGuild(id, player)
+    this.addMemberFromApply(id, {
+      id: player.id,
+      username: player.name,
+      role: "member"
+    }, player)
     this.rejectMemberGuild(id, player)
+  };
+
+  addMemberFromApply(id, { userId, username, role }, player) {
+    let data = this.gd(), find = data.findIndex(e => e.id === id);
+
+    if(find === -1) return;
+    let apply = data.apply.findIndex(e => e.id === userId)
+    
+    if(data.member.length + 1 > data.maxMember) {
+      if(player) player.sendMessage({ translate: "system.guild.full" });
+      return;
+    }
   };
 
   applyMemberGuild(id, player) {

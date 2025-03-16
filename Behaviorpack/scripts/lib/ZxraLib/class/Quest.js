@@ -1,5 +1,6 @@
 import { world, ItemStack, system } from "@minecraft/server";
-import { Game, Specialist } from "../module.js";
+import { Specialist } from "../module.js";
+import { Terra } from "../class.js";
 import * as data from "../../data.js";
 
 export class Quest {
@@ -102,10 +103,10 @@ export class Quest {
 			let index = i.type.split("/")
 			if(index[0] !== "item") {
 				index[0] === "cash" ?
-                  text += `\n> ${i.type.charAt(0).toUpperCase() + i.type.slice(1)} $${i.amount} ${new Game().guild().gd().find(e => e.member.some(r => r.id === this.player.id)) ? "+$"+Number(i.amount/5).toFixed(1) : ""}` :
+                  text += `\n> ${i.type.charAt(0).toUpperCase() + i.type.slice(1)} $${i.amount} ${Terra.guild.gd().find(e => e.member.some(r => r.id === this.player.id)) ? "+$"+Number(i.amount/4).toFixed(1) : ""}` :
                   index[0] === "token" ?
-                    new Game().guild().gd().find(e => e.member.some(r => r.id === this.player.id)) ?
-                      text += `\n> Token ${i.amount}` : text += "" :
+                    Terra.guild.gd().find(e => e.member.some(r => r.id === this.player.id)) ?
+                      text += `\n> Token ${i.amount*2}` : text += "" :
                       text += `\n> ${i.type.charAt(0).toUpperCase() + i.type.slice(1)} ${i.amount}`;
 			} else {
 				let item = index[1].replace("cz:", "").replace(/_/gi, " ")
@@ -121,7 +122,7 @@ export class Quest {
 			switch(ins[0]) {
 				case "cash":
 				  let gets = i.amount;
-				  if(new Game().guild().gd().find(e => e.member.some(r => r.id === this.player.id))) gets += i.amount/5;
+				  if(Terra.guild.gd().find(e => e.member.some(r => r.id === this.player.id))) gets += i.amount/4;
                   this.data.addMoney(gets);
                   break;
 				case "item":
@@ -130,10 +131,10 @@ export class Quest {
                   this.player.getComponent("inventory").container.addItem(newItem)
                   break;
                 case "token":
-                  let guild = new Game().guild().gd().find(e => e.member.some(r => r.id === this.player.id));
+                  let guild = Terra.guild.gd().find(e => e.member.some(r => r.id === this.player.id));
                   if(!guild) return;
-                  new Game().guild().addToken(guild.id, i.amount)
-                  new Game().guild().addXp(guild.id, i.amount*2)
+                  Terra.guild.addToken(guild.id, i.amount*2)
+                  Terra.guild.addXp(guild.id, i.amount*2.5)
                   break;
                 case "voxn": this.data.addVoxn(i.amount); break;
                 case "rep": this.data.addRep(i.amount); break;

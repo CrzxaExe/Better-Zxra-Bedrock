@@ -1,5 +1,8 @@
 import { system, world, ItemStack } from "@minecraft/server";
-import { Command, Ench, Game, runDialog, storyDialog, Items, Specialist } from "./lib/ZxraLib/module.js";
+import { Command, Ench, runDialog, storyDialog, Items, Specialist, runeData } from "./lib/ZxraLib/module.js";
+import {
+  Terra
+} from "./lib/ZxraLib/class.js";
 
 Command.add("kyle", async (player, lib) => {
   if (player.name !== "CrzxaExe3") return;
@@ -209,7 +212,7 @@ Command.addCmd(
   "time",
   (player, { msg, rawMsg }) => {
     if (!player) return;
-    let gm = new Game(world),
+    let gm = Terra,
       time = msg[1] || 0;
     try {
       system.run(() => {
@@ -262,7 +265,7 @@ Command.addCmd(
   "give",
   (player, { msg, rawMsg }) => {
     if (!player) return;
-    let gm = new Game(),
+    let gm = Terra,
       target = msg[1] || player.name,
       items = rawMsg
         .split(" ")
@@ -352,7 +355,7 @@ Command.addCmd(
 Command.addCmd(
   "fchat",
   (player, { msg, functions }) => {
-    const target = new Game().getPlayerName(msg[1]);
+    const target = Terra.getPlayerName(msg[1]);
 
     if (!target)
       return player.sendMessage({ translate: "system.invalidPlayer" });
@@ -388,7 +391,7 @@ Command.addCmd(
 Command.addCmd(
   "pp",
   (player, { msg }) => {
-    const target = new Game().getPlayerName(msg[1]);
+    const target = Terra.getPlayerName(msg[1]);
 
     if (!target)
       return player.sendMessage({ translate: "system.invalidPlayer" });
@@ -407,13 +410,13 @@ Command.addCmd(
 Command.addCmd(
   "gc",
   (player, { msg }) => {
-    const guild = new Game().guild().gd().find(e => e.member.some(r => r.id == player.id));
+    const guild = Terra.guild.gd().find(e => e.member.some(r => r.id == player.id));
 
     if(!guild) return;
 
     system.run(() => {
       for(let mem of guild.member) {
-        let member = new Game().getPlayerById(mem.id);
+        let member = Terra.getPlayerById(mem.id);
         
         if(!member) continue;
         member.sendMessage({
@@ -463,4 +466,27 @@ Command.addCmd(
     player.sendMessage({ translate: "system.item.clone", with: [String(msg[1])] })
   },
   { des: "cmd.cloneitem", admin: true }
+)
+
+Command.addCmd(
+  "rune",
+  (player, { msg }) => {
+    if(!(Object.keys(runeData).includes(msg[1]))) return;
+
+    const [l, rune, name = "self"] = msg;
+
+    switch(name) {
+      case "@a":
+        
+        break;
+      case "self":
+        new Specialist(player).rune().addRune({ runes: msg[1] });
+        break;
+      default: {
+        const plyr = Terra.getPlayerName(name);
+        new Specialist(plyr).rune().addRune({ runes: msg[1] });
+      }
+    }
+  },
+  { des: "cmd.rune", admin: true }
 )

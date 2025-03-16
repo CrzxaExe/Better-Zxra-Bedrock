@@ -362,14 +362,14 @@
         "default": {
           "transitions": [
             {
-              "moving": "q.ground_speed >= 0.17 && query.modified_move_speed < 0.75"
+              "moving": "q.ground_speed >= 0.08 && query.modified_move_speed < 0.75"
             },
             {
               "running": "q.ground_speed >= 0.17 && query.modified_move_speed >= 0.75"
             }
           ],
           "animations": [
-            "bob"
+            "yuri_bob"
           ],
           "blend_transition": 0.1
         },
@@ -379,7 +379,7 @@
           ],
           "transitions": [
             {
-              "default": "q.ground_speed < 0.17"
+              "default": "q.ground_speed < 0.08"
             },
             {
               "running": "query.modified_move_speed >= 0.75"
@@ -393,7 +393,7 @@
           ],
           "transitions": [
             {
-              "default": "q.ground_speed < 0.17"
+              "default": "q.ground_speed < 0.08"
             },
             {
               "moving": "query.modified_move_speed < 0.75"

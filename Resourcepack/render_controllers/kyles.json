@@ -33,6 +33,12 @@
           "zavarm2": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
         },
         {
+          "crzxMask": "q.get_equipped_item_name=='kyles' && q.health < 10 && !v.is_first_person"
+        },
+        {
+          "crzxMask2": "q.get_equipped_item_name=='kyles' && q.health < 10 && !v.is_first_person"
+        },
+        {
           "wing": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
         },
         {
@@ -67,6 +73,75 @@
         }
       ]
     },
+    "controller.render.sepen": {
+      "textures": [
+        "Texture.sepen"
+      ],
+      "is_hurt_color": {},
+      "on_fire_color": {},
+      "geometry": "Geometry.sepen",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "part_visibility": [
+        {
+          "sepenHorn": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "sepenLeftHorn": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "sepenRightHorn": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "sepenRightArmHorn": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "root": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "waist": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "body": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "head": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "hat": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "jacket": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "leftLeg": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "rightLeg": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "leftPants": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "rightPants": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "leftArm": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "rightArm": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "leftSleeve": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        },
+        {
+          "rightSleeve": "q.get_equipped_item_name=='kyles' && !v.is_first_person"
+        }
+      ]
+    },
     "controller.render.kyle_entity": {
       "textures": [
         "Texture.default"
@@ -79,6 +154,37 @@
           "*": "Material.default"
         }
       ]
+    },
+    "controller.render.player.shield": {
+      "textures": [
+        "Array.texture[q.skin_id]"
+      ],
+      "is_hurt_color": {},
+      "on_fire_color": {},
+      "geometry": "Array.geometry[q.skin_id]",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "arrays": {
+        "textures": {
+          "Array.texture": [
+            "Texture.cape",
+            "Texture.liberator_crown",
+            "Texture.quezn_shield",
+            "Texture.mudrock_shield"
+          ]
+        },
+        "geometries": {
+          "Array.geometry": [
+            "Geometry.default",
+            "Geometry.liberator_crown",
+            "Geometry.quezn_shield",
+            "Geometry.mudrock_shield"
+          ]
+        }
+      }
     },
     "controller.render.particles": {
       "textures": [

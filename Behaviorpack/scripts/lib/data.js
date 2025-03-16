@@ -8,10 +8,10 @@ export let setting = {
   staminaCooldown: true,
   staminaExhaust: 3,
   staminaRecovery: 1.5,
-  staminaAction: 4,
+  staminaAction: 3,
   staminaHurt: 3,
-  staminaRun: 1.0,
-  thirstDown: 0.003,
+  staminaRun: 0.5,
+  thirstDown: 0.001,
   customChat: true,
   customChatPrefix: "%guild%name > %msg",
   shopMultiplier: 1.0,
@@ -126,7 +126,7 @@ export const guildShop = [
   { item: "golden_apple", type: "foods", amount: 6, price: 20, lvl: 0, img: "textures/items/apple_golden" },
   { item: "cz:mina_ingot", type: "minerals", amount: 4, price: 25, lvl: 3, img: "textures/items/mina/ingot" }
   { item: "cz:plasma_ingot", type: "minerals", amount: 4, price: 12, lvl: 2, img: "textures/items/plasma/ingot" },
-  { item: "shulker_shell", type: "materials", amount: 6, price: 25, lvl: 7, img: "textures/items/shulker_shell" },
+  { item: "shulker_shell", type: "materials", amount: 4, price: 30, lvl: 7, img: "textures/items/shulker_shell" },
   { item: "totem_of_undying", type: "special",  amount: 2, price: 19, lvl: 0, img: "textures/items/totem" },
   { item: "cz:quest_scroll", type: "special", amount: 1, price: 5, lvl: 0, img: "textures/items/quest_scroll" }
 ]
@@ -142,7 +142,7 @@ export let blockData = {
   }
 }
 
-export let npcFile = {
+export const npcFile = {
   yuri: {
     mood: 0,
     emotion: 0,
@@ -281,7 +281,7 @@ export const toolsMod = {
   }
 }
 
-export let questIndex = [
+export const questIndex = [
   {
 	title: "quest.no0",
 	des: "quest.no0.des",

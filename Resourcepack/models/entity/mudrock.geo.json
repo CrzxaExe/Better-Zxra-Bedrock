@@ -1,122 +1,43 @@
 {
-  "format_version": "1.16.0",
-  "minecraft:geometry": [
-    {
-      "description": {
-        "identifier": "geometry.mudrock",
-        "texture_width": 32,
-        "texture_height": 32,
-        "visible_bounds_width": 2,
-        "visible_bounds_height": 3.5,
-        "visible_bounds_offset": [
-          0,
-          1.25,
-          0
-        ]
-      },
-      "bones": [
-        {
-          "name": "hammer",
-          "pivot": [
-            0,
-            24,
-            -1
-          ],
-          "rotation": [
-            90,
-            0,
-            0
-          ],
-          "binding": "q.item_slot_to_bone_name(c.item_slot)"
-        },
-        {
-          "name": "handle",
-          "parent": "hammer",
-          "pivot": [
-            0,
-            23,
-            0
-          ],
-          "cubes": [
-            {
-              "origin": [
-                -0.5,
-                22,
-                -2
-              ],
-              "size": [
-                1,
-                1,
-                2
-              ],
-              "inflate": 0.2,
-              "uv": [
-                6,
-                16
-              ]
-            },
-            {
-              "origin": [
-                -0.5,
-                38,
-                -2
-              ],
-              "size": [
-                1,
-                2,
-                2
-              ],
-              "uv": [
-                12,
-                16
-              ]
-            },
-            {
-              "origin": [
-                -0.5,
-                22,
-                -2
-              ],
-              "size": [
-                1,
-                12,
-                2
-              ],
-              "uv": [
-                0,
-                16
-              ]
-            }
-          ]
-        },
-        {
-          "name": "hammerHead",
-          "parent": "hammer",
-          "pivot": [
-            0,
-            33,
-            -1
-          ],
-          "cubes": [
-            {
-              "origin": [
-                -3,
-                33,
-                -6
-              ],
-              "size": [
-                6,
-                6,
-                10
-              ],
-              "uv": [
-                0,
-                0
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+	"format_version": "1.16.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.mudrock",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 5,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "hammer",
+					"pivot": [0, 24, -1],
+					"rotation": [90, 0, 0],
+					"binding": "q.item_slot_to_bone_name(c.item_slot)"
+				},
+				{
+					"name": "handle",
+					"parent": "hammer",
+					"pivot": [0, 23, 0],
+					"cubes": [
+						{"origin": [-0.5, 22, -2], "size": [1, 1, 2], "inflate": 0.2, "uv": [24, 22]},
+						{"origin": [-0.5, 38, -2], "size": [1, 2, 2], "uv": [24, 17]},
+						{"origin": [-0.5, 22, -2], "size": [1, 12, 2], "uv": [17, 17]}
+					]
+				},
+				{
+					"name": "hammerHead",
+					"parent": "hammer",
+					"pivot": [0, 33, -1],
+					"cubes": [
+						{"origin": [-3, 33, -6], "size": [6, 6, 10], "uv": [0, 0]},
+						{"origin": [-3, 33, 3], "size": [6, 6, 2], "inflate": -0.5, "uv": [0, 17]},
+						{"origin": [-3, 33, -7], "size": [6, 6, 2], "inflate": -0.5, "uv": [0, 17]}
+					]
+				}
+			]
+		}
+	]
 }

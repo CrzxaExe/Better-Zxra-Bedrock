@@ -1,25 +1,29 @@
 import { world } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
-import { Specialist, Game } from "../module.js";
+import { Specialist } from "../module.js";
 import * as jsonData from "../../data.js";
 
-class Leaderboard extends Game {
-  constructor(cls) {
-    super(world)
-    this.c = cls;
+class Leaderboard {
+  constructor() {
+    this.c = null;
     this.lib = jsonData.leaderboardLb;
+  };
+  
+  setup(game) {
+    if(this.c) return;
+    this.c = game;
   };
   
   lb() {
     //console.warn(JSON.stringify(this.getData("leaderboard")))
-    return this.getData("leaderboard") !== undefined ? this.getData("leaderboard") : this.lib;
+    return this.c.getData("leaderboard") !== undefined ? this.c.getData("leaderboard") : this.lib;
   };
   setLb(obj) {
     //console.warn(JSON.stringify(obj))
-    this.setData("leaderboard", obj);
+    this.c.setData("leaderboard", obj);
   };
   resetLb() {
-    this.setLb(this.lib)
+    this.c.setLb(this.lib)
   };
 
   getLeaderboard(player) {
@@ -62,7 +66,7 @@ class Leaderboard extends Game {
             gui2.title({ translate: "cz.leaderboard.deaths" }).body({ rawtext: [{ translate: "cz.leaderboard.deaths.body" },{ text: `\n` }, ...death]}).button({ translate: "system.yes" }).show(player)
             break;
           case 2:
-            let guilds = new Game().guild().gd()
+            let guilds = this.c.guild.gd()
               .sort((a, b) => b - a)
               .map((e, i) => `\n${i+1}. ${e.name}§r lvl ${e.act.lvl}`)
               .join("")

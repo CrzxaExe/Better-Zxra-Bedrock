@@ -239,7 +239,7 @@
             "damage_multiplier": 1.8
           },
           {
-            "damage_multiplier": 1.5,
+            "damage_multiplier": 1.2,
             "on_damage": {
               "filters": {
                 "any_of": [

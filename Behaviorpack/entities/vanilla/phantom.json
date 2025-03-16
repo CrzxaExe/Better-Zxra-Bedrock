@@ -50,7 +50,7 @@
         "is_pushable_by_piston": true
       },
       "minecraft:attack": {
-        "damage": 12
+        "damage": 14
       },
       "minecraft:breathable": {
         "total_supply": 15,
@@ -67,7 +67,7 @@
       },
       "minecraft:movement.glide": {
         "start_speed": 0.1,
-        "speed_when_turning": 0.9
+        "speed_when_turning": 2.9
       },
       "minecraft:burns_in_daylight": {},
       "minecraft:follow_range": {

@@ -122,6 +122,18 @@ class Status {
     data[findIndex].duration -= duration;
     this.setData(data);
   }
+  minLvlStatus(name, lvl = 1) {
+    if(!name) return;
+    const data = this.getAll(), findIndex = data.findIndex(e => e.name === name);
+
+    if(findIndex === -1) return;
+    if(data[findIndex].lvl <= lvl) {
+      this.removeStatus(name);
+      return;
+    }
+    data[findIndex].lvl -= lvl;
+    this.setData(data);
+  }
   removeStatus(name) {
     if(!name) return false;
     const data = this.getAll(), findIndex = data.findIndex(e => e.name === name);
@@ -131,6 +143,9 @@ class Status {
     switch(data[findIndex].type) {
       case "silence":
         this.ent.entity.removeTag("silence");
+        break;
+      case "mudrock_shield":
+        this.ent.entity.triggerEvent("cz:shield_break");
         break;
     }
 

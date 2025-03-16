@@ -27,7 +27,7 @@
           "triggers": [
             {
               "cause": "all",
-              "damage_multiplier": 0.5
+              "damage_multiplier": 0.8
             }
           ]
         },
@@ -56,7 +56,7 @@
         "height": 1.8
       },
       "minecraft:attack": {
-        "damage": 8
+        "damage": 2
       },
       "minecraft:damage_sensor": {
         "triggers": [

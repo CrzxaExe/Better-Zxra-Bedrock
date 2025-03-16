@@ -1,0 +1,24 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "cz:heart_crystal"
+    },
+    "pattern": [
+      "III",
+      "III",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "cz:heart_shard"
+      }
+    },
+    "result": {
+      "item": "cz:heart_crystal"
+    },
+    "tags": [
+      "crafting_table"
+    ]
+  }
+}

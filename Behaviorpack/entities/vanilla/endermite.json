@@ -56,7 +56,7 @@
         ]
       },
       "minecraft:attack": {
-        "damage": 5
+        "damage": 3
       },
       "minecraft:behavior.float": {
         "priority": 0

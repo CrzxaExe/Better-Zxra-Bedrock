@@ -292,7 +292,7 @@
         ]
       },
       "minecraft:attack": {
-        "damage": 14,
+        "damage": 7,
         "effect_name": "poison",
         "effect_duration": 5
       },
@@ -357,7 +357,7 @@
             "damage_multipler": 1.6
           },
           {
-            "damage_modifier": -6,
+            "damage_modifier": -3,
             "on_damage": {
               "filters": {
                 "any_of": [

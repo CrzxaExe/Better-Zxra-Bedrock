@@ -46,9 +46,10 @@ world.beforeEvents.worldInitialize.subscribe(({ blockComponentRegistry }) => {
         }
 
         const equippable = player?.getComponent("minecraft:equippable");
+        const itemStack = player?.getComponent("inventory").container.getSlot(player.selectedSlotIndex).getItem();
         if (!equippable) return;
 
-        const enchantable = itemStack.getComponent("minecraft:enchantable");
+        const enchantable = itemStack?.getComponent("minecraft:enchantable");
         const silkTouch = enchantable?.getEnchantment("silk_touch");
         if (silkTouch) return;
 

@@ -23,7 +23,7 @@ Weapon.registerSkill("reaper", (player, lib, event) => {
 
 	system.runTimeout(() => {
 		world.getDimension(player.dimension.id).getEntities({ location: player.location, maxDistance: 4, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"]}).forEach(e => {
-			new Entity(e).addDamage(Math.floor(9 * lib.multiplier), { cause: "entityAttack", damagingEntity: player })
+			new Entity(e).addDamage(Math.floor(9 * lib.multiplier), { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
 		})
     }, 2)
 })
@@ -37,7 +37,7 @@ Weapon.registerSkill("hammer", (player, lib, event) => {
 
 	system.runTimeout(() => {
 		world.getDimension(player.dimension.id).getEntities({ location: player.location, maxDistance: 4, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"]}).forEach(e => {
-			new Entity(e).addDamage(Math.floor(14 * lib.multiplier), { cause: "entityAttack", damagingEntity: player })
+			new Entity(e).addDamage(Math.floor(14 * lib.multiplier), { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
 		})
     }, 2)
 })
@@ -51,7 +51,7 @@ Weapon.registerSkill("katana", (player, lib, event) => {
 
 	player.getEntitiesFromViewDirection({ maxDistance: 6, excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
 		let ent = new Entity(e.entity)
-		ent.addDamage(14*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, hor: 2, ver: 0 })
+		ent.addDamage(14*lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel: lib.vel, hor: 2, ver: 0 })
 		ent.addEffect([{ name: "weakness", duration: 20, lvl: 1 }])
 	})
 })
@@ -64,5 +64,5 @@ Weapon.registerSkill("spear", (player, lib, event) => {
 
 	player.playAnimation("animation.weapon.dash.atk", { blendOutTime: 0.35 })// Animation
 	lib.sp.minStamina("value", 6)
-	new Entity(entity).addDamage((distance*3+2) * lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.velocity, hor: 2, ver: 0 })
+	new Entity(entity).addDamage((distance*3+2) * lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel: lib.velocity, hor: 2, ver: 0 })
 })

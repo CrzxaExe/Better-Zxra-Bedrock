@@ -1,0 +1,22 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:structure_template_feature": {
+    "description": {
+      "identifier": "cz:cemetery_of_the_living_dead_0_feature"
+    },
+    "structure_name": "mystructure:cmtry_living_dead0",
+    "adjustment_radius": 16,
+    "facing_direction": "random",
+    "constraints": {
+      "grounded": {},
+      "unburied": {},
+      "block_intersection": {
+        "block_allowlist": [
+          "minecraft:air",
+          "minecraft:dirt",
+          "minecraft:grass"
+        ]
+      }
+    }
+  }
+}

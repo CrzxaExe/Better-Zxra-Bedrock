@@ -20,7 +20,6 @@
         ],
         "animate": [
           "tail_controller",
-          "ears_controller",
           "root",
           "look_at_target_default"
         ]
@@ -38,7 +37,7 @@
         "charging": "animation.humanoid.charging",
         "attack.rotations": "animation.humanoid.attack.rotations",
         "sneaking": "animation.humanoid.sneaking",
-        "bob": "animation.humanoid.bob",
+        "yuri_bob": "animation.yuri.idle",
         "damage_nearby_mobs": "animation.humanoid.damage_nearby_mobs",
         "bow_and_arrow": "animation.humanoid.bow_and_arrow",
         "swimming": "animation.humanoid.swimming",

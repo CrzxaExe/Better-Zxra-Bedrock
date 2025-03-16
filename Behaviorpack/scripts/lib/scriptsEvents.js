@@ -3,6 +3,9 @@ import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import { userPanel } from "./items.js";
 import { Npc } from "./npc-class.js";
 import { Game, Entity, farmerShop, Specialist } from './ZxraLib/module.js';
+import {
+  Terra
+} from "./ZxraLib/class.js";
 import * as jsonData from "./data.js";
 
 var dis = {}
@@ -50,6 +53,23 @@ Script.add("bind", (entity, { msg }) => {
 	new Entity(entity).bind(Number(msg[0]) || 1)
 })
 
+// Heal Feature
+Script.add("heal", (entity, { msg }) => {
+    let amount = 1
+    
+    const [name, value = "1"] = msg[0].split("/")
+    
+    switch(name) {
+      case "%user_hp":
+        amount = entity.getComponent("health").effectiveMax / Number(value)
+        break;
+      default: {
+        amount = Number(msg[0])
+      }
+    }
+	new Entity(entity).heal(amount)
+})
+
 // Reset Specialist
 Script.add("sp_clear_data", (entity, { msg }) => {
 	new Specialist(entity).clearData()
@@ -77,6 +97,12 @@ Script.add("status", async (entity, { msg }) => {
 	} finally {
 		status.addStatus(name, duration, { lvl, type, stack, decay })
 	}
+})
+
+// Reduce status lvl Feature
+Script.add("min_lvl_status", async (entity, { msg }) => {
+  if(!msg[0]) return
+  new Entity(entity).status().minLvlStatus(msg[0], Number(msg[1]))
 })
 
 // Clear all status Feature
@@ -280,9 +306,9 @@ Script.add("reset_value_stamina", (entity) => {
 
 // Reset Leaderboard
 Script.add("reset_data_leaderboard", (entity, { msg }) => {
-  new Game().leaderboard().resetLb()
+  Terra.leaderboard.resetLb()
 })
 // Delete All Guild
 Script.add("delete_all_guild", (entity, { msg }) => {
-  new Game().guild().resetGd()
+  Terra.guild.resetGd()
 })

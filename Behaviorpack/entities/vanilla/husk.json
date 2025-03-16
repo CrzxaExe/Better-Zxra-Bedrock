@@ -106,10 +106,10 @@
           "value": 1.0625
         },
         "minecraft:mob_effect": {
-          "effect_range": 7,
-          "effect_time": 2,
+          "effect_range": 5,
+          "effect_time": 1,
           "mob_effect": "slowness",
-          "cooldown_time": 3,
+          "cooldown_time": 1,
           "entity_filter": {
             "all_of": [
               {
@@ -179,9 +179,9 @@
         ]
       },
       "minecraft:attack": {
-        "damage": 9,
+        "damage": 5,
         "effect_name": "poison",
-        "effect_duration": 10
+        "effect_duration": 3
       },
       "minecraft:variant": {
         "value": 2
@@ -316,7 +316,7 @@
       "minecraft:damage_sensor": {
         "triggers": [
           {
-            "damage_modifier": -4,
+            "damage_modifier": -3,
             "on_damage": {
               "filters": {
                 "any_of": [

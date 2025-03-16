@@ -1,12 +1,12 @@
 import { world } from "@minecraft/server";
-import { Game } from "../module.js";
+import { Terra } from "../class.js";
 
 class Waypoint {
   getData() {
-    return new Game().getData("waypoints", []);
+    return Terra.getData("waypoints", []);
   }
   setData(obj) {
-    new Game().setData("waypoints", obj);
+    Terra.setData("waypoints", obj);
   }
 
   // Main Method

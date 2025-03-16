@@ -65,7 +65,7 @@
             {
               "min_activation_range": 0.0,
               "max_activation_range": 3.0,
-              "cooldown_time": 3.0,
+              "cooldown_time": 5.0,
               "weight": 3,
               "cast_duration": 2.2,
               "particle_color": "#FF664D59",
@@ -108,7 +108,7 @@
             {
               "min_activation_range": 3.0,
               "weight": 4,
-              "cooldown_time": 0.8,
+              "cooldown_time": 1.3,
               "cast_duration": 1.0,
               "particle_color": "#FF664D59",
               "start_sound_event": "cast.spell",
@@ -128,7 +128,7 @@
             {
               "min_activation_range": 3.0,
               "weight": 4,
-              "cooldown_time": 1.6,
+              "cooldown_time": 2.5,
               "cast_duration": 1.0,
               "particle_color": "#FF669D59",
               "start_sound_event": "cast.spell",
@@ -157,7 +157,7 @@
             },
             {
               "weight": 1,
-              "cooldown_time": 9.0,
+              "cooldown_time": 11.0,
               "cast_duration": 5.0,
               "particle_color": "#FFB3B3CC",
               "sequence": [
@@ -369,7 +369,7 @@
       "minecraft:damage_sensor": {
         "triggers": [
           {
-            "damage_modifier": -4,
+            "damage_modifier": -2,
             "on_damage": {
               "filters": {
                 "any_of": [
@@ -387,7 +387,7 @@
           },
           {
             "cause": "magic",
-            "damage_multiplier": 0.7
+            "damage_multiplier": 0.8
           }
         ]
       },

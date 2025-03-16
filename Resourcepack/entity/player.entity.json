@@ -12,13 +12,19 @@
         "default": "textures/entity/steve",
         "cape": "textures/entity/cape_invisible",
         "kyle_state": "textures/entity/kyle_geo",
-        "kyle_indicator": "textures/indicator/kyle"
+        "sepen": "textures/entity/player/sepen",
+        "liberator_crown": "textures/entity/player/liberator_crown",
+        "quezn_shield": "textures/entity/player/quezn_shield",
+        "mudrock_shield": "textures/entity/player/mudrock_shield"
       },
       "geometry": {
         "default": "geometry.humanoid.custom",
         "cape": "geometry.cape",
         "kyle_state": "geometry.kyle_entity",
-        "indicator": "geometry.indicator_kyle"
+        "sepen": "geometry.sepen",
+        "liberator_crown": "geometry.liberator_crown",
+        "quezn_shield": "geometry.quezn_shield",
+        "mudrock_shield": "geometry.mudrock_shield"
       },
       "scripts": {
         "scale": "0.9375",
@@ -36,6 +42,7 @@
           "variable.attack_body_rot_y = Math.sin(360*Math.sqrt(variable.attack_time)) * 5.0;",
           "variable.tcos0 = (math.cos(query.modified_distance_moved * 29.17) * query.modified_move_speed / variable.gliding_speed_value) * 47.3;",
           "variable.inCos = 1-(v.tcos0*1);",
+          "variable.shieldIndex = q.skin_id || 0;",
           "variable.first_person_rotation_factor = math.sin((1 - variable.attack_time) * 180.0);",
           "variable.hand_bob = query.life_time < 0.01 ? 0.0 : variable.hand_bob + ((query.is_on_ground && query.is_alive ? math.clamp(math.sqrt(math.pow(query.position_delta(0), 2.0) + math.pow(query.position_delta(2), 2.0)), 0.0, 0.1) : 0.0) - variable.hand_bob) * 0.02;",
           "variable.map_angle = math.clamp(1 - variable.player_x_rotation / 45.1, 0.0, 1.0);",
@@ -62,11 +69,12 @@
           {
             "kyle_new_idle": "q.get_name=='CrzxaExe3'"
           },
-          "indicator_initialize"
+          "shield_animation"
         ]
       },
       "animations": {
         "root": "controller.animation.player.root",
+        "shield_animation": "animation.shields",
         "base_controller": "controller.animation.player.base",
         "hudplayer": "controller.animation.player.hudplayer",
         "humanoid_base_pose": "animation.humanoid.base_pose",
@@ -132,7 +140,6 @@
         "draw_dagger": "animation.weapon.dagger",
         "draw_lance": "animation.weapon.lance",
         "run_reaper": "animation.weapon.run.reaper",
-        "indicator_initialize": "animation.indicator.initialize",
         "chargings": "animation.charge",
         "double_gun": "animation.weapon.gun.double",
         "gun_use": "animation.weapon.gun",
@@ -155,7 +162,10 @@
           "controller.render.kyle": "q.get_name=='CrzxaExe3'"
         },
         {
-          "controller.render.indicator_kyle": "q.get_name=='CrzxaExe3' && q.is_using_item"
+          "controller.render.sepen": "q.get_name=='SepenBugle77'"
+        },
+        {
+          "controller.render.player.shield": "v.shieldIndex  != 0"
         }
       ],
       "enable_attachables": true,

@@ -77,6 +77,11 @@
         },
         {
           "type": "item",
+          "name": "cz:cenryter",
+          "weight": 3
+        },
+        {
+          "type": "item",
           "name": "minecraft:diamond",
           "weight": 5,
           "functions": [

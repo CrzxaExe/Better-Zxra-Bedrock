@@ -4,7 +4,7 @@ const getMaxHealthPercentage = (target, percentage = 1) => {
 }
 
 const vector2Distance = (firstLocation, secondLocation) => {
-  if(!firstLocation || !secontLocation) return;
+  if(!firstLocation || !secondLocation) return;
   return Math.sqrt((secondLocation.x - firstLocation.x) ** 2 + (secondLocation.z - firstLocation.z) ** 2);
 }
 

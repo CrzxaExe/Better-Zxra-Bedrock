@@ -16,7 +16,7 @@ Weapon.registerSkill("crusher", (player, lib, event) => {
 	  lib.sp.minStamina("value", 10)// Stamina
 	  player.playAnimation("animation.weapon.crushing", { blendOutTime: 0.35 })// Animation
 	  world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-		new Entity(e).addDamage(Math.floor((10*power+8) *lib.multiplier), { cause: "entityAttack", damagingEntity: player })
+		new Entity(e).addDamage(Math.floor((10*power+8) *lib.multiplier), { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
 	  })
 	  lib.sp.runCommand(`camerashake add @s 1.2 0.08`)
 	  if(player.isOnGround == true) lib.sp.impactParticle()
@@ -31,7 +31,7 @@ Weapon.registerSkill("crusher", (player, lib, event) => {
 	  let ent = new Entity(target)
 
       system.runTimeout(() => {
-	    ent.addDamage((power*8+8) *lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.vel, hor: 0, ver: power*0.3 })
+	    ent.addDamage((power*8+8) *lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel: lib.vel, hor: 0, ver: power*0.3 })
 	    ent.addEffect({ name: "slowness", duration: 6, lvl: 1 })
 	  }, 6)
 	} else {// Skill 1
@@ -46,7 +46,7 @@ Weapon.registerSkill("crusher", (player, lib, event) => {
       new Entity(entity).status().addStatus("crusher_silence", 3, { type: "silence", decay: "time", lvl: 1, stack: false })
 
       new Entity(entity).selfParticle("minecraft:critical_hit_emitter", { x: player.location.x, y: player.location.y + 1, z: player.location.z })
-      new Entity(entity).addDamage((power*4+8) * lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.velocity, hor: power*2+2, ver: 0 })
+      new Entity(entity).addDamage((power*4+8) * lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel: lib.velocity, hor: power*2+2, ver: 0 })
 	}
 })
 
@@ -64,7 +64,7 @@ Weapon.registerSkill("bringer", (player, lib, event) => {
 		lib.sp.knockback(lib.velocity, 2, 0)
 
 		system.runTimeout(() => {
-          new Entity(entity).addDamage(18*lib.multiplier, { cause: "entityAttack", damagingEntity: player }, { vel: lib.velocity, hor: 3, ver: 0 })
+          new Entity(entity).addDamage(18*lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel: lib.velocity, hor: 3, ver: 0 })
           new Entity(entity).selfParticle("cz:white_reverse_slash")
          }, 3)
 	} else if(player.isOnGround == false) {// Skill 3
@@ -79,7 +79,7 @@ Weapon.registerSkill("bringer", (player, lib, event) => {
 		lib.sp.bind(1.35)
 		system.runTimeout(() => {
 			world.getDimension(player.dimension.id).getEntities({ maxDistance: 7, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-				new Entity(e).addDamage(Math.floor(20 * lib.multiplier), { cause: "entityAttack", damagingEntity: player })
+				new Entity(e).addDamage(Math.floor(20 * lib.multiplier), { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
 				new Entity(e).selfParticle("cz:white_reverse_slash")
 				new Entity(e).addEffect({ name: "wither", duration: 3, lvl: 1, showParticles: false })
 			})
@@ -93,7 +93,7 @@ Weapon.registerSkill("bringer", (player, lib, event) => {
 
 		system.runTimeout(() => {
 			world.getDimension(player.dimension.id).getEntities({ maxDistance: 4, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-				new Entity(e).addDamage(Math.floor(12 * lib.multiplier), { cause: "entityAttack", damagingEntity: player })
+				new Entity(e).addDamage(Math.floor(12 * lib.multiplier), { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
 				new Entity(e).selfParticle("cz:white_reverse_slash")
 				new Entity(e).addEffect({ name: "wither", duration: 3, lvl: 1, showParticles: false })
 			})
@@ -112,7 +112,7 @@ Weapon.registerSkill("berserk", async (player, lib, event) => {
 
 	    system.runTimeout(() => {
 			world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-				new Entity(e).addDamage(player.getComponent("health").defaultValue/5, { cause: "entityAttack", damagingEntity: e })
+				new Entity(e).addDamage(player.getComponent("health").defaultValue/5, { cause: "entityAttack", damagingEntity: e, rune: lib.rune, isSkill: true })
 				lib.sp.addDamage(player.getComponent("health").defaultValue/10, { cause: "entityAttack", damagingEntity: e })
 				lib.berserk[player.id] = Math.floor(lib.berserk[player.id] + 6)
 			})
@@ -172,7 +172,7 @@ Weapon.registerSkill("cenryter", (player, lib, event) => {
           e.entity.setOnFire(5)
           lib.sp.heal(1)
           new Entity(e.entity).selfParticle("cz:orange_reverse_slash")
-          new Entity(e.entity).addDamage(21 * lib.multiplier, { cause: "entityAttack", damagingEntity: player },{ vel: lib.velocity, hor: 1.4, ver: 0.7 })
+          new Entity(e.entity).addDamage(21 * lib.multiplier, { cause: "fire", damagingEntity: player, rune: lib.rune, isSkill: true },{ vel: lib.velocity, hor: 1.4, ver: 0.7 })
         })
       }, 1)
     }, 6)
@@ -188,7 +188,7 @@ Weapon.registerSkill("cenryter", (player, lib, event) => {
       world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
         e.setOnFire(5)
         lib.sp.heal(1)
-        new Entity(e).addDamage(15 * lib.multiplier, { cause: "entityAttack", damagingEntity: player })
+        new Entity(e).addDamage(15 * lib.multiplier, { cause: "fire", damagingEntity: player, rune: lib.rune, isSkill: true })
         new Entity(e).selfParticle("cz:orange_reverse_slash")
       })
       system.runTimeout(() => {
@@ -222,7 +222,7 @@ Weapon.registerSkill("yume_staff", (player, lib, event) => {
       player.dimension.spawnParticle("cz:yume_explosion", player.location)
       player.dimension.spawnParticle("cz:yume_explosion_ring", { x: player.location.x, y: player.location.y + 0.3, z: player.location.z })
       world.getDimension(player.dimension.id).getEntities({ maxDistance: 7, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-        new Entity(e).addDamage(24 * lib.multiplier, { cause: "magic", damagingEntity: player }, { vel: e.getVelocity(), ver: -1.6, hor: 0.3 })
+        new Entity(e).addDamage(24 * lib.multiplier, { cause: "magic", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel: e.getVelocity(), ver: -1.6, hor: 0.3 })
       })
     }, 7)
   } else {
@@ -243,7 +243,7 @@ Weapon.registerSkill("yume_staff", (player, lib, event) => {
       for(let i = 0; i<stack+1; i++) {
         system.runTimeout(() => {
           world.getDimension(dimension.id).getEntities({ maxDistance: 5 + i, location: location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-            new Entity(e).addDamage((16 + (stack * 1 * i)) * lib.multiplier, { cause: "magic", damagingEntity: player }, { vel: e.getVelocity(), hor: 0, ver: -0.4 })
+            new Entity(e).addDamage((16 + (stack * 1 * i)) * lib.multiplier, { cause: "magic", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel: e.getVelocity(), hor: 0, ver: -0.4 })
             dimension.spawnParticle("cz:yume_explosion", location)
             dimension.spawnParticle("cz:yume_explosion_ring", newLocation)
           })
@@ -266,11 +266,11 @@ Weapon.registerSkill("undying", (player, lib, event) => {
 
     system.runTimeout(() => {
       world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-		new Entity(e).addDamage(18 * lib.multiplier, { cause: "magic", damagingEntity: player })
+		new Entity(e).addDamage(18 * lib.multiplier, { cause: "magic", damagingEntity: player, rune: lib.rune, isSkill: true })
 		new Entity(e).selfParticle("minecraft:critical_hit_emitter", { x: e.location.x, y: e.location.y + 1, z: e.location.z })
 		system.runTimeout(() => {
 		  if(!e) return
-		  new Entity(e).addDamage(9 * lib.multiplier, { cause: "magic", damagingEntity: player })
+		  new Entity(e).addDamage(9 * lib.multiplier, { cause: "magic", damagingEntity: player, rune: lib.rune, isSkill: true })
 	  	new Entity(e).selfParticle("minecraft:critical_hit_emitter", { x: e.location.x, y: e.location.y + 1, z: e.location.z })
 		}, 10)
 	  })
@@ -290,7 +290,7 @@ Weapon.registerSkill("undying", (player, lib, event) => {
 			lib.sp.knockback(lib.velocity, 0, -0.3)
 			lib.sp.selfParticle("cz:undying_jump")
 			world.getDimension(player.dimension.id).getEntities({ maxDistance: 4, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-				new Entity(e).addDamage((18 + getMaxHealthPercentage(e, 0.12)) * lib.multiplier, { cause: "magic", damagingEntity: player }, { vel:e.getVelocity(), ver: -1, hor: -0.2 })
+				new Entity(e).addDamage((18 + getMaxHealthPercentage(e, 0.12)) * lib.multiplier, { cause: "magic", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel:e.getVelocity(), ver: -1, hor: -0.2 })
 				new Entity(e).selfParticle("minecraft:critical_hit_emitter", { x: e.location.x, y: e.location.y + 1, z: e.location.z })
 			})
 		}, 6)
@@ -307,7 +307,7 @@ Weapon.registerSkill("undying", (player, lib, event) => {
 	  lib.sp.bind(1.05)
   	lib.sp.knockback(lib.velocity, 0.9, 0)
   
-	  new Entity(entity).addDamage(18 * lib.multiplier, { cause: "magic", damagingEntity: player })
+	  new Entity(entity).addDamage(18 * lib.multiplier, { cause: "magic", damagingEntity: player, rune: lib.rune, isSkill: true })
 	  new Entity(entity).selfParticle("minecraft:critical_hit_emitter", { x: entity.location.x, y: entity.location.y + 1, z: entity.location.z })
 	}, 5)
   }

@@ -75,6 +75,7 @@ const couponUse = (player, item) => {
     player.sendMessage({ translate: "system.coupon.invalid" });
     return;
   }
+  player.runCommand(`replaceitem entity @s slot.weapon.mainhand 0 air`)
 
   data.forEach(e => {
     const [item, quantity = 1] = e.split("*");

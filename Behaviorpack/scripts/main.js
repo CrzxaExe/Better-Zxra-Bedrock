@@ -11,7 +11,6 @@ import {
 } from "./system.js";
 import {
   Command,
-  Game,
   Quest,
   SpecialItem,
   Weapon,
@@ -20,6 +19,9 @@ import {
   summonXpAtPlayer,
   Specialist,
 } from "./lib/ZxraLib/module.js";
+import {
+  Terra
+} from "./lib/ZxraLib/class.js";
 import * as stats from "./lib/stats.js";
 import * as jsonData from "./lib/data.js";
 
@@ -72,7 +74,7 @@ system.beforeEvents.watchdogTerminate.subscribe((e) => {
 system.runInterval(async () => {
   try {
     if (Object.keys(options).length < 1)
-      options = new Game(world).getSetting();
+      options = Terra.getSetting();
     for (let plyr of world.getPlayers()) {
       const sp = new Specialist(plyr);
 
@@ -91,10 +93,10 @@ system.runInterval(async () => {
         options,
       });
     }
-    dimension.forEach((e) => {
+    Terra.getActiveDimension().forEach((e) => {
       world
         .getDimension(e)
-        .getEntities({ excludeTypes: ["cz:block_data"] })
+        .getEntities({ excludeTypes: ["cz:block_data","cz:seat","minecraft:pig","minecraft:cow","minecraft:sheep","minecraft:chicken","minecraft:bee","minecraft:item"] })
         .forEach((r) => {
           new Entity(r).controllerStatus();
         });
@@ -113,8 +115,8 @@ world.beforeEvents.chatSend.subscribe(async (e) => {
       data = sp.getData();
 
     function sendMsgEvent(sender, message, dt) {
-      const guild = new Game()
-        .guild()
+      const guild = Terra
+        .guild
         .gd()
         .find((s) => s.member.some((r) => r.id === sender.id));
       world.sendMessage({
@@ -136,7 +138,7 @@ world.beforeEvents.chatSend.subscribe(async (e) => {
           // fix issue % is missing
           .replace(/%/gi, "%%"),
       });
-      new Game().leaderboard().addLb(e.sender, { amount: 1, type: "chatting" });
+      Terra.leaderboard.addLb(e.sender, { amount: 1, type: "chatting" });
     }
 
     let find;
@@ -169,10 +171,9 @@ world.beforeEvents.chatSend.subscribe(async (e) => {
 
 // Initialing Addon
 world.afterEvents.worldInitialize.subscribe((e) => {
-  const wld = new Game(world);
-  options = wld.getSetting();
+  options = Terra.getSetting();
   if (options.debug) console.warn(JSON.stringify(options));
-  if (options.useBzbRules) wld.setWorldSetting(options.rules);
+  if (options.useBzbRules) Terra.setWorldSetting(options.rules);
 });
 
 // Refresh Player
@@ -181,7 +182,7 @@ world.beforeEvents.playerLeave.subscribe(({ player }) => {
   //sp.refreshPlayer();
 });
 world.afterEvents.playerJoin.subscribe((e) => {
-  const player = new Game().getPlayerName(e.playerName);
+  const player = Terra.getPlayerName(e.playerName);
   if (!player) return;
   new Specialist(player).refreshPlayer();
 });
@@ -204,28 +205,6 @@ world.afterEvents.playerSpawn.subscribe((e) => {
   });
 });
 
-// Entities Change Health Event
-world.afterEvents.entityHealthChanged.subscribe(
-  ({ entity, newValue, oldValue }) => {
-    try {
-      if (oldValue - newValue < -1) {
-        const indicator = world
-          .getDimension(entity.dimension.id)
-          .spawnEntity("cz:indicator", {
-            x: entity.location.x,
-            y: entity.location.y + 1.9,
-            z: entity.location.z,
-          });
-        indicator.nameTag = `§2${(Math.abs(oldValue - newValue)).toFixed(0)}`;
-        new Entity(indicator).knockback(indicator.getVelocity(), 0, 5)
-      }
-    } catch (err) {
-      if (options.debug) console.warn(err);
-    }
-  },
-  { entityTypes: ["minecraft:player"] }
-);
-
 // Entities Die Event
 world.afterEvents.entityDie.subscribe(async (e) => {
   const murder = e.damageSource.damagingEntity,
@@ -246,19 +225,20 @@ world.afterEvents.entityDie.subscribe(async (e) => {
     cp.minRep(Math.floor(cp.getRep() / 5));
     cp.setValueDefaultStamina();
     cp.setValueDefaultThirst();
-    new Game().leaderboard().addLb(corp, { amount: 1, type: "deaths" });
+    Terra.leaderboard.addLb(corp, { amount: 1, type: "deaths" });
 
-    const guild = new Game()
-      .guild()
+    const guild = Terra
+      .guild
       .gd()
       .find((s) => s.member.some((d) => d.id === corp.id));
-    if (guild?.id) new Game().guild().setXp(guild.id, 0);
+    if (guild?.id) Terra.guild.setXp(guild.id, 0);
   }
 
   // Initializing Kill Pasif
   if (murder instanceof Player) {
     let murderData = new Specialist(murder),
-      tarHp = corp.getComponent("health");
+      tarHp = corp.getComponent("health"),
+      rn = murderData.rune().getAllUsedRuneStat();
     murderData.addSpecialist(
       "xp",
       Math.floor(
@@ -266,7 +246,11 @@ world.afterEvents.entityDie.subscribe(async (e) => {
       ) * options.xpMultiplier
     );
     new Quest(murder).controller({ act: "kill", target: corp });
-    new Game().leaderboard().addLb(murder, { amount: 1, type: "kills" });
+    Terra.leaderboard.addLb(murder, { amount: 1, type: "kills" });
+
+    runActionRune(murder, corp, "onKill");
+
+    if(rn.moneyDrop > 0) murderData.addMoney(rn.moneyDrop);
 
     const item = murder
       .getComponent("inventory")
@@ -279,6 +263,7 @@ world.afterEvents.entityDie.subscribe(async (e) => {
       sp: murderData,
       item,
       ...inGame,
+      rune: rn,
       notSelf: "!" + murder.name,
       multiplier: murderData.status().decimalCalcStatus({ type: "damage" }, 1, 0.01),
     });
@@ -369,6 +354,9 @@ world.afterEvents.entityHitEntity.subscribe(
     let itemPasif = Weapon.Pasif.hit.find((x) =>
       item.getTags().includes(x.type)
     );
+
+    runActionRune(entity, e.hitEntity, "onHit");
+
     if (!itemPasif) return;
     return itemPasif.callback(entity, e.hitEntity, {
       silentState,
@@ -376,7 +364,8 @@ world.afterEvents.entityHitEntity.subscribe(
       ent: new Entity(e.hitEntity),
       item,
       itm,
-      team: new Game().guild().getTeammate(entity.id) || [entity.name],
+      rune: sp.rune().getAllUsedRuneStat(),
+      team: Terra.guild.getTeammate(entity.id) || [entity.name],
       notSelf: "!" + entity.name,
       tier: itm.getTier(),
       ...inGame,
@@ -395,6 +384,8 @@ world.afterEvents.entityHurt.subscribe(
         .container.getItem(e.hurtEntity.selectedSlotIndex),
       sp = new Specialist(e.hurtEntity);
     sp.cooldown().addCd("stamina_regen", options.staminaExhaust || 3);
+    
+    runActionRune(e.hurtEntity, e.damageSource.damagingEntity, "onHited");
 
     e.hurtEntity.runCommand(`camerashake add @s 1.4 0.26`);
     if (
@@ -414,6 +405,7 @@ world.afterEvents.entityHurt.subscribe(
       sp,
       ent: new Entity(e.damageSource.damagingEntity),
       item,
+      rune: sp.rune().getAllUsedRuneStat(),
       notSelf: "!" + e.hurtEntity.name,
       multiplier: sp.status().decimalCalcStatus({ type: "damage" }, 1, 0.01),
       ...inGame,
@@ -429,18 +421,21 @@ world.afterEvents.entityHurt.subscribe(
     damageSource: { cause, damagingEntity, damagingProjectile },
   }) => {
     if (!options.damageIndicator) return;
-    const indicator = world
-      .getDimension(hurtEntity.dimension.id)
-      .spawnEntity("cz:indicator", {
-        x: hurtEntity.location.x + Math.random(-0.5, 0.5),
-        y: hurtEntity.location.y + 0.4 + Math.random(-0.8, 1.4),
-        z: hurtEntity.location.z + Math.random(-0.5, 0.5),
-      });
-    indicator.nameTag = `${
-      Object.keys(jsonData.damageColor).includes(cause)
-        ? jsonData.damageColor[cause]
-        : ""
-    }${damage.toFixed(0)}`;
+    try {
+      const indicator = hurtEntity.dimension
+        .spawnEntity("cz:indicator", {
+          x: hurtEntity.location.x + Math.random(-0.5, 0.5),
+          y: hurtEntity.location.y + 0.4 + Math.random(-0.8, 1.4),
+          z: hurtEntity.location.z + Math.random(-0.5, 0.5),
+        });
+      indicator.nameTag = `${
+        Object.keys(jsonData.damageColor).includes(cause)
+          ? jsonData.damageColor[cause]
+          : ""
+      }${damage.toFixed(0)}`;
+    } catch(err) {
+      if(options.debug) console.warn(err)
+    }
   }
 );
 
@@ -477,10 +472,11 @@ world.afterEvents.itemReleaseUse.subscribe(async (e) => {
         wounded,
         vel,
         velocity,
-        team: new Game().guild().getTeammate(entity.id) || [entity.name],
+        team: Terra.guild.getTeammate(entity.id) || [entity.name],
         notSelf: "!" + entity.name,
         silentState,
         sp,
+        rune: sp.rune().getAllUsedRuneStat(),
         endless,
         multiplier: sp.status().decimalCalcStatus({ type: "skill" }, sp.status().decimalCalcStatus({ type: "damage" }, 1, 0.01), 0.01),
         ...inGame,
@@ -500,4 +496,18 @@ world.afterEvents.weatherChange.subscribe(({ raining, lightning }) => {
   if (lightning == true)
     world.sendMessage({ translate: "settings.text.weatherThunder" });
 });
+
+
+function runActionRune(player, target, act) {
+  try {
+    const action = new Specialist(player).rune().getAction(act);
+
+    if(action.length < 1) return;
+    action.forEach(e => {
+      e?.(player, target)
+    })
+  } catch(e) {
+    if (options.debug) console.warn(e);
+  }
+}
 // CrzxaExe3--

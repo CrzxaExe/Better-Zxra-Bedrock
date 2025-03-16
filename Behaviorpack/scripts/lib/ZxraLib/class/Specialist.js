@@ -2,11 +2,12 @@ import {
   Cooldown,
   Dirty,
   Entity,
-  Game,
   Temp,
+  Rune,
   leveling,
   mergeObject,
-  rawSpecialist
+  rawSpecialist,
+  rawRuneStat
 } from "../module.js";
 import {
   Player,
@@ -57,6 +58,11 @@ class Specialist extends Entity {
     if(item?.hasTag("greatsword") && !cooldown.hasCd("greatsword_crit")) arr.push("<+>");
     if(itemName === "liberator" && soul[this.player.id]) arr.push(`${soul[this.player.id]} Soul`);
     if(itemName === "skyler" && skyler[this.player.id]) arr.push(`${skyler[this.player.id]} Fireing`);
+    if(itemName === "catlye" && catlye[this.player.id] > 2) arr.push("Skill [1] Special");
+    if(itemName === "endless" && endless[this.player.id]) arr.push(`${endless[this.player.id]}/12`);
+    if(itemName === "berserk" && berserk[this.player.id]) arr.push(`W-Harm ${berserk[this.player.id]}`);
+    if(itemName === "silent" && world.scoreboard.getObjective("silent").getScore(this.player.scoreboardIdentity) > 0) arr.push(`${world.scoreboard.getObjective("silent").getScore(this.player.scoreboardIdentity) > 0} In-Leaf`)
+    if(itemName === "lectaze" && lectaze[this.player.id]) arr.push(`${lectaze[this.player.id]} Creations`);
 
     if(arr.length < 1) return;
 
@@ -69,8 +75,9 @@ class Specialist extends Entity {
   }
   controllerStamina({ options }) {
     const data = this.getStamina(),
+      runeStat = this.rune().getAllUsedRuneStat(),
       recovery = parseInt(options.staminaRecovery || 1.5),
-      drop     = parseInt(options.staminaRun || 1);
+      drop     = ((options.staminaRun || 1) - runeStat.staminaReduction);
 
     const cd = this.cooldown(),
       status = this.status();
@@ -83,7 +90,7 @@ class Specialist extends Entity {
       status.addStatus("tired", 10, { type: "none", decay: "time", lvl: 0, stack: false });
     }
 
-    if(status.getAllStatusBy({ type: "stamina_stuck" }).length > 0) return;
+    if(status.getAllStatusBy({ type: "st_stuck" }).length > 0) return;
 
     if(this.player.isSprinting || this.player.isSwimming) {
       use = -drop;
@@ -95,7 +102,7 @@ class Specialist extends Entity {
     }
     
     if(!cd.hasCd("stamina_regen")) {
-      use = Number(recovery * status.decimalCalcStatus({ type: "stamina_up" }, 1, 0.01)).toFixed(2);
+      use = Number(recovery * status.decimalCalcStatus({ type: "stamina_recovery" }, 1, 0.01)).toFixed(2);
     }
 
     if(data.value + Number(use) > data.max + data.add) {
@@ -104,7 +111,7 @@ class Specialist extends Entity {
     }
 
     if(cd.hasCd("stamina_regen") && use > 0) return;
-    this.addStamina("value", use - (status.getAllStatusBy({ name: "tired" }).length > 0 ? 0.5 : 0);
+    this.addStamina("value", use - (status.getAllStatusBy({ name: "tired" }).length > 0 ? 0.5 : 0));
   }
   controllerTemp() {}
   controllerThirst({ options }) {
@@ -118,7 +125,7 @@ class Specialist extends Entity {
     let drop = options.thirstDown || 0.003;
 
     if(this.player.isSprinting) drop += Number(0.028);
-    if(status.getStatusBy({ name: "tired" }).length > 0) drop += Number(0.013);
+    if(status.getAllStatusBy({ name: "tired" }).length > 0) drop += Number(0.013);
     if(this.player.dimension.id.split(":")[1] === "nether") drop += Number(0.02);
 
     drop += Number(status.decimalCalcStatus({ type: "thirsty" }, 0, 0.03));
@@ -127,8 +134,7 @@ class Specialist extends Entity {
   }
   controllerUi({ options }) {
     const data = this.getData(),
-      game     = new Game(),
-      guild    = game.guild()
+      guild    = Terra.guild
         .gd()
         .find(e => e.member.some(r => r.id === this.player.id));
 
@@ -152,6 +158,7 @@ class Specialist extends Entity {
 			case "skill": lvl = ` +${cur.lvl}% Skill`; break;
 			case "stack": lvl = ` > ${cur.lvl}`; break;
 			case "state": lvl = ``; break;
+			case "mudrock_shield": lvl = ` > ${cur.lvl}`; break;
 	 	}
 
 		 all += `${cur.name.split("_").map(e => e.charAt(0).toUpperCase() + e.slice(1)).join(" ")}${lvl}${cur.decay === "time" ? "| "+(cur.duration).toFixed(0)+"s" : ""}\n`
@@ -168,12 +175,11 @@ class Specialist extends Entity {
     const xpPercentage = (xp, lvl) => (xp / Math.floor(lvl * 18 + 40 + lvl * 10)) * 100;
 
     this.player.onScreenDisplay.setTitle(`cz:ui ${this.player.name}
-    §s${xpPercentage(xp, lvl).toFixed(1)}% ${xp} XP§f - §e${lvl}§f [Specialist]${!guild ? "" : "\n" + guild?.act.xp + "XP - " + guild?.act.lvl + " [" + guild?.name + "§r§f]"}
+    §s${xpPercentage(xp, lvl).toFixed(1)}% ${xp} XP§f - §e${lvl}§f [Specialist]${!guild ? "" : "\n§s" + guild?.act.xp + "XP§f - §e" + guild?.act.lvl + "§f [" + guild?.name + "§r§f]"}
 
-    §e$${money}§f | §b§l${voxn} Voxn§r§f
+    §e$${money.toFixed(1)}§f | §b§l${voxn} Voxn§r§f
     §eS ${Math.round(staminaValue / (staminaMax + staminaAdd) * 100).toFixed(0)} §bT ${Math.round(thirstValue / thirstMax * 100).toFixed(0)}§f
-    Rep ${reputation} AP ${game.getOnlineCount()}
-    ${data.specialist.lvl >= 8 || !options.uiLevelRequirement ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id : "minecraft:air" : ""}${sts}${cooldown}
+    Rep ${reputation} AP ${Terra.getOnlineCount()}${data.specialist.lvl >= 8 || !options.uiLevelRequirement ? "\n"+this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id : "minecraft:air" : ""}${sts}${cooldown}
     `,
     { fadeInDuration: 0, fadeOutDuration: 0, stayDuration: 0 }
     )
@@ -279,6 +285,7 @@ class Specialist extends Entity {
     return this.getData().stamina;
   }
   addStamina(key, amount = 0) {
+    if(this.status().getAllStatusBy({ type: "st_stuck" }).length > 0) return;
     if(!key) return;
     if(!Object.keys(rawSpecialist.stamina).includes(key)) return;
     if(
@@ -364,7 +371,7 @@ class Specialist extends Entity {
     this.setThirst("value", rawSpecialist.thirst.value);
     this.setThirst("max", rawSpecialist.thirst.max);
   }
-  setDefaultValueThirst() {
+  setValueDefaultThirst() {
     this.setThirst("value", this.getThirst().max);
   }
 
@@ -407,7 +414,7 @@ class Specialist extends Entity {
   }
 
   // Skill Method
-  impactSkill(dmg = 1, { single = false, ver = 0, velocity, ent, multiplier = 1, team = [this.player.name], cause = "entityAttack" }, impactFunction) {
+  impactSkill(dmg = 1, { single = false, ver = 0, velocity, ent, multiplier = 1, team = [this.player.name], cause = "entityAttack", rune = rawRuneStat }, impactFunction) {
     if(single && !ent) return;
 
     if(!velocity) velocity = this.player.getVelocity;
@@ -422,10 +429,10 @@ class Specialist extends Entity {
 
         if(!single) {
           world.getDimension(this.player.dimension.id).getEntities({ location: this.player.location, maxDistance: 6, minDistance: 0, excludeNames: [...team], excludeTypes: ["minecraft:item","cz:indicator"]}).forEach(e => {
-        	new Entity(e).addDamage(dmg * multiplier, { cause, damagingEntity: this.player })
+        	new Entity(e).addDamage(dmg * multiplier, { cause, damagingEntity: this.player, rune, isSkill: true })
           })
         } else {
-          ent.addDamage(dmg * multiplier, { cause: "entityAttack", damagingEntity: this.player })
+          ent.addDamage(dmg * multiplier, { cause: "entityAttack", damagingEntity: this.player, rune, isSkill: true })
         }
 
         if(typeof impactFunction === 'function') impactFunction?.();
@@ -504,6 +511,11 @@ class Specialist extends Entity {
     if(slot < 0 || slot > 35) return;
 
     this.getComponent("inventory").container.setItem(slot, item);
+  }
+
+  // Rune Method
+  rune() {
+    return new Rune(this);
   }
 
   // Misc Method

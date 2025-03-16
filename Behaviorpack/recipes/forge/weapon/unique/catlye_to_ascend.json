@@ -1,0 +1,20 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "cz:catlye_to_ascend"
+    },
+    "tags": [
+      "forger"
+    ],
+    "ingredients": [
+      {
+        "item": "cz:catlye"
+      }
+    ],
+    "result": {
+      "item": "cz:unique_ascend"
+    },
+    "group": "unique_ascend"
+  }
+}

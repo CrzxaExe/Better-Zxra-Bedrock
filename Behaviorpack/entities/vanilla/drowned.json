@@ -67,7 +67,7 @@
       },
       "minecraft:melee_mode": {
         "minecraft:attack": {
-          "damage": 6
+          "damage": 4
         },
         "minecraft:behavior.melee_attack": {
           "priority": 3,
@@ -164,14 +164,14 @@
           "add_effects": [
             {
               "effect": "regeneration",
-              "duration": 10
+              "duration": 5
             }
           ]
         },
         "minecraft:damage_sensor": {
           "triggers": {
             "cause": "all",
-            "damage_multiplier": 0.5
+            "damage_multiplier": 0.7
           }
         }
       }

@@ -1,0 +1,21 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:structure_template_feature": {
+    "description": {
+      "identifier": "cz:hell_cremation_feature"
+    },
+    "structure_name": "mystructure:hell_cremation",
+    "adjustment_radius": 16,
+    "facing_direction": "random",
+    "constraints": {
+      "grounded": {},
+      "unburied": {},
+      "block_intersection": {
+        "block_allowlist": [
+          "minecraft:air",
+          "minecraft:netherrack"
+        ]
+      }
+    }
+  }
+}

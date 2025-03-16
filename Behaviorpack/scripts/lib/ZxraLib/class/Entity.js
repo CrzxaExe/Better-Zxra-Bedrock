@@ -1,5 +1,6 @@
-import { Game, mergeObject, Status } from "../module.js";
-import { EffectTypes, MolangVariableMap, system, world } from "@minecraft/server";
+import { mergeObject, Status, Specialist, rawRuneStat } from "../module.js";
+import { Terra } from "../class.js";
+import { EffectTypes, MolangVariableMap, system, world, Player } from "@minecraft/server";
 import { Npc } from "../../npc-class.js";
 
 class Entity {
@@ -27,7 +28,7 @@ class Entity {
   }
   isTeammate(id) {
     if(!this.is("player")) return;
-    return new Game().guild().getTeammate(id).some(e => e.id === this.entity.id);
+    return Terra.guild.getTeammate(id).some(e => e.id === this.entity.id);
   }
 
   // Family Method
@@ -89,6 +90,9 @@ class Entity {
   }
   hasDebuffEffect() {
 	return this.entity.getEffects()?.some(e => ["weakness","blindness","slowness","mining_fatigue","darkness","poison","wither","instant_damage"].includes(e.typeId))
+  }
+  removeAllDebuffEffect() {
+    this.removeEffect(["weakness","blindness","slowness","mining_fatigue","darkness","poison","wither","instant_damage"])
   }
 
   // Command Method
@@ -165,6 +169,10 @@ class Entity {
         case "silence":
           this.entity.addTag("silence");
           break;
+        case "mudrock_shield":
+          if(this.getComponent("inventory").container.getSlot(this.entity.selectedSlotIndex).getItem()?.typeId?.split(":")[1] !== "mudrock") break;
+          this.entity.triggerEvent("cz:mudrock_shield");
+          break;
 	  }
 	}
   }
@@ -176,19 +184,40 @@ class Entity {
   }
 
   // Essentials Method
-  addDamage(damage = 1, option = { cause: "entityAttack", damagingEntity: this.entity }, knockback) {
-    let multiplier = 1.0;
+  addDamage(damage = 1, option = { cause: "entityAttack", damagingEntity: this.entity, rune: rawRuneStat, isSkill: false }, knockback) {
+    let actorRune = rawRuneStat;
+    let multiplier = 1.0 + option.rune.atk;
+    
+    if(this.entity instanceof Player)
+      actorRune = new Specialist(this.entity).rune().getAllUsedRuneStat();
 
-    switch(option.cause) {
-      case "entityAttack":
-        multiplier = this.status().decimalCalcStatus({ type: "fragile" }, 1, 0.01, true);
-        break;
-      case "magic":
-        multiplier = this.status().decimalCalcStatus({ type: "art_fragile" }, 1, 0.01, true);
-        break;
+    if(actorRune.skillDodge > 0 && option.isSkill) {
+      const skillDodge = Math.floor(Math.random() * 100);
+      if(skillDodge > 100 * (1 - actorRune.skillDodge)) return;
+    }
+    
+    let currentDamage = damage + option.rune.atkFlat;
+    if(option.isSkill) currentDamage += option.rune.skillFlat - actorRune.skillDamageRedFlat;
+
+    const fragility = {
+      entityAttack: "fragile",
+      magic: "art_fragile",
+      fire: "fire_fragile",
+      lightning: "lightning_fragility"
+    }[option.cause] || "";
+
+    if(fragility !== "") multiplier += this.status().decimalCalcStatus({ type: fragility }, 0, 0.01, true);
+    if(["fire","lightning"].includes(option.cause)) multiplier += this.status().decimalCalcStatus({ type: "elemental_fragile" }, 0, 0.01, true);
+
+    if(option.isSkill) currentDamage *= 1 - option.rune.skillDamageRed;
+    currentDamage *= multiplier
+
+    if(option.rune.critChance > 0 && option.isSkill) {
+      const critChance = Math.floor(Math.random() * 100);
+      if(critChance > 100 * (1 - option.rune.critChance)) currentDamage *= option.rune.critDamage;
     }
 
-    this.entity.applyDamage(Math.round(damage * multiplier), option);
+    this.entity.applyDamage(Math.round(currentDamage), { cause: option.cause, damagingEntity: option.damagingEntity });
 
     if(!knockback) return;
     const { vel = this.entity.getVelocity(), hor = 0, ver = 0 } = knockback;
@@ -196,6 +225,13 @@ class Entity {
   }
   heal(amount = 1) {
     const hp = this.getComponent("health");
+    let rune = rawRuneStat;
+
+    if(this.entity instanceof Player)
+      rune = new Specialist(this.entity).rune().getAllUsedRuneStat();
+
+    amount *= 1 + rune.healingEffectivity;
+
     hp.currentValue + Math.abs(amount) >= hp.effectiveMax ? hp.setCurrentValue(hp.effectiveMax) : hp.setCurrentValue(hp.currentValue + Math.abs(amount));
   }
   healable(heal = { amount: 1, source: "none" }, effect) {
