@@ -16,7 +16,7 @@ const questPanel = (player) => {
       { translate: `${quest.title}` },
       { text: "\n \n" },
       { translate: `${quest.des}` },
-      { text: `\n${data.actRaw()}\n` },
+      { text: `\n${data.actRaw()}\n\n` },
       { translate: "system.reward" },
       { text: `${data.rewardRaw()}` }
       ]})

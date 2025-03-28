@@ -1,33 +1,10 @@
-import { world, system } from "@minecraft/server";
-import { Leaderboard, Guild, ZxraLib } from "../module.js";
+import { world } from "@minecraft/server";
+import { Leaderboard, Guild, Terra, ZxraLib } from "../module.js";
 import * as json from "../../data.js";
 
-const players = [];
-
 class Game {
-  constructor() {
-   if(Game.#instance) 
-      throw new Error("Game must be singleton");
-      
-    this.guild = null;
-    this.leaderboard = null;
-  }
-  
-  static #instance = null;
-  
-  static getInstance() {
-    if(!Game.#instance) {
-      Game.#instance = new Game();
-    }
-    return Game.#instance;
-  }
-  
-  initialize() {
-    this.leaderboard = new Leaderboard();
-    this.guild = new Guild();
-    
-    this.guild.setup(this);
-    this.leaderboard.setup(this);
+  constructor(terra) {
+    this.terra = terra || Terra;
   }
 
   // Data Method
@@ -71,27 +48,6 @@ class Game {
 	console.warn(`Load...\n[BZB] Version v${ZxraLib.packVersion}\n[BZB] Using ZxraLib v${ZxraLib.version}\n[BZB] Setting morld gamerules...`);
 	Object.keys(rules).forEach(r => world.getDimension("minecraft:overworld").runCommand(`gamerule ${r} ${rules[r]}`));
   };
-
-  getActiveDimension() {
-    return world.getPlayers().reduce((all, cur) => {
-      if(all.includes(cur.dimension.id)) return all;
-      all.push(cur.dimension.id);
-      return all;
-    }, [])
-  }
-  
-  /* -------------------------------------------------------------------------------
-  * // Efficiency Method
-  --------------------------------------------------------------------------------*/
-  
-  allPlayers() {
-    return players;
-  }
-  setPlayers(arr) {
-    if(Array.isArray(arr)) throw new Error("Error on setting players")
-    players.splice(0)
-    players.push(...arr)
-  }
   
   /* -------------------------------------------------------------------------------
   * // Setting Method
@@ -101,6 +57,19 @@ class Game {
   };
   setSetting(obj) {
     this.setData("option", JSON.stringify(obj));
+  };
+  
+  /* -------------------------------------------------------------------------------
+  * // Leaderboard Method
+  --------------------------------------------------------------------------------*/
+  leaderboard() {
+    return this.terra.leaderboard;
+  };
+  /* -------------------------------------------------------------------------------
+  * // Guild Method
+  --------------------------------------------------------------------------------*/
+  guild() {
+    return this.terra.guild;
   };
 }
 

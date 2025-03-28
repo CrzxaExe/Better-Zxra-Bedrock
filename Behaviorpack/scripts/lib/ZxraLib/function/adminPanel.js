@@ -5,8 +5,7 @@ import {
   MessageFormData,
 } from "@minecraft/server-ui";
 import { setOptions } from "../../../main.js";
-import { mergeObject, Specialist, runeAdmin } from "../module.js";
-import { Terra } from "../class.js";
+import { mergeObject, Specialist, runeAdmin, Terra } from "../module.js";
 
 const adminPanel = (player, lib) => {
   let ui = new ActionFormData()
@@ -177,7 +176,7 @@ const settingPanel = (player, lib) => {
 
         setOptions(mergeObject(lib.options, newOptions));
 
-        Terra.setSetting(mergeObject(lib.options, newOptions));
+        Terra.game.setSetting(mergeObject(lib.options, newOptions));
         player.sendMessage({ translate: "system.settings.update" });
       });
 };
@@ -195,7 +194,7 @@ const resetLb = (player, lib) => {
         return adminPanel(player, lib);
 
       player.sendMessage({ translate: "system.reseted.leaderboard" });
-      Terra.leaderboard().resetLb();
+      Terra.leaderboard.resetLb();
     });
 };
 
@@ -223,11 +222,17 @@ const economy = (player, lib) => {
           return player.sendMessage({ translate: "system.invalidPlayer" });
         let sp = new Specialist(plyr);
 
-        [
-          sp.addMoney,
-          sp.takeMoney,
-          sp.setMoney,
-        ][type]?.(value)
+        switch (type) {
+          case 0:
+            sp.addMoney(value);
+            break;
+          case 1:
+            sp.takeMoney(value);
+            break;
+          case 2:
+            sp.setMoney(value);
+            break;
+        }
       });
 };
 
@@ -312,6 +317,10 @@ const guildLvl = (player, lib) => {
       { translate: "system.min" },
       { translate: "system.set" },
     ])
+    .dropdown({ translate: "system.method.gdKey" }, [
+      { translate: "system.lvl" },
+      { translate: "system.xp" },
+    ])
     .dropdown(
       { translate: "guild.name" },
       guilds.map((r) => r.name)
@@ -321,19 +330,24 @@ const guildLvl = (player, lib) => {
     .then((e) => {
       if (e.canceled) return adminPanel(player, lib);
 
-      let [type, id, amount] = e.formValues;
+      let [type, key, id, amount] = e.formValues;
 
       amount = parseInt(amount);
 
-      switch (type) {
+      switch(key) {
         case 0:
-          Terra.guild.addLvl(guilds[id].id, amount);
+          switch(type) {
+            case 0: Terra.guild.addLvl(guilds[id].id, amount); break;
+            case 1: Terra.guild.minLvl(guilds[id].id, amount); break;
+            case 2: Terra.guild.setLvl(guilds[id].id, amount); break;
+          }
           break;
         case 1:
-          Terra.guild.minLvl(guilds[id].id, amount);
-          break;
-        case 2:
-          Terra.guild.setLvl(guilds[id].id, amount);
+          switch(type) {
+            case 0: Terra.guild.addXp(guilds[id].id, amount); break;
+            case 1: Terra.guild.minXp(guilds[id].id, amount); break;
+            case 2: Terra.guild.setXp(guilds[id].id, amount); break;
+          }
           break;
       }
     });

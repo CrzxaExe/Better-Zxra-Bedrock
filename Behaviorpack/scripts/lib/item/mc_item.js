@@ -1,10 +1,7 @@
 import { world, system, ItemStack } from "@minecraft/server";
 import { ActionFormData, MessageFormData, ModalFormData } from "@minecraft/server-ui";
 
-import { teleportUi, teleportConfirm, teleportToPlayer, SpecialItem, Entity, Specialist, couponEdit, couponUse, ItemContainer } from '../ZxraLib/module.js';
-import {
-  Terra
-} from "../ZxraLib/class.js";
+import { teleportUi, teleportConfirm, teleportToPlayer, Game, SpecialItem, Entity, Specialist, couponEdit, couponUse, ItemContainer } from '../ZxraLib/module.js';
 
 // Const
 const PLAYER_MAX_HEALTH = 28;
@@ -44,10 +41,10 @@ SpecialItem.addItem("money_card", (player, item) => {
   player.runCommand(`clear @s ${item.typeId} 0 1`)
 })
 
-SpecialItem.addItem("guild_max_member_up", (player, item) => {
-  let gd = Terra.guild.gd().findIndex(e => e.id === id);
+SpecialItem.addItem("guild_member_add", (player, item) => {
+  let gd = new Game().guild().gd().find(e => e.member.some(r => r.id === player.id));
   if(!gd) return player.sendMessage({ translate: "system.guild.notHave" });
-  Terra.guild.addMaxMember(gd.id, 1);
+  new Game().guild().addMaxMember(gd.id, 1);
   player.runCommand(`clear @s ${item.typeId} 0 1`)
 })
 

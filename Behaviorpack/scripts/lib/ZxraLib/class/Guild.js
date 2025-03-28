@@ -1,15 +1,12 @@
-import { uniqueId, mergeObject, leveling, Specialist } from "../module.js";
+import { uniqueId, mergeObject, leveling, Specialist, Terra } from "../module.js";
 import * as jsonData from "../../data.js";
 
 class Guild {
-  constructor() {
-    this.guild = null;
-  }
-
-  setup(game) {
-    if(this.guild) return;
-    this.guild = game;
-  }
+  constructor(cls) {
+    if(!cls) throw new Error("Guild must have Game Class");
+    this.guild = cls;
+    this.lib = jsonData.guild
+  };
 
   gd() {
     //console.warn(JSON.stringify(this.getData("guilds")))
@@ -72,13 +69,13 @@ class Guild {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
     if(find === -1) return;
-    let member = data[find].member.includes(player.id)
-    if(data[find].member.length + 1 > data.maxMember) return player.sendMessage({ translate: "system.guild.full" });
-
+    let member = data[find].member.map(e => e.id).includes(player.id)
     if(member) return;
+    if(data[find].member.length + 1 > data[find].maxMember) return //player.sendMessage({ translate: "system.guild.full" });
+
     data[find].member.push({
       id: player.id,
-      username: player.name,
+      username: player.name || player.username,
       role: "member"
     })
     this.setGd(data)
@@ -92,6 +89,7 @@ class Guild {
 
     if(member === -1) return;
     data[find].member[member].role = role
+    console.warn(JSON.stringify(data[find]))
     this.setGd(data)
   };
   
@@ -99,7 +97,7 @@ class Guild {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
     if(find === -1) return;
-    let member = data[find].member.findIndex(e => e.id === plyr)
+    let member = data[find].member.findIndex(e => e.id === plyr.id)
 
     if(member === -1) return;
     data[find].member.splice(member, 1)
@@ -111,30 +109,14 @@ class Guild {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
     if(find === -1) return;
-    let apply = data.apply.findIndex(e => e.id === player.id)
+    let apply = data[find].apply.findIndex(e => e.id === player.id)
 
-    if(data.member.length + 1 > data.maxMember) return player.sendMessage({ translate: "system.guild.full" });
+    if(data[find].member.length + 1 > data[find].maxMember) return; //player.sendMessage({ translate: "system.guild.full" });
 
     if(apply === -1) return;
-    
-    this.addMemberFromApply(id, {
-      id: player.id,
-      username: player.name,
-      role: "member"
-    }, player)
+
     this.rejectMemberGuild(id, player)
-  };
-
-  addMemberFromApply(id, { userId, username, role }, player) {
-    let data = this.gd(), find = data.findIndex(e => e.id === id);
-
-    if(find === -1) return;
-    let apply = data.apply.findIndex(e => e.id === userId)
-    
-    if(data.member.length + 1 > data.maxMember) {
-      if(player) player.sendMessage({ translate: "system.guild.full" });
-      return;
-    }
+    this.addMemberGuild(id, player)
   };
 
   applyMemberGuild(id, player) {
@@ -152,7 +134,7 @@ class Guild {
     let data = this.gd(), find = data.findIndex(e => e.id === id);
 
     if(find === -1) return;
-    let appl = data[find].apply.findIndex(e => e.id === plyr);
+    let appl = data[find].apply.findIndex(e => e.id === plyr.id);
     
     if(appl === -1) return;
     data[find].apply.splice(appl, 1)
@@ -161,7 +143,7 @@ class Guild {
 
   // Token Method
   getToken(id) {
-    return this.getGuildById(id)?.token;
+    return this.getGuildById(id)?.token || 0;
   };
 
   addToken(id, amount) {
@@ -198,7 +180,7 @@ class Guild {
 
     if(find === -1) return;
     if(data[find].act.xp + Number(amount) > (50 * data[find].act.lvl) + 50) {
-      let counter = leveling(data[find].act.xp, data[find].act.lvl, level => (50 * level) + 50);
+      let counter = leveling(data[find].act.xp + Number(amount), data[find].act.lvl, level => (50 * level) + 50);
 
       data[find].act = { xp: counter.xp, lvl: counter.lvl }
     } else

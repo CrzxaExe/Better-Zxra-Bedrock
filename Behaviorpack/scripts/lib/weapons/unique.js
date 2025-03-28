@@ -209,7 +209,7 @@ Weapon.registerSkill("silent", (player, lib, event) => {
 			player.teleport(pos, { rotation: player.getRotation() })
 			let stack = world.scoreboard.getObjective("silent").getScore(player.scoreboardIdentity) || 0
 			silentState.splice(silentState.indexOf(player.id), 1)
-			lib.sp.runCommand([`damage @e[tag=silent_target] ${(stack*6+12) * lib.multiplier} entity_attack entity @s`,`execute as @e[tag=silent_target] run particle cz:silent_nuke ~~1.1~`,`scoreboard players set @s silent 0`,`tag @e remove silent_target`])
+			lib.sp.runCommand([`damage @e[tag=silent_target] ${Number((stack*0.4+6) * lib.multiplier).toFixed(0)} entity_attack entity @s`,`scoreboard players set @s silent 0`,`tag @e remove silent_target`])
 		}, 100)
 	} else if(player.isOnGround == false && player.isSneaking == false) {// Skill 3
 	    if(lib.sp.cooldown().cd("silent3", 6)) return
@@ -222,8 +222,9 @@ Weapon.registerSkill("silent", (player, lib, event) => {
 	    system.runTimeout(() => {
 		  player.dimension.getEntities({ location: player.location, maxDistance: 6, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"]}).forEach(e => {
 			const ent = new Entity(e);
-			ent.addDamage(Math.floor((world.scoreboard.getObjective("silent").getScore(player.scoreboardIdentity) * 18 + 18) * lib.multiplier), { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
+			ent.addDamage(Math.floor((world.scoreboard.getObjective("silent").getScore(player.scoreboardIdentity) * 0.6 + 8) * lib.multiplier), { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
 			ent.addEffect({ name: "slowness", duration: 2, lvl: 2 })
+			player.runCommand("scoreboard players add @s silent -4")
             ent.selfParticle("cz:silent_particle", { x: player.location.x, y: player.location.y + 1, z: player.location.z })
 		  })
 		})
@@ -236,9 +237,9 @@ Weapon.registerSkill("silent", (player, lib, event) => {
         let entity = player.getEntitiesFromViewDirection({ maxDistance: 5, excludeTypes: ["minecraft:item","cz:indicator"], excludeNames: [...lib.team] })[0].entity, ent = new Entity(entity)
         if(!entity || entity == null || entity == undefined) return
 
-        player.runCommand("scoreboard players add @s silent 12")
+        player.runCommand("scoreboard players add @s silent 4")
         ent.selfParticle("cz:silent_particle", { x: player.location.x, y: player.location.y + 1, z: player.location.z })
-        ent.addDamage((world.scoreboard.getObjective("silent").getScore(player.scoreboardIdentity)*5) * lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
+        ent.addDamage((world.scoreboard.getObjective("silent").getScore(player.scoreboardIdentity)*0.5) * lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
 	} else {// Skill 1
 	    let target = player.getEntitiesFromViewDirection({ maxDistance: 5, excludeTypes: ["minecraft:item","cz:indicator"], excludeNames: [...lib.team] })[0]
         if(!target || target == undefined) return
@@ -249,14 +250,14 @@ Weapon.registerSkill("silent", (player, lib, event) => {
 	    player.playAnimation("animation.weapon.slice.double", { blendOutTime: 0.05 })
 	    let ent = new Entity(target.entity)
 
-		ent.addDamage(18, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
+		ent.addDamage(10*lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
 		ent.selfParticle("cz:silent_particle", { x: player.location.x, y: player.location.y + 1, z: player.location.z })
-	    player.runCommand("scoreboard players add @s silent 6")
+	    player.runCommand("scoreboard players add @s silent 2")
 	    lib.sp.addEffect({ name: "strength", duration: 5, lvl: 3 })
 
 		system.runTimeout(() => {
 		  ent.selfParticle("cz:silent_particle", { x: player.location.x, y: player.location.y + 1, z: player.location.z })
-          ent.addDamage(26*lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
+          ent.addDamage(12*lib.multiplier, { cause: "entityAttack", damagingEntity: player, rune: lib.rune, isSkill: true })
         }, 10)
 	}
 })

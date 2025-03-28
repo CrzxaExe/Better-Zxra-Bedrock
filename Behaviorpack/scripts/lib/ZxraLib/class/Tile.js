@@ -1,6 +1,5 @@
 import { world } from "@minecraft/server";
-import { BlockContainer } from "../module.js";
-import { Terra } from "../class.js";
+import { Game, BlockContainer } from "../module.js";
 
 class Tile {
   constructor(block) {
@@ -9,13 +8,13 @@ class Tile {
   }
 
   getData() {
-    return Terra.getData("blocks");
+    return new Game().getData("blocks");
   }
   setData(obj) {
-    Terra.setData("blocks", obj);
+    new Game().setData("blocks", obj);
   }
   clearData(obj) {
-    Terra.setData("blocks", []);
+    new Game().setData("blocks", []);
   }
 
   hasTag(tag = []) {

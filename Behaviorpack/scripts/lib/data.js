@@ -123,12 +123,14 @@ export const guildShop = [
   { item: "minecraft:enchanted_book", type: "enchant", enchant: "thorns*1", amount: 1, price: 38, lvl: 7, img: "textures/items/book_enchanted" },
   { item: "minecraft:enchanted_book", type: "enchant", enchant: "unbreaking*1", amount: 1, price: 35, lvl: 6, img: "textures/items/book_enchanted" },
   { item: "minecraft:enchanted_book", type: "enchant", enchant: "wind_burst*1", amount: 1, price: 32, lvl: 8, img: "textures/items/book_enchanted" },
+  { item: "cz:guild_member_add", type: "special",  amount: 1, price: 50, lvl: 9, img: "textures/items/stats" },
   { item: "golden_apple", type: "foods", amount: 6, price: 20, lvl: 0, img: "textures/items/apple_golden" },
+  { item: "cz:heart_shard", type: "special",  amount: 1, price: 30, lvl: 9, img: "textures/items/heart_shard" },
   { item: "cz:mina_ingot", type: "minerals", amount: 4, price: 25, lvl: 3, img: "textures/items/mina/ingot" }
   { item: "cz:plasma_ingot", type: "minerals", amount: 4, price: 12, lvl: 2, img: "textures/items/plasma/ingot" },
   { item: "shulker_shell", type: "materials", amount: 4, price: 30, lvl: 7, img: "textures/items/shulker_shell" },
   { item: "totem_of_undying", type: "special",  amount: 2, price: 19, lvl: 0, img: "textures/items/totem" },
-  { item: "cz:quest_scroll", type: "special", amount: 1, price: 5, lvl: 0, img: "textures/items/quest_scroll" }
+  { item: "cz:quest_scroll", type: "special", amount: 2, price: 5, lvl: 0, img: "textures/items/quest_scroll" }
 ]
 
 export let blockData = {
@@ -292,7 +294,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 123.4 },
 	  { type: "rep", amount: 3 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 4 },
 	  { type: "item/cz:diamond_ascend", amount: 1 },
 	  { type: "item/iron_ingot", amount: 3 },
 	  { type: "token", amount: 5 }
@@ -308,7 +310,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 118.6 },
 	  { type: "rep", amount: 4 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 4 },
 	  { type: "item/cz:diamond_ascend", amount: 1 },
 	  { type: "token", amount: 4 }
     ]
@@ -323,7 +325,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 130.8 },
 	  { type: "rep", amount: 4 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 4 },
 	  { type: "item/cz:diamond_ascend", amount: 1 },
 	  { type: "item/gunpowder", amount: 40 },
 	  { type: "token", amount: 4 }
@@ -340,7 +342,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 146.4 },
 	  { type: "rep", amount: 8 },
-	  { type: "voxn", amount: 4 },
+	  { type: "voxn", amount: 8 },
 	  { type: "item/cz:diamond_ascend", amount: 1 },
 	  { type: "item/gunpowder", amount: 80 },
 	  { type: "token", amount: 6 }
@@ -357,7 +359,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 90.2 },
 	  { type: "rep", amount: 7 },
-	  { type: "voxn", amount: 4 },
+	  { type: "voxn", amount: 8 },
 	  { type: "item/iron_pickaxe", amount: 1 },
 	  { type: "token", amount: 3 }
 	]
@@ -371,7 +373,7 @@ export const questIndex = [
 	],
 	reward: [
 	  { type: "cash", amount: 90.6 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 4 },
 	  { type: "rep", amount: 5 },
 	  { type: "token", amount: 1 }
 	]
@@ -388,7 +390,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 386.9 },
 	  { type: "rep", amount: 8 },
-	  { type: "voxn", amount: 6 },
+	  { type: "voxn", amount: 12 },
 	  { type: "item/cz:diamond_ascend", amount: 1 },
 	  { type: "item/cz:plasma_ingot", amount: 4 },
 	  { type: "token", amount: 9 }
@@ -404,7 +406,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 1023.9 },
 	  { type: "rep", amount: 8 },
-	  { type: "voxn", amount: 4 },
+	  { type: "voxn", amount: 8 },
 	  { type: "item/cz:diamond_ascend", amount: 1 },
 	  { type: "token", amount: 7 }
 	]
@@ -419,7 +421,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 8239.8 },
 	  { type: "rep", amount: 18 },
-	  { type: "voxn", amount: 14 },
+	  { type: "voxn", amount: 28 },
 	  { type: "item/cz:diamond_ascend", amount: 2 },
 	  { type: "item/end_crystal", amount: 4 },
 	  { type: "token", amount: 30 }
@@ -435,7 +437,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 78.8 },
 	  { type: "rep", amount: 3 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 5 },
 	  { type: "token", amount: 1 }
 	]
   },
@@ -450,7 +452,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 92.4 },
 	  { type: "rep", amount: 7 },
-	  { type: "voxn", amount: 4 },
+	  { type: "voxn", amount: 8 },
 	  { type: "item/iron_block", amount: 9 },
 	  { type: "token", amount: 4 }
 	]
@@ -465,7 +467,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 55.6 },
 	  { type: "rep", amount: 6 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 8 },
 	  { type: "item/blaze_rod", amount: 5 },
 	  { type: "token", amount: 6 }
 	]
@@ -481,7 +483,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 76.3 },
 	  { type: "rep", amount: 3 },
-	  { type: "voxn", amount: 4 },
+	  { type: "voxn", amount: 8 },
 	  { type: "item/cooked_mutton", amount: 64 },
 	  { type: "token", amount: 3 }
 	]
@@ -496,7 +498,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 1203.25 },
 	  { type: "rep", amount: 12 },
-	  { type: "voxn", amount: 25 },
+	  { type: "voxn", amount: 50 },
 	  { type: "item/cz:diamond_ascend", amount: 24 },
 	  { type: "token", amount: 69 }
 	]
@@ -511,7 +513,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 77.2 },
 	  { type: "rep", amount: 3 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 4 },
 	  { type: "token", amount: 2 }
 	]
   },
@@ -525,7 +527,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 69.7 },
 	  { type: "rep", amount: 3 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 4 },
 	  { type: "token", amount: 2 }
 	]
   },
@@ -539,7 +541,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 72.2 },
 	  { type: "rep", amount: 5 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 5 },
   	{ type: "token", amount: 2 }
 	]
   },
@@ -555,7 +557,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 242.8 },
 	  { type: "rep", amount: 12 },
-	  { type: "voxn", amount: 5 },
+	  { type: "voxn", amount: 10 },
 	  { type: "item/diamond_pickaxe", amount: 1 },
 	  { type: "token", amount: 5 }
 	]
@@ -571,7 +573,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 96.3 },
 	  { type: "rep", amount: 3 },
-	  { type: "voxn", amount: 4 },
+	  { type: "voxn", amount: 8 },
 	  { type: "token", amount: 6 }
 	]
   },
@@ -586,7 +588,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 164.3 },
 	  { type: "rep", amount: 12 },
-	  { type: "voxn", amount: 8 },
+	  { type: "voxn", amount: 16 },
 	  { type: "item/trident", amount: 1 },
 	  { type: "token", amount: 8 }
 	]
@@ -601,7 +603,7 @@ export const questIndex = [
 	reward: [
 	  { type: "cash", amount: 76.3 },
 	  { type: "rep", amount: 4 },
-	  { type: "voxn", amount: 2 },
+	  { type: "voxn", amount: 5 },
 	  { type: "token", amount: 7 }
 	]
   }

@@ -54,7 +54,7 @@ export const teleportToPlayer = (player, item) => {
     "minecraft:overworld",
     "minecraft:nether",
     "minecraft:the_end"
-  ], py = world.getPlayers(),
+  ], py = Terra.getPlayer(),
   plyr = py.map(e => {
     return { name: e.name, location: e.location, dimension: e.dimension, id: e.id }
   }).filter(e => e.id !== player.id);

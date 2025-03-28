@@ -219,10 +219,10 @@ Weapon.registerSkill("lighter", (player, lib, event) => {
 	system.runTimeout(() => {
 	  lib.sp.selfParticle("cz:lighter_impact")
 	  world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-	    let dmg = 17 * vector2Distance(player.location, e.location), cause = "entityAttack"
+	    let dmg = 8 * vector2Distance(player.location, e.location), cause = "entityAttack"
 	    if(lib.sp.isOnFire()) e.setOnFire(3)
 	    if(new Entity(e).isOnFire()) {
-		  dmg *= 1.5
+		  dmg *= 2.5
 		  cause = "fire"
 		}
 		new Entity(e).selfParticle("minecraft:critical_hit_emitter", { x: e.location.x, y: e.location.y + 1, z: e.location.z })

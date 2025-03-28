@@ -1,5 +1,4 @@
-import { Entity, gachaData, gachaFeatured, userPity, runeData } from "../module.js";
-import { Terra } from "../class.js";
+import { Entity, Game, gachaData, gachaFeatured, userPity, runeData } from "../module.js";
 
 class Gacha {
   static getData() {
@@ -7,7 +6,7 @@ class Gacha {
   }
 
   static getFeatured() {
-    return Terra.getData("gacha", gachaFeatured);
+    return new Game().getData("gacha", gachaFeatured);
   }
 
   static getUserPity(player) {
@@ -46,19 +45,19 @@ class Gacha {
       data = this.getData().weapon,
       featured = this.getFeatured();
 
-    const chance = Math.floor(Math.random() * 101) + pity.pityWeapon.normal/2;
+    const chance = Math.floor(Math.random() * 101) + pity.pityWeapon.normal;
 
-    const rarity = chance > 95 ?
+    const rarity = chance > 92 ?
       "unique" : chance > 75 ?
         "epic" : chance > 35 ?
           "legend" : "rare";
 
-    chance > 95 ? this.resetUserPity(player, "normal") : this.addUserPity(player, "normal", 1);
+    chance > 92 ? this.resetUserPity(player, "normal") : this.addUserPity(player, "normal", 1);
 
-    const subChance = Math.floor(Math.random() * 98) + pity.pityWeapon.featured/2;
+    const subChance = Math.floor(Math.random() * 98) + pity.pityWeapon.featured;
 
-    const wpn = subChance > 97 ? featured[rarity][Math.floor(Math.random() * featured[rarity].length)] : data[rarity][Math.floor(Math.random() * data[rarity].length)];
-    subChance > 97 && featured.unique.includes(wpn) ? this.resetUserPity(player, "featured") : this.addUserPity(player, "featured", 1);
+    const wpn = subChance > 95 ? featured[rarity][Math.floor(Math.random() * featured[rarity].length)] : data[rarity][Math.floor(Math.random() * data[rarity].length)];
+    subChance > 95 && featured.unique.includes(wpn) ? this.resetUserPity(player, "featured") : this.addUserPity(player, "featured", 1);
     
     return { rarity, weapon: wpn };
   }

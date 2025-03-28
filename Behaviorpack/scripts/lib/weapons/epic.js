@@ -154,11 +154,9 @@ Weapon.registerSkill("cenryter", (player, lib, event) => {
     world.getDimension(player.dimension.id).getEntities({ maxDistance: 5, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
       if(!e.getComponent("onfire")) return
       
-      lib.sp.heal(1)
+      lib.sp.heal(2)
       new Entity(e).selfParticle("cz:ourfire_absorb")
-      if(Number((lib.sp.status().getStatus("our_fire")?.lvl) || 0) + 4 <= 40) {
-        lib.sp.status().addStatus("our_fire", 10, { type: "skill", stack: true, lvl: 4 })
-      }
+      lib.sp.status().addStatus("our_fire", 10, { type: "skill", stack: true, lvl: 5 })
     })
   } else if(player.getEffect("strength") && !player.isSneaking) {
     player.playAnimation("animation.weapon.reaper.up", { blendOutTime: 0.35 })// Animation
@@ -170,9 +168,9 @@ Weapon.registerSkill("cenryter", (player, lib, event) => {
       system.runTimeout(() => {
         player.getEntitiesFromViewDirection({ maxDistance: 4, excludeTypes: ["minecraft:item","cz:indicator"], excludeNames: [...lib.team] }).forEach(e => {
           e.entity.setOnFire(5)
-          lib.sp.heal(1)
+          lib.sp.heal(4)
           new Entity(e.entity).selfParticle("cz:orange_reverse_slash")
-          new Entity(e.entity).addDamage(21 * lib.multiplier, { cause: "fire", damagingEntity: player, rune: lib.rune, isSkill: true },{ vel: lib.velocity, hor: 1.4, ver: 0.7 })
+          new Entity(e.entity).addDamage(27 * lib.multiplier, { cause: "fire", damagingEntity: player, rune: lib.rune, isSkill: true },{ vel: lib.velocity, hor: 1.2, ver: 0.9 })
         })
       }, 1)
     }, 6)
@@ -187,7 +185,7 @@ Weapon.registerSkill("cenryter", (player, lib, event) => {
       lib.sp.addEffect({ name: "strength", duration: 5, lvl: 1 })
       world.getDimension(player.dimension.id).getEntities({ maxDistance: 6, location: player.location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
         e.setOnFire(5)
-        lib.sp.heal(1)
+        lib.sp.heal(2)
         new Entity(e).addDamage(15 * lib.multiplier, { cause: "fire", damagingEntity: player, rune: lib.rune, isSkill: true })
         new Entity(e).selfParticle("cz:orange_reverse_slash")
       })
@@ -243,7 +241,7 @@ Weapon.registerSkill("yume_staff", (player, lib, event) => {
       for(let i = 0; i<stack+1; i++) {
         system.runTimeout(() => {
           world.getDimension(dimension.id).getEntities({ maxDistance: 5 + i, location: location, minDistance: 0, excludeNames: [...lib.team], excludeTypes: ["minecraft:item","cz:indicator"] }).forEach(e => {
-            new Entity(e).addDamage((16 + (stack * 1 * i)) * lib.multiplier, { cause: "magic", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel: e.getVelocity(), hor: 0, ver: -0.4 })
+            new Entity(e).addDamage((10 + (stack * 2.5 * i)) * lib.multiplier, { cause: "magic", damagingEntity: player, rune: lib.rune, isSkill: true }, { vel: e.getVelocity(), hor: 0, ver: -0.4 })
             dimension.spawnParticle("cz:yume_explosion", location)
             dimension.spawnParticle("cz:yume_explosion_ring", newLocation)
           })

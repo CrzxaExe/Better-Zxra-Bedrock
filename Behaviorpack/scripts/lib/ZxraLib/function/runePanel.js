@@ -148,7 +148,7 @@ const runeAdmin = (player) => {
   const ui = new ModalFormData()
     .title("cz.rune")
     .dropdown({ translate: "system.method.rune" }, select)
-    .dropdown({ translate: "cz.rune" }, runes)
+    .dropdown({ translate: "cz.rune" }, runes.map(e => formatName(e)))
     .show(player)
     .then(e => {
       if(e.canceled) return;

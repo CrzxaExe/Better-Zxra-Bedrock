@@ -67,6 +67,7 @@ class Status {
 
   // Operation Method
   addStatus(name, duration = 1, { type = "none", decay = "time", stack, lvl = 1 }) {
+    if(["cz:block_data","minecraft:item","minecraft:sheep","minecraft:cow","minecraft:pig","minecraft:bee","minecraft:sniffer","minecraft:allay","minecraft:chicken"].includes(this.ent.entity.typeId)) return;
     if(!name) return;
 
     switch(type) {

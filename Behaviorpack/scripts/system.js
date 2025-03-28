@@ -1,9 +1,6 @@
 import { EffectTypes, ItemStack, system, world, Player } from "@minecraft/server";
-import { leveling, Entity, Items } from "./lib/ZxraLib/module.js";
+import { Dirty, Ench, Game, leveling, Temp, Entity, Items, Cooldown } from "./lib/ZxraLib/module.js";
 import { Npc } from "./lib/npc-class.js";
-import {
-  Terra
-} from "./lib/ZxraLib/class.js";
 import * as data from "./lib/data.js";
 
 // Main Class of Block UI
@@ -26,8 +23,8 @@ export class Tile {
 	constructor(block) {
 		if(!block) throw new Error("Invalid block")
 		this.block = block
-		this.world = Terra
-		this.entity = world.getEntityAtBlock(this.block, "block_data")
+		this.world = new Game()
+		this.entity = this.world.getEntityAtBlock(this.block, "block_data")
 		if(!this.entity || this.entity == undefined || this.entity == null) {
           world.getDimension(block.dimension.id).spawnEntity("cz:block_data")
           this.entity = this.world.getEntityAtBlock(this.block, "block_data")

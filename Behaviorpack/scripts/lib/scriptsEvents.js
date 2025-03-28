@@ -2,10 +2,7 @@ import { EffectTypes, system, world, Player } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import { userPanel } from "./items.js";
 import { Npc } from "./npc-class.js";
-import { Game, Entity, farmerShop, Specialist } from './ZxraLib/module.js';
-import {
-  Terra
-} from "./ZxraLib/class.js";
+import { Entity, farmerShop, Specialist, Terra } from './ZxraLib/module.js';
 import * as jsonData from "./data.js";
 
 var dis = {}

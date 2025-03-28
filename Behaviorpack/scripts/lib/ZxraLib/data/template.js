@@ -34,3 +34,39 @@ export const rawRuneStat = {
   skillDamageRedFlat: 0,
   staminaReduction: 0
 }
+
+export const rawWorld = {
+  setting: {},
+  leaderboard: {},
+  guild: [],
+  redeem: []
+}
+
+export const setting = {
+  rules: {
+    naturalregeneration: true,
+    recipesunlock: false,
+    showcoordinates: true,
+    spawnradius: 1
+  },
+  staminaCooldown: true,
+  staminaExhaust: 3,
+  staminaRecovery: 1.5,
+  staminaAction: 3,
+  staminaHurt: 3,
+  staminaRun: 0.5,
+  thirstDown: 0.001,
+  customChat: true,
+  customChatPrefix: "%guild%name > %msg",
+  shopMultiplier: 1.0,
+  xpMultiplier: 1.0,
+  debug: false,
+  useBzbRules: true,
+  deathLocation: true,
+  damageIndicator: true,
+  starterItem: true,
+  starterItemMessage: "system.welcome.item",
+  starterItems: "cz:stats*1",
+  uiLevelRequirement: true,
+  saveInterval: 5000
+}

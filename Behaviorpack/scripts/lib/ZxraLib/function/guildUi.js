@@ -1,7 +1,6 @@
 import { ActionFormData, ModalFormData, MessageFormData } from "@minecraft/server-ui";
 import { ItemStack, EnchantmentType, system } from "@minecraft/server";
-import { Specialist } from "../module.js";
-import { Terra } from "../class.js";
+import { Specialist, Game, Terra } from "../module.js";
 
 import * as jsonData from "../../data.js";
 
@@ -198,7 +197,7 @@ const guildLeave = (player, { id, name, member }) => {
       if(s.canceled || !s.selection || s.selection === 0) return;
 
       if(member.some(e => e.id === player.id && e.role === "superadmin")) return player.sendMessage({ translate: "system.guild.isOwner" })
-      Terra.guild.removeMemberGuild(id, player.id)
+      Terra.guild.removeMemberGuild(id, player)
       player.sendMessage({ translate: "system.guild.leaved" })
     })
 };
@@ -267,6 +266,7 @@ const guildAcc = (player, { id, apply, select }) => {
     .show(player)
     .then(e => {
       if(e.canceled) return;
+      console.warn(id)
 
       switch(e.selection) {
         case 0:
@@ -318,12 +318,12 @@ const guildUser = (player, { member, id, select }) => {
   ui.show(player)
     .then(e => {
       if(e.canceled) return;
-
-      [
-        guildMember,
-        guildRole,
-        guildKick
-      ][e.selection]?.(player, { member, id, select })
+      
+      switch(e.selection) {
+        case 0: guildMember(player, { member, id }); break;
+        case 1: guildRole(player, { member, id, select }); break;
+        case 2: guildKick(player, { member, id, select }); break;
+      };
     })
 };
 
@@ -339,8 +339,8 @@ const guildRole = (player, { member, id, select }) => {
     role.pop();
 
   let ui = new ModalFormData()
-    .title({ rawtext: [{ translate: "system.guild.role.ch" },{ text: ` ${user.username}` }]})
-    .dropdown({ translate: "system.guild.role.sel" }, role)
+    .title({ rawtext: [{ translate: "system.guild.role.ch" },{ text: ` ${member[select].username}` }]})
+    .dropdown({ translate: "system.guild.role.sel" }, role, roleType.findIndex(r => r === member[select].role))
     
   ui.show(player)
     .then(e => {
@@ -348,7 +348,7 @@ const guildRole = (player, { member, id, select }) => {
 
       let [roleId] = e.formValues;
 
-      Terra.guild.updateMemberGuild(id, player, roleType[roleId])
+      Terra.guild.updateMemberGuild(id, member[select], roleType[roleId])
       player.sendMessage({ rawtext: [{ text: `${member[select].username} ` },{ translate: "system.guild.role.updated" }]})
     })
 };
@@ -368,8 +368,8 @@ const guildKick = (player, { member, id, select }) => {
     .then(e => {
       if(e.canceled || !e.selection || e.selection === 0) return;
 
-      Terra.guild.removeMemberGuild(id. player.id)
       player.sendMessage({ rawtext: [{ text: `${member[select].username} ` },{ translate: "system.guild.kicked" }]})
+      Terra.guild.removeMemberGuild(id, member[select])
     })
 };
 

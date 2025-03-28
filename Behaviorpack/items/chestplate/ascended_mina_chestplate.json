@@ -1,17 +1,17 @@
 {
-  "format_version": "1.20.20",
+  "format_version": "1.21.60",
   "minecraft:item": {
     "description": {
       "identifier": "cz:ascended_mina_chestplate",
       "menu_category": {
         "category": "equipment",
-        "group": "itemGroup.name.chestplate",
+        "group": "minecraft:itemGroup.name.chestplate",
         "is_hidden_in_commands": false
       }
     },
     "components": {
       "minecraft:icon": {
-        "texture": "mina_chestplate_asc"
+        "textures": { "default": "mina_chestplate_asc" }
       },
       "minecraft:max_stack_size": 1,
       "minecraft:enchantable": {
@@ -35,12 +35,9 @@
           }
         ]
       },
-      "minecraft:mining_speed": 1,
-      "minecraft:damage": 3,
       "minecraft:wearable": {
         "slot": "slot.armor.chest",
-        "protection": 11,
-        "dispensable": true
+        "protection": 11
       },
       "minecraft:display_name": {
         "value": "item.ascended_mina_chestplate.name"

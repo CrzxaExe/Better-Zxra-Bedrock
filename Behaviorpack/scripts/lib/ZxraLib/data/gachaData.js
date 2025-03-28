@@ -66,5 +66,4 @@ const userPity = {
     featured: 0
   }
 }
-
 export { gachaData, gachaFeatured, userPity };

@@ -12,7 +12,7 @@
       "minecraft:flammable": false,
       "tag:heavy_ingot_block": {},
       "tag:heavy_ingot_block1": {},
-      "minecraft:loot": "loot_tables/block/mina_block",
+      "minecraft:loot": "loot_tables/block/mina_block.json",
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 20.0
       }

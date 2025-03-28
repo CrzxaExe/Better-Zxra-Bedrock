@@ -1,9 +1,6 @@
 import { world, system, ItemStack } from "@minecraft/server";
-import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { Quest, Specialist, guildUi, adminPanel, questPanel, shop, SpecialItem, runePanel, formatName, gachaPanel } from "./ZxraLib/module.js";
-import {
-  Terra
-} from "./ZxraLib/class.js";
+import { ActionFormData, ModalFormData, MessageFormData } from "@minecraft/server-ui";
+import { Quest, Specialist, guildUi, adminPanel, questPanel, shop, SpecialItem, runePanel, formatName, gachaPanel, Terra } from "./ZxraLib/module.js";
 import * as data from "./data.js"
 
 import "./item/vial.js";
@@ -30,26 +27,27 @@ let shopPanel = (plyr, lib) => {
 	// Showing Shop panel and getting the res
 	hpk.show(plyr).then(r => {
 		if(r.canceled) return
-		const bol = new ActionFormData()
+		let menu = "blocks",
+          bol = new ActionFormData()
             .title("cz:shop")
             .body({ translate: "cz.shop.body" })
 
 		// Get menu
-		const menu = [
-		  "blocks",
-		  "crops",
-		  "foods",
-		  "materials",
-		  "minerals",
-		  "redstone",
-		  "special"
-		][r.selection]
+		switch(r.selection) {
+			case 0: menu = "blocks"; break;
+			case 1: menu = "crops"; break;
+			case 2: menu = "foods"; break;
+			case 3: menu = "materials"; break;
+			case 4: menu = "minerals"; break;
+			case 5: menu = "redstone"; break;
+			case 6: menu = "special"; break;
+		}
 
 		// Button item factory
 		shop[menu].forEach(i => {
-	      let name = i.item.replace("cz:", "").replace(/_/gi, " "), img = i.img || ""
-	      if(i.voxn) return bol.button(`${name.charAt(0).toUpperCase() + name.slice(1)}\n${i.price} Voxn`, img)
-          bol.button(`${name.charAt(0).toUpperCase() + name.slice(1)}\n$${(i.price * day).toFixed(2)}`, img)
+	      let img = i.img || ""
+	      if(i.voxn) return bol.button(`${formatName(i.item)}\n${i.price} Voxn`, img)
+          bol.button(`${formatName(i.item)}\n$${(i.price * day).toFixed(2)}`, img)
           
         })
 
@@ -119,9 +117,21 @@ let shopPanel = (plyr, lib) => {
 	jlm.show(player).then(r => {
 		if(r.canceled) return
 		switch(r.selection) {
-			case 0: data.clearData(); player.sendMessage({ translate: "system.reset.user" }); break;
+			case 0:
+			  const iui = new MessageFormData()
+			    .title({ translate: "system.reset.user.title" })
+			    .body({ translate: "system.reset.user.body" })
+			    .button2({ translate: "system.yes" })
+                .button1({ translate: "system.cancel" })
+                .show(player)
+                .then(e => {
+                  if (e.canceled || !e.selection || e.selection === 0) return;
+                  data.clearData();
+                  player.sendMessage({ translate: "system.reset.user" });
+                })
+              break;
 			case 1: transferPanel(player); break;
-			case 2: player.dimension.runCommand("reload"); break;
+			case 2: world.getDimension(player.dimension.id).runCommand("reload"); break;
 			case 3: data.resetMoney(); player.sendMessage({ translate: "system.reset.bal" }); break;
 			case 4: data.resetAllStamina(); player.sendMessage({ translate: "system.reset.stamina" }); break;
 			case 5: data.temp().reset(); player.sendMessage({ translate: "system.reset.temp" }); break;
@@ -147,12 +157,12 @@ let shopPanel = (plyr, lib) => {
 
 		let [user, amount] = r.formValues, target = players[user]
 		if(!target || target == "None") return player.sendMessage({ translate: "system.invalidPlayer.name" })
-		data.transferMoney(Terra.getPlayerName(target), Number(amount))
+		data.transferMoney(Terra.game.getPlayerName(target), Number(amount))
 	})
 }
 
 SpecialItem.addItem("stats", (player, item, lib) => {
-	let data = new Specialist(player), guild = Terra.guild.gd().find(e => e.member.some(r => r.id === player.id));
+	let data = new Specialist(player), guild = Terra.game.guild().gd().find(e => e.member.some(r => r.id === player.id));
 	let specialist = data.getData();
 
     let stats = new ActionFormData()
@@ -166,7 +176,7 @@ Rep ${specialist.reputation}
 §eStamina(S) ${(specialist.stamina.value.toFixed(1))} | ${Math.round(specialist.stamina.value / (specialist.stamina.max + specialist.stamina.add) * 100).toFixed(0)}%%§f
 §bThirst(T) ${Number(specialist.thirst.value).toFixed(2)} | ${Math.round(specialist.thirst.value / specialist.thirst.max * 100).toFixed(0)}%%§f
 
-Active Player ${Terra.getOnlineCount()} | Day ${world.getDay()}
+Active Player ${Terra.game.getOnlineCount()} | Day ${world.getDay()}
       `.trim())
       .button({ translate: "cz.shop" }, "textures/cz/icon/shop")
       .button({ translate: "cz.guild" }, "textures/cz/icon/guild")
@@ -187,7 +197,7 @@ Active Player ${Terra.getOnlineCount()} | Day ${world.getDay()}
         	case 0: shopPanel(player, lib); break;
         	case 1: guildUi(player); break;
             case 2: runePanel(player); break;
-            case 3: game.leaderboard().getLeaderboard(player);  break;
+            case 3: Terra.leaderboard.getLeaderboard(player);  break;
             case 4: gachaPanel(player); break;
             case 5: questPanel(player); break;
             case 6: userPanel(player); break;

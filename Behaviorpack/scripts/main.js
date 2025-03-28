@@ -11,6 +11,7 @@ import {
 } from "./system.js";
 import {
   Command,
+  Terra,
   Quest,
   SpecialItem,
   Weapon,
@@ -19,9 +20,6 @@ import {
   summonXpAtPlayer,
   Specialist,
 } from "./lib/ZxraLib/module.js";
-import {
-  Terra
-} from "./lib/ZxraLib/class.js";
 import * as stats from "./lib/stats.js";
 import * as jsonData from "./lib/data.js";
 
@@ -74,8 +72,9 @@ system.beforeEvents.watchdogTerminate.subscribe((e) => {
 system.runInterval(async () => {
   try {
     if (Object.keys(options).length < 1)
-      options = Terra.getSetting();
-    for (let plyr of world.getPlayers()) {
+      options = Terra.game.getSetting();
+
+    for (let plyr of Terra.getPlayer()) {
       const sp = new Specialist(plyr);
 
       sp.controllerActionBar({
@@ -96,7 +95,11 @@ system.runInterval(async () => {
     Terra.getActiveDimension().forEach((e) => {
       world
         .getDimension(e)
-        .getEntities({ excludeTypes: ["cz:block_data","cz:seat","minecraft:pig","minecraft:cow","minecraft:sheep","minecraft:chicken","minecraft:bee","minecraft:item"] })
+        .getEntities({
+          excludeTypes: [
+            "cz:block_data","minecraft:item","minecraft:sheep","minecraft:cow","minecraft:pig","minecraft:bee","minecraft:sniffer","minecraft:allay","minecraft:chicken"
+          ]
+         })
         .forEach((r) => {
           new Entity(r).controllerStatus();
         });
@@ -170,23 +173,28 @@ world.beforeEvents.chatSend.subscribe(async (e) => {
 });
 
 // Initialing Addon
-world.afterEvents.worldInitialize.subscribe((e) => {
-  options = Terra.getSetting();
+world.afterEvents.worldLoad.subscribe((e) => {
+  Terra.setPlayers(world.getPlayers());
+
+  options = Terra.game.getSetting();
   if (options.debug) console.warn(JSON.stringify(options));
-  if (options.useBzbRules) Terra.setWorldSetting(options.rules);
+  if (options.useBzbRules) Terra.game.setWorldSetting(options.rules);
 });
 
 // Refresh Player
 world.beforeEvents.playerLeave.subscribe(({ player }) => {
-  //let sp = new Specialist(player);
-  //sp.refreshPlayer();
+  Terra.setPlayers(world.getPlayers());
 });
 world.afterEvents.playerJoin.subscribe((e) => {
-  const player = Terra.getPlayerName(e.playerName);
+  Terra.setPlayers(world.getPlayers());
+
+  const player = Terra.game.getPlayerName(e.playerName);
   if (!player) return;
   new Specialist(player).refreshPlayer();
 });
 world.afterEvents.playerSpawn.subscribe((e) => {
+  Terra.setPlayers(world.getPlayers());
+
   const player = e.player,
     isFirst = e.initialSpawn;
   new Specialist(player).refreshPlayer();
@@ -204,6 +212,28 @@ world.afterEvents.playerSpawn.subscribe((e) => {
     translate: options.starterItemMessage || "system.welcome.item",
   });
 });
+
+// Entities Change Health Event
+world.afterEvents.entityHealthChanged.subscribe(
+  ({ entity, newValue, oldValue }) => {
+    try {
+      if (oldValue - newValue < -1) {
+        const indicator = world
+          .getDimension(entity.dimension.id)
+          .spawnEntity("cz:indicator", {
+            x: entity.location.x,
+            y: entity.location.y + 1.9,
+            z: entity.location.z,
+          });
+        indicator.nameTag = `§2${(Math.abs(oldValue - newValue)).toFixed(0)}`;
+        new Entity(indicator).knockback(indicator.getVelocity(), 0, 5)
+      }
+    } catch (err) {
+      if (options.debug) console.warn(err);
+    }
+  },
+  { entityTypes: ["minecraft:player"] }
+);
 
 // Entities Die Event
 world.afterEvents.entityDie.subscribe(async (e) => {
@@ -302,7 +332,7 @@ world.afterEvents.itemStartUseOn.subscribe(({ block, itemStack, source }) => {
 });
 
 // Use Item On
-world.afterEvents.itemUseOn.subscribe((e) => {
+world.afterEvents.itemStartUseOn.subscribe((e) => {
   let block = e.block,
     player = e.source,
     item = e.itemStack;

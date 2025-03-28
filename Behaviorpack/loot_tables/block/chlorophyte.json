@@ -56,7 +56,7 @@
       "conditions": [
         {
           "condition": "match_tool",
-          "item": "cz:chloropythe_pickaxe",
+          "item": "cz:chlorophyte_pickaxe",
           "count": 1
         }
       ],

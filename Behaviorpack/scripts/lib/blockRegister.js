@@ -1,6 +1,7 @@
-import { world } from "@minecraft/server";
+import { world, system } from "@minecraft/server";
+import { durabilityControl } from "./ZxraLib/module.js";
 
-world.beforeEvents.worldInitialize.subscribe(({ blockComponentRegistry }) => {
+system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
   /*
    *. Block Function
    */
@@ -45,17 +46,18 @@ world.beforeEvents.worldInitialize.subscribe(({ blockComponentRegistry }) => {
           case "ender_ore": drop = 8; break;
         }
 
-        const equippable = player?.getComponent("minecraft:equippable");
-        const itemStack = player?.getComponent("inventory").container.getSlot(player.selectedSlotIndex).getItem();
-        if (!equippable) return;
+        const itemStack = player?.getComponent("inventory")?.container.getSlot(player.selectedSlotIndex)?.getItem();
+        if (!itemStack) return;
 
-        const enchantable = itemStack?.getComponent("minecraft:enchantable");
+        const enchantable = itemStack.getComponent("minecraft:enchantable");
         const silkTouch = enchantable?.getEnchantment("silk_touch");
         if (silkTouch) return;
 
         for (let i = 0; i < drop; i++) {
           dimension.spawnEntity("minecraft:xp_orb", block.location);
         }
+        
+        durabilityControl(player, 1)
       }
     }
   )

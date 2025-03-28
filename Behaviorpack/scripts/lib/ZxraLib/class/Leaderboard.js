@@ -1,17 +1,12 @@
 import { world } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
-import { Specialist } from "../module.js";
+import { Specialist, Game } from "../module.js";
 import * as jsonData from "../../data.js";
 
 class Leaderboard {
-  constructor() {
-    this.c = null;
+  constructor(cls) {
+    this.c = cls;
     this.lib = jsonData.leaderboardLb;
-  };
-  
-  setup(game) {
-    if(this.c) return;
-    this.c = game;
   };
   
   lb() {
@@ -23,7 +18,7 @@ class Leaderboard {
     this.c.setData("leaderboard", obj);
   };
   resetLb() {
-    this.c.setLb(this.lib)
+    this.setLb(this.lib)
   };
 
   getLeaderboard(player) {
@@ -66,7 +61,7 @@ class Leaderboard {
             gui2.title({ translate: "cz.leaderboard.deaths" }).body({ rawtext: [{ translate: "cz.leaderboard.deaths.body" },{ text: `\n` }, ...death]}).button({ translate: "system.yes" }).show(player)
             break;
           case 2:
-            let guilds = this.c.guild.gd()
+            let guilds = this.c.guild().gd()
               .sort((a, b) => b - a)
               .map((e, i) => `\n${i+1}. ${e.name}§r lvl ${e.act.lvl}`)
               .join("")

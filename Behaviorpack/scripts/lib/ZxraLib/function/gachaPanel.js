@@ -1,4 +1,4 @@
-import { ActionFormData } from "@minecraft/server-ui";
+import { ActionFormData, MessageFormData } from "@minecraft/server-ui";
 import { Gacha, Specialist, formatName, gachaData } from "../module.js";
 
 const WEAPON_GACHA_PRICE = 100,
@@ -17,6 +17,7 @@ const gachaPanel = (player) => {
     .body({ translate: "cz.gacha.body" })
     .button({ translate: "gacha.weapon" })
     .button({ translate: "gacha.rune" })
+    .button({ translate: "gacha.exchange" })
 
     .show(player)
     .then(e => {
@@ -24,7 +25,8 @@ const gachaPanel = (player) => {
 
       [
         weaponGacha,
-        runeGacha
+        runeGacha,
+        gachaExchange
       ][e.selection]?.(player);
     })
 }
@@ -64,6 +66,11 @@ const weaponGacha = (player) => {
       
       const sp = new Specialist(player),
         total = [1,3,5][e.selection];
+
+      if(player.getComponent("inventory").container.emptySlotsCount < total) {
+        player.sendMessage({ translate: "system.fullInventory" })
+        return;
+      }
       
       if(sp.getVoxn() < WEAPON_GACHA_PRICE*total) {
         player.sendMessage({ translate: "system.buy.outVoxn" })
@@ -107,6 +114,79 @@ const runeGacha = (player) => {
 
         player.sendMessage({ translate: "system.gacha.result.rune", with: [formatName(mul)] })
       }
+    })
+}
+
+const gachaExchange = (player) => {
+  const ui = new ActionFormData()
+    .title({ translate: "gacha.exchange" })
+    .body({ translate: "gacha.exchange.body" })
+    .button({ translate: "rarity.unique" })
+    .button({ translate: "rarity.epic" })
+    .button({ translate: "rarity.legend" })
+    .button({ translate: "rarity.rare" })
+    .show(player)
+    .then(e => {
+      if(e.canceled) return;
+
+      const ascend = {
+        unique_ascend: 0,
+        epic_ascend: 0,
+        legend_ascend: 0,
+        rare_ascend: 0
+      };
+
+      new Specialist(player).getItems().forEach(r => {
+        if(!(Object.keys(ascend).includes(r.name.replace("cz:","")))) return;
+        ascend[r.name.replace("cz:","")] += r.amount;
+      })
+
+      subGachaExchange(player, ["unique","epic","legend","rare"][e.selection], ascend)
+    })
+}
+
+const subGachaExchange = (player, rarity, ascend) => {
+  const ui = new ActionFormData()
+    .title({ translate: "rarity."+rarity })
+    .body({
+      rawtext: [
+        { translate: "rarity.unique" }, { text: " "+ascend["unique_ascend"]+"\n" },
+        { translate: "rarity.epic" }, { text: " "+ascend["epic_ascend"]+"\n" },
+        { translate: "rarity.legend" }, { text: " "+ascend["legend_ascend"]+"\n" },
+        { translate: "rarity.rare"}, { text: " "+ascend["rare_ascend"] }
+      ]
+    })
+
+  gachaData.weapon[rarity].forEach(e => ui.button(formatName(e)))
+
+  ui.button({ translate: "system.cancel" })
+    .show(player)
+    .then(e => {
+      if(e.canceled || e.selection === gachaData.weapon[rarity].length) return;
+
+      const subUi = new MessageFormData()
+        .title({ translate: "gacha.exchange.confirm" })
+        .body({ translate: "gacha.exchange.to", with: [formatName(gachaData.weapon[rarity][e.selection])] })
+        .button2({ translate: "system.yes" })
+        .button1({ translate: "system.cancel" })
+
+        .show(player)
+        .then(r => {
+          if(r.canceled || !r.selection || r.selection === 0) return;
+
+          if(player.getComponent("inventory").container.emptySlotsCount < 1) {
+            player.sendMessage({ translate: "system.fullInventory" })
+            return;
+          }
+          
+          if(ascend[rarity+"_ascend"] < 10) {
+            player.sendMessage({ translate: "gacha.exchange.notEnough", with: [formatName(rarity+"_ascend")] })
+            return;
+          }
+          
+          new Specialist(player).giveItem({ id: "cz:"+gachaData.weapon[rarity][e.selection], amount: 1 })
+          player.runCommand(`clear @s cz:${rarity}_ascend 0 10`)
+        })
     })
 }
 

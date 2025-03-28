@@ -6,7 +6,7 @@
 
 export const ZxraLib = {
   packVersion: "1.3.5",
-  version: "1.0.15",
+  version: "1.1.0",
 }
 
 /*
@@ -36,6 +36,7 @@ export { Skill } from "./class/Skill.js";
 export { Specialist } from "./class/Specialist.js";
 export { Status } from "./class/Status.js";
 export { Temp } from "./class/Temp.js";
+export { Terra } from "./class/Terra.js";
 export { Tile } from "./class/Tile.js";
 export { Waypoint } from "./class/Waypoint.js";
 export { Weapon } from "./class/Weapon.js";
@@ -63,7 +64,9 @@ export {
 export {
   rawRune,
   rawRuneStat,
-  rawSpecialist
+  rawSpecialist,
+  rawWorld,
+  setting
 } from "./data/template.js";
 
 /*

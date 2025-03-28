@@ -3,6 +3,7 @@ import {
   Dirty,
   Entity,
   Temp,
+  Terra,
   Rune,
   leveling,
   mergeObject,
@@ -61,13 +62,12 @@ class Specialist extends Entity {
     if(itemName === "catlye" && catlye[this.player.id] > 2) arr.push("Skill [1] Special");
     if(itemName === "endless" && endless[this.player.id]) arr.push(`${endless[this.player.id]}/12`);
     if(itemName === "berserk" && berserk[this.player.id]) arr.push(`W-Harm ${berserk[this.player.id]}`);
-    if(itemName === "silent" && world.scoreboard.getObjective("silent").getScore(this.player.scoreboardIdentity) > 0) arr.push(`${world.scoreboard.getObjective("silent").getScore(this.player.scoreboardIdentity) > 0} In-Leaf`)
+    if(itemName === "silent" && world.scoreboard.getObjective("silent").getScore(this.player.scoreboardIdentity) > 0) arr.push(`${world.scoreboard.getObjective("silent").getScore(this.player.scoreboardIdentity)} In-Leaf`)
     if(itemName === "lectaze" && lectaze[this.player.id]) arr.push(`${lectaze[this.player.id]} Creations`);
 
     if(arr.length < 1) return;
 
-    const display = arr.join(" | ");
-    this.player.onScreenDisplay.setActionBar({ text: display });
+    this.player.onScreenDisplay.setActionBar({ text: arr.join(" | ") });
   }
   controllerCooldown() {
     const cd = this.cooldown()
@@ -134,7 +134,8 @@ class Specialist extends Entity {
   }
   controllerUi({ options }) {
     const data = this.getData(),
-      guild    = Terra.guild
+      game     = Terra.game,
+      guild    = game.guild()
         .gd()
         .find(e => e.member.some(r => r.id === this.player.id));
 
@@ -179,7 +180,7 @@ class Specialist extends Entity {
 
     §e$${money.toFixed(1)}§f | §b§l${voxn} Voxn§r§f
     §eS ${Math.round(staminaValue / (staminaMax + staminaAdd) * 100).toFixed(0)} §bT ${Math.round(thirstValue / thirstMax * 100).toFixed(0)}§f
-    Rep ${reputation} AP ${Terra.getOnlineCount()}${data.specialist.lvl >= 8 || !options.uiLevelRequirement ? "\n"+this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id : "minecraft:air" : ""}${sts}${cooldown}
+    Rep ${reputation} AP ${Terra.totalPlayers()}${data.specialist.lvl >= 8 || !options.uiLevelRequirement ? this.player.getBlockFromViewDirection({ maxDistance: 6 })?.block?.type.id ? "\n"+this.player.getBlockFromViewDirection({ maxDistance: 6 }).block.type.id : "minecraft:air" : ""}${sts}${cooldown}
     `,
     { fadeInDuration: 0, fadeOutDuration: 0, stayDuration: 0 }
     )
@@ -458,6 +459,7 @@ class Specialist extends Entity {
         arr[findIndex].amount += item.amount || 1;
       } catch (error) {}
     }
+    return arr;
   }
   getItemCount(name) {
     if(!name) return;

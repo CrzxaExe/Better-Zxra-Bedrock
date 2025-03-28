@@ -24,6 +24,7 @@ const couponEdit = (player, item, data, container) => {
       }
 
       if(e.selection < data.length) {
+        console.warn(data[e.selection])
         const [prevItem, prevQuantity] = data[e.selection].split("*");
 
         const input = new ModalFormData()
@@ -32,15 +33,15 @@ const couponEdit = (player, item, data, container) => {
           .textField({ translate: "type.count" }, { translate: "type.number" }, prevQuantity)
           .submitButton({ translate: "system.edit" })
           .show(player)
-          .then(e => {
-            if(e.canceled) {
+          .then(r => {
+            if(r.canceled) {
               couponEdit(player, item, data, container);
               return;
             }
 
-            const [newItem, quantity = 1] = e.formValues;
+            const [newItem, quantity = 1] = r.formValues;
 
-            data.splice(e.selection, 1, `${newItem.trim().replace("minecraft:", "").split("_").map(e => e.startsWith("cz:") ? e.substring(0,3) + e.charAt(3).toUpperCase() + e.slice(4) : e.charAt(0).toUpperCase() + e.slice(1)).join(" ")}*${parseInt(quantity)}`);
+            data.splice(e.selection, 1, `${newItem.trim().replace("minecraft:", "").split("_").map(j => j.startsWith("cz:") ? j.substring(0,3) + j.charAt(3).toUpperCase() + j.slice(4) : j.charAt(0).toUpperCase() + j.slice(1)).join(" ")}*${parseInt(quantity)}`);
             couponEdit(player, item, data, container);
             return;
           })

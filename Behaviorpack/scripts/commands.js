@@ -1,8 +1,15 @@
 import { system, world, ItemStack } from "@minecraft/server";
-import { Command, Ench, runDialog, storyDialog, Items, Specialist, runeData } from "./lib/ZxraLib/module.js";
 import {
+  Command,
+  Ench,
+  Game,
+  runDialog,
+  storyDialog,
+  Items,
+  Specialist,
+  runeData,
   Terra
-} from "./lib/ZxraLib/class.js";
+} from "./lib/ZxraLib/module.js";
 
 Command.add("kyle", async (player, lib) => {
   if (player.name !== "CrzxaExe3") return;
@@ -200,7 +207,7 @@ Command.addCmd(
   (player) => {
     if (!player) return;
     system.run(() => {
-      player.runCommand("summon cz:seat ~~~");
+      player.runCommand("summon cz:seat ~ ~-0.1 ~");
       player.runCommand(`ride @s start_riding @e[r=1,type=cz:seat,c=1]`);
     });
   },
@@ -212,16 +219,15 @@ Command.addCmd(
   "time",
   (player, { msg, rawMsg }) => {
     if (!player) return;
-    let gm = Terra,
-      time = msg[1] || 0;
+    let time = msg[1] || 0;
     try {
       system.run(() => {
         let day = ["day", "night", "midnight", "noon", "sunset", "sunrise"];
         if (!day.includes(time.toLowerCase())) {
           if (time.toLowerCase().startsWith("d")) {
             let slm = Number(time.slice(1)) * 24000;
-            world
-              .getDimension(player.dimension.id)
+            player
+              .dimension
               .runCommand(`time add ${slm}`);
             player.sendMessage({
               rawtext: [
@@ -230,8 +236,8 @@ Command.addCmd(
               ],
             });
           } else {
-            world
-              .getDimension(player.dimension.id)
+            player
+              .dimension
               .runCommand(`time add ${Number(time)}`);
             player.sendMessage({
               rawtext: [
@@ -241,8 +247,8 @@ Command.addCmd(
             });
           }
         } else {
-          world
-            .getDimension(player.dimension.id)
+          player
+            .dimension
             .runCommand(`time set ${time}`);
           player.sendMessage({
             rawtext: [
@@ -265,7 +271,7 @@ Command.addCmd(
   "give",
   (player, { msg, rawMsg }) => {
     if (!player) return;
-    let gm = Terra,
+    let gm = new Game(),
       target = msg[1] || player.name,
       items = rawMsg
         .split(" ")
@@ -355,7 +361,7 @@ Command.addCmd(
 Command.addCmd(
   "fchat",
   (player, { msg, functions }) => {
-    const target = Terra.getPlayerName(msg[1]);
+    const target = new Game().getPlayerName(msg[1]);
 
     if (!target)
       return player.sendMessage({ translate: "system.invalidPlayer" });
@@ -391,7 +397,7 @@ Command.addCmd(
 Command.addCmd(
   "pp",
   (player, { msg }) => {
-    const target = Terra.getPlayerName(msg[1]);
+    const target = Terra.game.getPlayerName(msg[1]);
 
     if (!target)
       return player.sendMessage({ translate: "system.invalidPlayer" });
@@ -416,7 +422,7 @@ Command.addCmd(
 
     system.run(() => {
       for(let mem of guild.member) {
-        let member = Terra.getPlayerById(mem.id);
+        let member = Terra.game.getPlayerById(mem.id);
         
         if(!member) continue;
         member.sendMessage({
@@ -483,7 +489,7 @@ Command.addCmd(
         new Specialist(player).rune().addRune({ runes: msg[1] });
         break;
       default: {
-        const plyr = Terra.getPlayerName(name);
+        const plyr = Terra.game.getPlayerName(name);
         new Specialist(plyr).rune().addRune({ runes: msg[1] });
       }
     }

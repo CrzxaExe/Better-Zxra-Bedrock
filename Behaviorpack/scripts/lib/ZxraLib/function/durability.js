@@ -11,13 +11,12 @@ const durabilityControl = (source, amount = 1) => {
 
   if (source.getGameMode() === GameMode.creative) return;
 
-  const itemStack = mainhand.getItem();
-
-  const durability = itemStack.getComponent("minecraft:durability");
+  const itemStack = mainhand.getItem(),
+    durability = itemStack?.getComponent("minecraft:durability");
   if (!durability) return;
 
-  const enchantable = itemStack.getComponent("minecraft:enchantable");
-  const unbreakingLevel = enchantable?.getEnchantment("unbreaking")?.level;
+  const enchantable = itemStack.getComponent("minecraft:enchantable"),
+    unbreakingLevel = enchantable?.getEnchantment("unbreaking")?.level;
 
   const damageChance = durability.getDamageChance(unbreakingLevel) / 100;
 

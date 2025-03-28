@@ -1,5 +1,4 @@
-import { mergeObject, Status, Specialist, rawRuneStat } from "../module.js";
-import { Terra } from "../class.js";
+import { Game, mergeObject, Status, Specialist, rawRuneStat } from "../module.js";
 import { EffectTypes, MolangVariableMap, system, world, Player } from "@minecraft/server";
 import { Npc } from "../../npc-class.js";
 
@@ -28,7 +27,7 @@ class Entity {
   }
   isTeammate(id) {
     if(!this.is("player")) return;
-    return Terra.guild.getTeammate(id).some(e => e.id === this.entity.id);
+    return new Game().guild().getTeammate(id).some(e => e.id === this.entity.id);
   }
 
   // Family Method
@@ -186,7 +185,7 @@ class Entity {
   // Essentials Method
   addDamage(damage = 1, option = { cause: "entityAttack", damagingEntity: this.entity, rune: rawRuneStat, isSkill: false }, knockback) {
     let actorRune = rawRuneStat;
-    let multiplier = 1.0 + option.rune.atk;
+    let multiplier = 1.0 + (option.rune?.atk || 0);
     
     if(this.entity instanceof Player)
       actorRune = new Specialist(this.entity).rune().getAllUsedRuneStat();
@@ -196,8 +195,8 @@ class Entity {
       if(skillDodge > 100 * (1 - actorRune.skillDodge)) return;
     }
     
-    let currentDamage = damage + option.rune.atkFlat;
-    if(option.isSkill) currentDamage += option.rune.skillFlat - actorRune.skillDamageRedFlat;
+    let currentDamage = damage + (option.rune?.atkFlat || 1);
+    if(option.isSkill) currentDamage += (option.rune?.skillFlat || 0) - actorRune.skillDamageRedFlat;
 
     const fragility = {
       entityAttack: "fragile",
@@ -209,12 +208,12 @@ class Entity {
     if(fragility !== "") multiplier += this.status().decimalCalcStatus({ type: fragility }, 0, 0.01, true);
     if(["fire","lightning"].includes(option.cause)) multiplier += this.status().decimalCalcStatus({ type: "elemental_fragile" }, 0, 0.01, true);
 
-    if(option.isSkill) currentDamage *= 1 - option.rune.skillDamageRed;
+    if(option.isSkill) currentDamage *= 1 - (option.rune?.skillDamageRed || 0);
     currentDamage *= multiplier
 
-    if(option.rune.critChance > 0 && option.isSkill) {
+    if((option.rune?.critChance || 0) > 0 && option.isSkill) {
       const critChance = Math.floor(Math.random() * 100);
-      if(critChance > 100 * (1 - option.rune.critChance)) currentDamage *= option.rune.critDamage;
+      if(critChance > 100 * (1 - (option.rune?.critChance || 0))) currentDamage *= option.rune?.critDamage || 0;
     }
 
     this.entity.applyDamage(Math.round(currentDamage), { cause: option.cause, damagingEntity: option.damagingEntity });
@@ -230,7 +229,7 @@ class Entity {
     if(this.entity instanceof Player)
       rune = new Specialist(this.entity).rune().getAllUsedRuneStat();
 
-    amount *= 1 + rune.healingEffectivity;
+    amount *= 1 + (Number(rune.healingEffectivity) || 0);
 
     hp.currentValue + Math.abs(amount) >= hp.effectiveMax ? hp.setCurrentValue(hp.effectiveMax) : hp.setCurrentValue(hp.currentValue + Math.abs(amount));
   }

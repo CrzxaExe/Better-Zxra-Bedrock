@@ -247,7 +247,7 @@ Weapon.addHitPasif("katana", (user, target, lib) => {
     case "silent": // Pasif In Leaf
       if (lib.silentState.includes(user.id)) {
         target.addEffect(EffectTypes.get("slowness"), 20, { amplifier: 0 });
-        user.runCommand(`scoreboard players add @s silent 2`);
+        user.runCommand(`scoreboard players add @s silent 1`);
         target.addTag("silent_target");
       }
 
